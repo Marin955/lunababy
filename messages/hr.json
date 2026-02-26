@@ -1,0 +1,514 @@
+{
+  "common": {
+    "nav": {
+      "home": "Početna",
+      "shop": "Trgovina",
+      "about": "O nama",
+      "contact": "Kontakt",
+      "faq": "Česta pitanja",
+      "shippingInfo": "Dostava",
+      "returns": "Povrati",
+      "privacy": "Privatnost"
+    },
+    "buttons": {
+      "addToCart": "Dodaj u košaricu",
+      "continueShopping": "Nastavi kupnju",
+      "proceedToCheckout": "Nastavi na plaćanje",
+      "placeOrder": "Naruči",
+      "viewAll": "Pogledaj sve",
+      "learnMore": "Saznaj više",
+      "subscribe": "Pretplati se",
+      "apply": "Primijeni",
+      "remove": "Ukloni",
+      "backToShop": "Povratak u trgovinu",
+      "close": "Zatvori"
+    },
+    "footer": {
+      "description": "Nježna njega za vašeg malog mjesečevog zraka. Ručno birani paketi sigurnih, organskih i testiranih proizvoda za bebe.",
+      "copyright": "© 2026 LunaBaby. Sva prava pridržana.",
+      "shopLinks": "Trgovina",
+      "helpLinks": "Pomoć",
+      "companyLinks": "Tvrtka",
+      "newArrivals": "Novo",
+      "bestsellers": "Najprodavanije",
+      "giftSets": "Poklon paketi",
+      "socialFollow": "Pratite nas"
+    },
+    "currency": "€",
+    "language": {
+      "hr": "HR",
+      "en": "EN",
+      "switchTo": "English"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "Novo u LunaBaby",
+      "title": "Nježna njega za vašu malu zvjezdicu",
+      "subtitle": "Otkrijte naše ručno birane pakete vrhunskih proizvoda za bebe — savršeni za poklon ili prvi set za nove roditelje.",
+      "cta": "Istražite pakete",
+      "trustBadge1": "Besplatna dostava iznad €50",
+      "trustBadge2": "30 dana povrata",
+      "trustBadge3": "Sigurno plaćanje"
+    },
+    "categories": {
+      "title": "Kupujte po kategoriji",
+      "clothing": "Odjeća",
+      "nursery": "Spavaonica",
+      "feeding": "Hranjenje",
+      "bath": "Kupanje",
+      "toys": "Igračke",
+      "onTheGo": "Na putu"
+    },
+    "featured": {
+      "title": "Najpopularniji paketi",
+      "subtitle": "Naši najtraženiji paketi koje roditelji obožavaju"
+    },
+    "whyUs": {
+      "title": "Zašto LunaBaby?",
+      "freeShipping": "Besplatna dostava",
+      "freeShippingDesc": "Na sve narudžbe iznad €50 u Hrvatskoj",
+      "organic": "Organski materijali",
+      "organicDesc": "Samo prirodni, sigurni materijali za vaše dijete",
+      "easyReturns": "Jednostavni povrati",
+      "easyReturnsDesc": "30 dana za zamjenu ili povrat novca",
+      "safeTested": "Sigurno i testirano",
+      "safeTestedDesc": "Svi proizvodi certificirani prema EU standardima"
+    }
+  },
+  "shop": {
+    "title": "Svi paketi",
+    "subtitle": "Otkrijte naše ručno birane pakete za vašu bebu",
+    "itemsIncluded": "Uključeni proizvodi",
+    "addedToCart": "Dodano u košaricu!"
+  },
+  "bundle": {
+    "backToShop": "Povratak u trgovinu",
+    "whatsIncluded": "Što je uključeno",
+    "addToCart": "Dodaj u košaricu",
+    "outOfStock": "Nema na skladištu",
+    "originalPrice": "Izvorna cijena",
+    "salePrice": "Cijena s popustom",
+    "badges": {
+      "new": "Novo",
+      "popular": "Popularno",
+      "sale": "Akcija"
+    },
+    "reviews": "recenzija",
+    "addedToCart": "Dodano!"
+  },
+  "cart": {
+    "title": "Vaša košarica",
+    "empty": "Vaša košarica je prazna",
+    "emptyMessage": "Izgleda da još niste dodali nijedan paket u svoju košaricu.",
+    "subtotal": "Međuzbroj",
+    "discount": "Popust",
+    "shipping": "Dostava",
+    "shippingAtCheckout": "Izračunato na blagajni",
+    "total": "Ukupno",
+    "promoCode": "Promotivni kod",
+    "promoPlaceholder": "Unesite kod",
+    "promoApply": "Primijeni",
+    "promoRemove": "Ukloni",
+    "promoInvalid": "Kod nije valjan",
+    "promoSuccess": "Kod uspješno primijenjen!",
+    "promoMinOrder": "Minimalni iznos narudžbe: €{amount}",
+    "quantity": "Količina",
+    "remove": "Ukloni",
+    "freeShippingNote": "Besplatna standardna dostava za narudžbe iznad €50!"
+  },
+  "checkout": {
+    "title": "Blagajna",
+    "form": {
+      "firstName": "Ime",
+      "lastName": "Prezime",
+      "email": "Email adresa",
+      "phone": "Telefon",
+      "phonePlaceholder": "+385 9x xxx xxxx",
+      "street": "Ulica i kućni broj",
+      "streetPlaceholder": "npr. Ilica 123",
+      "postalCode": "Poštanski broj",
+      "postalCodePlaceholder": "npr. 10000",
+      "city": "Grad",
+      "company": "Tvrtka (neobavezno)",
+      "note": "Napomena (neobavezno)",
+      "notePlaceholder": "Posebne napomene za dostavu..."
+    },
+    "shipping": {
+      "title": "Način dostave",
+      "standard": "Standardna dostava",
+      "express": "Ekspresna dostava",
+      "pickup": "Preuzimanje na paketomatu",
+      "businessDays": "radnih dana",
+      "free": "Besplatno"
+    },
+    "orderSummary": "Pregled narudžbe",
+    "errors": {
+      "required": "Ovo polje je obavezno",
+      "invalidEmail": "Unesite valjanu email adresu",
+      "invalidPhone": "Unesite valjani telefonski broj",
+      "invalidPostalCode": "Unesite valjani poštanski broj (5 znamenki)"
+    }
+  },
+  "confirmation": {
+    "title": "Hvala na narudžbi!",
+    "message": "Ovo je demo trgovina — vaša narudžba nije stvarno obrađena. U pravoj verziji, ovdje biste primili potvrdu narudžbe.",
+    "orderNumber": "Broj narudžbe",
+    "continueShopping": "Nastavi kupnju",
+    "demoNote": "Ovo je demonstracijska verzija LunaBaby trgovine."
+  },
+  "newsletter": {
+    "title": "Pridružite se LunaBaby obitelji",
+    "description": "Pretplatite se na naš newsletter i ostvarite 10% popusta na prvu narudžbu.",
+    "placeholder": "Vaša email adresa",
+    "success": "Hvala na pretplati! Provjerite svoj email za kod za popust.",
+    "error": "Unesite valjanu email adresu.",
+    "privacyNote": "Poštujemo vašu privatnost. Odjava je moguća u bilo kojem trenutku."
+  },
+  "about": {
+    "title": "O nama",
+    "heroTitle": "Nježnost u svakom detalju",
+    "heroSubtitle": "Upoznajte tim iza LunaBaby — roditelje koji su pretvorili ljubav prema svojoj djeci u nešto više.",
+    "ourStory": {
+      "title": "Naša priča",
+      "paragraph1": "LunaBaby je nastao 2024. godine u Zagrebu, iz jednostavne potrebe dvoje mladih roditelja — Marine i Ivana. Kad im se rodilo prvo dijete, proveli su tjedne istražujući koji su proizvodi uistinu sigurni, kvalitetni i pristupačni. Bezbroj noći provedenih čitajući recenzije, uspoređujući certifikate i tražeći preporuke drugih roditelja dovelo ih je do zaključka: pronalaženje pravih proizvoda za bebu ne bi trebalo biti tako teško.",
+      "paragraph2": "Iz te frustracije rodila se ideja o LunaBaby — mjestu gdje roditelji mogu pronaći pažljivo odabrane pakete proizvoda za bebe, bez stresa i nesigurnosti. Svaki proizvod u našoj ponudi prolazi temeljitu provjeru kvalitete, od materijala do certifikata sigurnosti.",
+      "paragraph3": "Danas, LunaBaby obitelj broji tisuće zadovoljnih roditelja diljem Hrvatske koji nam vjeruju kad je u pitanju njega njihovih najmanjih. Naša priča tek počinje, a svaki novi paket koji pošaljemo nosi djelić naše ljubavi i posvećenosti."
+    },
+    "ourMission": {
+      "title": "Naša misija",
+      "paragraph1": "Naša misija je jednostavna: učiniti roditeljstvo malo lakšim. Vjerujemo da svaki roditelj zaslužuje pristup sigurnim, kvalitetnim proizvodima za svoje dijete, bez da mora satima istraživati i uspoređivati opcije.",
+      "paragraph2": "Ručno biramo svaki proizvod u našim paketima, surađujemo s pouzdanim europskim dobavljačima i osiguravamo da sve što prodajemo zadovoljava najstrože standarde sigurnosti. Naši paketi su osmišljeni tako da pokriju sve što vam treba — od prvih dana u rodilištu pa sve do prvih koraka."
+    },
+    "ourValues": {
+      "title": "Naše vrijednosti",
+      "value1": {
+        "title": "Sigurnost na prvom mjestu",
+        "description": "Svi naši proizvodi su certificirani prema EU standardima sigurnosti. Ne pravimo kompromise kad su u pitanju naša djeca."
+      },
+      "value2": {
+        "title": "Organski i prirodni materijali",
+        "description": "Dajemo prednost organskom pamuku, prirodnim materijalima i proizvodima bez štetnih kemikalija. Nježna koža vaše bebe zaslužuje samo najbolje."
+      },
+      "value3": {
+        "title": "Transparentnost",
+        "description": "Svaki proizvod dolazi s detaljnim opisom materijala, podrijetla i certifikata. Vjerujemo da informirani roditelji donose najbolje odluke."
+      },
+      "value4": {
+        "title": "Podrška roditeljima",
+        "description": "Nismo samo trgovina — mi smo zajednica. Naš tim roditelja uvijek je tu za savjet, preporuku ili jednostavno podršku."
+      }
+    },
+    "ourPromise": {
+      "title": "Naše obećanje",
+      "paragraph1": "Obećavamo vam da ćemo uvijek stavljati dobrobit vaše bebe na prvo mjesto. Svaki proizvod koji nosi oznaku LunaBaby prošao je našu strogu kontrolu kvalitete. Ako ikad niste zadovoljni, tu smo da to ispravimo — bez pitanja.",
+      "paragraph2": "Hvala vam što ste dio LunaBaby obitelji. Zajedno stvaramo sigurnije i ljepše djetinjstvo za naše mališane."
+    }
+  },
+  "faq": {
+    "title": "Česta pitanja",
+    "items": [
+      {
+        "question": "Kako mogu naručiti proizvode?",
+        "answer": "Naručivanje je jednostavno! Odaberite željeni paket, dodajte ga u košaricu i slijedite korake za završetak narudžbe. Potrebno je unijeti podatke za dostavu i odabrati način plaćanja. Nakon potvrde narudžbe, primit ćete email s detaljima i brojem za praćenje pošiljke."
+      },
+      {
+        "question": "Koji načini plaćanja su dostupni?",
+        "answer": "Prihvaćamo sve glavne kreditne i debitne kartice (Visa, Mastercard, Maestro), plaćanje putem internet bankarstva te plaćanje pouzećem za narudžbe unutar Hrvatske. Sva online plaćanja obrađuju se putem sigurnog SSL enkripcijskog sustava."
+      },
+      {
+        "question": "Koliko traje dostava?",
+        "answer": "Standardna dostava unutar Hrvatske traje 3-5 radnih dana. Ekspresna dostava dostupna je za 1-2 radna dana uz nadoplatu. Za narudžbe zaprimljene do 14:00 sati radnim danom, paketi se šalju isti dan."
+      },
+      {
+        "question": "Koliki su troškovi dostave?",
+        "answer": "Standardna dostava košta €3,99 za narudžbe unutar Hrvatske. Za narudžbe iznad €50, standardna dostava je potpuno besplatna! Ekspresna dostava košta €7,99, a preuzimanje na paketomatu je €2,99. Za narudžbe iznad €50, preuzimanje na paketomatu je također besplatno."
+      },
+      {
+        "question": "Dostavljate li izvan Hrvatske?",
+        "answer": "Trenutno dostavljamo na područje cijele Hrvatske, uključujući otoke. Radimo na proširenju dostave na susjedne zemlje (Sloveniju, Bosnu i Hercegovinu, Srbiju) i očekujemo da ćemo uskoro moći dostavljati i izvan Hrvatske. Pretplatite se na naš newsletter kako biste prvi saznali kad uvedemo međunarodnu dostavu."
+      },
+      {
+        "question": "Kakva je politika povrata?",
+        "answer": "Nudimo 30 dana za povrat ili zamjenu proizvoda od dana primitka narudžbe. Proizvodi moraju biti nekorišteni, u originalnom pakiranju i s oznakom. Povrat novca obrađuje se u roku od 7 radnih dana od primitka vraćenog proizvoda. Troškove povratne dostave snosi kupac, osim u slučaju pogreške s naše strane."
+      },
+      {
+        "question": "Kako mogu vratiti proizvod?",
+        "answer": "Za pokretanje povrata, kontaktirajte nas putem emaila na povrati@lunababy.hr ili nas nazovite na +385 1 234 5678. Naš tim će vam poslati upute i povratnu etiketu. Proizvod zapakirajte u originalnu ambalažu i predajte kurirskoj službi. Pratit ćemo status vašeg povrata i obavijestiti vas kad povrat bude obrađen."
+      },
+      {
+        "question": "Jesu li vaši proizvodi sigurni za bebe?",
+        "answer": "Apsolutno. Sigurnost je naš prioritet broj jedan. Svi proizvodi u našoj ponudi certificirani su prema EU standardima sigurnosti (EN 71 za igračke, OEKO-TEX za tekstil). Surađujemo isključivo s provjerenim europskim proizvođačima koji dijele našu posvećenost kvaliteti. Svaki paket prolazi dodatnu kontrolu kvalitete prije slanja."
+      },
+      {
+        "question": "Mogu li prilagoditi sadržaj paketa?",
+        "answer": "Trenutno nudimo unaprijed sastavljene pakete koji su pažljivo osmišljeni za različite potrebe i dobne skupine. Svaki paket je sastavljen na temelju preporuka pedijatara i iskustva stotina roditelja. Ako imate posebne zahtjeve ili želje, kontaktirajte nas i potrudit ćemo se pronaći najbolje rješenje za vas."
+      },
+      {
+        "question": "Nudite li poklon pakiranje?",
+        "answer": "Da! Svi naši paketi dolaze u prekrasnom LunaBaby poklon pakiranju koje je savršeno za darove. Možete dodati i personaliziranu poruku tijekom narudžbe bez dodatnog troška. Za posebne prilike (baby shower, rođendan, krštenje), nudimo i premium poklon pakiranje s ukrasnom vrpcom i čestitkom za dodatnih €3,99."
+      }
+    ]
+  },
+  "shippingPage": {
+    "title": "Informacije o dostavi",
+    "intro": "U LunaBaby-ju želimo da vaši paketi stignu brzo, sigurno i u savršenom stanju. Ovdje ćete pronaći sve informacije o načinima dostave, rokovima i troškovima.",
+    "methods": {
+      "title": "Načini dostave",
+      "standard": {
+        "name": "Standardna dostava",
+        "time": "3-5 radnih dana",
+        "price": "€3,99",
+        "freeAbove": "Besplatno za narudžbe iznad €50",
+        "description": "Pouzdana dostava putem Hrvatske pošte ili GLS kurirske službe na vašu kućnu adresu."
+      },
+      "express": {
+        "name": "Ekspresna dostava",
+        "time": "1-2 radna dana",
+        "price": "€7,99",
+        "description": "Brza dostava putem GLS kurirske službe za hitne narudžbe. Narudžbe zaprimljene do 14:00 šalju se isti dan."
+      },
+      "pickup": {
+        "name": "Preuzimanje na paketomatu",
+        "time": "2-4 radna dana",
+        "price": "€2,99",
+        "freeAbove": "Besplatno za narudžbe iznad €50",
+        "description": "Preuzmite svoj paket na najbližem BoxNow ili DPD paketomatu u vrijeme koje vam odgovara."
+      }
+    },
+    "freeShipping": {
+      "title": "Besplatna dostava",
+      "description": "Uživajte u besplatnoj standardnoj dostavi na sve narudžbe iznad €50 unutar Hrvatske. Besplatna dostava primjenjuje se automatski na blagajni — nije potreban promotivni kod."
+    },
+    "deliveryAreas": {
+      "title": "Područja dostave",
+      "description": "Dostavljamo na cijelo područje Republike Hrvatske, uključujući sve otoke. Dostava na otoke može trajati 1-2 radna dana duže od navedenih rokova. Za otočne adrese preporučujemo standardnu dostavu jer je ekspresna dostava ograničena na kopnene adrese.",
+      "international": "Međunarodna dostava trenutno nije dostupna. Radimo na proširenju usluge na susjedne zemlje. Pretplatite se na naš newsletter za obavijesti o novostima."
+    },
+    "packaging": {
+      "title": "Pakiranje i zaštita",
+      "description": "Svaki LunaBaby paket zapakiran je s posebnom pažnjom. Koristimo ekološki prihvatljive materijale za pakiranje — reciklirani karton, biorazgradivi zaštitni materijal i papirnu traku. Naši paketi su osmišljeni tako da budu i funkcionalni i lijepi — savršeni kao poklon bez potrebe za dodatnim pakiranjem."
+    },
+    "tracking": {
+      "title": "Praćenje pošiljke",
+      "description": "Nakon slanja narudžbe, primit ćete email s brojem za praćenje pošiljke. Status svoje narudžbe možete pratiti u stvarnom vremenu putem poveznice u emailu."
+    }
+  },
+  "returnsPage": {
+    "title": "Politika povrata",
+    "overview": {
+      "title": "Pregled politike povrata",
+      "description": "U LunaBaby-ju želimo da budete potpuno zadovoljni svojom kupnjom. Ako iz bilo kojeg razloga niste zadovoljni, nudimo jednostavan i transparentan proces povrata unutar 30 dana od primitka narudžbe."
+    },
+    "conditions": {
+      "title": "Uvjeti za povrat",
+      "items": [
+        "Proizvod mora biti vraćen unutar 30 dana od primitka narudžbe.",
+        "Proizvod mora biti nekorišten i u originalnom pakiranju.",
+        "Sve originalne oznake i etikete moraju biti neoštećene.",
+        "Proizvod ne smije biti pran, nošen ili na bilo koji način korišten.",
+        "Potrebno je priložiti račun ili potvrdu narudžbe."
+      ]
+    },
+    "process": {
+      "title": "Postupak povrata",
+      "steps": [
+        {
+          "title": "Kontaktirajte nas",
+          "description": "Pošaljite email na povrati@lunababy.hr ili nas nazovite na +385 1 234 5678. Navedite broj narudžbe i razlog povrata."
+        },
+        {
+          "title": "Primite upute",
+          "description": "Naš tim će vam u roku od 24 sata poslati potvrdu i upute za povrat, uključujući povratnu adresu i etiketu."
+        },
+        {
+          "title": "Pošaljite paket",
+          "description": "Zapakirajte proizvod u originalnu ambalažu i predajte ga kurirskoj službi ili ga dostavite na najbliži paketomati."
+        },
+        {
+          "title": "Obrada povrata",
+          "description": "Nakon primitka i pregleda vraćenog proizvoda, obradit ćemo vaš povrat. Primit ćete email potvrdu o statusu."
+        }
+      ]
+    },
+    "refund": {
+      "title": "Povrat novca",
+      "description": "Povrat novca obrađuje se u roku od 7 radnih dana od primitka vraćenog proizvoda. Novac se vraća na isti način plaćanja korišten pri narudžbi. Za plaćanja karticom, povrat može potrajati dodatnih 3-5 radnih dana ovisno o banci.",
+      "shippingCosts": "Troškovi dostave se ne vraćaju, osim u slučaju pogreške s naše strane (pogrešan proizvod, oštećen proizvod ili proizvod koji ne odgovara opisu)."
+    },
+    "exchange": {
+      "title": "Zamjena proizvoda",
+      "description": "Ako želite zamijeniti proizvod za drugi paket ili drugu veličinu, kontaktirajte nas i rado ćemo vam pomoći. Zamjene se obrađuju besplatno — mi pokrivamo troškove dostave zamjenskog proizvoda. Zamjenski proizvod šaljemo u roku od 1-2 radna dana od primitka vašeg povrata."
+    },
+    "exceptions": {
+      "title": "Iznimke",
+      "description": "Iz higijenskih razloga, ne možemo prihvatiti povrate proizvoda koji su bili u direktnom kontaktu s dječjom kožom i koji su otvoreni (npr. kreme, losioni, vlažne maramice). Ova iznimka ne utječe na vaša zakonska prava potrošača."
+    }
+  },
+  "contactPage": {
+    "title": "Kontaktirajte nas",
+    "intro": "Imate pitanje, prijedlog ili trebate pomoć s narudžbom? Naš tim je tu za vas! Slobodno nas kontaktirajte putem bilo kojeg od navedenih kanala.",
+    "email": {
+      "label": "Email",
+      "value": "info@lunababy.hr",
+      "description": "Za opća pitanja i upite"
+    },
+    "supportEmail": {
+      "label": "Podrška",
+      "value": "podrska@lunababy.hr",
+      "description": "Za pomoć s narudžbama i povratima"
+    },
+    "phone": {
+      "label": "Telefon",
+      "value": "+385 1 234 5678",
+      "description": "Dostupni radnim danom"
+    },
+    "hours": {
+      "label": "Radno vrijeme",
+      "weekdays": "Ponedjeljak - Petak: 08:00 - 18:00",
+      "saturday": "Subota: 09:00 - 14:00",
+      "sunday": "Nedjelja: zatvoreno"
+    },
+    "address": {
+      "label": "Adresa",
+      "street": "Ilica 42",
+      "city": "10000 Zagreb",
+      "country": "Hrvatska"
+    },
+    "form": {
+      "title": "Pošaljite nam poruku",
+      "name": "Vaše ime",
+      "namePlaceholder": "Ime i prezime",
+      "email": "Email adresa",
+      "emailPlaceholder": "vas@email.hr",
+      "subject": "Predmet",
+      "subjectPlaceholder": "O čemu se radi?",
+      "message": "Poruka",
+      "messagePlaceholder": "Opišite svoj upit...",
+      "submit": "Pošalji poruku",
+      "success": "Hvala na poruci! Odgovorit ćemo vam u roku od 24 sata.",
+      "error": "Došlo je do pogreške. Pokušajte ponovno ili nas kontaktirajte direktno."
+    },
+    "responseTime": "Obično odgovaramo unutar 24 sata radnim danom."
+  },
+  "privacyPage": {
+    "title": "Politika privatnosti",
+    "intro": "U LunaBaby-ju ozbiljno shvaćamo zaštitu vaših osobnih podataka. Ova politika privatnosti objašnjava koje podatke prikupljamo, kako ih koristimo i koja su vaša prava. Molimo vas da pažljivo pročitate ovu politiku.",
+    "lastUpdated": "Posljednje ažuriranje: veljača 2026.",
+    "dataCollection": {
+      "title": "Prikupljanje podataka",
+      "description": "Prikupljamo samo podatke koji su nam potrebni za pružanje naših usluga. To uključuje:",
+      "items": [
+        "Osobni podaci: ime, prezime, email adresa, telefonski broj i adresa za dostavu koje unosite prilikom narudžbe.",
+        "Podaci o narudžbama: informacije o kupljenim proizvodima, iznosima, načinima plaćanja i statusu narudžbe.",
+        "Podaci o komunikaciji: poruke koje nam šaljete putem kontakt obrasca, emaila ili telefona.",
+        "Tehnički podaci: IP adresa, vrsta preglednika, operacijski sustav i podaci o interakciji s našom web stranicom prikupljeni automatski."
+      ]
+    },
+    "cookies": {
+      "title": "Kolačići (Cookies)",
+      "description": "Naša web stranica koristi kolačiće za poboljšanje vašeg iskustva. Koristimo:",
+      "items": [
+        "Neophodni kolačići: potrebni za rad web stranice, uključujući košaricu i prijavu. Ne mogu se isključiti.",
+        "Analitički kolačići: pomažu nam razumjeti kako koristite našu stranicu kako bismo je poboljšali. Koristimo anonimiziranu analitiku.",
+        "Funkcionalni kolačići: pamte vaše postavke kao što su jezik i valuta za bolje korisničko iskustvo."
+      ],
+      "note": "Ne koristimo kolačiće za oglašavanje niti dijelimo podatke s oglašivačkim mrežama. Možete upravljati kolačićima putem postavki svog preglednika."
+    },
+    "usage": {
+      "title": "Korištenje podataka",
+      "description": "Vaše podatke koristimo isključivo u sljedeće svrhe:",
+      "items": [
+        "Obrada i dostava vaših narudžbi.",
+        "Komunikacija vezana uz vaše narudžbe (potvrde, obavijesti o dostavi, odgovori na upite).",
+        "Poboljšanje naše web stranice i korisničkog iskustva na temelju anonimiziranih analitičkih podataka.",
+        "Slanje newslettera i promotivnih ponuda, isključivo uz vašu izričitu suglasnost.",
+        "Ispunjavanje zakonskih obveza (računovodstvo, porezne evidencije)."
+      ]
+    },
+    "sharing": {
+      "title": "Dijeljenje podataka",
+      "description": "Ne prodajemo niti iznajmljujemo vaše osobne podatke trećim stranama. Podatke dijelimo samo s:",
+      "items": [
+        "Kurirske službe: ime, adresa i telefon za potrebe dostave.",
+        "Procesori plaćanja: podaci o plaćanju za sigurnu obradu transakcija. Ne pohranjujemo podatke o vašoj kartici.",
+        "Hosting i IT usluge: pouzdani pružatelji usluga koji su ugovorno obvezani na zaštitu vaših podataka."
+      ]
+    },
+    "retention": {
+      "title": "Čuvanje podataka",
+      "description": "Vaše osobne podatke čuvamo samo onoliko dugo koliko je potrebno za ispunjenje svrhe za koju su prikupljeni. Podaci o narudžbama čuvaju se 5 godina u skladu sa zakonskim obvezama. Podaci iz newslettera čuvaju se dok se ne odjavite. Nakon isteka, podaci se sigurno brišu ili anonimiziraju."
+    },
+    "rights": {
+      "title": "Vaša prava",
+      "description": "Prema Općoj uredbi o zaštiti podataka (GDPR), imate sljedeća prava:",
+      "items": [
+        "Pravo pristupa: možete zatražiti kopiju svih osobnih podataka koje imamo o vama.",
+        "Pravo na ispravak: možete zatražiti ispravak netočnih ili nepotpunih podataka.",
+        "Pravo na brisanje: možete zatražiti brisanje svojih osobnih podataka ('pravo na zaborav').",
+        "Pravo na ograničenje obrade: možete zatražiti ograničenje načina na koji koristimo vaše podatke.",
+        "Pravo na prenosivost podataka: možete zatražiti prijenos svojih podataka u strukturiranom formatu.",
+        "Pravo na prigovor: možete uložiti prigovor na obradu vaših podataka u marketinške svrhe."
+      ]
+    },
+    "contact": {
+      "title": "Kontakt za zaštitu podataka",
+      "description": "Za sva pitanja vezana uz zaštitu vaših osobnih podataka, obratite nam se na:",
+      "email": "privatnost@lunababy.hr",
+      "note": "Odgovorit ćemo na vaš upit u roku od 30 dana, u skladu sa zakonskim zahtjevima. Ako smatrate da vaša prava nisu poštovana, imate pravo podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP)."
+    }
+  },
+  "errors": {
+    "notFound": "Stranica nije pronađena",
+    "goHome": "Povratak na početnu"
+  },
+  "metadata": {
+    "home": {
+      "title": "LunaBaby - Nježni paketi za bebe | Poklon setovi",
+      "description": "Otkrijte LunaBaby ručno birane pakete sigurnih, organskih i testiranih proizvoda za bebe. Savršeni pokloni za nove roditelje."
+    },
+    "shop": {
+      "title": "Trgovina | LunaBaby",
+      "description": "Pregledajte našu kolekciju pažljivo biranih paketa za bebe. Organski materijali, sigurni proizvodi, besplatna dostava iznad €50."
+    },
+    "bundle": {
+      "titleSuffix": " | LunaBaby"
+    },
+    "cart": {
+      "title": "Košarica | LunaBaby",
+      "description": "Pregledajte svoju košaricu i nastavite s kupnjom na LunaBaby web trgovini."
+    },
+    "checkout": {
+      "title": "Blagajna | LunaBaby",
+      "description": "Završite svoju narudžbu na LunaBaby. Sigurno plaćanje i brza dostava."
+    },
+    "orderConfirmation": {
+      "title": "Potvrda narudžbe | LunaBaby",
+      "description": "Vaša narudžba je uspješno zaprimljena. Hvala na kupnji u LunaBaby trgovini."
+    },
+    "about": {
+      "title": "O nama | LunaBaby",
+      "description": "Upoznajte LunaBaby - tim roditelja iz Zagreba koji pažljivo biraju sigurne i organske proizvode za vaše dijete."
+    },
+    "faq": {
+      "title": "Česta pitanja | LunaBaby",
+      "description": "Odgovori na najčešća pitanja o narudžbama, dostavi, povratima i proizvodima u LunaBaby trgovini."
+    },
+    "shipping": {
+      "title": "Dostava | LunaBaby",
+      "description": "Informacije o načinima dostave, rokovima i troškovima. Besplatna dostava za narudžbe iznad €50."
+    },
+    "returns": {
+      "title": "Povrati | LunaBaby",
+      "description": "Politika povrata LunaBaby trgovine. 30 dana za povrat ili zamjenu proizvoda."
+    },
+    "contact": {
+      "title": "Kontakt | LunaBaby",
+      "description": "Kontaktirajte LunaBaby tim. Tu smo za sva vaša pitanja o narudžbama, proizvodima i dostavi."
+    },
+    "privacy": {
+      "title": "Privatnost | LunaBaby",
+      "description": "Politika privatnosti LunaBaby trgovine. Saznajte kako štitimo vaše osobne podatke."
+    }
+  }
+}

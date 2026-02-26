@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* LunaBaby Color Palette */
+  --color-cream: #FBF9F6;
+  --color-warm-white: #FEFDFB;
+  --color-teal: #8BBCC4;
+  --color-teal-deep: #6BA3AD;
+  --color-teal-light: #D4EAEE;
+  --color-teal-pale: #EDF6F8;
+  --color-lavender: #C5B8D9;
+  --color-lavender-light: #EDE8F4;
+  --color-lavender-pale: #F6F3FA;
+  --color-gold: #E8D5A3;
+  --color-gold-warm: #F0DFB4;
+  --color-gold-light: #FBF5E6;
+  --color-blush: #F0D4CC;
+  --color-blush-light: #FBF0ED;
+  --color-sage: #B8CCBA;
+  --color-sage-light: #E8F0E8;
+  --color-text-dark: #3D3D4E;
+  --color-text-mid: #6B6B7B;
+  --color-text-light: #9898A8;
+
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Quicksand', sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(59, 59, 78, 0.04);
+  --shadow-md: 0 4px 20px rgba(59, 59, 78, 0.06);
+  --shadow-lg: 0 8px 40px rgba(59, 59, 78, 0.08);
+  --shadow-hover: 0 12px 48px rgba(139, 188, 196, 0.15);
+
+  /* Border Radius */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text-dark);
+  background-color: var(--color-cream);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Twinkle animations for hero stars */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+@keyframes twinkle-delayed {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.15); }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.animate-twinkle-delayed {
+  animation: twinkle-delayed 4s ease-in-out 1s infinite;
+}

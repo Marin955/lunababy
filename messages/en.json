@@ -1,0 +1,514 @@
+{
+  "common": {
+    "nav": {
+      "home": "Home",
+      "shop": "Shop",
+      "about": "About Us",
+      "contact": "Contact",
+      "faq": "FAQ",
+      "shippingInfo": "Shipping",
+      "returns": "Returns",
+      "privacy": "Privacy"
+    },
+    "buttons": {
+      "addToCart": "Add to Cart",
+      "continueShopping": "Continue Shopping",
+      "proceedToCheckout": "Proceed to Checkout",
+      "placeOrder": "Place Order",
+      "viewAll": "View All",
+      "learnMore": "Learn More",
+      "subscribe": "Subscribe",
+      "apply": "Apply",
+      "remove": "Remove",
+      "backToShop": "Back to Shop",
+      "close": "Close"
+    },
+    "footer": {
+      "description": "Gentle care for your little moonbeam. Hand-picked bundles of safe, organic, and tested baby products.",
+      "copyright": "© 2026 LunaBaby. All rights reserved.",
+      "shopLinks": "Shop",
+      "helpLinks": "Help",
+      "companyLinks": "Company",
+      "newArrivals": "New Arrivals",
+      "bestsellers": "Bestsellers",
+      "giftSets": "Gift Sets",
+      "socialFollow": "Follow Us"
+    },
+    "currency": "€",
+    "language": {
+      "hr": "HR",
+      "en": "EN",
+      "switchTo": "Hrvatski"
+    }
+  },
+  "home": {
+    "hero": {
+      "badge": "New at LunaBaby",
+      "title": "Gentle care for your little star",
+      "subtitle": "Discover our hand-picked bundles of premium baby products — perfect as a gift or a first set for new parents.",
+      "cta": "Explore Bundles",
+      "trustBadge1": "Free shipping over €50",
+      "trustBadge2": "30-day returns",
+      "trustBadge3": "Secure payment"
+    },
+    "categories": {
+      "title": "Shop by Category",
+      "clothing": "Clothing",
+      "nursery": "Nursery",
+      "feeding": "Feeding",
+      "bath": "Bath",
+      "toys": "Toys",
+      "onTheGo": "On the Go"
+    },
+    "featured": {
+      "title": "Most Popular Bundles",
+      "subtitle": "Our best-selling bundles that parents love"
+    },
+    "whyUs": {
+      "title": "Why LunaBaby?",
+      "freeShipping": "Free Shipping",
+      "freeShippingDesc": "On all orders over €50 in Croatia",
+      "organic": "Organic Materials",
+      "organicDesc": "Only natural, safe materials for your baby",
+      "easyReturns": "Easy Returns",
+      "easyReturnsDesc": "30 days for exchange or refund",
+      "safeTested": "Safe & Tested",
+      "safeTestedDesc": "All products certified to EU standards"
+    }
+  },
+  "shop": {
+    "title": "All Bundles",
+    "subtitle": "Discover our hand-picked bundles for your baby",
+    "itemsIncluded": "Items Included",
+    "addedToCart": "Added to cart!"
+  },
+  "bundle": {
+    "backToShop": "Back to Shop",
+    "whatsIncluded": "What's Included",
+    "addToCart": "Add to Cart",
+    "outOfStock": "Out of Stock",
+    "originalPrice": "Original price",
+    "salePrice": "Sale price",
+    "badges": {
+      "new": "New",
+      "popular": "Popular",
+      "sale": "Sale"
+    },
+    "reviews": "reviews",
+    "addedToCart": "Added!"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "emptyMessage": "It looks like you haven't added any bundles to your cart yet.",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "shippingAtCheckout": "Calculated at checkout",
+    "total": "Total",
+    "promoCode": "Promo Code",
+    "promoPlaceholder": "Enter code",
+    "promoApply": "Apply",
+    "promoRemove": "Remove",
+    "promoInvalid": "Invalid code",
+    "promoSuccess": "Code successfully applied!",
+    "promoMinOrder": "Minimum order amount: €{amount}",
+    "quantity": "Quantity",
+    "remove": "Remove",
+    "freeShippingNote": "Free standard shipping on orders over €50!"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone",
+      "phonePlaceholder": "+385 9x xxx xxxx",
+      "street": "Street Address",
+      "streetPlaceholder": "e.g. Ilica 123",
+      "postalCode": "Postal Code",
+      "postalCodePlaceholder": "e.g. 10000",
+      "city": "City",
+      "company": "Company (optional)",
+      "note": "Note (optional)",
+      "notePlaceholder": "Special delivery notes..."
+    },
+    "shipping": {
+      "title": "Shipping Method",
+      "standard": "Standard Shipping",
+      "express": "Express Shipping",
+      "pickup": "Parcel Locker Pickup",
+      "businessDays": "business days",
+      "free": "Free"
+    },
+    "orderSummary": "Order Summary",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address",
+      "invalidPhone": "Please enter a valid phone number",
+      "invalidPostalCode": "Please enter a valid postal code (5 digits)"
+    }
+  },
+  "confirmation": {
+    "title": "Thank you for your order!",
+    "message": "This is a demo store — your order has not actually been processed. In a real version, you would receive an order confirmation here.",
+    "orderNumber": "Order Number",
+    "continueShopping": "Continue Shopping",
+    "demoNote": "This is a demo version of the LunaBaby store."
+  },
+  "newsletter": {
+    "title": "Join the LunaBaby Family",
+    "description": "Subscribe to our newsletter and get 10% off your first order.",
+    "placeholder": "Your email address",
+    "success": "Thanks for subscribing! Check your email for a discount code.",
+    "error": "Please enter a valid email address.",
+    "privacyNote": "We respect your privacy. You can unsubscribe at any time."
+  },
+  "about": {
+    "title": "About Us",
+    "heroTitle": "Gentleness in Every Detail",
+    "heroSubtitle": "Meet the team behind LunaBaby — parents who turned their love for their children into something more.",
+    "ourStory": {
+      "title": "Our Story",
+      "paragraph1": "LunaBaby was born in 2024 in Zagreb, Croatia, from the simple need of two young parents — Marina and Ivan. When their first child arrived, they spent weeks researching which products were truly safe, high-quality, and affordable. Countless nights reading reviews, comparing certifications, and seeking recommendations from other parents led them to one conclusion: finding the right baby products shouldn't be this hard.",
+      "paragraph2": "From that frustration, the idea for LunaBaby was born — a place where parents can find carefully curated bundles of baby products, without the stress and uncertainty. Every product in our range undergoes thorough quality checks, from materials to safety certifications.",
+      "paragraph3": "Today, the LunaBaby family includes thousands of happy parents across Croatia who trust us when it comes to caring for their little ones. Our story is just beginning, and every new bundle we ship carries a piece of our love and dedication."
+    },
+    "ourMission": {
+      "title": "Our Mission",
+      "paragraph1": "Our mission is simple: to make parenting a little easier. We believe every parent deserves access to safe, quality products for their child, without having to spend hours researching and comparing options.",
+      "paragraph2": "We hand-pick every product in our bundles, work with trusted European suppliers, and ensure that everything we sell meets the strictest safety standards. Our bundles are designed to cover everything you need — from the first days at the hospital to baby's first steps."
+    },
+    "ourValues": {
+      "title": "Our Values",
+      "value1": {
+        "title": "Safety First",
+        "description": "All our products are certified to EU safety standards. We make no compromises when it comes to our children."
+      },
+      "value2": {
+        "title": "Organic & Natural Materials",
+        "description": "We prioritize organic cotton, natural materials, and products free from harmful chemicals. Your baby's delicate skin deserves only the best."
+      },
+      "value3": {
+        "title": "Transparency",
+        "description": "Every product comes with a detailed description of materials, origin, and certifications. We believe informed parents make the best decisions."
+      },
+      "value4": {
+        "title": "Support for Parents",
+        "description": "We're not just a store — we're a community. Our team of parents is always here for advice, recommendations, or simply support."
+      }
+    },
+    "ourPromise": {
+      "title": "Our Promise",
+      "paragraph1": "We promise to always put your baby's well-being first. Every product that carries the LunaBaby label has passed our strict quality control. If you're ever not satisfied, we're here to make it right — no questions asked.",
+      "paragraph2": "Thank you for being part of the LunaBaby family. Together, we're creating a safer and more beautiful childhood for our little ones."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How do I place an order?",
+        "answer": "Ordering is simple! Select your desired bundle, add it to your cart, and follow the steps to complete your order. You'll need to enter your delivery details and choose a payment method. After confirming your order, you'll receive an email with the details and a tracking number."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept all major credit and debit cards (Visa, Mastercard, Maestro), online banking payments, and cash on delivery for orders within Croatia. All online payments are processed through a secure SSL encryption system."
+      },
+      {
+        "question": "How long does delivery take?",
+        "answer": "Standard delivery within Croatia takes 3-5 business days. Express delivery is available for 1-2 business days at an additional cost. Orders placed before 2:00 PM on business days are shipped the same day."
+      },
+      {
+        "question": "How much does shipping cost?",
+        "answer": "Standard shipping costs €3.99 for orders within Croatia. For orders over €50, standard shipping is completely free! Express shipping costs €7.99, and parcel locker pickup is €2.99. For orders over €50, parcel locker pickup is also free."
+      },
+      {
+        "question": "Do you ship internationally?",
+        "answer": "We currently deliver throughout Croatia, including the islands. We are working on expanding delivery to neighbouring countries (Slovenia, Bosnia and Herzegovina, Serbia) and expect to offer international shipping soon. Subscribe to our newsletter to be the first to know when we launch international delivery."
+      },
+      {
+        "question": "What is your return policy?",
+        "answer": "We offer 30 days for returns or exchanges from the date of receiving your order. Products must be unused, in their original packaging, and with tags attached. Refunds are processed within 7 business days of receiving the returned product. Return shipping costs are covered by the customer, unless the error was on our end."
+      },
+      {
+        "question": "How do I return a product?",
+        "answer": "To initiate a return, contact us via email at returns@lunababy.hr or call us at +385 1 234 5678. Our team will send you instructions and a return label. Package the product in its original packaging and hand it to the courier service. We'll track the status of your return and notify you once it has been processed."
+      },
+      {
+        "question": "Are your products safe for babies?",
+        "answer": "Absolutely. Safety is our number one priority. All products in our range are certified to EU safety standards (EN 71 for toys, OEKO-TEX for textiles). We work exclusively with trusted European manufacturers who share our commitment to quality. Every bundle undergoes an additional quality check before shipping."
+      },
+      {
+        "question": "Can I customize the bundle contents?",
+        "answer": "We currently offer pre-assembled bundles that have been carefully designed for different needs and age groups. Each bundle is put together based on paediatrician recommendations and the experience of hundreds of parents. If you have special requirements or requests, contact us and we'll do our best to find the right solution for you."
+      },
+      {
+        "question": "Do you offer gift wrapping?",
+        "answer": "Yes! All our bundles come in beautiful LunaBaby gift packaging that's perfect for presents. You can also add a personalised message during checkout at no extra cost. For special occasions (baby showers, birthdays, christenings), we offer premium gift wrapping with a decorative ribbon and greeting card for an additional €3.99."
+      }
+    ]
+  },
+  "shippingPage": {
+    "title": "Shipping Information",
+    "intro": "At LunaBaby, we want your packages to arrive quickly, safely, and in perfect condition. Here you'll find all the information about shipping methods, delivery times, and costs.",
+    "methods": {
+      "title": "Shipping Methods",
+      "standard": {
+        "name": "Standard Shipping",
+        "time": "3-5 business days",
+        "price": "€3.99",
+        "freeAbove": "Free for orders over €50",
+        "description": "Reliable delivery via Croatian Post or GLS courier service to your home address."
+      },
+      "express": {
+        "name": "Express Shipping",
+        "time": "1-2 business days",
+        "price": "€7.99",
+        "description": "Fast delivery via GLS courier service for urgent orders. Orders placed before 2:00 PM are shipped the same day."
+      },
+      "pickup": {
+        "name": "Parcel Locker Pickup",
+        "time": "2-4 business days",
+        "price": "€2.99",
+        "freeAbove": "Free for orders over €50",
+        "description": "Pick up your package from the nearest BoxNow or DPD parcel locker at a time that suits you."
+      }
+    },
+    "freeShipping": {
+      "title": "Free Shipping",
+      "description": "Enjoy free standard shipping on all orders over €50 within Croatia. Free shipping is applied automatically at checkout — no promo code needed."
+    },
+    "deliveryAreas": {
+      "title": "Delivery Areas",
+      "description": "We deliver throughout the entire Republic of Croatia, including all islands. Delivery to islands may take 1-2 business days longer than the stated timeframes. For island addresses, we recommend standard shipping as express delivery is limited to mainland addresses.",
+      "international": "International shipping is not currently available. We are working on expanding our service to neighbouring countries. Subscribe to our newsletter for updates."
+    },
+    "packaging": {
+      "title": "Packaging & Protection",
+      "description": "Every LunaBaby package is packed with special care. We use eco-friendly packaging materials — recycled cardboard, biodegradable protective material, and paper tape. Our packages are designed to be both functional and beautiful — perfect as a gift without the need for additional wrapping."
+    },
+    "tracking": {
+      "title": "Shipment Tracking",
+      "description": "After your order is shipped, you'll receive an email with a tracking number. You can track the status of your order in real time via the link in the email."
+    }
+  },
+  "returnsPage": {
+    "title": "Returns Policy",
+    "overview": {
+      "title": "Returns Policy Overview",
+      "description": "At LunaBaby, we want you to be completely satisfied with your purchase. If for any reason you're not happy, we offer a simple and transparent return process within 30 days of receiving your order."
+    },
+    "conditions": {
+      "title": "Return Conditions",
+      "items": [
+        "The product must be returned within 30 days of receiving your order.",
+        "The product must be unused and in its original packaging.",
+        "All original tags and labels must be intact.",
+        "The product must not have been washed, worn, or used in any way.",
+        "A receipt or order confirmation must be included."
+      ]
+    },
+    "process": {
+      "title": "Return Process",
+      "steps": [
+        {
+          "title": "Contact Us",
+          "description": "Send an email to returns@lunababy.hr or call us at +385 1 234 5678. Include your order number and reason for return."
+        },
+        {
+          "title": "Receive Instructions",
+          "description": "Our team will send you a confirmation and return instructions within 24 hours, including the return address and label."
+        },
+        {
+          "title": "Ship the Package",
+          "description": "Package the product in its original packaging and hand it to the courier service or drop it off at the nearest parcel locker."
+        },
+        {
+          "title": "Return Processing",
+          "description": "After receiving and inspecting the returned product, we'll process your return. You'll receive an email confirmation of the status."
+        }
+      ]
+    },
+    "refund": {
+      "title": "Refunds",
+      "description": "Refunds are processed within 7 business days of receiving the returned product. Money is returned via the same payment method used for the order. For card payments, the refund may take an additional 3-5 business days depending on your bank.",
+      "shippingCosts": "Shipping costs are not refunded, unless the error was on our end (wrong product, damaged product, or product that doesn't match the description)."
+    },
+    "exchange": {
+      "title": "Product Exchange",
+      "description": "If you'd like to exchange a product for a different bundle or size, contact us and we'll be happy to help. Exchanges are processed free of charge — we cover the shipping costs for the replacement product. Replacement products are shipped within 1-2 business days of receiving your return."
+    },
+    "exceptions": {
+      "title": "Exceptions",
+      "description": "For hygiene reasons, we cannot accept returns of products that have been in direct contact with a child's skin and have been opened (e.g. creams, lotions, wet wipes). This exception does not affect your statutory consumer rights."
+    }
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "intro": "Have a question, suggestion, or need help with an order? Our team is here for you! Feel free to reach out through any of the channels below.",
+    "email": {
+      "label": "Email",
+      "value": "info@lunababy.hr",
+      "description": "For general enquiries"
+    },
+    "supportEmail": {
+      "label": "Support",
+      "value": "support@lunababy.hr",
+      "description": "For help with orders and returns"
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+385 1 234 5678",
+      "description": "Available on weekdays"
+    },
+    "hours": {
+      "label": "Business Hours",
+      "weekdays": "Monday - Friday: 08:00 - 18:00",
+      "saturday": "Saturday: 09:00 - 14:00",
+      "sunday": "Sunday: closed"
+    },
+    "address": {
+      "label": "Address",
+      "street": "Ilica 42",
+      "city": "10000 Zagreb",
+      "country": "Croatia"
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "name": "Your Name",
+      "namePlaceholder": "First and last name",
+      "email": "Email Address",
+      "emailPlaceholder": "you@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is this about?",
+      "message": "Message",
+      "messagePlaceholder": "Describe your enquiry...",
+      "submit": "Send Message",
+      "success": "Thank you for your message! We'll get back to you within 24 hours.",
+      "error": "Something went wrong. Please try again or contact us directly."
+    },
+    "responseTime": "We typically respond within 24 hours on business days."
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "intro": "At LunaBaby, we take the protection of your personal data seriously. This privacy policy explains what data we collect, how we use it, and what your rights are. Please read this policy carefully.",
+    "lastUpdated": "Last updated: February 2026.",
+    "dataCollection": {
+      "title": "Data Collection",
+      "description": "We only collect data that is necessary for providing our services. This includes:",
+      "items": [
+        "Personal data: name, surname, email address, phone number, and delivery address that you provide when placing an order.",
+        "Order data: information about purchased products, amounts, payment methods, and order status.",
+        "Communication data: messages you send us via the contact form, email, or phone.",
+        "Technical data: IP address, browser type, operating system, and interaction data with our website collected automatically."
+      ]
+    },
+    "cookies": {
+      "title": "Cookies",
+      "description": "Our website uses cookies to improve your experience. We use:",
+      "items": [
+        "Essential cookies: required for the website to function, including the shopping cart and login. These cannot be disabled.",
+        "Analytics cookies: help us understand how you use our site so we can improve it. We use anonymised analytics.",
+        "Functional cookies: remember your preferences such as language and currency for a better user experience."
+      ],
+      "note": "We do not use advertising cookies or share data with advertising networks. You can manage cookies through your browser settings."
+    },
+    "usage": {
+      "title": "Data Usage",
+      "description": "We use your data exclusively for the following purposes:",
+      "items": [
+        "Processing and delivering your orders.",
+        "Communication related to your orders (confirmations, shipping notifications, responses to enquiries).",
+        "Improving our website and user experience based on anonymised analytics data.",
+        "Sending newsletters and promotional offers, only with your explicit consent.",
+        "Fulfilling legal obligations (accounting, tax records)."
+      ]
+    },
+    "sharing": {
+      "title": "Data Sharing",
+      "description": "We do not sell or rent your personal data to third parties. We only share data with:",
+      "items": [
+        "Courier services: name, address, and phone number for delivery purposes.",
+        "Payment processors: payment data for secure transaction processing. We do not store your card details.",
+        "Hosting and IT services: trusted service providers who are contractually bound to protect your data."
+      ]
+    },
+    "retention": {
+      "title": "Data Retention",
+      "description": "We retain your personal data only for as long as necessary to fulfil the purpose for which it was collected. Order data is retained for 5 years in accordance with legal obligations. Newsletter data is retained until you unsubscribe. After expiry, data is securely deleted or anonymised."
+    },
+    "rights": {
+      "title": "Your Rights",
+      "description": "Under the General Data Protection Regulation (GDPR), you have the following rights:",
+      "items": [
+        "Right of access: you can request a copy of all personal data we hold about you.",
+        "Right to rectification: you can request correction of inaccurate or incomplete data.",
+        "Right to erasure: you can request deletion of your personal data ('right to be forgotten').",
+        "Right to restriction of processing: you can request restriction of how we use your data.",
+        "Right to data portability: you can request transfer of your data in a structured format.",
+        "Right to object: you can object to the processing of your data for marketing purposes."
+      ]
+    },
+    "contact": {
+      "title": "Data Protection Contact",
+      "description": "For all questions regarding the protection of your personal data, please contact us at:",
+      "email": "privacy@lunababy.hr",
+      "note": "We will respond to your enquiry within 30 days, in accordance with legal requirements. If you believe your rights have not been respected, you have the right to file a complaint with the Croatian Personal Data Protection Agency (AZOP)."
+    }
+  },
+  "errors": {
+    "notFound": "Page not found",
+    "goHome": "Back to Home"
+  },
+  "metadata": {
+    "home": {
+      "title": "LunaBaby - Gentle Baby Bundles | Gift Sets",
+      "description": "Discover LunaBaby hand-picked bundles of safe, organic, and tested baby products. Perfect gifts for new parents."
+    },
+    "shop": {
+      "title": "Shop | LunaBaby",
+      "description": "Browse our collection of carefully curated baby bundles. Organic materials, safe products, free shipping over €50."
+    },
+    "bundle": {
+      "titleSuffix": " | LunaBaby"
+    },
+    "cart": {
+      "title": "Cart | LunaBaby",
+      "description": "Review your cart and continue shopping at the LunaBaby store."
+    },
+    "checkout": {
+      "title": "Checkout | LunaBaby",
+      "description": "Complete your order at LunaBaby. Secure payment and fast delivery."
+    },
+    "orderConfirmation": {
+      "title": "Order Confirmation | LunaBaby",
+      "description": "Your order has been successfully received. Thank you for shopping at LunaBaby."
+    },
+    "about": {
+      "title": "About Us | LunaBaby",
+      "description": "Meet LunaBaby - a team of parents from Zagreb who carefully select safe and organic products for your baby."
+    },
+    "faq": {
+      "title": "FAQ | LunaBaby",
+      "description": "Answers to frequently asked questions about orders, shipping, returns, and products at the LunaBaby store."
+    },
+    "shipping": {
+      "title": "Shipping | LunaBaby",
+      "description": "Information about shipping methods, delivery times, and costs. Free shipping on orders over €50."
+    },
+    "returns": {
+      "title": "Returns | LunaBaby",
+      "description": "LunaBaby returns policy. 30 days for returns or product exchanges."
+    },
+    "contact": {
+      "title": "Contact | LunaBaby",
+      "description": "Contact the LunaBaby team. We're here for all your questions about orders, products, and delivery."
+    },
+    "privacy": {
+      "title": "Privacy | LunaBaby",
+      "description": "LunaBaby privacy policy. Learn how we protect your personal data."
+    }
+  }
+}
