@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LunaBaby — Gentle Care for Your Little Moonbeam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #FBF9F6;
+  --warm-white: #FEFDFB;
+  --teal: #8BBCC4;
+  --teal-deep: #6BA3AD;
+  --teal-light: #D4EAEE;
+  --teal-pale: #EDF6F8;
+  --lavender: #C5B8D9;
+  --lavender-light: #EDE8F4;
+  --lavender-pale: #F6F3FA;
+  --gold: #E8D5A3;
+  --gold-warm: #F0DFB4;
+  --gold-light: #FBF5E6;
+  --blush: #F0D4CC;
+  --blush-light: #FBF0ED;
+  --sage: #B8CCBA;
+  --sage-light: #E8F0E8;
+  --text-dark: #3D3D4E;
+  --text-mid: #6B6B7B;
+  --text-light: #9898A8;
+  --shadow-sm: 0 2px 8px rgba(59, 59, 78, 0.04);
+  --shadow-md: 0 4px 20px rgba(59, 59, 78, 0.06);
+  --shadow-lg: 0 8px 40px rgba(59, 59, 78, 0.08);
+  --shadow-hover: 0 12px 48px rgba(139, 188, 196, 0.15);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text-dark);
+  background: var(--cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ UTILITIES ============ */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--text-dark);
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  max-width: 520px;
+  font-weight: 400;
+}
+
+/* ============ REVEAL ANIMATIONS ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ============ FLOATING DECORATIONS ============ */
+.float-star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 3s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.3); }
+}
+
+/* ============ NAVBAR ============ */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+  transition: all 0.4s ease;
+}
+.navbar.scrolled {
+  background: rgba(251, 249, 246, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(139, 188, 196, 0.1);
+}
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.nav-logo img {
+  height: 52px;
+  width: auto;
+}
+.nav-logo span {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--text-dark);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--teal);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--teal-deep); }
+.nav-links a:hover::after { width: 100%; }
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.nav-icon {
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-icon:hover { color: var(--teal-deep); }
+.nav-icon svg { width: 20px; height: 20px; }
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--teal);
+  border-radius: 50%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.mobile-toggle svg { width: 24px; height: 24px; color: var(--text-dark); }
+
+/* ============ HERO ============ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--warm-white) 0%, var(--teal-pale) 35%, var(--lavender-pale) 65%, var(--gold-light) 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: radial-gradient(circle, rgba(139,188,196,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: -5%;
+  width: 50vw;
+  height: 50vw;
+  max-width: 600px;
+  max-height: 600px;
+  background: radial-gradient(circle, rgba(197,184,217,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding-top: 72px;
+}
+.hero-content { max-width: 520px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139,188,196,0.2);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  margin-bottom: 28px;
+  animation: fadeInDown 0.8s ease forwards;
+}
+.hero-badge svg { width: 14px; height: 14px; }
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.15;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  animation: fadeInUp 0.8s 0.2s ease both;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal-deep);
+}
+.hero-text {
+  font-size: 1.1rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 440px;
+  animation: fadeInUp 0.8s 0.4s ease both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInUp 0.8s 0.6s ease both;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(139,188,196,0.3);
+}
+.btn-primary:hover {
+  background: var(--teal-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(139,188,196,0.4);
+}
+.btn-primary svg { width: 16px; height: 16px; }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-mid);
+  border: 1.5px solid rgba(107,107,123,0.2);
+  border-radius: 50px;
+  padding: 15px 28px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  border-color: var(--teal);
+  color: var(--teal-deep);
+  background: rgba(139,188,196,0.05);
+}
+
+/* Hero visual */
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInUp 1s 0.3s ease both;
+}
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1;
+}
+.hero-moon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  opacity: 0.08;
+  animation: moonFloat 6s ease-in-out infinite;
+}
+@keyframes moonFloat {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  50% { transform: translate(-50%, -52%) rotate(3deg); }
+}
+.hero-product-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78%;
+  aspect-ratio: 1;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: var(--shadow-lg), inset 0 0 60px rgba(255,255,255,0.3);
+}
+.hero-floating-card {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255,255,255,0.5);
+  animation: cardFloat 5s ease-in-out infinite;
+}
+.hero-floating-card.card-1 {
+  top: 12%;
+  right: 2%;
+  animation-delay: 0s;
+}
+.hero-floating-card.card-2 {
+  bottom: 18%;
+  left: 0%;
+  animation-delay: -2s;
+}
+.hero-floating-card.card-3 {
+  bottom: 6%;
+  right: 8%;
+  animation-delay: -3.5s;
+}
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.floating-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+.floating-card-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+.floating-card-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.hero-logo-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  z-index: 2;
+  filter: drop-shadow(0 8px 32px rgba(139,188,196,0.2));
+}
+
+/* Trust row */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(139,188,196,0.15);
+  animation: fadeInUp 0.8s 0.8s ease both;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-light);
+}
+.trust-item svg { width: 16px; height: 16px; color: var(--teal); }
+
+/* ============ CATEGORIES ============ */
+.categories {
+  padding: 100px 0;
+  background: var(--warm-white);
+  position: relative;
+}
+.categories-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.categories-header .section-subtitle {
+  margin: 0 auto;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.category-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid transparent;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  opacity: 1;
+  transition: opacity 0.4s;
+}
+.category-card:nth-child(1)::before { background: linear-gradient(145deg, var(--teal-pale), #E8F4F6); }
+.category-card:nth-child(2)::before { background: linear-gradient(145deg, var(--lavender-pale), #EFEBF5); }
+.category-card:nth-child(3)::before { background: linear-gradient(145deg, var(--gold-light), #F9F1DE); }
+.category-card:nth-child(4)::before { background: linear-gradient(145deg, var(--blush-light), #FAE9E4); }
+.category-card:nth-child(5)::before { background: linear-gradient(145deg, var(--sage-light), #DDE9DD); }
+.category-card:nth-child(6)::before { background: linear-gradient(145deg, #EEF0F8, #E4E7F3); }
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(139,188,196,0.15);
+}
+.category-icon {
+  position: relative;
+  z-index: 1;
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 18px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.4s;
+}
+.category-card:hover .category-icon { transform: scale(1.08); }
+.category-name {
+  position: relative;
+  z-index: 1;
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: var(--text-dark);
+}
+.category-count {
+  position: relative;
+  z-index: 1;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+/* ============ BESTSELLERS ============ */
+.bestsellers {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
+}
+.bestsellers-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.product-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 1px solid rgba(0,0,0,0.03);
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+.product-image {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.product-image-bg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.4rem;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.product-card:hover .product-image-bg { transform: scale(1.05); }
+.product-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tag-new { background: var(--teal-light); color: var(--teal-deep); }
+.tag-popular { background: var(--lavender-light); color: #8B7BA8; }
+.tag-organic { background: var(--sage-light); color: #6B8B6D; }
+.tag-sale { background: #FDDEDE; color: #C27070; }
+.product-wishlist {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0;
+  transform: scale(0.8);
+}
+.product-card:hover .product-wishlist {
+  opacity: 1;
+  transform: scale(1);
+}
+.product-wishlist:hover { background: white; transform: scale(1.1) !important; }
+.product-wishlist svg { width: 16px; height: 16px; color: var(--text-light); }
+.product-wishlist:hover svg { color: #E88B8B; }
+.product-info { padding: 20px; }
+.product-brand {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.product-price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.product-price {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--teal-deep);
+}
+.product-price-old {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  text-decoration: line-through;
+}
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+}
+.stars {
+  display: flex;
+  gap: 1px;
+  color: var(--gold);
+  font-size: 0.75rem;
+}
+.rating-count {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-left: 4px;
+}
+
+/* View all link */
+.view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--teal-deep);
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+.view-all:hover { gap: 10px; }
+.view-all svg { width: 16px; height: 16px; }
+
+/* ============ USP / WHY SECTION ============ */
+.why-section {
+  padding: 100px 0;
+  background: var(--cream);
+  position: relative;
+}
+.why-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,188,196,0.2), transparent);
+}
+.why-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.why-header .section-subtitle {
+  margin: 0 auto;
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.why-card {
+  text-align: center;
+  padding: 40px 24px;
+  background: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: all 0.4s;
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.why-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+}
+.why-card:nth-child(1) .why-icon { background: var(--teal-pale); }
+.why-card:nth-child(2) .why-icon { background: var(--sage-light); }
+.why-card:nth-child(3) .why-icon { background: var(--lavender-pale); }
+.why-card:nth-child(4) .why-icon { background: var(--gold-light); }
+.why-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+.why-text {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ============ NEWSLETTER ============ */
+.newsletter {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.newsletter-card {
+  position: relative;
+  background: linear-gradient(145deg, var(--teal-pale) 0%, var(--lavender-pale) 50%, var(--gold-light) 100%);
+  border-radius: var(--radius-xl);
+  padding: 72px 60px;
+  text-align: center;
+  overflow: hidden;
+}
+.newsletter-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.newsletter-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(197,184,217,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.newsletter-content {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.newsletter-icon {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+.newsletter h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 14px;
+  color: var(--text-dark);
+}
+.newsletter p {
+  font-size: 1rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.newsletter-input {
+  flex: 1;
+  padding: 16px 24px;
+  border-radius: 50px;
+  border: 1.5px solid rgba(139,188,196,0.25);
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  outline: none;
+  transition: all 0.3s;
+}
+.newsletter-input::placeholder { color: var(--text-light); }
+.newsletter-input:focus {
+  border-color: var(--teal);
+  background: rgba(255,255,255,0.9);
+  box-shadow: 0 0 0 4px rgba(139,188,196,0.1);
+}
+.newsletter-btn {
+  padding: 16px 30px;
+  border-radius: 50px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(139,188,196,0.3);
+}
+.newsletter-btn:hover {
+  background: var(--teal-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(139,188,196,0.4);
+}
+.newsletter-note {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  margin-top: 16px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  background: #F5F3F0;
+  padding: 72px 0 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 56px;
+}
+.footer-brand img {
+  height: 48px;
+  margin-bottom: 16px;
+}
+.footer-brand p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+.social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(139,188,196,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.social-link:hover {
+  background: var(--teal);
+  color: white;
+  transform: translateY(-2px);
+}
+.social-link svg { width: 18px; height: 18px; }
+.footer-column h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  margin-bottom: 20px;
+  color: var(--text-dark);
+}
+.footer-column ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-column a {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-column a:hover { color: var(--teal-deep); }
+.footer-bottom {
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-bottom p {
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+.footer-payments {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.payment-icon {
+  width: 42px;
+  height: 28px;
+  background: white;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-light);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: block; }
+
+  .hero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+  .hero-content { max-width: 100%; }
+  .hero-text { margin: 0 auto 36px; }
+  .hero-actions { justify-content: center; }
+  .hero-trust { justify-content: center; flex-wrap: wrap; }
+  .hero-visual { order: -1; }
+  .hero-image-wrapper { max-width: 300px; margin: 0 auto; }
+
+  .categories-grid { grid-template-columns: repeat(2, 1fr); }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+
+  .bestsellers-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .newsletter-card { padding: 48px 28px; }
+  .newsletter-form { flex-direction: column; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .categories-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .category-card { padding: 24px 16px; }
+  .products-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .why-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .hero-actions { flex-direction: column; }
+  .btn-secondary { width: 100%; justify-content: center; }
+  .btn-primary { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== NAVBAR ==================== -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#" class="nav-logo">
+      <img src="generated-image (3).png" alt="LunaBaby">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#categories">Shop</a></li>
+      <li><a href="#bestsellers">Bestsellers</a></li>
+      <li><a href="#why">About</a></li>
+      <li><a href="#newsletter">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+      <div class="nav-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35" stroke-linecap="round"/></svg>
+      </div>
+      <div class="nav-icon">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="nav-icon" style="position:relative">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6h18" stroke-linecap="round"/><path d="M16 10a4 4 0 0 1-8 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="cart-badge">2</span>
+      </div>
+      <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <!-- Decorative stars -->
+  <div class="float-star" style="top:15%;left:8%;animation-delay:0s;width:5px;height:5px;"></div>
+  <div class="float-star" style="top:25%;left:22%;animation-delay:1.5s;"></div>
+  <div class="float-star" style="top:10%;right:30%;animation-delay:0.8s;width:4px;height:4px;"></div>
+  <div class="float-star" style="top:35%;right:12%;animation-delay:2.2s;"></div>
+  <div class="float-star" style="bottom:30%;left:15%;animation-delay:1s;width:4px;height:4px;"></div>
+  <div class="float-star" style="bottom:20%;right:25%;animation-delay:0.3s;"></div>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        New Spring Collection 2026
+      </div>
+      <h1>Gentle care for your little <em>moonbeam</em></h1>
+      <p class="hero-text">Thoughtfully curated essentials for babies and toddlers. Organic fabrics, safe materials, and designs that make parenthood a little more beautiful.</p>
+      <div class="hero-actions">
+        <a href="#bestsellers" class="btn-primary">
+          Shop Collection
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#categories" class="btn-secondary">Explore Categories</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4 12 14.01l-3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free shipping over €50
+        </div>
+        <div class="trust-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4 12 14.01l-3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          100% organic
+        </div>
+        <div class="trust-item">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4 12 14.01l-3-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          30-day returns
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-image-wrapper">
+        <div class="hero-product-circle"></div>
+        <img class="hero-logo-center" src="generated-image (3).png" alt="LunaBaby Logo">
+
+        <div class="hero-floating-card card-1">
+          <div class="floating-card-icon" style="background:var(--teal-pale)">🌙</div>
+          <div class="floating-card-label">Happy families</div>
+          <div class="floating-card-value">12,400+</div>
+        </div>
+        <div class="hero-floating-card card-2">
+          <div class="floating-card-icon" style="background:var(--lavender-pale)">⭐</div>
+          <div class="floating-card-label">Average rating</div>
+          <div class="floating-card-value">4.9 / 5.0</div>
+        </div>
+        <div class="hero-floating-card card-3">
+          <div class="floating-card-icon" style="background:var(--sage-light)">🍃</div>
+          <div class="floating-card-label">Organic certified</div>
+          <div class="floating-card-value">GOTS & Oeko-Tex</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CATEGORIES ==================== -->
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="categories-header reveal">
+      <p class="section-label">Browse by Category</p>
+      <h2 class="section-title">Everything for your little one</h2>
+      <p class="section-subtitle">From cosy sleepwear to nursery essentials — find everything you need for every stage of their journey.</p>
+    </div>
+    <div class="categories-grid">
+      <a class="category-card reveal reveal-delay-1" href="#">
+        <div class="category-icon">👶</div>
+        <div class="category-name">Clothing</div>
+        <div class="category-count">124 products</div>
+      </a>
+      <a class="category-card reveal reveal-delay-2" href="#">
+        <div class="category-icon">🛏️</div>
+        <div class="category-name">Nursery</div>
+        <div class="category-count">86 products</div>
+      </a>
+      <a class="category-card reveal reveal-delay-3" href="#">
+        <div class="category-icon">🍼</div>
+        <div class="category-name">Feeding</div>
+        <div class="category-count">67 products</div>
+      </a>
+      <a class="category-card reveal reveal-delay-4" href="#">
+        <div class="category-icon">🛁</div>
+        <div class="category-name">Bath &amp; Care</div>
+        <div class="category-count">53 products</div>
+      </a>
+      <a class="category-card reveal reveal-delay-5" href="#">
+        <div class="category-icon">🧸</div>
+        <div class="category-name">Toys</div>
+        <div class="category-count">91 products</div>
+      </a>
+      <a class="category-card reveal reveal-delay-6" href="#">
+        <div class="category-icon">🚼</div>
+        <div class="category-name">On the Go</div>
+        <div class="category-count">42 products</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BESTSELLERS ==================== -->
+<section class="bestsellers" id="bestsellers">
+  <div class="container">
+    <div class="bestsellers-header">
+      <div class="reveal">
+        <p class="section-label">Most Loved</p>
+        <h2 class="section-title">Our bestsellers</h2>
+        <p class="section-subtitle">Tried, tested, and adored by thousands of parents across Europe.</p>
+      </div>
+      <a href="#" class="view-all reveal">
+        View all products
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+    <div class="products-grid">
+      <!-- Product 1 -->
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-image">
+          <div class="product-image-bg" style="background:linear-gradient(135deg,#EDF6F8,#DAEEF2)">🌙</div>
+          <span class="product-tag tag-new">New</span>
+          <button class="product-wishlist" aria-label="Add to wishlist"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">LunaBaby Essentials</div>
+          <div class="product-name">Organic Cotton Sleepsuit</div>
+          <div class="product-price-row">
+            <span class="product-price">€34.90</span>
+          </div>
+          <div class="product-rating">
+            <div class="stars">★★★★★</div>
+            <span class="rating-count">(128)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-image">
+          <div class="product-image-bg" style="background:linear-gradient(135deg,#F6F3FA,#EFEBF5)">🧸</div>
+          <span class="product-tag tag-popular">Popular</span>
+          <button class="product-wishlist" aria-label="Add to wishlist"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Luna Comfort</div>
+          <div class="product-name">Dreamy Soft Blanket</div>
+          <div class="product-price-row">
+            <span class="product-price">€42.00</span>
+          </div>
+          <div class="product-rating">
+            <div class="stars">★★★★★</div>
+            <span class="rating-count">(94)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-image">
+          <div class="product-image-bg" style="background:linear-gradient(135deg,#FBF5E6,#F5ECCE)">🍼</div>
+          <span class="product-tag tag-organic">Organic</span>
+          <button class="product-wishlist" aria-label="Add to wishlist"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Luna Feeding</div>
+          <div class="product-name">Bamboo Bottle Set</div>
+          <div class="product-price-row">
+            <span class="product-price">€28.50</span>
+          </div>
+          <div class="product-rating">
+            <div class="stars">★★★★★</div>
+            <span class="rating-count">(76)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card reveal reveal-delay-4">
+        <div class="product-image">
+          <div class="product-image-bg" style="background:linear-gradient(135deg,#FBF0ED,#F5E3DC)">👣</div>
+          <span class="product-tag tag-sale">-20%</span>
+          <button class="product-wishlist" aria-label="Add to wishlist"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Luna Bath</div>
+          <div class="product-name">Gentle Bath &amp; Body Set</div>
+          <div class="product-price-row">
+            <span class="product-price">€22.40</span>
+            <span class="product-price-old">€28.00</span>
+          </div>
+          <div class="product-rating">
+            <div class="stars">★★★★★</div>
+            <span class="rating-count">(61)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WHY LUNABABY ==================== -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="why-header reveal">
+      <p class="section-label">Why LunaBaby</p>
+      <h2 class="section-title">Made with love, delivered with care</h2>
+      <p class="section-subtitle">We believe every baby deserves the softest, safest, and most thoughtfully made products.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon">🚚</div>
+        <h3 class="why-title">Free Shipping</h3>
+        <p class="why-text">Complimentary delivery on all orders over €50. Express options available across Europe.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon">🌿</div>
+        <h3 class="why-title">Organic Materials</h3>
+        <p class="why-text">GOTS-certified organic cotton and natural materials. Gentle on sensitive baby skin.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon">↩️</div>
+        <h3 class="why-title">Easy Returns</h3>
+        <p class="why-text">Changed your mind? No worries. Free returns within 30 days, no questions asked.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-4">
+        <div class="why-icon">🛡️</div>
+        <h3 class="why-title">Safe &amp; Tested</h3>
+        <p class="why-text">Every product meets EU safety standards and is independently tested for your peace of mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <div class="newsletter-card reveal">
+      <div class="newsletter-content">
+        <div class="newsletter-icon">✉️</div>
+        <h2>Join the LunaBaby family</h2>
+        <p>Get 10% off your first order, plus early access to new arrivals, seasonal sales, and parenting tips delivered to your inbox.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Subscribed ✓'; this.querySelector('input').value='';">
+          <input type="email" class="newsletter-input" placeholder="Your email address" required>
+          <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+        <p class="newsletter-note">We respect your privacy. Unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="generated-image (3).png" alt="LunaBaby">
+        <p>Thoughtfully curated baby essentials for modern parents. Organic, safe, and beautifully designed.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Pinterest">
+            <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.372 0 12c0 4.99 3.657 9.128 8.438 9.878-.046-.75-.088-1.902.018-2.72.096-.745.62-4.746.62-4.746s-.158-.317-.158-.784c0-.735.426-1.283.957-1.283.45 0 .668.34.668.746 0 .454-.29 1.134-.44 1.764-.124.527.265.957.786.957 1.003 0 1.676-1.29 1.676-2.82 0-1.164-.784-2.037-2.21-2.037-1.612 0-2.617 1.2-2.617 2.545 0 .463.136.79.348 1.043.098.116.111.163.076.296l-.117.457c-.038.148-.148.2-.274.145-.725-.296-1.062-1.09-1.062-1.983 0-1.473 1.243-3.24 3.71-3.24 1.984 0 3.287 1.435 3.287 2.975 0 2.04-1.132 3.565-2.8 3.565-.562 0-1.09-.304-1.27-.649l-.372 1.473c-.128.462-.378.927-.588 1.287A12.03 12.03 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Bestsellers</a></li>
+          <li><a href="#">Sale</a></li>
+          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Gift Sets</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns &amp; Exchanges</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 LunaBaby. All rights reserved.</p>
+      <div class="footer-payments">
+        <div class="payment-icon">VISA</div>
+        <div class="payment-icon">MC</div>
+        <div class="payment-icon">AMEX</div>
+        <div class="payment-icon">PP</div>
+        <div class="payment-icon">KLARNA</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Navbar scroll effect
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Reveal on scroll
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
