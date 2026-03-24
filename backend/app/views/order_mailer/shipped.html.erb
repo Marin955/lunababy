@@ -1,0 +1,41 @@
+<% if @locale == "en" %>
+  <h1>Your order has been shipped!</h1>
+  <p>Hi <%= @order.customer_name %>,</p>
+  <p>Great news! Your order <strong><%= @order.order_number %></strong> is on its way.</p>
+
+  <% if @shipment&.tracking_number.present? %>
+    <p>
+      <strong>Carrier:</strong> <%= @shipment.carrier.humanize %><br>
+      <strong>Tracking Number:</strong> <%= @shipment.tracking_number %>
+      <% if @shipment.tracking_url %>
+        <br><a href="<%= @shipment.tracking_url %>">Track your package</a>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if @shipment&.estimated_delivery_at.present? %>
+    <p><strong>Estimated delivery:</strong> <%= @shipment.estimated_delivery_at.strftime("%B %d, %Y") %></p>
+  <% end %>
+
+  <p>Luna Baby Team</p>
+<% else %>
+  <h1>Vaša narudžba je poslana!</h1>
+  <p>Poštovani/a <%= @order.customer_name %>,</p>
+  <p>Vaša narudžba <strong><%= @order.order_number %></strong> je na putu!</p>
+
+  <% if @shipment&.tracking_number.present? %>
+    <p>
+      <strong>Dostavljač:</strong> <%= @shipment.carrier.humanize %><br>
+      <strong>Broj za praćenje:</strong> <%= @shipment.tracking_number %>
+      <% if @shipment.tracking_url %>
+        <br><a href="<%= @shipment.tracking_url %>">Pratite svoju pošiljku</a>
+      <% end %>
+    </p>
+  <% end %>
+
+  <% if @shipment&.estimated_delivery_at.present? %>
+    <p><strong>Očekivana dostava:</strong> <%= @shipment.estimated_delivery_at.strftime("%d.%m.%Y.") %></p>
+  <% end %>
+
+  <p>Luna Baby tim</p>
+<% end %>

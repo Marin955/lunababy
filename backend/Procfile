@@ -1,0 +1,3 @@
+web: bundle exec thrust ./bin/rails server -p ${PORT:-3000}
+worker: bundle exec rails solid_queue:start
+release: bundle exec rails db:prepare

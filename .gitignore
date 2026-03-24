@@ -33,6 +33,16 @@ npm-debug.log*
 # Cache
 .cache/
 
+# Rails backend
+backend/tmp/
+backend/log/
+backend/.env
+!backend/.env.example
+backend/config/master.key
+backend/config/credentials/*.key
+backend/storage/
+backend/db/*.sqlite3
+
 # Claude Code
 .mcp.json
 screenshots/

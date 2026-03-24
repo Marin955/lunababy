@@ -1,0 +1,17 @@
+<% status_labels = {
+  "en" => { "confirmed" => "Confirmed", "processing" => "Processing", "shipped" => "Shipped", "delivered" => "Delivered", "cancelled" => "Cancelled", "refunded" => "Refunded" },
+  "hr" => { "confirmed" => "Potvrđena", "processing" => "U obradi", "shipped" => "Poslana", "delivered" => "Dostavljena", "cancelled" => "Otkazana", "refunded" => "Refundirana" }
+} %>
+<% status = status_labels.dig(@locale, @order.status) || @order.status.humanize %>
+
+<% if @locale == "en" %>
+  <h1>Order Status Update</h1>
+  <p>Hi <%= @order.customer_name %>,</p>
+  <p>Your order <strong><%= @order.order_number %></strong> status has been updated to: <strong><%= status %></strong></p>
+  <p>Luna Baby Team</p>
+<% else %>
+  <h1>Ažuriranje statusa narudžbe</h1>
+  <p>Poštovani/a <%= @order.customer_name %>,</p>
+  <p>Status vaše narudžbe <strong><%= @order.order_number %></strong> je ažuriran na: <strong><%= status %></strong></p>
+  <p>Luna Baby tim</p>
+<% end %>
