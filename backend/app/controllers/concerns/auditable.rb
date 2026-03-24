@@ -9,7 +9,7 @@ module Auditable
       action: action,
       target_type: target.class.name,
       target_id: target.id,
-      changes: changes
+      change_data: changes
     )
   end
 end
