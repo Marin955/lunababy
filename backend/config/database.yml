@@ -25,7 +25,9 @@ production:
   primary:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
+    prepared_statements: false
   queue:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
+    prepared_statements: false
     migrations_paths: db/queue_migrate
