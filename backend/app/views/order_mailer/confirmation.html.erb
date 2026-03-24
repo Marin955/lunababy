@@ -1,0 +1,47 @@
+<% if @locale == "en" %>
+  <h1>Thank you for your order!</h1>
+  <p>Hi <%= @order.customer_name %>,</p>
+  <p>Your order <strong><%= @order.order_number %></strong> has been received and is being processed.</p>
+
+  <h2>Order Summary</h2>
+  <table>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.bundle_name %> x<%= item.quantity %></td>
+        <td><%= number_to_currency(item.line_total / 100.0, unit: "\u20AC") %></td>
+      </tr>
+    <% end %>
+    <tr><td>Subtotal</td><td><%= number_to_currency(@order.subtotal / 100.0, unit: "\u20AC") %></td></tr>
+    <% if @order.discount_amount > 0 %>
+      <tr><td>Discount</td><td>-<%= number_to_currency(@order.discount_amount / 100.0, unit: "\u20AC") %></td></tr>
+    <% end %>
+    <tr><td>Shipping</td><td><%= number_to_currency(@order.shipping_cost / 100.0, unit: "\u20AC") %></td></tr>
+    <tr><td><strong>Total</strong></td><td><strong><%= number_to_currency(@order.total / 100.0, unit: "\u20AC") %></strong></td></tr>
+  </table>
+
+  <p>We'll notify you when your order ships.</p>
+  <p>Luna Baby Team</p>
+<% else %>
+  <h1>Hvala na narudžbi!</h1>
+  <p>Poštovani/a <%= @order.customer_name %>,</p>
+  <p>Vaša narudžba <strong><%= @order.order_number %></strong> je zaprimljena i u obradi.</p>
+
+  <h2>Pregled narudžbe</h2>
+  <table>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.bundle_name %> x<%= item.quantity %></td>
+        <td><%= number_to_currency(item.line_total / 100.0, unit: "\u20AC") %></td>
+      </tr>
+    <% end %>
+    <tr><td>Međuzbroj</td><td><%= number_to_currency(@order.subtotal / 100.0, unit: "\u20AC") %></td></tr>
+    <% if @order.discount_amount > 0 %>
+      <tr><td>Popust</td><td>-<%= number_to_currency(@order.discount_amount / 100.0, unit: "\u20AC") %></td></tr>
+    <% end %>
+    <tr><td>Dostava</td><td><%= number_to_currency(@order.shipping_cost / 100.0, unit: "\u20AC") %></td></tr>
+    <tr><td><strong>Ukupno</strong></td><td><strong><%= number_to_currency(@order.total / 100.0, unit: "\u20AC") %></strong></td></tr>
+  </table>
+
+  <p>Obavijestit ćemo vas kada vaša narudžba bude poslana.</p>
+  <p>Luna Baby tim</p>
+<% end %>

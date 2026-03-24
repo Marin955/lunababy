@@ -1,0 +1,31 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  primary:
+    <<: *default
+    database: lunababy_development
+  queue:
+    <<: *default
+    database: lunababy_development
+    migrations_paths: db/queue_migrate
+
+test:
+  primary:
+    <<: *default
+    database: lunababy_test
+  queue:
+    <<: *default
+    database: lunababy_test
+    migrations_paths: db/queue_migrate
+
+production:
+  primary:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+  queue:
+    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+    migrations_paths: db/queue_migrate
