@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { getShippingMethods } from '@/services/shipping-service';
+import { fetchShippingMethods } from '@/services/api/shipping';
 import { formatPrice } from '@/lib/utils';
-import type { Locale } from '@/i18n/routing';
+import type { ShippingMethod } from '@/types';
 
 interface ShippingSelectorProps {
-  selectedMethodId: string;
+  selectedMethodId: string | null;
   onSelect: (methodId: string) => void;
   locale: string;
   subtotal: number;
@@ -20,8 +20,34 @@ export default function ShippingSelector({
   subtotal,
 }: ShippingSelectorProps) {
   const t = useTranslations('checkout.shipping');
-  const methods = getShippingMethods();
-  const loc = locale as Locale;
+  const [methods, setMethods] = useState<ShippingMethod[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchShippingMethods(locale)
+      .then((data) => {
+        setMethods(data);
+        if (data.length > 0 && !selectedMethodId) {
+          onSelect(data[0].id);
+        }
+      })
+      .catch(() => setMethods([]))
+      .finally(() => setLoading(false));
+  }, [locale]);
+
+  if (loading) {
+    return (
+      <div>
+        <h2 className="font-heading text-lg font-semibold text-text-dark mb-4">
+          {t('title')}
+        </h2>
+        <div className="animate-pulse space-y-3">
+          <div className="h-20 bg-gray-100 rounded-[--radius-md]" />
+          <div className="h-20 bg-gray-100 rounded-[--radius-md]" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -32,8 +58,7 @@ export default function ShippingSelector({
         {methods.map((method) => {
           const isSelected = method.id === selectedMethodId;
           const isFree =
-            method.freeThreshold !== undefined &&
-            subtotal >= method.freeThreshold;
+            method.free_threshold !== null && subtotal >= method.free_threshold;
 
           return (
             <label
@@ -58,17 +83,17 @@ export default function ShippingSelector({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
                   <span className="font-medium text-text-dark">
-                    {method.name[loc]}
+                    {method.name}
                   </span>
                   <span className="text-sm font-semibold text-teal-deep whitespace-nowrap">
-                    {isFree ? t('free') : formatPrice(method.price)}
+                    {isFree ? t('free') : formatPrice(method.price, locale)}
                   </span>
                 </div>
                 <p className="text-sm text-text-mid mt-1">
-                  {method.description[loc]}
+                  {method.description}
                 </p>
                 <p className="text-xs text-text-light mt-1">
-                  {method.carrier} &middot; {method.estimatedDays} {t('businessDays')}
+                  {method.carrier} &middot; {method.estimated_days} {t('businessDays')}
                 </p>
               </div>
             </label>

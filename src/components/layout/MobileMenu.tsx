@@ -15,6 +15,7 @@ interface MobileMenuProps {
 const navLinks = [
   { key: 'home', href: '/' },
   { key: 'shop', href: '/shop' },
+  { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'faq', href: '/faq' },
   { key: 'shippingInfo', href: '/shipping-info' },

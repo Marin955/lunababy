@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
+import { useAuthStore } from '@/stores/auth-store';
 import CartIcon from '@/components/cart/CartIcon';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import MobileMenu from '@/components/layout/MobileMenu';
@@ -11,15 +12,21 @@ import MobileMenu from '@/components/layout/MobileMenu';
 const navLinks = [
   { key: 'home', href: '/' },
   { key: 'shop', href: '/shop' },
+  { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'contact', href: '/contact' },
 ] as const;
 
 export default function Header() {
   const t = useTranslations('common.nav');
+  const tAuth = useTranslations('auth');
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const signOutAction = useAuthStore((state) => state.signOut);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -88,6 +95,34 @@ export default function Header() {
 
             {/* Right side */}
             <div className="flex items-center gap-3">
+              {/* Auth links - Desktop only */}
+              <div className="hidden lg:flex items-center gap-3">
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      href="/profile"
+                      className="text-sm font-medium text-text-mid hover:text-teal-deep transition-colors"
+                    >
+                      {user?.name || tAuth('profile')}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={signOutAction}
+                      className="text-sm font-medium text-text-light hover:text-red-500 transition-colors cursor-pointer"
+                    >
+                      {tAuth('signOut')}
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/signin"
+                    className="text-sm font-medium text-text-mid hover:text-teal-deep transition-colors"
+                  >
+                    {tAuth('signIn')}
+                  </Link>
+                )}
+              </div>
+
               {/* Language Switcher - Desktop only */}
               <div className="hidden lg:block">
                 <LanguageSwitcher />

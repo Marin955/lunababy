@@ -3,11 +3,9 @@ import type { BundleItem } from '@/types';
 
 interface BundleItemListProps {
   items: BundleItem[];
-  locale: string;
 }
 
-export default function BundleItemList({ items, locale }: BundleItemListProps) {
-  const loc = locale as 'hr' | 'en';
+export default function BundleItemList({ items }: BundleItemListProps) {
 
   return (
     <ul className="space-y-4">
@@ -26,7 +24,7 @@ export default function BundleItemList({ items, locale }: BundleItemListProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-text-dark text-sm">
-                {item.name[loc]}
+                {item.name}
               </span>
               {item.quantity > 1 && (
                 <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-semibold rounded-full bg-teal-light text-teal-deep">
@@ -35,7 +33,7 @@ export default function BundleItemList({ items, locale }: BundleItemListProps) {
               )}
             </div>
             <p className="text-sm text-text-mid leading-relaxed mt-1">
-              {item.description[loc]}
+              {item.description}
             </p>
           </div>
         </li>

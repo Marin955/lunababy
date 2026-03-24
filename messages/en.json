@@ -8,7 +8,8 @@
       "faq": "FAQ",
       "shippingInfo": "Shipping",
       "returns": "Returns",
-      "privacy": "Privacy"
+      "privacy": "Privacy",
+      "trackOrder": "Track Order"
     },
     "buttons": {
       "addToCart": "Add to Cart",
@@ -143,19 +144,23 @@
       "free": "Free"
     },
     "orderSummary": "Order Summary",
+    "savedAddresses": "Use saved address",
+    "defaultAddress": "Default",
     "errors": {
       "required": "This field is required",
       "invalidEmail": "Please enter a valid email address",
       "invalidPhone": "Please enter a valid phone number",
-      "invalidPostalCode": "Please enter a valid postal code (5 digits)"
+      "invalidPostalCode": "Please enter a valid postal code (5 digits)",
+      "orderFailed": "There was an error creating your order. Please try again."
     }
   },
   "confirmation": {
     "title": "Thank you for your order!",
-    "message": "This is a demo store — your order has not actually been processed. In a real version, you would receive an order confirmation here.",
+    "message": "Your order has been received and we've sent a confirmation to your email.",
     "orderNumber": "Order Number",
-    "continueShopping": "Continue Shopping",
-    "demoNote": "This is a demo version of the LunaBaby store."
+    "orderTotal": "Total",
+    "email": "Email",
+    "continueShopping": "Continue Shopping"
   },
   "newsletter": {
     "title": "Join the LunaBaby Family",
@@ -509,6 +514,215 @@
     "privacy": {
       "title": "Privacy | LunaBaby",
       "description": "LunaBaby privacy policy. Learn how we protect your personal data."
+    },
+    "orderLookup": {
+      "title": "Track Order | LunaBaby",
+      "description": "Track the status of your order."
+    },
+    "signin": {
+      "title": "Sign In | LunaBaby",
+      "description": "Sign in to your LunaBaby account."
+    },
+    "profile": {
+      "title": "My Profile | LunaBaby",
+      "description": "Manage your profile and settings."
+    },
+    "addresses": {
+      "title": "My Addresses | LunaBaby",
+      "description": "Manage your delivery addresses."
+    },
+    "myOrders": {
+      "title": "My Orders | LunaBaby",
+      "description": "View your order history."
+    },
+    "admin": {
+      "title": "Admin | LunaBaby",
+      "description": "LunaBaby store administration."
     }
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "signInWith": "Sign in with {provider}",
+    "signInDescription": "Sign in to your account to access orders, addresses, and profile.",
+    "google": "Google",
+    "facebook": "Facebook",
+    "signingIn": "Signing in...",
+    "signInError": "Sign in failed. Please try again.",
+    "or": "or",
+    "notConfigured": "not configured",
+    "profile": "Profile",
+    "welcomeBack": "Welcome back!"
+  },
+  "profile": {
+    "title": "My Profile",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "language": "Language",
+    "save": "Save Changes",
+    "saved": "Changes saved!",
+    "saveError": "Error saving changes. Please try again.",
+    "loadError": "Error loading profile.",
+    "manageAddresses": "Manage Addresses",
+    "viewOrders": "View Orders",
+    "myAddresses": "My Addresses",
+    "myOrders": "My Orders"
+  },
+  "addresses": {
+    "title": "My Addresses",
+    "addNew": "Add New Address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this address?",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "street": "Street Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "phone": "Phone",
+    "company": "Company (optional)",
+    "saved": "Address saved!",
+    "deleted": "Address deleted.",
+    "selectSaved": "Select a saved address",
+    "noAddresses": "You have no saved addresses.",
+    "default": "Default",
+    "setAsDefault": "Set as default address",
+    "save": "Save Address",
+    "cancel": "Cancel",
+    "saveError": "Error saving address."
+  },
+  "orders": {
+    "title": "My Orders",
+    "orderNumber": "Order Number",
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "noOrders": "You have no orders.",
+    "backToOrders": "Back to orders",
+    "viewDetails": "View Details",
+    "items": "Items",
+    "shippingInfo": "Shipping Information",
+    "tracking": "Shipment Tracking",
+    "trackingNumber": "Tracking Number",
+    "trackPackage": "Track Package",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping",
+    "free": "Free",
+    "shippingAddress": "Shipping Address",
+    "statusPending": "Pending",
+    "statusConfirmed": "Confirmed",
+    "statusProcessing": "Processing",
+    "statusShipped": "Shipped",
+    "statusDelivered": "Delivered",
+    "statusCancelled": "Cancelled",
+    "statusRefunded": "Refunded"
+  },
+  "orderLookup": {
+    "title": "Track Your Order",
+    "description": "Enter your email and order number to check your order status.",
+    "email": "Email Address",
+    "orderNumber": "Order Number (e.g. LB-20260324-XXXXX)",
+    "emailPlaceholder": "email@example.com",
+    "search": "Find Order",
+    "searching": "Searching...",
+    "notFound": "Order not found. Please check your details and try again.",
+    "errors": {
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "totalOrders": "Total Orders",
+      "revenue": "Revenue",
+      "recentOrders": "Recent Orders",
+      "lowStock": "Low Stock",
+      "loadError": "Error loading data."
+    },
+    "orders": {
+      "title": "Orders",
+      "filterByStatus": "Filter by Status",
+      "search": "Search orders...",
+      "changeStatus": "Change Status",
+      "createShipment": "Create Shipment",
+      "carrier": "Carrier",
+      "trackingNumber": "Tracking Number",
+      "estimatedDelivery": "Estimated Delivery",
+      "statusChanged": "Order status updated.",
+      "shipmentCreated": "Shipment created.",
+      "ship": "Ship",
+      "allStatuses": "All Statuses",
+      "searchPlaceholder": "Search by number or email...",
+      "orderNumber": "Order Number",
+      "customer": "Customer",
+      "status": "Status",
+      "date": "Date",
+      "total": "Total",
+      "noOrders": "No orders found.",
+      "orderDetail": "Order Detail",
+      "orderNotFound": "Order not found."
+    },
+    "bundles": {
+      "title": "Bundles",
+      "stockQuantity": "Stock",
+      "active": "Active",
+      "inactive": "Inactive",
+      "updated": "Bundle updated.",
+      "name": "Name",
+      "price": "Price",
+      "stock": "Stock",
+      "actions": "Actions",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "promoCodes": {
+      "title": "Promo Codes",
+      "createNew": "Create New Code",
+      "code": "Code",
+      "discountType": "Discount Type",
+      "value": "Value",
+      "active": "Active",
+      "expires": "Expires",
+      "maxUses": "Max Uses",
+      "minOrder": "Min Order",
+      "created": "Promo code created.",
+      "updated": "Promo code updated.",
+      "create": "Create New",
+      "type": "Type",
+      "uses": "Uses",
+      "actions": "Actions",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "yes": "Yes",
+      "no": "No",
+      "noCodes": "No promo codes found.",
+      "freeShipping": "Free Shipping",
+      "percentage": "Percentage",
+      "fixedAmount": "Fixed Amount",
+      "expiresAt": "Expiration Date"
+    },
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "bundles": "Bundles",
+      "promoCodes": "Promo Codes"
+    }
+  },
+  "loading": "Loading...",
+  "error": {
+    "generic": "Something went wrong. Please try again.",
+    "tryAgain": "Something went wrong. Please try again.",
+    "notFound": "Page not found.",
+    "notFoundMessage": "The page you're looking for doesn't exist or has been moved.",
+    "forbidden": "You don't have access to this page.",
+    "retry": "Try Again",
+    "backHome": "Back to Home"
   }
 }

@@ -7,9 +7,10 @@ import Button from '@/components/ui/Button';
 
 interface AddToCartButtonProps {
   bundleId: string;
+  inStock: boolean;
 }
 
-export default function AddToCartButton({ bundleId }: AddToCartButtonProps) {
+export default function AddToCartButton({ bundleId, inStock }: AddToCartButtonProps) {
   const t = useTranslations('bundle');
   const addItem = useCartStore((state) => state.addItem);
   const [added, setAdded] = useState(false);
@@ -25,9 +26,12 @@ export default function AddToCartButton({ bundleId }: AddToCartButtonProps) {
       variant="primary"
       size="lg"
       onClick={handleAdd}
+      disabled={!inStock}
       className={`w-full ${added ? 'bg-teal' : ''}`}
     >
-      {added ? (
+      {!inStock ? (
+        t('outOfStock')
+      ) : added ? (
         <span className="flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

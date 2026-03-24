@@ -1,28 +1,39 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { subscribe } from '@/services/api/newsletter';
 
 export default function Newsletter() {
   const t = useTranslations('newsletter');
   const tCommon = useTranslations('common');
+  const locale = useLocale();
 
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    // Client-side email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email.trim())) {
       setStatus('error');
+      setErrorMessage(t('error'));
       return;
     }
 
-    // Demo: simulate successful subscription
-    setStatus('success');
-    setEmail('');
+    setStatus('loading');
+    setErrorMessage(null);
+
+    try {
+      await subscribe(email.trim(), locale);
+      setStatus('success');
+      setEmail('');
+    } catch {
+      setStatus('error');
+      setErrorMessage(t('error'));
+    }
   }
 
   return (
@@ -39,7 +50,6 @@ export default function Newsletter() {
 
           {status === 'success' ? (
             <div className="flex flex-col items-center gap-4">
-              {/* Checkmark */}
               <div className="w-14 h-14 bg-teal-pale rounded-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,26 +82,32 @@ export default function Newsletter() {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    if (status === 'error') setStatus('idle');
+                    if (status === 'error') {
+                      setStatus('idle');
+                      setErrorMessage(null);
+                    }
                   }}
                   placeholder={t('placeholder')}
+                  disabled={status === 'loading'}
                   className={`
                     flex-1 px-4 py-3 rounded-[--radius-sm] border bg-white
                     focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal
                     transition-all font-body text-text-dark placeholder:text-text-light
                     ${status === 'error' ? 'border-red-400' : 'border-gray-200'}
+                    ${status === 'loading' ? 'opacity-50' : ''}
                   `}
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-teal-deep text-white font-semibold rounded-[--radius-sm] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 cursor-pointer whitespace-nowrap"
+                  disabled={status === 'loading'}
+                  className="px-6 py-3 bg-teal-deep text-white font-semibold rounded-[--radius-sm] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 cursor-pointer whitespace-nowrap disabled:opacity-50"
                 >
-                  {tCommon('buttons.subscribe')}
+                  {status === 'loading' ? '...' : tCommon('buttons.subscribe')}
                 </button>
               </form>
 
-              {status === 'error' && (
-                <p className="text-red-500 text-sm mt-3">{t('error')}</p>
+              {errorMessage && (
+                <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
               )}
 
               <p className="text-xs text-text-light mt-4">

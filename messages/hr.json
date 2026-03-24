@@ -8,7 +8,8 @@
       "faq": "Česta pitanja",
       "shippingInfo": "Dostava",
       "returns": "Povrati",
-      "privacy": "Privatnost"
+      "privacy": "Privatnost",
+      "trackOrder": "Praćenje narudžbe"
     },
     "buttons": {
       "addToCart": "Dodaj u košaricu",
@@ -143,19 +144,23 @@
       "free": "Besplatno"
     },
     "orderSummary": "Pregled narudžbe",
+    "savedAddresses": "Koristi spremljenu adresu",
+    "defaultAddress": "Zadano",
     "errors": {
       "required": "Ovo polje je obavezno",
       "invalidEmail": "Unesite valjanu email adresu",
       "invalidPhone": "Unesite valjani telefonski broj",
-      "invalidPostalCode": "Unesite valjani poštanski broj (5 znamenki)"
+      "invalidPostalCode": "Unesite valjani poštanski broj (5 znamenki)",
+      "orderFailed": "Došlo je do greške pri stvaranju narudžbe. Pokušajte ponovo."
     }
   },
   "confirmation": {
     "title": "Hvala na narudžbi!",
-    "message": "Ovo je demo trgovina — vaša narudžba nije stvarno obrađena. U pravoj verziji, ovdje biste primili potvrdu narudžbe.",
+    "message": "Vaša narudžba je zaprimljena i poslali smo vam potvrdu na email.",
     "orderNumber": "Broj narudžbe",
-    "continueShopping": "Nastavi kupnju",
-    "demoNote": "Ovo je demonstracijska verzija LunaBaby trgovine."
+    "orderTotal": "Ukupno",
+    "email": "Email",
+    "continueShopping": "Nastavi kupnju"
   },
   "newsletter": {
     "title": "Pridružite se LunaBaby obitelji",
@@ -509,6 +514,215 @@
     "privacy": {
       "title": "Privatnost | LunaBaby",
       "description": "Politika privatnosti LunaBaby trgovine. Saznajte kako štitimo vaše osobne podatke."
+    },
+    "orderLookup": {
+      "title": "Praćenje narudžbe | LunaBaby",
+      "description": "Pratite status vaše narudžbe."
+    },
+    "signin": {
+      "title": "Prijava | LunaBaby",
+      "description": "Prijavite se u svoj LunaBaby račun."
+    },
+    "profile": {
+      "title": "Moj profil | LunaBaby",
+      "description": "Upravljajte svojim profilom i postavkama."
+    },
+    "addresses": {
+      "title": "Moje adrese | LunaBaby",
+      "description": "Upravljajte adresama za dostavu."
+    },
+    "myOrders": {
+      "title": "Moje narudžbe | LunaBaby",
+      "description": "Pregledajte povijest narudžbi."
+    },
+    "admin": {
+      "title": "Admin | LunaBaby",
+      "description": "Administracija LunaBaby trgovine."
     }
+  },
+  "auth": {
+    "signIn": "Prijava",
+    "signOut": "Odjava",
+    "signInWith": "Prijavite se putem {provider}",
+    "signInDescription": "Prijavite se u svoj račun za pristup narudžbama, adresama i profilu.",
+    "google": "Google",
+    "facebook": "Facebook",
+    "signingIn": "Prijava u tijeku...",
+    "signInError": "Greška pri prijavi. Pokušajte ponovo.",
+    "or": "ili",
+    "notConfigured": "nije konfigurirano",
+    "profile": "Profil",
+    "welcomeBack": "Dobrodošli natrag!"
+  },
+  "profile": {
+    "title": "Moj profil",
+    "name": "Ime",
+    "email": "Email",
+    "phone": "Telefon",
+    "language": "Jezik",
+    "save": "Spremi promjene",
+    "saved": "Promjene spremljene!",
+    "saveError": "Greška pri spremanju. Pokušajte ponovo.",
+    "loadError": "Greška pri učitavanju profila.",
+    "manageAddresses": "Upravljaj adresama",
+    "viewOrders": "Pogledaj narudžbe",
+    "myAddresses": "Moje adrese",
+    "myOrders": "Moje narudžbe"
+  },
+  "addresses": {
+    "title": "Moje adrese",
+    "addNew": "Dodaj novu adresu",
+    "edit": "Uredi",
+    "delete": "Obriši",
+    "confirmDelete": "Jeste li sigurni da želite obrisati ovu adresu?",
+    "firstName": "Ime",
+    "lastName": "Prezime",
+    "street": "Ulica i kućni broj",
+    "city": "Grad",
+    "postalCode": "Poštanski broj",
+    "phone": "Telefon",
+    "company": "Tvrtka (opcionalno)",
+    "saved": "Adresa spremljena!",
+    "deleted": "Adresa obrisana.",
+    "selectSaved": "Odaberite spremljenu adresu",
+    "noAddresses": "Nemate spremljenih adresa.",
+    "default": "Zadano",
+    "setAsDefault": "Postavi kao zadanu adresu",
+    "save": "Spremi adresu",
+    "cancel": "Odustani",
+    "saveError": "Greška pri spremanju adrese."
+  },
+  "orders": {
+    "title": "Moje narudžbe",
+    "orderNumber": "Broj narudžbe",
+    "date": "Datum",
+    "status": "Status",
+    "total": "Ukupno",
+    "noOrders": "Nemate narudžbi.",
+    "backToOrders": "Natrag na narudžbe",
+    "viewDetails": "Pogledaj detalje",
+    "items": "Stavke",
+    "shippingInfo": "Podaci o dostavi",
+    "tracking": "Praćenje pošiljke",
+    "trackingNumber": "Broj pošiljke",
+    "trackPackage": "Prati pošiljku",
+    "subtotal": "Međuzbroj",
+    "discount": "Popust",
+    "shipping": "Dostava",
+    "free": "Besplatno",
+    "shippingAddress": "Adresa za dostavu",
+    "statusPending": "Na čekanju",
+    "statusConfirmed": "Potvrđena",
+    "statusProcessing": "U obradi",
+    "statusShipped": "Poslana",
+    "statusDelivered": "Dostavljena",
+    "statusCancelled": "Otkazana",
+    "statusRefunded": "Refundirana"
+  },
+  "orderLookup": {
+    "title": "Praćenje narudžbe",
+    "description": "Unesite email i broj narudžbe za praćenje statusa.",
+    "email": "Email adresa",
+    "orderNumber": "Broj narudžbe (npr. LB-20260324-XXXXX)",
+    "emailPlaceholder": "email@primjer.com",
+    "search": "Traži narudžbu",
+    "searching": "Traženje...",
+    "notFound": "Narudžba nije pronađena. Provjerite unesene podatke.",
+    "errors": {
+      "required": "Ovo polje je obavezno",
+      "invalidEmail": "Unesite valjanu email adresu"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Kontrolna ploča",
+      "totalOrders": "Ukupno narudžbi",
+      "revenue": "Prihod",
+      "recentOrders": "Nedavne narudžbe",
+      "lowStock": "Nizke zalihe",
+      "loadError": "Greška pri učitavanju."
+    },
+    "orders": {
+      "title": "Narudžbe",
+      "filterByStatus": "Filtriraj po statusu",
+      "search": "Pretraži narudžbe...",
+      "changeStatus": "Promijeni status",
+      "createShipment": "Kreiraj pošiljku",
+      "carrier": "Dostavljač",
+      "trackingNumber": "Broj za praćenje",
+      "estimatedDelivery": "Očekivana dostava",
+      "statusChanged": "Status narudžbe ažuriran.",
+      "shipmentCreated": "Pošiljka kreirana.",
+      "ship": "Pošalji",
+      "allStatuses": "Svi statusi",
+      "searchPlaceholder": "Pretraži po broju ili emailu...",
+      "orderNumber": "Broj narudžbe",
+      "customer": "Kupac",
+      "status": "Status",
+      "date": "Datum",
+      "total": "Ukupno",
+      "noOrders": "Nema narudžbi.",
+      "orderDetail": "Detalji narudžbe",
+      "orderNotFound": "Narudžba nije pronađena."
+    },
+    "bundles": {
+      "title": "Paketi",
+      "stockQuantity": "Zaliha",
+      "active": "Aktivno",
+      "inactive": "Neaktivno",
+      "updated": "Paket ažuriran.",
+      "name": "Naziv",
+      "price": "Cijena",
+      "stock": "Zaliha",
+      "actions": "Akcije",
+      "edit": "Uredi",
+      "save": "Spremi",
+      "cancel": "Odustani",
+      "yes": "Da",
+      "no": "Ne"
+    },
+    "promoCodes": {
+      "title": "Promo kodovi",
+      "createNew": "Kreiraj novi kod",
+      "code": "Kod",
+      "discountType": "Tip popusta",
+      "value": "Vrijednost",
+      "active": "Aktivan",
+      "expires": "Ističe",
+      "maxUses": "Maks. korištenja",
+      "minOrder": "Min. narudžba",
+      "created": "Promo kod kreiran.",
+      "updated": "Promo kod ažuriran.",
+      "create": "Kreiraj novi",
+      "type": "Tip",
+      "uses": "Korištenja",
+      "actions": "Akcije",
+      "edit": "Uredi",
+      "save": "Spremi",
+      "cancel": "Odustani",
+      "yes": "Da",
+      "no": "Ne",
+      "noCodes": "Nema promo kodova.",
+      "freeShipping": "Besplatna dostava",
+      "percentage": "Postotak",
+      "fixedAmount": "Fiksni iznos",
+      "expiresAt": "Datum isteka"
+    },
+    "nav": {
+      "dashboard": "Kontrolna ploča",
+      "orders": "Narudžbe",
+      "bundles": "Paketi",
+      "promoCodes": "Promo kodovi"
+    }
+  },
+  "loading": "Učitavanje...",
+  "error": {
+    "generic": "Došlo je do greške. Pokušajte ponovo.",
+    "tryAgain": "Nešto je pošlo po krivu. Pokušajte ponovo.",
+    "notFound": "Stranica nije pronađena.",
+    "notFoundMessage": "Stranica koju tražite ne postoji ili je premještena.",
+    "forbidden": "Nemate pristup ovoj stranici.",
+    "retry": "Pokušaj ponovo",
+    "backHome": "Natrag na početnu"
   }
 }

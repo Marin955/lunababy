@@ -3,6 +3,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins(
       "https://lunababy.eu",
       "https://www.lunababy.eu",
+      "https://lunababy.vercel.app",
+      "https://lunababy-*.vercel.app",
       "http://localhost:3000"
     )
 

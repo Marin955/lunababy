@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import { getBundles } from '@/services/bundle-service';
 import BundleGrid from '@/components/bundles/BundleGrid';
 
+export const dynamic = 'force-dynamic';
+
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -28,7 +30,7 @@ export default async function ShopPage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('shop');
-  const bundles = getBundles();
+  const bundles = await getBundles(locale);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">

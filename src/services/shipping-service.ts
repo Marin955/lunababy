@@ -1,6 +1,7 @@
 import type { ShippingMethod } from '@/types';
-import { shippingMethods } from '@/data/shipping-methods';
+import { fetchShippingMethods } from './api/shipping';
 
-export function getShippingMethods(): ShippingMethod[] {
-  return [...shippingMethods].sort((a, b) => a.price - b.price);
+export async function getShippingMethods(locale: string = 'hr'): Promise<ShippingMethod[]> {
+  const methods = await fetchShippingMethods(locale);
+  return methods.sort((a, b) => a.price - b.price);
 }

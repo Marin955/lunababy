@@ -1,17 +1,17 @@
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-import { getFeaturedBundles } from '@/services/bundle-service';
+import type { Bundle } from '@/types';
 import BundleGrid from '@/components/bundles/BundleGrid';
 import Button from '@/components/ui/Button';
 
 interface FeaturedBundlesProps {
   locale: string;
+  bundles: Bundle[];
 }
 
-export default async function FeaturedBundles({ locale }: FeaturedBundlesProps) {
+export default async function FeaturedBundles({ locale, bundles }: FeaturedBundlesProps) {
   const t = await getTranslations('home.featured');
   const tButtons = await getTranslations('common.buttons');
-  const bundles = getFeaturedBundles();
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">

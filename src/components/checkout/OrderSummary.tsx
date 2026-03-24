@@ -3,44 +3,43 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
-import { getBundles } from '@/services/bundle-service';
-import { getShippingMethods } from '@/services/shipping-service';
 import {
   calculateSubtotal,
   calculateDiscount,
   calculateShipping,
   calculateTotal,
-  validatePromoCode,
 } from '@/services/cart-service';
 import { formatPrice } from '@/lib/utils';
-import type { Locale } from '@/i18n/routing';
+import type { Bundle, ShippingMethod, PromoValidation } from '@/types';
 
 interface OrderSummaryProps {
-  shippingMethodId: string | null;
   locale: string;
+  bundles: Bundle[];
+  shippingMethods: ShippingMethod[];
+  selectedShippingMethodId: string | null;
+  promoValidation: PromoValidation | null;
 }
 
-export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryProps) {
+export default function OrderSummary({
+  locale,
+  bundles,
+  shippingMethods,
+  selectedShippingMethodId,
+  promoValidation,
+}: OrderSummaryProps) {
   const t = useTranslations('checkout');
   const tCart = useTranslations('cart');
   const items = useCartStore((state) => state.items);
-  const promoCode = useCartStore((state) => state.promoCode);
-
-  const bundles = getBundles();
-  const loc = locale as Locale;
 
   const subtotal = calculateSubtotal(items, bundles);
+  const discount = calculateDiscount(subtotal, promoValidation);
 
-  const promo = promoCode ? validatePromoCode(promoCode) : null;
-  const discount = calculateDiscount(subtotal, promo);
-
-  const shippingMethods = getShippingMethods();
-  const selectedMethod = shippingMethodId
-    ? shippingMethods.find((m) => m.id === shippingMethodId) ?? null
+  const selectedMethod = selectedShippingMethodId
+    ? shippingMethods.find((m) => m.id === selectedShippingMethodId) ?? null
     : null;
 
   const shipping = selectedMethod
-    ? calculateShipping(subtotal, selectedMethod, promo)
+    ? calculateShipping(subtotal, selectedMethod, promoValidation)
     : 0;
 
   const total = calculateTotal(subtotal, discount, shipping);
@@ -61,10 +60,10 @@ export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryP
           return (
             <div key={item.bundleId} className="flex justify-between text-sm">
               <span className="text-text-mid">
-                {bundle.name[loc]} &times; {item.quantity}
+                {bundle.name} &times; {item.quantity}
               </span>
               <span className="text-text-dark font-medium">
-                {formatPrice(lineTotal)}
+                {formatPrice(lineTotal, locale)}
               </span>
             </div>
           );
@@ -75,7 +74,7 @@ export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryP
         {/* Subtotal */}
         <div className="flex justify-between text-sm">
           <span className="text-text-mid">{tCart('subtotal')}</span>
-          <span className="text-text-dark">{formatPrice(subtotal)}</span>
+          <span className="text-text-dark">{formatPrice(subtotal, locale)}</span>
         </div>
 
         {/* Discount */}
@@ -83,7 +82,7 @@ export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryP
           <div className="flex justify-between text-sm">
             <span className="text-green-600">{tCart('discount')}</span>
             <span className="text-green-600 font-medium">
-              -{formatPrice(discount)}
+              -{formatPrice(discount, locale)}
             </span>
           </div>
         )}
@@ -95,7 +94,7 @@ export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryP
             {selectedMethod
               ? shipping === 0
                 ? t('shipping.free')
-                : formatPrice(shipping)
+                : formatPrice(shipping, locale)
               : tCart('shippingAtCheckout')}
           </span>
         </div>
@@ -108,7 +107,7 @@ export default function OrderSummary({ shippingMethodId, locale }: OrderSummaryP
             {tCart('total')}
           </span>
           <span className="font-heading text-xl font-bold text-teal-deep">
-            {formatPrice(total)}
+            {formatPrice(total, locale)}
           </span>
         </div>
       </div>

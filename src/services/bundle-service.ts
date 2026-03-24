@@ -1,15 +1,20 @@
-import type { Bundle } from '@/types';
-import { bundles } from '@/data/bundles';
+import type { Bundle, BundleDetail } from '@/types';
+import { fetchBundles, fetchBundleBySlug } from './api/bundles';
 
-export function getBundles(): Bundle[] {
-  return bundles;
+export async function getBundles(locale: string = 'hr'): Promise<Bundle[]> {
+  return fetchBundles(locale);
 }
 
-export function getBundleBySlug(slug: string): Bundle | null {
-  return bundles.find((bundle) => bundle.slug === slug) ?? null;
+export async function getBundleBySlug(slug: string, locale: string = 'hr'): Promise<BundleDetail | null> {
+  try {
+    return await fetchBundleBySlug(slug, locale);
+  } catch {
+    return null;
+  }
 }
 
-export function getFeaturedBundles(): Bundle[] {
+export async function getFeaturedBundles(locale: string = 'hr'): Promise<Bundle[]> {
+  const bundles = await fetchBundles(locale);
   return bundles.filter(
     (bundle) => bundle.badge === 'popular' || bundle.badge === 'new'
   );

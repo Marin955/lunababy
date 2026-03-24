@@ -1,10 +1,11 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-import { getBundleBySlug, getBundles } from '@/services/bundle-service';
+import { notFound } from 'next/navigation';
+import { getBundleBySlug } from '@/services/bundle-service';
+
+export const dynamic = 'force-dynamic';
 import { formatPrice } from '@/lib/utils';
-import { routing } from '@/i18n/routing';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
@@ -14,16 +15,15 @@ type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const bundle = getBundleBySlug(slug);
+  const bundle = await getBundleBySlug(slug, locale);
   const t = await getTranslations({ locale, namespace: 'metadata.bundle' });
-  const loc = locale as 'hr' | 'en';
 
   if (!bundle) {
     return { title: 'LunaBaby' };
   }
 
-  const title = bundle.name[loc] + t('titleSuffix');
-  const description = bundle.description[loc];
+  const title = bundle.name + t('titleSuffix');
+  const description = bundle.description;
 
   return {
     title,
@@ -36,19 +36,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
   };
-}
-
-export function generateStaticParams() {
-  const bundles = getBundles();
-  const params: { locale: string; slug: string }[] = [];
-
-  for (const locale of routing.locales) {
-    for (const bundle of bundles) {
-      params.push({ locale, slug: bundle.slug });
-    }
-  }
-
-  return params;
 }
 
 function getGradientClasses(colorFrom: string, colorTo: string): string {
@@ -80,14 +67,12 @@ export default async function BundleDetailPage({
   const { locale, slug } = await params;
   setRequestLocale(locale);
 
-  const bundle = getBundleBySlug(slug);
+  const bundle = await getBundleBySlug(slug, locale);
   if (!bundle) {
-    redirect(`/${locale}/shop`);
+    notFound();
   }
 
   const t = await getTranslations('bundle');
-  const tButtons = await getTranslations('common.buttons');
-  const loc = locale as 'hr' | 'en';
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-12">
@@ -104,7 +89,7 @@ export default async function BundleDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left: Hero visual */}
         <div
-          className={`relative rounded-[--radius-xl] bg-gradient-to-br ${getGradientClasses(bundle.colorFrom, bundle.colorTo)} flex items-center justify-center min-h-[400px]`}
+          className={`relative rounded-[--radius-xl] bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center min-h-[400px]`}
         >
           <span className="text-[120px] sm:text-[160px]">{bundle.emoji}</span>
 
@@ -119,41 +104,41 @@ export default async function BundleDetailPage({
         <div className="flex flex-col">
           {/* Bundle name */}
           <h1 className="font-heading text-3xl sm:text-4xl font-semibold text-text-dark mb-4">
-            {bundle.name[loc]}
+            {bundle.name}
           </h1>
 
           {/* Description */}
           <p className="text-text-mid leading-relaxed mb-8">
-            {bundle.description[loc]}
+            {bundle.description}
           </p>
 
           {/* Price section */}
           <div className="flex items-center gap-4 mb-8">
-            {bundle.originalPrice && (
+            {bundle.original_price && (
               <div className="flex flex-col">
                 <span className="text-xs text-text-light uppercase tracking-wide">
                   {t('originalPrice')}
                 </span>
                 <span className="text-lg text-text-light line-through">
-                  {formatPrice(bundle.originalPrice)}
+                  {formatPrice(bundle.original_price, locale)}
                 </span>
               </div>
             )}
             <div className="flex flex-col">
-              {bundle.originalPrice && (
+              {bundle.original_price && (
                 <span className="text-xs text-teal-deep uppercase tracking-wide font-semibold">
                   {t('salePrice')}
                 </span>
               )}
               <span className="text-3xl font-semibold text-teal-deep">
-                {formatPrice(bundle.price)}
+                {formatPrice(bundle.price, locale)}
               </span>
             </div>
           </div>
 
           {/* Add to Cart */}
           <div className="mb-10">
-            <AddToCartButton bundleId={bundle.id} />
+            <AddToCartButton bundleId={bundle.id} inStock={bundle.in_stock} />
           </div>
 
           {/* What's included */}
@@ -161,7 +146,7 @@ export default async function BundleDetailPage({
             <h2 className="font-heading text-xl font-semibold text-text-dark mb-4">
               {t('whatsIncluded')}
             </h2>
-            <BundleItemList items={bundle.items} locale={locale} />
+            <BundleItemList items={bundle.items} />
           </div>
         </div>
       </div>

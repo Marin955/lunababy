@@ -1,12 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
+import { fetchBundles } from '@/services/api/bundles';
+import { calculateSubtotal } from '@/services/cart-service';
 import CartItem from '@/components/cart/CartItem';
 import PromoCodeInput from '@/components/cart/PromoCodeInput';
 import CartSummary from '@/components/cart/CartSummary';
 import Button from '@/components/ui/Button';
+import type { Bundle, PromoValidation } from '@/types';
 
 export default function CartPage() {
   const t = useTranslations('cart');
@@ -15,8 +18,26 @@ export default function CartPage() {
   const items = useCartStore((state) => state.items);
   const isHydrated = useCartStore((state) => state.isHydrated);
 
-  // Show nothing while hydrating to avoid SSR/client mismatch
-  if (!isHydrated) {
+  const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [promoValidation, setPromoValidation] = useState<PromoValidation | null>(null);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+    if (items.length === 0) {
+      setLoading(false);
+      return;
+    }
+    fetchBundles(locale)
+      .then(setBundles)
+      .catch(() => setBundles([]))
+      .finally(() => setLoading(false));
+  }, [isHydrated, items.length, locale]);
+
+  const subtotal = calculateSubtotal(items, bundles);
+
+  // Show nothing while hydrating
+  if (!isHydrated || loading) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
@@ -93,19 +114,28 @@ export default function CartPage() {
                 bundleId={item.bundleId}
                 quantity={item.quantity}
                 locale={locale}
+                bundle={bundles.find((b) => b.id === item.bundleId)}
               />
             ))}
           </div>
 
           {/* Promo code */}
           <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
-            <PromoCodeInput locale={locale} />
+            <PromoCodeInput
+              locale={locale}
+              cartTotal={subtotal}
+              onValidated={setPromoValidation}
+            />
           </div>
         </div>
 
         {/* Right column: Summary */}
         <div className="lg:col-span-1">
-          <CartSummary locale={locale} />
+          <CartSummary
+            locale={locale}
+            bundles={bundles}
+            promoValidation={promoValidation}
+          />
         </div>
       </div>
     </div>

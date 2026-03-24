@@ -1,10 +1,13 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
+
+export const dynamic = 'force-dynamic';
 import Categories from '@/components/home/Categories';
 import FeaturedBundles from '@/components/home/FeaturedBundles';
 import WhyLunaBaby from '@/components/home/WhyLunaBaby';
 import Newsletter from '@/components/home/Newsletter';
+import { getFeaturedBundles } from '@/services/bundle-service';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -29,11 +32,13 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const bundles = await getFeaturedBundles(locale);
+
   return (
     <>
       <HeroSection />
       <Categories />
-      <FeaturedBundles locale={locale} />
+      <FeaturedBundles bundles={bundles} locale={locale} />
       <WhyLunaBaby />
       <Newsletter />
     </>

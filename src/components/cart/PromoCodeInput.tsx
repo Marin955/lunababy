@@ -3,14 +3,16 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
-import { validatePromoCode } from '@/services/cart-service';
-import type { Locale } from '@/i18n/routing';
+import { validatePromoCode } from '@/services/api/promo-codes';
+import type { PromoValidation } from '@/types';
 
 interface PromoCodeInputProps {
   locale: string;
+  cartTotal: number;
+  onValidated: (result: PromoValidation | null) => void;
 }
 
-export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
+export default function PromoCodeInput({ locale, cartTotal, onValidated }: PromoCodeInputProps) {
   const t = useTranslations('cart');
   const promoCode = useCartStore((state) => state.promoCode);
   const applyPromo = useCartStore((state) => state.applyPromo);
@@ -19,26 +21,34 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [activePromo, setActivePromo] = useState<PromoValidation | null>(null);
 
-  const lang = locale as Locale;
-
-  const activePromo = promoCode ? validatePromoCode(promoCode) : null;
-
-  const handleApply = () => {
+  const handleApply = async () => {
     setError(null);
     setSuccess(null);
 
     if (!inputValue.trim()) return;
 
-    const validated = validatePromoCode(inputValue);
-    if (validated) {
-      applyPromo(validated.code);
-      setSuccess(t('promoSuccess'));
-      setInputValue('');
-      // Clear success message after 3 seconds
-      setTimeout(() => setSuccess(null), 3000);
-    } else {
+    setLoading(true);
+    try {
+      const result = await validatePromoCode(inputValue, cartTotal, locale);
+      if (result.valid) {
+        applyPromo(result.code);
+        setActivePromo(result);
+        onValidated(result);
+        setSuccess(t('promoSuccess'));
+        setInputValue('');
+        setTimeout(() => setSuccess(null), 3000);
+      } else {
+        setError(result.reason || t('promoInvalid'));
+        onValidated(null);
+      }
+    } catch {
       setError(t('promoInvalid'));
+      onValidated(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,6 +60,8 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
 
   const handleRemove = () => {
     removePromo();
+    setActivePromo(null);
+    onValidated(null);
     setError(null);
     setSuccess(null);
     setInputValue('');
@@ -61,16 +73,17 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
         {t('promoCode')}
       </label>
 
-      {activePromo ? (
-        /* Active promo display */
+      {activePromo || promoCode ? (
         <div className="flex items-center justify-between bg-teal-pale/50 border border-teal/20 rounded-[--radius-sm] px-4 py-3">
           <div>
             <span className="font-semibold text-teal-deep text-sm">
-              {activePromo.code}
+              {activePromo?.code || promoCode}
             </span>
-            <p className="text-xs text-text-mid mt-0.5">
-              {activePromo.label[lang]}
-            </p>
+            {activePromo?.label && (
+              <p className="text-xs text-text-mid mt-0.5">
+                {activePromo.label}
+              </p>
+            )}
           </div>
           <button
             type="button"
@@ -81,7 +94,6 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
           </button>
         </div>
       ) : (
-        /* Input + Apply button */
         <div className="flex gap-2">
           <input
             type="text"
@@ -92,6 +104,7 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
             }}
             onKeyDown={handleKeyDown}
             placeholder={t('promoPlaceholder')}
+            disabled={loading}
             className={`
               flex-1 px-4 py-2.5
               rounded-[--radius-sm]
@@ -101,27 +114,22 @@ export default function PromoCodeInput({ locale }: PromoCodeInputProps) {
               font-body text-text-dark text-sm
               placeholder:text-text-light
               ${error ? 'border-red-400' : 'border-gray-200'}
+              ${loading ? 'opacity-50' : ''}
             `}
           />
           <button
             type="button"
             onClick={handleApply}
-            className="px-5 py-2.5 bg-teal-deep text-white text-sm font-semibold rounded-[--radius-sm] hover:bg-teal transition-colors cursor-pointer shrink-0"
+            disabled={loading}
+            className="px-5 py-2.5 bg-teal-deep text-white text-sm font-semibold rounded-[--radius-sm] hover:bg-teal transition-colors cursor-pointer shrink-0 disabled:opacity-50"
           >
-            {t('promoApply')}
+            {loading ? '...' : t('promoApply')}
           </button>
         </div>
       )}
 
-      {/* Error message */}
-      {error && (
-        <p className="text-red-500 text-xs">{error}</p>
-      )}
-
-      {/* Success message */}
-      {success && (
-        <p className="text-teal-deep text-xs font-medium">{success}</p>
-      )}
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {success && <p className="text-teal-deep text-xs font-medium">{success}</p>}
     </div>
   );
 }

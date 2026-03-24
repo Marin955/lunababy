@@ -34,14 +34,12 @@ function getGradientClasses(colorFrom: string, colorTo: string): string {
 }
 
 export default function BundleCard({ bundle, locale }: BundleCardProps) {
-  const loc = locale as 'hr' | 'en';
-
   return (
     <div className="group bg-white rounded-[--radius-lg] shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col">
       {/* Gradient top with emoji */}
       <Link href={`/shop/${bundle.slug}`} className="block relative">
         <div
-          className={`relative h-48 bg-gradient-to-br ${getGradientClasses(bundle.colorFrom, bundle.colorTo)} flex items-center justify-center`}
+          className={`relative h-48 bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center`}
         >
           <span className="text-7xl group-hover:scale-110 transition-transform duration-300">
             {bundle.emoji}
@@ -60,28 +58,28 @@ export default function BundleCard({ bundle, locale }: BundleCardProps) {
       <div className="flex flex-col flex-1 p-5">
         <Link href={`/shop/${bundle.slug}`}>
           <h3 className="font-heading text-lg font-semibold text-text-dark mb-1 group-hover:text-teal-deep transition-colors duration-200">
-            {bundle.name[loc]}
+            {bundle.name}
           </h3>
         </Link>
 
         <p className="text-sm text-text-mid leading-relaxed mb-4 flex-1">
-          {bundle.shortDescription[loc]}
+          {bundle.short_description}
         </p>
 
         {/* Price */}
         <div className="flex items-center gap-2 mb-4">
-          {bundle.originalPrice && (
+          {bundle.original_price && (
             <span className="text-sm text-text-light line-through">
-              {formatPrice(bundle.originalPrice)}
+              {formatPrice(bundle.original_price, locale)}
             </span>
           )}
           <span className="text-xl font-semibold text-teal-deep">
-            {formatPrice(bundle.price)}
+            {formatPrice(bundle.price, locale)}
           </span>
         </div>
 
         {/* Add to Cart button */}
-        <AddToCartButton bundleId={bundle.id} />
+        <AddToCartButton bundleId={bundle.id} inStock={bundle.in_stock} />
       </div>
     </div>
   );

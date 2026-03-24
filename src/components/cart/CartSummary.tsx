@@ -3,30 +3,25 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
-import { getBundles } from '@/services/bundle-service';
-import {
-  calculateSubtotal,
-  validatePromoCode,
-  calculateDiscount,
-} from '@/services/cart-service';
+import { calculateSubtotal } from '@/services/cart-service';
 import { formatPrice } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { Link } from '@/i18n/navigation';
+import type { Bundle, PromoValidation } from '@/types';
 
 interface CartSummaryProps {
   locale: string;
+  bundles: Bundle[];
+  promoValidation: PromoValidation | null;
 }
 
-export default function CartSummary({ locale }: CartSummaryProps) {
+export default function CartSummary({ locale, bundles, promoValidation }: CartSummaryProps) {
   const t = useTranslations('cart');
   const tCommon = useTranslations('common');
   const items = useCartStore((state) => state.items);
-  const promoCode = useCartStore((state) => state.promoCode);
 
-  const bundles = getBundles();
   const subtotal = calculateSubtotal(items, bundles);
-  const validatedPromo = promoCode ? validatePromoCode(promoCode) : null;
-  const discount = calculateDiscount(subtotal, validatedPromo);
+  const discount = promoValidation?.valid ? (promoValidation.discount_amount ?? 0) : 0;
   const total = subtotal - discount;
 
   if (items.length === 0) {
@@ -38,14 +33,14 @@ export default function CartSummary({ locale }: CartSummaryProps) {
       {/* Subtotal */}
       <div className="flex justify-between text-sm">
         <span className="text-text-mid">{t('subtotal')}</span>
-        <span className="font-medium text-text-dark">{formatPrice(subtotal)}</span>
+        <span className="font-medium text-text-dark">{formatPrice(subtotal, locale)}</span>
       </div>
 
       {/* Discount line */}
       {discount > 0 && (
         <div className="flex justify-between text-sm">
           <span className="text-teal-deep">{t('discount')}</span>
-          <span className="font-medium text-teal-deep">-{formatPrice(discount)}</span>
+          <span className="font-medium text-teal-deep">-{formatPrice(discount, locale)}</span>
         </div>
       )}
 
@@ -60,7 +55,7 @@ export default function CartSummary({ locale }: CartSummaryProps) {
         <div className="flex justify-between">
           <span className="font-heading font-semibold text-text-dark">{t('total')}</span>
           <span className="font-heading font-semibold text-text-dark text-lg">
-            {formatPrice(total)}
+            {formatPrice(total, locale)}
           </span>
         </div>
       </div>

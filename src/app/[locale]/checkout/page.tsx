@@ -4,39 +4,58 @@ import React, { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart-store';
+import { fetchBundles } from '@/services/api/bundles';
+import { fetchShippingMethods } from '@/services/api/shipping';
+import { calculateSubtotal } from '@/services/cart-service';
 import CheckoutForm from '@/components/checkout/CheckoutForm';
 import ShippingSelector from '@/components/checkout/ShippingSelector';
 import OrderSummary from '@/components/checkout/OrderSummary';
-import { getBundles } from '@/services/bundle-service';
-import { calculateSubtotal } from '@/services/cart-service';
-import type { CheckoutFormValues } from '@/components/checkout/CheckoutForm';
+import type { Bundle, ShippingMethod, PromoValidation } from '@/types';
 
 export default function CheckoutPage() {
   const t = useTranslations('checkout');
   const locale = useLocale();
   const router = useRouter();
   const items = useCartStore((state) => state.items);
+  const promoCode = useCartStore((state) => state.promoCode);
   const isHydrated = useCartStore((state) => state.isHydrated);
 
-  const [selectedShippingMethod, setSelectedShippingMethod] = useState('standard');
+  const [bundles, setBundles] = useState<Bundle[]>([]);
+  const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
+  const [selectedShippingMethodId, setSelectedShippingMethodId] = useState<string | null>(null);
+  const [promoValidation, setPromoValidation] = useState<PromoValidation | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
-  // Redirect to shop if cart is empty
+  // Redirect to shop if cart is empty (but not after placing an order)
   useEffect(() => {
-    if (isHydrated && items.length === 0) {
+    if (isHydrated && items.length === 0 && !orderPlaced) {
       router.replace('/shop');
     }
-  }, [isHydrated, items.length, router]);
+  }, [isHydrated, items.length, router, orderPlaced]);
 
-  // Calculate subtotal for shipping selector
-  const bundles = getBundles();
+  // Fetch bundles and shipping methods
+  useEffect(() => {
+    if (!isHydrated || items.length === 0) return;
+    Promise.all([
+      fetchBundles(locale),
+      fetchShippingMethods(locale),
+    ])
+      .then(([bundleData, shippingData]) => {
+        setBundles(bundleData);
+        setShippingMethods(shippingData);
+        if (shippingData.length > 0) {
+          setSelectedShippingMethodId(shippingData[0].id);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [isHydrated, items.length, locale]);
+
   const subtotal = calculateSubtotal(items, bundles);
 
-  function handleFormSubmit(_data: CheckoutFormValues) {
-    router.push('/order-confirmation');
-  }
-
   // Loading state while hydrating
-  if (!isHydrated) {
+  if (!isHydrated || loading) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
@@ -65,13 +84,20 @@ export default function CheckoutPage() {
         {/* Left column: Form + Shipping */}
         <div className="lg:col-span-2 space-y-8">
           <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
-            <CheckoutForm onSubmit={handleFormSubmit} />
+            <CheckoutForm
+              locale={locale}
+              items={items}
+              bundles={bundles}
+              shippingMethodId={selectedShippingMethodId}
+              promoCode={promoCode}
+              onOrderPlaced={() => setOrderPlaced(true)}
+            />
           </div>
 
           <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
             <ShippingSelector
-              selectedMethodId={selectedShippingMethod}
-              onSelect={setSelectedShippingMethod}
+              selectedMethodId={selectedShippingMethodId}
+              onSelect={setSelectedShippingMethodId}
               locale={locale}
               subtotal={subtotal}
             />
@@ -81,8 +107,11 @@ export default function CheckoutPage() {
         {/* Right column: Order Summary */}
         <div className="lg:col-span-1">
           <OrderSummary
-            shippingMethodId={selectedShippingMethod}
             locale={locale}
+            bundles={bundles}
+            shippingMethods={shippingMethods}
+            selectedShippingMethodId={selectedShippingMethodId}
+            promoValidation={promoValidation}
           />
         </div>
       </div>

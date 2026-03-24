@@ -1,5 +1,4 @@
-import type { Bundle, CartItem, PromoCode, ShippingMethod } from '@/types';
-import { promoCodes } from '@/data/promo-codes';
+import type { Bundle, CartItem, PromoValidation, ShippingMethod } from '@/types';
 
 export function calculateSubtotal(items: CartItem[], bundles: Bundle[]): number {
   return items.reduce((sum, item) => {
@@ -9,48 +8,24 @@ export function calculateSubtotal(items: CartItem[], bundles: Bundle[]): number 
   }, 0);
 }
 
-export function validatePromoCode(code: string): PromoCode | null {
-  const normalized = code.trim().toUpperCase();
-  return promoCodes.find((pc) => pc.code.toUpperCase() === normalized) ?? null;
-}
-
 export function calculateDiscount(
   subtotal: number,
-  promoCode: PromoCode | null
+  promo: PromoValidation | null
 ): number {
-  if (!promoCode) return 0;
-
-  if (promoCode.minOrderAmount !== undefined && subtotal < promoCode.minOrderAmount) {
-    return 0;
-  }
-
-  switch (promoCode.type) {
-    case 'percentage': {
-      const discount = (subtotal * promoCode.value) / 100;
-      return Math.min(discount, subtotal);
-    }
-    case 'fixed': {
-      return Math.min(promoCode.value, subtotal);
-    }
-    case 'free-shipping': {
-      return 0;
-    }
-    default: {
-      return 0;
-    }
-  }
+  if (!promo || !promo.valid) return 0;
+  return promo.discount_amount ?? 0;
 }
 
 export function calculateShipping(
   subtotal: number,
   method: ShippingMethod,
-  promoCode: PromoCode | null
+  promo: PromoValidation | null
 ): number {
-  if (promoCode?.type === 'free-shipping') {
+  if (promo?.valid && promo.discount_type === 'free_shipping') {
     return 0;
   }
 
-  if (method.freeThreshold !== undefined && subtotal >= method.freeThreshold) {
+  if (method.free_threshold !== null && subtotal >= method.free_threshold) {
     return 0;
   }
 
