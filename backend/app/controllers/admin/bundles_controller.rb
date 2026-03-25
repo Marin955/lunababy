@@ -27,7 +27,7 @@ module Admin
     private
 
     def bundle_params
-      params.permit(:stock_quantity, :active, :price, :original_price, :name_hr, :name_en,
+      params.permit(:stock_quantity, :active, :price, :original_price, :discount_percent, :name_hr, :name_en,
                     :short_description_hr, :short_description_en, :description_hr, :description_en,
                     :badge, :position, :low_stock_threshold)
     end

@@ -10,6 +10,7 @@ export interface Bundle {
   short_description: string;
   price: number; // cents
   original_price: number | null;
+  discount_percent: number;
   badge: 'new' | 'popular' | 'sale' | null;
   category: string;
   emoji: string;

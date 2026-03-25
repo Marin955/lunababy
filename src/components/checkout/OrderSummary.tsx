@@ -32,7 +32,18 @@ export default function OrderSummary({
   const items = useCartStore((state) => state.items);
 
   const subtotal = calculateSubtotal(items, bundles);
-  const discount = calculateDiscount(subtotal, promoValidation);
+  const promoDiscount = calculateDiscount(subtotal, promoValidation);
+
+  // Calculate savings from bundle discounts (original_price vs price)
+  const bundleSavings = items.reduce((sum, item) => {
+    const bundle = bundles.find((b) => b.id === item.bundleId);
+    if (bundle?.original_price) {
+      return sum + (bundle.original_price - bundle.price) * item.quantity;
+    }
+    return sum;
+  }, 0);
+
+  const fullPrice = subtotal + bundleSavings;
 
   const selectedMethod = selectedShippingMethodId
     ? shippingMethods.find((m) => m.id === selectedShippingMethodId) ?? null
@@ -42,7 +53,7 @@ export default function OrderSummary({
     ? calculateShipping(subtotal, selectedMethod, promoValidation)
     : 0;
 
-  const total = calculateTotal(subtotal, discount, shipping);
+  const total = calculateTotal(subtotal, promoDiscount, shipping);
 
   return (
     <div className="bg-white rounded-[--radius-lg] shadow-sm p-6 sticky top-24">
@@ -71,18 +82,28 @@ export default function OrderSummary({
       </div>
 
       <div className="border-t border-gray-100 pt-4 space-y-3">
-        {/* Subtotal */}
+        {/* Full price (before discounts) */}
         <div className="flex justify-between text-sm">
           <span className="text-text-mid">{tCart('subtotal')}</span>
-          <span className="text-text-dark">{formatPrice(subtotal, locale)}</span>
+          <span className="text-text-dark">{formatPrice(fullPrice, locale)}</span>
         </div>
 
-        {/* Discount */}
-        {discount > 0 && (
+        {/* Bundle discount savings */}
+        {bundleSavings > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-green-600">{tCart('discount')}</span>
-            <span className="text-green-600 font-medium">
-              -{formatPrice(discount, locale)}
+            <span className="text-text-mid">{tCart('savings')}</span>
+            <span className="text-text-dark font-medium">
+              -{formatPrice(bundleSavings, locale)}
+            </span>
+          </div>
+        )}
+
+        {/* Promo code discount */}
+        {promoDiscount > 0 && (
+          <div className="flex justify-between text-sm">
+            <span className="text-teal-deep">{tCart('discount')}</span>
+            <span className="text-teal-deep font-medium">
+              -{formatPrice(promoDiscount, locale)}
             </span>
           </div>
         )}

@@ -98,6 +98,12 @@ export default async function BundleDetailPage({
               <Badge type={bundle.badge} />
             </div>
           )}
+
+          {bundle.discount_percent > 0 && (
+            <div className="absolute top-6 right-6 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
+              -{bundle.discount_percent}%
+            </div>
+          )}
         </div>
 
         {/* Right: Details */}

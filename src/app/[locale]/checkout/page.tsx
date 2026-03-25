@@ -6,6 +6,7 @@ import { useRouter } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart-store';
 import { fetchBundles } from '@/services/api/bundles';
 import { fetchShippingMethods } from '@/services/api/shipping';
+import { validatePromoCode } from '@/services/api/promo-codes';
 import { calculateSubtotal } from '@/services/cart-service';
 import CheckoutForm from '@/components/checkout/CheckoutForm';
 import ShippingSelector from '@/components/checkout/ShippingSelector';
@@ -19,6 +20,8 @@ export default function CheckoutPage() {
   const items = useCartStore((state) => state.items);
   const promoCode = useCartStore((state) => state.promoCode);
   const isHydrated = useCartStore((state) => state.isHydrated);
+
+  const removePromo = useCartStore((state) => state.removePromo);
 
   const [bundles, setBundles] = useState<Bundle[]>([]);
   const [shippingMethods, setShippingMethods] = useState<ShippingMethod[]>([]);
@@ -53,6 +56,24 @@ export default function CheckoutPage() {
   }, [isHydrated, items.length, locale]);
 
   const subtotal = calculateSubtotal(items, bundles);
+
+  // Re-validate stored promo code on mount
+  useEffect(() => {
+    if (!promoCode || subtotal === 0) return;
+    validatePromoCode(promoCode, subtotal, locale)
+      .then((result) => {
+        if (result.valid) {
+          setPromoValidation(result);
+        } else {
+          removePromo();
+          setPromoValidation(null);
+        }
+      })
+      .catch(() => {
+        removePromo();
+        setPromoValidation(null);
+      });
+  }, [promoCode, subtotal, locale, removePromo]);
 
   // Loading state while hydrating
   if (!isHydrated || loading) {

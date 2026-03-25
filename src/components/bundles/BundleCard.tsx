@@ -51,6 +51,13 @@ export default function BundleCard({ bundle, locale }: BundleCardProps) {
               <Badge type={bundle.badge} />
             </div>
           )}
+
+          {/* Discount badge */}
+          {bundle.discount_percent > 0 && (
+            <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+              -{bundle.discount_percent}%
+            </div>
+          )}
         </div>
       </Link>
 

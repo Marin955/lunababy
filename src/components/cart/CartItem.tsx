@@ -34,9 +34,21 @@ export default function CartItem({ bundleId, quantity, locale, bundle }: CartIte
         <h3 className="font-heading font-semibold text-text-dark text-base truncate">
           {bundle.name}
         </h3>
-        <p className="text-sm text-text-mid mt-0.5">
-          {formatPrice(bundle.price, locale)}
-        </p>
+        <div className="flex items-center gap-2 mt-0.5">
+          {bundle.original_price && (
+            <span className="text-sm text-text-light line-through">
+              {formatPrice(bundle.original_price, locale)}
+            </span>
+          )}
+          <span className="text-sm text-text-mid">
+            {formatPrice(bundle.price, locale)}
+          </span>
+          {bundle.discount_percent > 0 && (
+            <span className="text-xs text-red-600 font-medium">
+              -{bundle.discount_percent}%
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Quantity + total + remove */}

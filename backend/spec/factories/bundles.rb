@@ -34,5 +34,13 @@ FactoryBot.define do
       badge { :sale }
       original_price { 7990 }
     end
+
+    trait :discounted do
+      price { 8990 }
+      original_price { 8990 }
+      discount_percent { 20 }
+      badge { :sale }
+      after(:build) { |b| b.price = (b.original_price * (100 - b.discount_percent) / 100.0).round }
+    end
   end
 end

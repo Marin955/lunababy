@@ -58,6 +58,7 @@ interface AdminBundle {
   name_en: string;
   price: number;
   original_price: number | null;
+  discount_percent: number;
   stock_quantity: number;
   low_stock_threshold: number;
   active: boolean;
@@ -72,7 +73,7 @@ export async function fetchAdminBundles(token: string): Promise<AdminBundle[]> {
 
 export async function updateAdminBundle(
   id: string,
-  data: Partial<Pick<AdminBundle, 'price' | 'original_price' | 'stock_quantity' | 'low_stock_threshold' | 'active'>>,
+  data: Partial<Pick<AdminBundle, 'price' | 'original_price' | 'discount_percent' | 'stock_quantity' | 'low_stock_threshold' | 'active'>>,
   token: string
 ): Promise<AdminBundle> {
   const res = await api.patch<{ data: AdminBundle }>(`/admin/bundles/${id}`, data, { token });

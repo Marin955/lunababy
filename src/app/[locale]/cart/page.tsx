@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
 import { fetchBundles } from '@/services/api/bundles';
+import { validatePromoCode } from '@/services/api/promo-codes';
 import { calculateSubtotal } from '@/services/cart-service';
 import CartItem from '@/components/cart/CartItem';
 import PromoCodeInput from '@/components/cart/PromoCodeInput';
@@ -17,6 +18,9 @@ export default function CartPage() {
   const locale = useLocale();
   const items = useCartStore((state) => state.items);
   const isHydrated = useCartStore((state) => state.isHydrated);
+
+  const promoCode = useCartStore((state) => state.promoCode);
+  const removePromo = useCartStore((state) => state.removePromo);
 
   const [bundles, setBundles] = useState<Bundle[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,6 +39,24 @@ export default function CartPage() {
   }, [isHydrated, items.length, locale]);
 
   const subtotal = calculateSubtotal(items, bundles);
+
+  // Re-validate stored promo code on mount
+  useEffect(() => {
+    if (!promoCode || subtotal === 0) return;
+    validatePromoCode(promoCode, subtotal, locale)
+      .then((result) => {
+        if (result.valid) {
+          setPromoValidation(result);
+        } else {
+          removePromo();
+          setPromoValidation(null);
+        }
+      })
+      .catch(() => {
+        removePromo();
+        setPromoValidation(null);
+      });
+  }, [promoCode, subtotal, locale, removePromo]);
 
   // Show nothing while hydrating
   if (!isHydrated || loading) {
