@@ -99,6 +99,14 @@ export default function Header() {
               <div className="hidden lg:flex items-center gap-3">
                 {isAuthenticated ? (
                   <>
+                    {user?.role === 'admin' && (
+                      <Link
+                        href="/admin"
+                        className="text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
+                      >
+                        Admin
+                      </Link>
+                    )}
                     <Link
                       href="/profile"
                       className="text-sm font-medium text-text-mid hover:text-teal-deep transition-colors"
