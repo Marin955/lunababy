@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       post "auth/login", to: "auth#login"
       post "auth/google", to: "auth#google"
       post "auth/facebook", to: "auth#facebook"
+      post "auth/refresh", to: "auth#refresh"
       delete "auth/session", to: "auth#destroy"
 
       # Orders (mixed auth)

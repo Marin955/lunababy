@@ -91,6 +91,27 @@ module Api
         }
       end
 
+      def refresh
+        token = params[:refresh_token]
+        return render json: { error: "Missing refresh token" }, status: :bad_request unless token
+
+        payload = decode_jwt(token)
+        unless payload && payload["type"] == "refresh"
+          return render json: { error: "Invalid or expired refresh token" }, status: :unauthorized
+        end
+
+        user = User.find_by(id: payload["user_id"])
+        return render json: { error: "User not found" }, status: :unauthorized unless user
+
+        render json: {
+          data: {
+            token: encode_jwt(user),
+            refresh_token: encode_refresh_token(user),
+            user: UserSerializer.new(user).serializable_hash
+          }
+        }
+      end
+
       def destroy
         authenticate_user!
         return if performed?

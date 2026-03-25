@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import type { User } from '@/types';
 import { setTokenRefresher } from '@/services/api/client';
+import { refreshAccessToken } from '@/services/api/auth';
 
 interface AuthState {
   user: User | null;
@@ -54,13 +55,32 @@ export const useAuthStore = create<AuthState>()(
 
 // Set up token refresh for the API client
 setTokenRefresher(async () => {
-  const { refreshToken, signOut } = useAuthStore.getState();
+  const { refreshToken, signIn, signOut } = useAuthStore.getState();
   if (!refreshToken) {
     signOut();
     return null;
   }
-  // For now, if the access token expires, sign the user out.
-  // A proper refresh endpoint could be added to the backend later.
-  signOut();
-  return null;
+  try {
+    const response = await refreshAccessToken(refreshToken);
+    const { token, refresh_token, user } = response.data;
+    signIn(token, refresh_token, user);
+    return token;
+  } catch {
+    signOut();
+    return null;
+  }
+});
+
+// On rehydration, if we have a refresh token but no access token, refresh immediately
+useAuthStore.persist.onFinishHydration((state) => {
+  if (state.isAuthenticated && state.refreshToken && !state.token) {
+    refreshAccessToken(state.refreshToken)
+      .then((response) => {
+        const { token, refresh_token, user } = response.data;
+        useAuthStore.getState().signIn(token, refresh_token, user);
+      })
+      .catch(() => {
+        useAuthStore.getState().signOut();
+      });
+  }
 });
