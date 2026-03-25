@@ -62,9 +62,6 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
-      rescue Exception => e
-        Rails.logger.error "Google auth error: #{e.class}: #{e.message}"
-        render json: { error: "Google authentication failed: #{e.message}" }, status: :internal_server_error
       end
 
       def facebook
@@ -92,9 +89,6 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
-      rescue Exception => e
-        Rails.logger.error "Facebook auth error: #{e.class}: #{e.message}"
-        render json: { error: "Facebook authentication failed: #{e.message}" }, status: :internal_server_error
       end
 
       def destroy
