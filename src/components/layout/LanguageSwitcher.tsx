@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1 rounded-full bg-gray-100 p-0.5">
+    <div className="inline-flex items-center gap-1 rounded-full bg-gray-100 p-0.5">
       {locales.map((loc) => {
         const isActive = loc === currentLocale;
         return (
