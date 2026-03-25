@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
+import { useAuthStore } from '@/stores/auth-store';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 
 interface MobileMenuProps {
@@ -26,11 +27,15 @@ const navLinks = [
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const t = useTranslations('common');
+  const tAuth = useTranslations('auth');
   const tCart = useTranslations('cart');
   const pathname = usePathname();
   const items = useCartStore((state) => state.items);
   const isHydrated = useCartStore((state) => state.isHydrated);
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
+  const signOutAction = useAuthStore((state) => state.signOut);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -132,8 +137,45 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </ul>
           </nav>
 
-          {/* Bottom section: Cart + Language */}
+          {/* Bottom section: Auth + Cart + Language */}
           <div className="border-t border-gray-100 px-4 py-4 space-y-3">
+            {/* Auth links */}
+            {isAuthenticated ? (
+              <div className="space-y-1">
+                {user?.role === 'admin' && (
+                  <Link
+                    href="/admin"
+                    onClick={onClose}
+                    className="block py-3 px-3 text-lg font-medium text-amber-600 hover:bg-amber-50 rounded-[--radius-sm] transition-colors duration-200"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <Link
+                  href="/profile"
+                  onClick={onClose}
+                  className="block py-3 px-3 text-lg font-medium text-text-dark hover:text-teal-deep hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
+                >
+                  {user?.name || tAuth('profile')}
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => { signOutAction(); onClose(); }}
+                  className="w-full text-left py-3 px-3 text-lg font-medium text-text-light hover:text-red-500 hover:bg-red-50 rounded-[--radius-sm] transition-colors duration-200 cursor-pointer"
+                >
+                  {tAuth('signOut')}
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/signin"
+                onClick={onClose}
+                className="block py-3 px-3 text-lg font-medium text-teal-deep hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
+              >
+                {tAuth('signIn')}
+              </Link>
+            )}
+
             {/* Cart link */}
             <Link
               href="/cart"
