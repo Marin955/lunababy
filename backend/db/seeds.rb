@@ -2,10 +2,15 @@
 # All monetary values are in cents (e.g. 8990 = €89.90)
 
 puts "Seeding admin user..."
-User.find_or_create_by!(email: ENV.fetch("ADMIN_EMAIL", "admin@lunababy.eu")) do |u|
+admin = User.find_or_create_by!(email: ENV.fetch("ADMIN_EMAIL", "admin@lunababy.eu")) do |u|
   u.name = "LunaBaby Admin"
   u.role = :admin
   u.language = :hr
+  u.password = ENV.fetch("ADMIN_PASSWORD", "admin123!")
+end
+# Update password if admin already exists but has no password
+if admin.password_digest.blank?
+  admin.update!(password: ENV.fetch("ADMIN_PASSWORD", "admin123!"))
 end
 
 puts "Seeding shipping methods..."

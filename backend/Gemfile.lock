@@ -100,6 +100,7 @@ GEM
     avo-icons (0.1.2)
       inline_svg
     base64 (0.3.0)
+    bcrypt (3.1.22)
     bcrypt_pbkdf (1.1.2)
     bcrypt_pbkdf (1.1.2-arm64-darwin)
     bigdecimal (4.0.1)
@@ -444,6 +445,7 @@ PLATFORMS
 DEPENDENCIES
   alba
   avo
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   bundler-audit

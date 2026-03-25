@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       post "promo_codes/validate", to: "promo_codes#validate"
 
       # Authentication
+      post "auth/register", to: "auth#register"
+      post "auth/login", to: "auth#login"
       post "auth/google", to: "auth#google"
       post "auth/facebook", to: "auth#facebook"
       delete "auth/session", to: "auth#destroy"

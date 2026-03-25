@@ -552,7 +552,20 @@
     "or": "ili",
     "notConfigured": "nije konfigurirano",
     "profile": "Profil",
-    "welcomeBack": "Dobrodošli natrag!"
+    "welcomeBack": "Dobrodošli natrag!",
+    "email": "Email adresa",
+    "password": "Lozinka",
+    "confirmPassword": "Potvrdi lozinku",
+    "name": "Ime i prezime",
+    "register": "Registracija",
+    "registerDescription": "Kreirajte račun za lakše naručivanje i praćenje narudžbi.",
+    "registerError": "Greška pri registraciji. Pokušajte ponovo.",
+    "noAccount": "Nemate račun?",
+    "registerLink": "Registrirajte se",
+    "haveAccount": "Već imate račun?",
+    "signInLink": "Prijavite se",
+    "passwordMismatch": "Lozinke se ne podudaraju.",
+    "passwordTooShort": "Lozinka mora imati najmanje 8 znakova."
   },
   "profile": {
     "title": "Moj profil",

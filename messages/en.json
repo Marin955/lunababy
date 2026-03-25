@@ -552,7 +552,20 @@
     "or": "or",
     "notConfigured": "not configured",
     "profile": "Profile",
-    "welcomeBack": "Welcome back!"
+    "welcomeBack": "Welcome back!",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "name": "Full name",
+    "register": "Register",
+    "registerDescription": "Create an account for easier ordering and order tracking.",
+    "registerError": "Registration failed. Please try again.",
+    "noAccount": "Don't have an account?",
+    "registerLink": "Register",
+    "haveAccount": "Already have an account?",
+    "signInLink": "Sign in",
+    "passwordMismatch": "Passwords do not match.",
+    "passwordTooShort": "Password must be at least 8 characters."
   },
   "profile": {
     "title": "My Profile",

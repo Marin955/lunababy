@@ -143,10 +143,14 @@ export interface Address {
   is_default: boolean;
 }
 
-export interface AuthResponse {
+export interface AuthData {
   token: string;
   refresh_token: string;
   user: User;
+}
+
+export interface AuthResponse {
+  data: AuthData;
 }
 
 // Pagination

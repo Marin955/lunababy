@@ -1,6 +1,44 @@
 module Api
   module V1
     class AuthController < ApplicationController
+      def register
+        user = User.new(
+          email: params[:email],
+          name: params[:name],
+          password: params[:password],
+          password_confirmation: params[:password],
+          language: params[:language] || :hr
+        )
+
+        unless user.save
+          return render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
+        end
+
+        render json: {
+          data: {
+            token: encode_jwt(user),
+            refresh_token: encode_refresh_token(user),
+            user: UserSerializer.new(user).serializable_hash
+          }
+        }, status: :created
+      end
+
+      def login
+        user = User.find_by("LOWER(email) = ?", params[:email]&.downcase)
+
+        unless user&.password_digest.present? && user&.authenticate(params[:password])
+          return render json: { error: "Invalid email or password" }, status: :unauthorized
+        end
+
+        render json: {
+          data: {
+            token: encode_jwt(user),
+            refresh_token: encode_refresh_token(user),
+            user: UserSerializer.new(user).serializable_hash
+          }
+        }
+      end
+
       def google
         response = Net::HTTP.get_response(
           URI("https://oauth2.googleapis.com/tokeninfo?id_token=#{params[:credential]}")
