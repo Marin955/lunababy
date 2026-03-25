@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password validations: false
 
-  has_many :oauth_identities, dependent: :destroy
+  has_many :oauth_identities, class_name: "OAuthIdentity", dependent: :destroy
   has_many :addresses, dependent: :destroy
   has_many :orders, dependent: :nullify
   has_many :admin_audit_logs, foreign_key: :admin_user_id, dependent: :nullify
