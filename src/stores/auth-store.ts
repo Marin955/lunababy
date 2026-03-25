@@ -53,8 +53,8 @@ export const useAuthStore = create<AuthState>()(
   )
 );
 
-// Set up token refresh for the API client
-setTokenRefresher(async () => {
+// Set up token refresh for the API client (client-side only)
+if (typeof window !== 'undefined') setTokenRefresher(async () => {
   const { refreshToken, signIn, signOut } = useAuthStore.getState();
   if (!refreshToken) {
     signOut();
@@ -72,15 +72,17 @@ setTokenRefresher(async () => {
 });
 
 // On rehydration, if we have a refresh token but no access token, refresh immediately
-useAuthStore.persist.onFinishHydration((state) => {
-  if (state.isAuthenticated && state.refreshToken && !state.token) {
-    refreshAccessToken(state.refreshToken)
-      .then((response) => {
-        const { token, refresh_token, user } = response.data;
-        useAuthStore.getState().signIn(token, refresh_token, user);
-      })
-      .catch(() => {
-        useAuthStore.getState().signOut();
-      });
-  }
-});
+if (typeof window !== 'undefined') {
+  useAuthStore.persist.onFinishHydration((state) => {
+    if (state.isAuthenticated && state.refreshToken && !state.token) {
+      refreshAccessToken(state.refreshToken)
+        .then((response) => {
+          const { token, refresh_token, user } = response.data;
+          useAuthStore.getState().signIn(token, refresh_token, user);
+        })
+        .catch(() => {
+          useAuthStore.getState().signOut();
+        });
+    }
+  });
+}
