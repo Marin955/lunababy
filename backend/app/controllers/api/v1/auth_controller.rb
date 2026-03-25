@@ -53,7 +53,7 @@ module Api
           provider: :google,
           uid: payload["sub"],
           email: payload["email"],
-          name: payload["name"] || payload["email"]
+          name: payload["name"] || payload["given_name"] || payload["email"]
         )
 
         render json: {
@@ -63,6 +63,8 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
 
       def facebook
@@ -89,6 +91,8 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
+      rescue => e
+        render json: { error: e.message }, status: :internal_server_error
       end
 
       def destroy
