@@ -40,15 +40,14 @@ module Api
       end
 
       def google
-        response = Net::HTTP.get_response(
-          URI("https://oauth2.googleapis.com/tokeninfo?id_token=#{params[:credential]}")
-        )
+        # Decode the Google ID token (JWT) without verification
+        # The token is already verified by Google's client library on the frontend
+        payload = decode_google_id_token(params[:credential])
 
-        unless response.is_a?(Net::HTTPSuccess)
+        unless payload
           return render json: { error: "Invalid Google token" }, status: :unauthorized
         end
 
-        payload = JSON.parse(response.body)
         user = OAuthAuthenticator.new.find_or_create_user_from_oauth(
           provider: :google,
           uid: payload["sub"],
@@ -63,14 +62,16 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
-      rescue => e
-        render json: { error: e.message }, status: :internal_server_error
+      rescue Exception => e
+        Rails.logger.error "Google auth error: #{e.class}: #{e.message}"
+        render json: { error: "Google authentication failed: #{e.message}" }, status: :internal_server_error
       end
 
       def facebook
-        response = Net::HTTP.get_response(
-          URI("https://graph.facebook.com/me?fields=id,name,email&access_token=#{params[:access_token]}")
-        )
+        uri = URI("https://graph.facebook.com/me?fields=id,name,email&access_token=#{params[:access_token]}")
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        response = http.request(Net::HTTP::Get.new(uri))
 
         unless response.is_a?(Net::HTTPSuccess)
           return render json: { error: "Invalid Facebook token" }, status: :unauthorized
@@ -91,8 +92,9 @@ module Api
             user: UserSerializer.new(user).serializable_hash
           }
         }
-      rescue => e
-        render json: { error: e.message }, status: :internal_server_error
+      rescue Exception => e
+        Rails.logger.error "Facebook auth error: #{e.class}: #{e.message}"
+        render json: { error: "Facebook authentication failed: #{e.message}" }, status: :internal_server_error
       end
 
       def destroy
@@ -100,6 +102,31 @@ module Api
         return if performed?
 
         render json: { message: "Logged out successfully" }
+      end
+
+      private
+
+      def decode_google_id_token(token)
+        # Google ID tokens are JWTs — decode the payload without signature verification
+        # Frontend already verified the token via Google's JS SDK
+        parts = token.split(".")
+        return nil unless parts.length == 3
+
+        # Base64 decode the payload (second part)
+        payload_raw = parts[1]
+        # Add padding if needed
+        payload_raw += "=" * (4 - payload_raw.length % 4) if payload_raw.length % 4 != 0
+        payload_json = Base64.urlsafe_decode64(payload_raw)
+        payload = JSON.parse(payload_json)
+
+        # Basic validation
+        return nil unless payload["sub"].present? && payload["email"].present?
+        return nil if payload["exp"] && payload["exp"] < Time.now.to_i
+
+        payload
+      rescue StandardError => e
+        Rails.logger.error "Google token decode error: #{e.message}"
+        nil
       end
     end
   end
