@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import type { Bundle } from '@/types';
 import { formatPrice } from '@/lib/utils';
+import { getBundleImage } from '@/lib/bundle-images';
 import Badge from '@/components/ui/Badge';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
 
@@ -34,16 +36,28 @@ function getGradientClasses(colorFrom: string, colorTo: string): string {
 }
 
 export default function BundleCard({ bundle, locale }: BundleCardProps) {
+  const bundleImage = getBundleImage(bundle.slug);
+
   return (
     <div className="group bg-white rounded-[--radius-lg] shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col">
-      {/* Gradient top with emoji */}
+      {/* Top visual: product image or gradient+emoji */}
       <Link href={`/shop/${bundle.slug}`} className="block relative">
         <div
-          className={`relative h-48 bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center`}
+          className={`relative h-48 ${bundleImage ? '' : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)}`} flex items-center justify-center overflow-hidden`}
         >
-          <span className="text-7xl group-hover:scale-110 transition-transform duration-300">
-            {bundle.emoji}
-          </span>
+          {bundleImage ? (
+            <Image
+              src={bundleImage}
+              alt={bundle.name}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <span className="text-7xl group-hover:scale-110 transition-transform duration-300">
+              {bundle.emoji}
+            </span>
+          )}
 
           {/* Badge overlay */}
           {bundle.badge && (

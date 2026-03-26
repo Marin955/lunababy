@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/Button';
 
@@ -23,37 +24,60 @@ export default function HeroSection() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 py-20 w-full">
-        <div className="max-w-2xl">
-          {/* Badge */}
-          <span className="inline-block px-4 py-1.5 bg-white/60 backdrop-blur-sm rounded-full text-sm font-semibold text-teal-deep mb-6">
-            {t('badge')}
-          </span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text content */}
+          <div>
+            {/* Badge */}
+            <span className="inline-block px-4 py-1.5 bg-white/60 backdrop-blur-sm rounded-full text-sm font-semibold text-teal-deep mb-6">
+              {t('badge')}
+            </span>
 
-          {/* Heading */}
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold text-text-dark leading-tight mb-6">
-            {t('title')}
-          </h1>
+            {/* Heading */}
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold text-text-dark leading-tight mb-6">
+              {t('title')}
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-text-mid leading-relaxed mb-8 max-w-xl">
-            {t('subtitle')}
-          </p>
+            {/* Subtitle */}
+            <p className="text-lg sm:text-xl text-text-mid leading-relaxed mb-8 max-w-xl">
+              {t('subtitle')}
+            </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4 mb-10">
-            <Button href="/shop" size="lg">
-              {t('cta')}
-            </Button>
-            <Button href="/about" variant="outline" size="lg">
-              {tButtons('learnMore')}
-            </Button>
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4 mb-10">
+              <Button href="/shop" size="lg">
+                {t('cta')}
+              </Button>
+              <Button href="/about" variant="outline" size="lg">
+                {tButtons('learnMore')}
+              </Button>
+            </div>
+
+            {/* Trust indicators */}
+            <div className="flex flex-wrap gap-6">
+              <TrustBadge icon="truck" text={t('trustBadge1')} />
+              <TrustBadge icon="return" text={t('trustBadge2')} />
+              <TrustBadge icon="shield" text={t('trustBadge3')} />
+            </div>
           </div>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap gap-6">
-            <TrustBadge icon="truck" text={t('trustBadge1')} />
-            <TrustBadge icon="return" text={t('trustBadge2')} />
-            <TrustBadge icon="shield" text={t('trustBadge3')} />
+          {/* Right: Featured product image */}
+          <div className="hidden lg:flex justify-center">
+            <div className="relative w-full max-w-md">
+              <div className="absolute -inset-4 bg-white/30 backdrop-blur-sm rounded-3xl rotate-3" />
+              <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/sleeping-box.jpg"
+                  alt={t('title')}
+                  width={600}
+                  height={480}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+              <div className="absolute -bottom-3 -right-3 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
+                <span className="text-sm font-semibold text-teal-deep">Best seller</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

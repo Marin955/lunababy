@@ -1,11 +1,13 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getBundleBySlug } from '@/services/bundle-service';
 
 export const dynamic = 'force-dynamic';
 import { formatPrice } from '@/lib/utils';
+import { getBundleImage } from '@/lib/bundle-images';
 import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
@@ -89,18 +91,29 @@ export default async function BundleDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Left: Hero visual */}
         <div
-          className={`relative rounded-[--radius-xl] bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center min-h-[400px]`}
+          className={`relative rounded-[--radius-xl] ${getBundleImage(bundle.slug) ? '' : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)}`} flex items-center justify-center min-h-[400px] overflow-hidden`}
         >
-          <span className="text-[120px] sm:text-[160px]">{bundle.emoji}</span>
+          {getBundleImage(bundle.slug) ? (
+            <Image
+              src={getBundleImage(bundle.slug)!}
+              alt={bundle.name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
+            />
+          ) : (
+            <span className="text-[120px] sm:text-[160px]">{bundle.emoji}</span>
+          )}
 
           {bundle.badge && (
-            <div className="absolute top-6 left-6">
+            <div className="absolute top-6 left-6 z-10">
               <Badge type={bundle.badge} />
             </div>
           )}
 
           {bundle.discount_percent > 0 && (
-            <div className="absolute top-6 right-6 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
+            <div className="absolute top-6 right-6 z-10 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
               -{bundle.discount_percent}%
             </div>
           )}
