@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
 
 export const dynamic = 'force-dynamic';
-import Categories from '@/components/home/Categories';
 import FeaturedBundles from '@/components/home/FeaturedBundles';
 import WhyLunaBaby from '@/components/home/WhyLunaBaby';
 import Newsletter from '@/components/home/Newsletter';
@@ -37,7 +36,6 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <HeroSection />
-      <Categories />
       <FeaturedBundles bundles={bundles} locale={locale} />
       <WhyLunaBaby />
       <Newsletter />
