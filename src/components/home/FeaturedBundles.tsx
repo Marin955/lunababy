@@ -2,7 +2,6 @@ import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import type { Bundle } from '@/types';
 import BundleGrid from '@/components/bundles/BundleGrid';
-import Button from '@/components/ui/Button';
 
 interface FeaturedBundlesProps {
   locale: string;
@@ -11,7 +10,6 @@ interface FeaturedBundlesProps {
 
 export default async function FeaturedBundles({ locale, bundles }: FeaturedBundlesProps) {
   const t = await getTranslations('home.featured');
-  const tButtons = await getTranslations('common.buttons');
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
@@ -25,12 +23,6 @@ export default async function FeaturedBundles({ locale, bundles }: FeaturedBundl
       </div>
 
       <BundleGrid bundles={bundles} locale={locale} />
-
-      <div className="text-center mt-10">
-        <Button href="/shop" variant="outline" size="lg">
-          {tButtons('viewAll')}
-        </Button>
-      </div>
     </section>
   );
 }

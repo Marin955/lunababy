@@ -14,8 +14,5 @@ export async function getBundleBySlug(slug: string, locale: string = 'hr'): Prom
 }
 
 export async function getFeaturedBundles(locale: string = 'hr'): Promise<Bundle[]> {
-  const bundles = await fetchBundles(locale);
-  return bundles.filter(
-    (bundle) => bundle.badge === 'popular' || bundle.badge === 'new'
-  );
+  return fetchBundles(locale);
 }
