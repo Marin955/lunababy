@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 const navItems = [
   { key: 'dashboard', href: '/admin' },
   { key: 'orders', href: '/admin/orders' },
+  { key: 'products', href: '/admin/products' },
   { key: 'bundles', href: '/admin/bundles' },
   { key: 'promoCodes', href: '/admin/promo-codes' },
 ] as const;

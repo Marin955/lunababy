@@ -11,6 +11,7 @@ interface AuthState {
   token: string | null;
   refreshToken: string | null;
   isAuthenticated: boolean;
+  isReady: boolean;
   signIn: (token: string, refreshToken: string, user: User) => void;
   signOut: () => void;
   setUser: (user: User) => void;
@@ -25,13 +26,14 @@ export const useAuthStore = create<AuthState>()(
         token: null,
         refreshToken: null,
         isAuthenticated: false,
+        isReady: false,
 
         signIn: (token, refreshToken, user) => {
-          set({ user, token, refreshToken, isAuthenticated: true }, false, 'signIn');
+          set({ user, token, refreshToken, isAuthenticated: true, isReady: true }, false, 'signIn');
         },
 
         signOut: () => {
-          set({ user: null, token: null, refreshToken: null, isAuthenticated: false }, false, 'signOut');
+          set({ user: null, token: null, refreshToken: null, isAuthenticated: false, isReady: true }, false, 'signOut');
         },
 
         setUser: (user) => {
@@ -47,6 +49,20 @@ export const useAuthStore = create<AuthState>()(
           refreshToken: state.refreshToken,
           isAuthenticated: state.isAuthenticated,
         }),
+        onRehydrateStorage: () => (state) => {
+          if (state?.isAuthenticated && state.refreshToken && !state.token) {
+            refreshAccessToken(state.refreshToken)
+              .then((response) => {
+                const { token, refresh_token, user } = response.data;
+                useAuthStore.getState().signIn(token, refresh_token, user);
+              })
+              .catch(() => {
+                useAuthStore.getState().signOut();
+              });
+          } else {
+            useAuthStore.setState({ isReady: true }, false, 'hydrated');
+          }
+        },
       }
     ),
     { name: 'AuthStore' }
@@ -71,18 +87,3 @@ if (typeof window !== 'undefined') setTokenRefresher(async () => {
   }
 });
 
-// On rehydration, if we have a refresh token but no access token, refresh immediately
-if (typeof window !== 'undefined') {
-  useAuthStore.persist.onFinishHydration((state) => {
-    if (state.isAuthenticated && state.refreshToken && !state.token) {
-      refreshAccessToken(state.refreshToken)
-        .then((response) => {
-          const { token, refresh_token, user } = response.data;
-          useAuthStore.getState().signIn(token, refresh_token, user);
-        })
-        .catch(() => {
-          useAuthStore.getState().signOut();
-        });
-    }
-  });
-}

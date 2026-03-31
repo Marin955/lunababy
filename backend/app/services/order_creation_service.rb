@@ -44,16 +44,26 @@ class OrderCreationService
     raise Error, "Items are required" if items.blank?
 
     bundle_ids = items.map { |i| i[:bundle_id] || resolve_bundle_id(i[:slug]) }
-    locked_bundles = Bundle.lock.where(id: bundle_ids).index_by(&:id)
+    bundles = Bundle.includes(bundle_items: :product).where(id: bundle_ids).index_by(&:id)
+
+    # Collect all product IDs needed across all bundles and lock them (sorted by ID to prevent deadlocks)
+    all_product_ids = bundles.values.flat_map { |b| b.bundle_items.map(&:product_id) }.uniq
+    locked_products = Product.lock.where(id: all_product_ids).order(:id).index_by(&:id)
 
     items.map do |item|
       bundle_id = item[:bundle_id] || resolve_bundle_id(item[:slug])
-      bundle = locked_bundles[bundle_id]
+      bundle = bundles[bundle_id]
       raise Error, "Bundle not found: #{item[:slug] || item[:bundle_id]}" unless bundle
 
       quantity = item[:quantity].to_i
-      raise Error, "#{bundle.name_hr} is out of stock" unless bundle.in_stock?
-      raise Error, "Insufficient stock for #{bundle.name_hr}" if bundle.stock_quantity < quantity
+
+      # Validate stock for each product in the bundle
+      bundle.bundle_items.each do |bi|
+        product = locked_products[bi.product_id]
+        needed = bi.quantity * quantity
+        raise Error, "#{product.name_hr} is out of stock" if product.stock_quantity <= 0
+        raise Error, "Insufficient stock for #{product.name_hr}" if product.stock_quantity < needed
+      end
 
       { bundle: bundle, quantity: quantity }
     end
@@ -147,8 +157,13 @@ class OrderCreationService
   def decrement_stock!(bundles)
     bundles.each do |entry|
       bundle = entry[:bundle]
-      quantity = entry[:quantity]
-      bundle.update!(stock_quantity: bundle.stock_quantity - quantity)
+      order_qty = entry[:quantity]
+
+      bundle.bundle_items.each do |bi|
+        product = bi.product
+        needed = bi.quantity * order_qty
+        product.update!(stock_quantity: product.stock_quantity - needed)
+      end
     end
   end
 

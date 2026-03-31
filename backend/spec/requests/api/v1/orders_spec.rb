@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "API V1 Orders", type: :request do
   let!(:user) { create(:user) }
-  let!(:bundle) { create(:bundle, slug: "sleep-bundle", price: 3990, stock_quantity: 10) }
+  let!(:bundle) { create(:bundle, :with_items, slug: "sleep-bundle", price: 3990) }
   let!(:shipping_method) { create(:shipping_method, slug: "standard", price: 350, free_threshold: 5000) }
 
   let(:valid_order_params) do
@@ -48,7 +48,7 @@ RSpec.describe "API V1 Orders", type: :request do
     end
 
     it "creates order with multiple items" do
-      bundle2 = create(:bundle, slug: "feeding-bundle", price: 4990, stock_quantity: 5)
+      bundle2 = create(:bundle, :with_items, slug: "feeding-bundle", price: 4990)
       params = valid_order_params.deep_dup
       params[:items] << { bundle_id: bundle2.id, quantity: 2 }
 
@@ -71,15 +71,18 @@ RSpec.describe "API V1 Orders", type: :request do
       expect(json["total"]).to eq(3990 - 399 + 350)
     end
 
-    it "decrements bundle stock" do
+    it "decrements product stock" do
+      product = bundle.bundle_items.first.product
+      initial_stock = product.stock_quantity
+
       post "/api/v1/orders", params: valid_order_params
 
       expect(response).to have_http_status(:created)
-      expect(bundle.reload.stock_quantity).to eq(9)
+      expect(product.reload.stock_quantity).to eq(initial_stock - bundle.bundle_items.first.quantity)
     end
 
     it "rejects order with out-of-stock bundle" do
-      bundle.update!(stock_quantity: 0)
+      bundle.bundle_items.each { |bi| bi.product.update!(stock_quantity: 0) }
 
       post "/api/v1/orders", params: valid_order_params
 
@@ -97,7 +100,7 @@ RSpec.describe "API V1 Orders", type: :request do
     end
 
     it "gives free shipping when above threshold" do
-      expensive_bundle = create(:bundle, slug: "premium", price: 6000, stock_quantity: 5)
+      expensive_bundle = create(:bundle, :with_items, slug: "premium", price: 6000)
       params = valid_order_params.deep_dup
       params[:items] = [{ bundle_id: expensive_bundle.id, quantity: 1 }]
 

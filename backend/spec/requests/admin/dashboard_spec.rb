@@ -16,7 +16,7 @@ RSpec.describe "Admin Dashboard", type: :request do
       expect(json["total_orders"]).to eq(3)
       expect(json["revenue_total"]).to be_a(Integer)
       expect(json["recent_orders"]).to be_an(Array)
-      expect(json["low_stock_bundles"]).to be_an(Array)
+      expect(json["low_stock_products"]).to be_an(Array)
       expect(json["orders_by_status"]).to be_a(Hash)
     end
 

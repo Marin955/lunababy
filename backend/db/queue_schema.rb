@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_31_000004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -44,14 +44,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
   create_table "bundle_items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "bundle_id", null: false
     t.datetime "created_at", null: false
-    t.text "description_en"
-    t.text "description_hr"
-    t.string "name_en", null: false
-    t.string "name_hr", null: false
     t.integer "position", default: 0, null: false
+    t.uuid "product_id", null: false
     t.integer "quantity", null: false
     t.datetime "updated_at", null: false
+    t.index ["bundle_id", "product_id"], name: "index_bundle_items_on_bundle_id_and_product_id", unique: true
     t.index ["bundle_id"], name: "index_bundle_items_on_bundle_id"
+    t.index ["product_id"], name: "index_bundle_items_on_product_id"
   end
 
   create_table "bundles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -65,7 +64,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
     t.text "description_hr"
     t.integer "discount_percent", default: 0, null: false
     t.string "emoji"
-    t.integer "low_stock_threshold", default: 5, null: false
+    t.string "image_path"
     t.string "name_en", null: false
     t.string "name_hr", null: false
     t.integer "original_price"
@@ -74,7 +73,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
     t.text "short_description_en"
     t.text "short_description_hr"
     t.string "slug", null: false
-    t.integer "stock_quantity", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_bundles_on_slug", unique: true
   end
@@ -153,6 +151,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.text "description_en"
+    t.text "description_hr"
+    t.string "image_path"
+    t.integer "low_stock_threshold", default: 5, null: false
+    t.integer "msrp", default: 0, null: false
+    t.string "name_en", null: false
+    t.string "name_hr", null: false
+    t.integer "position", default: 0, null: false
+    t.integer "purchase_price", default: 0, null: false
+    t.integer "purchase_price_with_vat", default: 0, null: false
+    t.integer "sex", default: 0, null: false
+    t.string "sku"
+    t.integer "stock_quantity", default: 0, null: false
+    t.string "supplier_name"
+    t.string "supplier_url"
+    t.datetime "updated_at", null: false
+    t.index ["sku"], name: "index_products_on_sku", unique: true, where: "(sku IS NOT NULL)"
+  end
+
   create_table "promo_codes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: true, null: false
     t.string "code", null: false
@@ -212,6 +232,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_220000) do
   add_foreign_key "addresses", "users"
   add_foreign_key "admin_audit_logs", "users", column: "admin_user_id"
   add_foreign_key "bundle_items", "bundles"
+  add_foreign_key "bundle_items", "products"
   add_foreign_key "oauth_identities", "users"
   add_foreign_key "order_items", "bundles"
   add_foreign_key "order_items", "orders"

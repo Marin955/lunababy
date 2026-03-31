@@ -1,5 +1,6 @@
 class Bundle < ApplicationRecord
   has_many :bundle_items, dependent: :destroy
+  has_many :products, through: :bundle_items
   has_many :order_items, dependent: :restrict_with_error
 
   enum :badge, { new: 0, popular: 1, sale: 2 }, prefix: true
@@ -13,10 +14,16 @@ class Bundle < ApplicationRecord
   before_validation :apply_discount
 
   scope :active, -> { where(active: true) }
-  scope :in_stock, -> { where(active: true).where('stock_quantity > 0') }
+
+  def computed_stock_quantity
+    items = bundle_items.includes(:product).to_a
+    return 0 if items.empty?
+
+    items.map { |bi| bi.product.stock_quantity / bi.quantity }.min
+  end
 
   def in_stock?
-    stock_quantity > 0 && active
+    active && computed_stock_quantity > 0
   end
 
   private
@@ -25,11 +32,9 @@ class Bundle < ApplicationRecord
     return unless discount_percent_changed? || original_price_changed?
 
     if discount_percent > 0
-      # Set original_price from current price if not already set
       self.original_price ||= price
       self.price = (original_price * (100 - discount_percent) / 100.0).round
     elsif discount_percent_changed? && discount_percent.zero? && original_price.present?
-      # Discount removed — restore original price
       self.price = original_price
       self.original_price = nil
     end

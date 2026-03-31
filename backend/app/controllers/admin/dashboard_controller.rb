@@ -7,7 +7,7 @@ module Admin
           orders_by_status: orders_by_status,
           revenue_total: Order.where.not(status: [ :cancelled, :refunded ]).sum(:total),
           recent_orders: recent_orders,
-          low_stock_bundles: low_stock_bundles
+          low_stock_products: low_stock_products
         }
       }
     end
@@ -24,10 +24,20 @@ module Admin
       )
     end
 
-    def low_stock_bundles
-      Bundle.where("stock_quantity < low_stock_threshold").as_json(
-        only: [ :id, :slug, :name_hr, :name_en, :stock_quantity, :low_stock_threshold, :active ]
-      )
+    def low_stock_products
+      Product.where("stock_quantity <= low_stock_threshold")
+             .includes(:bundles)
+             .order(:stock_quantity)
+             .map do |product|
+        {
+          id: product.id,
+          name_hr: product.name_hr,
+          name_en: product.name_en,
+          stock_quantity: product.stock_quantity,
+          low_stock_threshold: product.low_stock_threshold,
+          bundles: product.bundles.pluck(:name_hr)
+        }
+      end
     end
   end
 end

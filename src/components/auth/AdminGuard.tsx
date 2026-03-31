@@ -12,16 +12,20 @@ export default function AdminGuard({ children }: AdminGuardProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const isReady = useAuthStore((state) => state.isReady);
 
   useEffect(() => {
+    if (!isReady) return;
     if (!isAuthenticated) {
       router.replace('/signin');
     } else if (user?.role !== 'admin') {
       router.replace('/');
     }
-  }, [isAuthenticated, user, router]);
+  }, [isReady, isAuthenticated, user, router]);
 
-  if (!isAuthenticated || user?.role !== 'admin') {
+  // Show loading while auth state is being restored
+  if (!isReady || !isAuthenticated || user?.role !== 'admin' || !token) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="animate-pulse space-y-4">

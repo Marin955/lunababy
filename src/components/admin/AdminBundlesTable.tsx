@@ -15,7 +15,6 @@ interface AdminBundlesTableProps {
 interface EditValues {
   price: number;
   discount_percent: number;
-  stock_quantity: number;
   active: boolean;
 }
 
@@ -23,7 +22,7 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
   const t = useTranslations('admin.bundles');
   const token = useAuthStore((state) => state.token);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [editValues, setEditValues] = useState<EditValues>({ price: 0, discount_percent: 0, stock_quantity: 0, active: true });
+  const [editValues, setEditValues] = useState<EditValues>({ price: 0, discount_percent: 0, active: true });
   const [saving, setSaving] = useState(false);
 
   function startEdit(bundle: AdminBundle) {
@@ -31,7 +30,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
     setEditValues({
       price: bundle.original_price ?? bundle.price,
       discount_percent: bundle.discount_percent,
-      stock_quantity: bundle.stock_quantity,
       active: bundle.active,
     });
   }
@@ -48,7 +46,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
     setSaving(true);
     try {
       const payload: Record<string, unknown> = {
-        stock_quantity: editValues.stock_quantity,
         active: editValues.active,
         discount_percent: editValues.discount_percent,
       };
@@ -92,7 +89,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
                   <div className="text-xs text-text-light">{bundle.slug}</div>
                 </td>
 
-                {/* Base price */}
                 <td className="px-4 py-3 text-right">
                   {isEditing ? (
                     <div className="flex items-center justify-end gap-1">
@@ -111,7 +107,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
                   )}
                 </td>
 
-                {/* Discount percent */}
                 <td className="px-4 py-3 text-right">
                   {isEditing ? (
                     <div className="flex items-center justify-end gap-1">
@@ -136,7 +131,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
                   )}
                 </td>
 
-                {/* Sale price (computed) */}
                 <td className="px-4 py-3 text-right">
                   {isEditing ? (
                     <span className={editValues.discount_percent > 0 ? 'text-red-600 font-semibold' : 'text-text-dark'}>
@@ -149,23 +143,14 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
                   )}
                 </td>
 
-                {/* Stock */}
+                {/* Computed stock (read-only) */}
                 <td className="px-4 py-3 text-right">
-                  {isEditing ? (
-                    <input
-                      type="number"
-                      value={editValues.stock_quantity}
-                      onChange={(e) => setEditValues((prev) => ({ ...prev, stock_quantity: Number(e.target.value) }))}
-                      className="w-20 px-2 py-1 border border-gray-200 rounded text-right text-sm"
-                    />
-                  ) : (
-                    <span className={bundle.stock_quantity <= bundle.low_stock_threshold ? 'text-red-600 font-semibold' : ''}>
-                      {bundle.stock_quantity}
-                    </span>
-                  )}
+                  <span className={bundle.computed_stock_quantity <= 5 ? 'text-red-600 font-semibold' : ''}>
+                    {bundle.computed_stock_quantity}
+                  </span>
+                  <span className="text-xs text-text-light ml-1">(auto)</span>
                 </td>
 
-                {/* Active */}
                 <td className="px-4 py-3 text-center">
                   {isEditing ? (
                     <input
@@ -181,7 +166,6 @@ export default function AdminBundlesTable({ bundles, onUpdated }: AdminBundlesTa
                   )}
                 </td>
 
-                {/* Actions */}
                 <td className="px-4 py-3 text-right">
                   {isEditing ? (
                     <div className="flex gap-2 justify-end">

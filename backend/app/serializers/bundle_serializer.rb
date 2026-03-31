@@ -1,7 +1,7 @@
 class BundleSerializer
   include Alba::Resource
 
-  attributes :id, :slug, :price, :original_price, :discount_percent, :category, :emoji, :color_from, :color_to
+  attributes :id, :slug, :price, :original_price, :discount_percent, :category, :emoji, :color_from, :color_to, :image_path
 
   attribute :badge do |bundle|
     bundle.badge

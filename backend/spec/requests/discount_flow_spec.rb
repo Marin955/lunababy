@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Discount flow", type: :request do
   let!(:admin) { create(:user, :admin) }
-  let!(:bundle) { create(:bundle, :with_items, slug: "test-bundle", price: 10000, stock_quantity: 20) }
+  let!(:bundle) { create(:bundle, :with_items, slug: "test-bundle", price: 10000) }
 
   describe "Admin sets a discount" do
     it "applies discount and computes sale price" do

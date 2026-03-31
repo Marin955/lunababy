@@ -1,7 +1,7 @@
 class BundleDetailSerializer
   include Alba::Resource
 
-  attributes :id, :slug, :price, :original_price, :discount_percent, :category, :emoji, :color_from, :color_to
+  attributes :id, :slug, :price, :original_price, :discount_percent, :category, :emoji, :color_from, :color_to, :image_path
 
   attribute :badge do |bundle|
     bundle.badge
@@ -23,7 +23,11 @@ class BundleDetailSerializer
     bundle.in_stock?
   end
 
+  attribute :stock_quantity do |bundle|
+    bundle.computed_stock_quantity
+  end
+
   many :bundle_items, key: :items, resource: BundleItemSerializer do |bundle|
-    bundle.bundle_items.order(:position)
+    bundle.bundle_items.includes(:product).order(:position)
   end
 end

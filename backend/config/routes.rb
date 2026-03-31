@@ -40,6 +40,11 @@ Rails.application.routes.draw do
       end
     end
     resources :bundles, only: [ :index, :update ]
+    resources :products, only: [ :index, :show, :update ] do
+      member do
+        post :adjust_stock
+      end
+    end
     resources :promo_codes, only: [ :index, :create, :update ]
     get "dashboard", to: "dashboard#show"
   end

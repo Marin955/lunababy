@@ -108,3 +108,10 @@ Detailed reference docs are in `agent_docs/`:
 - **[api.md](agent_docs/api.md)** — All API endpoints, request/response formats, auth flow
 - **[testing.md](agent_docs/testing.md)** — Running tests, factories, test helpers, dev workflow
 - **[playwright.md](agent_docs/playwright.md)** — Using Playwright MCP for browser testing
+
+## Active Technologies
+- Ruby 3.x (Rails 8.1 API) + TypeScript 5 (Next.js 15.3 / React 19) + Rails 8.1, Next.js 15.3, React 19, Tailwind CSS 4, Zustand 5, next-intl 4.8, Alba 3.x (004-product-inventory-management)
+- PostgreSQL 16+ (Supabase in prod, local in dev), UUID primary keys, integer cents for money (004-product-inventory-management)
+
+## Recent Changes
+- 004-product-inventory-management: Added Ruby 3.x (Rails 8.1 API) + TypeScript 5 (Next.js 15.3 / React 19) + Rails 8.1, Next.js 15.3, React 19, Tailwind CSS 4, Zustand 5, next-intl 4.8, Alba 3.x

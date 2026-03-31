@@ -16,19 +16,24 @@ export interface Bundle {
   emoji: string;
   color_from: string;
   color_to: string;
+  image_path: string | null;
   in_stock: boolean;
 }
 
 // Bundle detail (from GET /api/v1/bundles/:slug)
 export interface BundleDetail extends Bundle {
   description: string;
+  stock_quantity: number;
   items: BundleItem[];
 }
 
 export interface BundleItem {
+  id: string;
+  product_id: string;
   name: string;
   description: string;
   quantity: number;
+  image_path: string | null;
 }
 
 // Cart (client-side)
@@ -186,7 +191,7 @@ export interface AdminDashboard {
   orders_by_status: Record<string, number>;
   revenue_total: number;
   recent_orders: AdminRecentOrder[];
-  low_stock_bundles: AdminLowStockBundle[];
+  low_stock_products: AdminLowStockProduct[];
 }
 
 export interface AdminRecentOrder {
@@ -199,12 +204,33 @@ export interface AdminRecentOrder {
   created_at: string;
 }
 
-export interface AdminLowStockBundle {
+export interface AdminLowStockProduct {
   id: string;
-  slug: string;
   name_hr: string;
   name_en: string;
   stock_quantity: number;
   low_stock_threshold: number;
+  bundles: string[];
+}
+
+// Admin product
+export interface AdminProduct {
+  id: string;
+  sku: string | null;
+  name_hr: string;
+  name_en: string;
+  description_hr: string | null;
+  description_en: string | null;
+  sex: 'unisex' | 'female' | 'male';
+  purchase_price: number; // cents
+  purchase_price_with_vat: number; // cents
+  msrp: number; // cents
+  supplier_name: string | null;
+  supplier_url: string | null;
+  image_path: string | null;
+  stock_quantity: number;
+  low_stock_threshold: number;
   active: boolean;
+  position: number;
+  bundles: { id: string; name_hr: string; name_en: string; slug: string }[];
 }

@@ -8,7 +8,6 @@ FactoryBot.define do
     short_description_hr { "Kratki opis" }
     short_description_en { "Short description" }
     price { 5990 }
-    stock_quantity { 10 }
     category { "test" }
     emoji { "🎁" }
     color_from { "teal-light" }
@@ -23,7 +22,11 @@ FactoryBot.define do
     end
 
     trait :out_of_stock do
-      stock_quantity { 0 }
+      after(:create) do |bundle|
+        bundle.bundle_items.each do |bi|
+          bi.product.update!(stock_quantity: 0)
+        end
+      end
     end
 
     trait :inactive do

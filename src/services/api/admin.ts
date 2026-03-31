@@ -1,5 +1,5 @@
 import { api } from './client';
-import type { AdminDashboard, Order, PaginatedResponse, Bundle } from '@/types';
+import type { AdminDashboard, AdminProduct, Order, PaginatedResponse, Bundle } from '@/types';
 
 // Dashboard
 export async function fetchDashboard(token: string): Promise<AdminDashboard> {
@@ -50,6 +50,40 @@ export async function createShipment(
   return res.data;
 }
 
+// Products
+export async function fetchAdminProducts(token: string): Promise<AdminProduct[]> {
+  const res = await api.get<{ data: AdminProduct[] }>('/admin/products', { token });
+  return res.data;
+}
+
+export async function fetchAdminProduct(id: string, token: string): Promise<AdminProduct> {
+  const res = await api.get<{ data: AdminProduct }>(`/admin/products/${id}`, { token });
+  return res.data;
+}
+
+export async function updateAdminProduct(
+  id: string,
+  data: Partial<Pick<AdminProduct, 'name_hr' | 'name_en' | 'description_hr' | 'description_en' | 'stock_quantity' | 'low_stock_threshold' | 'active'>>,
+  token: string
+): Promise<AdminProduct> {
+  const res = await api.patch<{ data: AdminProduct }>(`/admin/products/${id}`, { product: data }, { token });
+  return res.data;
+}
+
+export async function adjustProductStock(
+  id: string,
+  adjustment: number,
+  reason: string,
+  token: string
+): Promise<{ id: string; stock_quantity: number; previous_stock: number; adjustment: number }> {
+  const res = await api.post<{ data: { id: string; stock_quantity: number; previous_stock: number; adjustment: number } }>(
+    `/admin/products/${id}/adjust_stock`,
+    { adjustment, reason },
+    { token }
+  );
+  return res.data;
+}
+
 // Bundles
 interface AdminBundle {
   id: string;
@@ -59,11 +93,12 @@ interface AdminBundle {
   price: number;
   original_price: number | null;
   discount_percent: number;
-  stock_quantity: number;
-  low_stock_threshold: number;
+  computed_stock_quantity: number;
   active: boolean;
   badge: string | null;
   category: string;
+  image_path: string | null;
+  items: { product_id: string; name_hr: string; name_en: string; quantity: number; stock_quantity: number }[];
 }
 
 export async function fetchAdminBundles(token: string): Promise<AdminBundle[]> {
@@ -73,7 +108,7 @@ export async function fetchAdminBundles(token: string): Promise<AdminBundle[]> {
 
 export async function updateAdminBundle(
   id: string,
-  data: Partial<Pick<AdminBundle, 'price' | 'original_price' | 'discount_percent' | 'stock_quantity' | 'low_stock_threshold' | 'active'>>,
+  data: Partial<Pick<AdminBundle, 'price' | 'original_price' | 'discount_percent' | 'active'>>,
   token: string
 ): Promise<AdminBundle> {
   const res = await api.patch<{ data: AdminBundle }>(`/admin/bundles/${id}`, data, { token });

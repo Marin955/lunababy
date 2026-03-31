@@ -47,7 +47,7 @@ function DashboardContent() {
           <RecentOrdersTable orders={dashboard.recent_orders} />
         </div>
         <div>
-          <LowStockAlerts bundles={dashboard.low_stock_bundles} />
+          <LowStockAlerts products={dashboard.low_stock_products} />
         </div>
       </div>
     </>

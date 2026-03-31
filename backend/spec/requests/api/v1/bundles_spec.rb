@@ -71,7 +71,7 @@ RSpec.describe "API V1 Bundles", type: :request do
 
       json = response.parsed_body["data"]
       expect(json["name"]).to eq("Sleep Bundle")
-      expect(json["items"][0]["name"]).to start_with("Item")
+      expect(json["items"][0]["name"]).to start_with("Product")
     end
 
     it "returns 404 for nonexistent bundle" do

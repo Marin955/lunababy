@@ -1,7 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getBundleBySlug } from '@/services/bundle-service';
 
@@ -12,6 +11,7 @@ import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
 import BundleItemList from '@/components/bundles/BundleItemList';
+import ProductCarousel from '@/components/bundles/ProductCarousel';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -38,27 +38,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
     },
   };
-}
-
-function getGradientClasses(colorFrom: string, colorTo: string): string {
-  const fromMap: Record<string, string> = {
-    'teal-light': 'from-teal-light',
-    'teal-pale': 'from-teal-pale',
-    'lavender-pale': 'from-lavender-pale',
-    'gold-light': 'from-gold-light',
-    'blush-light': 'from-blush-light',
-    'sage-light': 'from-sage-light',
-  };
-  const toMap: Record<string, string> = {
-    'teal-light': 'to-teal-light',
-    'teal-pale': 'to-teal-pale',
-    'lavender-light': 'to-lavender-light',
-    'lavender-pale': 'to-lavender-pale',
-    'gold-light': 'to-gold-light',
-    'blush-light': 'to-blush-light',
-    'sage-light': 'to-sage-light',
-  };
-  return `${fromMap[colorFrom] || 'from-teal-pale'} ${toMap[colorTo] || 'to-lavender-pale'}`;
 }
 
 export default async function BundleDetailPage({
@@ -89,22 +68,16 @@ export default async function BundleDetailPage({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left: Hero visual */}
-        <div
-          className={`relative rounded-[--radius-xl] ${getBundleImage(bundle.slug) ? '' : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)}`} flex items-center justify-center min-h-[400px] overflow-hidden`}
-        >
-          {getBundleImage(bundle.slug) ? (
-            <Image
-              src={getBundleImage(bundle.slug)!}
-              alt={bundle.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
-          ) : (
-            <span className="text-[120px] sm:text-[160px]">{bundle.emoji}</span>
-          )}
+        {/* Left: Image carousel */}
+        <div className="relative">
+          <ProductCarousel
+            bundleImage={getBundleImage(bundle.slug)}
+            bundleName={bundle.name}
+            items={bundle.items}
+            emoji={bundle.emoji}
+            colorFrom={bundle.color_from}
+            colorTo={bundle.color_to}
+          />
 
           {bundle.badge && (
             <div className="absolute top-6 left-6 z-10">
@@ -113,7 +86,7 @@ export default async function BundleDetailPage({
           )}
 
           {bundle.discount_percent > 0 && (
-            <div className="absolute top-6 right-6 z-10 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
+            <div className="absolute top-6 right-6 z-20 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full">
               -{bundle.discount_percent}%
             </div>
           )}
