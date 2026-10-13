@@ -2,6 +2,7 @@ import React from 'react';
 import { getTranslations } from 'next-intl/server';
 import type { Bundle } from '@/types';
 import BundleGrid from '@/components/bundles/BundleGrid';
+import { BUNDLES_SECTION_ID } from '@/lib/constants';
 
 interface FeaturedBundlesProps {
   locale: string;
@@ -12,7 +13,7 @@ export default async function FeaturedBundles({ locale, bundles }: FeaturedBundl
   const t = await getTranslations('home.featured');
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20">
+    <section id={BUNDLES_SECTION_ID} className="max-w-7xl mx-auto px-6 py-20 scroll-mt-28 lg:scroll-mt-32">
       <div className="text-center mb-12">
         <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-text-dark mb-3">
           {t('title')}

@@ -15,7 +15,6 @@ interface MobileMenuProps {
 
 const navLinks = [
   { key: 'home', href: '/' },
-  { key: 'shop', href: '/shop' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'faq', href: '/faq' },
@@ -82,7 +81,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <Link href="/" className="flex items-center gap-2" onClick={onClose}>
               <Image
-                src="/logo.png"
+                src="/logo.svg"
+                unoptimized
                 alt="LunaBaby"
                 width={32}
                 height={32}

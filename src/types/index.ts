@@ -24,6 +24,8 @@ export interface Bundle {
 export interface BundleDetail extends Bundle {
   description: string;
   stock_quantity: number;
+  /** Lowest price in the last 30 days, in cents. Shown by law on product pages. */
+  lowest_price_30_days: number;
   items: BundleItem[];
 }
 

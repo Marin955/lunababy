@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
       # Newsletter
       post "newsletter/subscribe", to: "newsletter#subscribe"
+      post "contact_messages", to: "contact_messages#create"
     end
   end
 

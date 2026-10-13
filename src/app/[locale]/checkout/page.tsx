@@ -33,7 +33,7 @@ export default function CheckoutPage() {
   // Redirect to shop if cart is empty (but not after placing an order)
   useEffect(() => {
     if (isHydrated && items.length === 0 && !orderPlaced) {
-      router.replace('/shop');
+      router.replace('/');
     }
   }, [isHydrated, items.length, router, orderPlaced]);
 

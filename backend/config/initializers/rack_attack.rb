@@ -24,6 +24,11 @@ class Rack::Attack
     req.ip if req.path == "/api/v1/newsletter/subscribe" && req.post?
   end
 
+  # Throttle contact form messages (5 per hour per IP)
+  throttle("contact/ip", limit: 5, period: 1.hour) do |req|
+    req.ip if req.path == "/api/v1/contact_messages" && req.post?
+  end
+
   # Return JSON for throttled requests
   self.throttled_responder = lambda do |_request|
     [ 429, { "Content-Type" => "application/json" }, [ '{"error":"Too many requests. Please try again later."}' ] ]

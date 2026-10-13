@@ -1,0 +1,8 @@
+<h1>Nova poruka s web stranice</h1>
+<p><strong>Ime:</strong> <%= @name %></p>
+<p><strong>Email:</strong> <%= mail_to @email %></p>
+<p><strong>Jezik stranice:</strong> <%= @language.to_s.upcase %></p>
+<hr>
+<p style="white-space: pre-wrap;"><%= @message %></p>
+<hr>
+<p style="color: #888; font-size: 12px;">Odgovorite izravno na ovaj email — odgovor ide pošiljatelju.</p>

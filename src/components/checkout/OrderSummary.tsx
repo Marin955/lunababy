@@ -56,7 +56,7 @@ export default function OrderSummary({
   const total = calculateTotal(subtotal, promoDiscount, shipping);
 
   return (
-    <div className="bg-white rounded-[--radius-lg] shadow-sm p-6 sticky top-24">
+    <div className="bg-white rounded-[--radius-lg] shadow-sm p-6 sticky top-32">
       <h2 className="font-heading text-lg font-semibold text-text-dark mb-6">
         {t('orderSummary')}
       </h2>

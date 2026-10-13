@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslations } from 'next-intl';
 
 type BadgeType = 'new' | 'popular' | 'sale';
 
@@ -12,13 +13,9 @@ const badgeClasses: Record<BadgeType, string> = {
   sale: 'bg-[#FDDEDE] text-[#C27070]',
 };
 
-const badgeLabels: Record<BadgeType, string> = {
-  new: 'New',
-  popular: 'Popular',
-  sale: 'Sale',
-};
-
 export default function Badge({ type }: BadgeProps) {
+  const t = useTranslations('bundle.badges');
+
   return (
     <span
       className={`
@@ -26,7 +23,7 @@ export default function Badge({ type }: BadgeProps) {
         ${badgeClasses[type]}
       `}
     >
-      {badgeLabels[type]}
+      {t(type)}
     </span>
   );
 }

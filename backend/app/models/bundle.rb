@@ -2,6 +2,7 @@ class Bundle < ApplicationRecord
   has_many :bundle_items, dependent: :destroy
   has_many :products, through: :bundle_items
   has_many :order_items, dependent: :restrict_with_error
+  has_many :price_changes, class_name: "BundlePriceChange", dependent: :destroy
 
   enum :badge, { new: 0, popular: 1, sale: 2 }, prefix: true
 
@@ -12,6 +13,7 @@ class Bundle < ApplicationRecord
   validates :discount_percent, numericality: { in: 0..100 }
 
   before_validation :apply_discount
+  after_save :record_price_change, if: :saved_change_to_price?
 
   scope :active, -> { where(active: true) }
 
@@ -26,7 +28,23 @@ class Bundle < ApplicationRecord
     active && computed_stock_quantity > 0
   end
 
+  LOWEST_PRICE_WINDOW = 30.days
+
+  # Lowest price the bundle was sold at during the last 30 days, including the current price.
+  # The price in effect when the window opened counts too, even if it was set earlier.
+  def lowest_price_last_30_days
+    window_start = LOWEST_PRICE_WINDOW.ago
+    in_window = price_changes.where(created_at: window_start..).pluck(:price)
+    before_window = price_changes.where(created_at: ...window_start).order(created_at: :desc).pick(:price)
+
+    [price, *in_window, before_window].compact.min
+  end
+
   private
+
+  def record_price_change
+    price_changes.create!(price: price)
+  end
 
   def apply_discount
     return unless discount_percent_changed? || original_price_changed?

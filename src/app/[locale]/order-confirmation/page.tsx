@@ -8,6 +8,7 @@ import { Link } from '@/i18n/navigation';
 import { fetchOrder } from '@/services/api/orders';
 import { formatPrice } from '@/lib/utils';
 import type { Order } from '@/types';
+import { COLLECTION_HREF } from '@/lib/constants';
 
 export default function OrderConfirmationPage() {
   return (
@@ -108,7 +109,7 @@ function OrderConfirmationContent() {
 
       {/* Continue shopping button */}
       <Link
-        href="/shop"
+        href={COLLECTION_HREF}
         className="inline-flex items-center justify-center px-8 py-4 bg-teal-deep text-white font-semibold rounded-[--radius-md] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300"
       >
         {t('continueShopping')}

@@ -5,7 +5,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
       "https://www.lunababy.eu",
       "https://lunababy.vercel.app",
       "https://lunababy-*.vercel.app",
-      "http://localhost:3000"
+      "http://localhost:3000",
+      # Any local port in development, so the frontend can run beside other projects.
+      *(Rails.env.development? ? [ %r{\Ahttp://localhost:\d+\z} ] : [])
     )
 
     resource "*",

@@ -11,7 +11,6 @@ import MobileMenu from '@/components/layout/MobileMenu';
 
 const navLinks = [
   { key: 'home', href: '/' },
-  { key: 'shop', href: '/shop' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'contact', href: '/contact' },
@@ -20,6 +19,7 @@ const navLinks = [
 export default function Header() {
   const t = useTranslations('common.nav');
   const tAuth = useTranslations('auth');
+  const tHome = useTranslations('home');
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -57,12 +57,18 @@ export default function Header() {
           }
         `}
       >
+        {/* Free delivery announcement bar */}
+        <div className="h-8 flex items-center justify-center bg-teal-deep text-white text-xs sm:text-sm font-medium px-4 text-center">
+          {tHome('freeDeliveryBar')}
+        </div>
+
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 shrink-0">
               <Image
-                src="/logo.png"
+                src="/logo.svg"
+                unoptimized
                 alt="LunaBaby"
                 width={40}
                 height={40}

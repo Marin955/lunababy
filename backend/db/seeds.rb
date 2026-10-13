@@ -263,7 +263,7 @@ bundles_data = [
   {
     slug: "feeding-bundle", category: "feeding", emoji: "🍼",
     color_from: "gold-light", color_to: "blush-light",
-    badge: :new, price: 4490, position: 0,
+    price: 4490, position: 0,
     image_path: "/images/bundles/feeding-bundle.jpg",
     name_hr: "Paket za hranjenje", name_en: "Feeding Bundle",
     short_description_hr: "Sve za bezbrino hranjenje bebe",
@@ -281,7 +281,7 @@ bundles_data = [
   {
     slug: "bath-time-bundle", category: "bath", emoji: "🛁",
     color_from: "teal-pale", color_to: "teal-light",
-    badge: :popular, price: 5990, position: 1,
+    price: 5990, position: 1,
     image_path: "/images/bath-box.jpg",
     name_hr: "Paket za kupanje", name_en: "Bath Time Bundle",
     short_description_hr: "Sigurno i ugodno kupanje za bebe",
@@ -300,7 +300,7 @@ bundles_data = [
   {
     slug: "sleep-bundle", category: "sleep", emoji: "🌙",
     color_from: "teal-light", color_to: "lavender-light",
-    badge: :sale, price: 8990, original_price: 10588, position: 2,
+    badge: :popular, price: 8990, position: 2,
     image_path: "/images/sleeping-box.jpg",
     name_hr: "Paket za spavanje", name_en: "Sleep Bundle",
     short_description_hr: "Mirne noći za bebe i roditelje",

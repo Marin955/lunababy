@@ -3,7 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import Button from '@/components/ui/Button';
+import LunaStar from '@/components/ui/LunaStar';
+import { BUNDLES_SECTION_ID } from '@/lib/constants';
+
+const BEST_SELLER_HREF = '/shop/sleep-bundle';
 
 export default function HeroSection() {
   const t = useTranslations('home.hero');
@@ -11,26 +16,20 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[80vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(165deg, var(--color-warm-white) 0%, var(--color-teal-pale) 35%, var(--color-lavender-pale) 65%, var(--color-gold-light) 100%)' }}>
-      {/* Floating star decorations */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <span className="absolute top-[10%] left-[8%] text-2xl animate-twinkle opacity-60">&#10022;</span>
-        <span className="absolute top-[20%] right-[12%] text-3xl animate-twinkle-delayed opacity-50">&#10022;</span>
-        <span className="absolute top-[55%] left-[15%] text-xl animate-twinkle opacity-40">&#10022;</span>
-        <span className="absolute top-[35%] right-[25%] text-lg animate-twinkle-delayed opacity-50">&#10022;</span>
-        <span className="absolute bottom-[20%] left-[45%] text-2xl animate-twinkle opacity-30">&#10022;</span>
-        <span className="absolute top-[70%] right-[8%] text-xl animate-twinkle-delayed opacity-40">&#10022;</span>
-        <span className="absolute top-[15%] left-[55%] text-sm animate-twinkle opacity-50">&#10022;</span>
-        <span className="absolute bottom-[30%] right-[40%] text-lg animate-twinkle opacity-35">&#10022;</span>
+      {/* Floating star decorations — logo-style stars, kept to the edges so they never sit behind text */}
+      <div className="absolute inset-0 pointer-events-none text-[#E3C9A8]" aria-hidden="true">
+        <LunaStar className="absolute top-[6%] right-[6%] w-5 h-5 animate-twinkle opacity-70" />
+        <LunaStar className="absolute top-[3%] right-[28%] w-3 h-3 animate-twinkle-delayed opacity-60" />
+        <LunaStar className="absolute bottom-[8%] left-[5%] w-4 h-4 animate-twinkle-delayed opacity-60" />
+        <LunaStar className="hidden lg:block absolute top-[12%] left-[4%] w-4 h-4 animate-twinkle opacity-60" />
+        <LunaStar className="hidden lg:block absolute bottom-[14%] left-[46%] w-3 h-3 animate-twinkle opacity-50" />
+        <LunaStar className="hidden lg:block absolute bottom-[10%] right-[4%] w-5 h-5 animate-twinkle-delayed opacity-60" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 py-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text content */}
           <div>
-            {/* Badge */}
-            <span className="inline-block px-4 py-1.5 bg-white/60 backdrop-blur-sm rounded-full text-sm font-semibold text-teal-deep mb-6">
-              {t('badge')}
-            </span>
 
             {/* Heading */}
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-semibold text-text-dark leading-tight mb-6">
@@ -42,9 +41,32 @@ export default function HeroSection() {
               {t('subtitle')}
             </p>
 
+            {/* Featured package — mobile only (desktop shows it in the right column) */}
+            <Link href={BEST_SELLER_HREF} className="lg:hidden block relative mb-8 max-w-sm">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                <Image
+                  src="/images/sleeping-box.jpg"
+                  alt={t('bestSellerAlt')}
+                  width={600}
+                  height={480}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
+              <span className="absolute -bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-4 py-1.5 shadow-md text-sm font-semibold text-teal-deep">
+                {t('bestSeller')}
+              </span>
+            </Link>
+
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-10">
-              <Button href="/shop" size="lg">
+              <Button
+                type="button"
+                size="lg"
+                onClick={() =>
+                  document.getElementById(BUNDLES_SECTION_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              >
                 {t('cta')}
               </Button>
               <Button href="/about" variant="outline" size="lg">
@@ -62,22 +84,22 @@ export default function HeroSection() {
 
           {/* Right: Featured product image */}
           <div className="hidden lg:flex justify-center">
-            <div className="relative w-full max-w-md">
+            <Link href={BEST_SELLER_HREF} className="group relative w-full max-w-md">
               <div className="absolute -inset-4 bg-white/30 backdrop-blur-sm rounded-3xl rotate-3" />
               <div className="relative rounded-2xl overflow-hidden shadow-xl">
                 <Image
                   src="/images/sleeping-box.jpg"
-                  alt={t('title')}
+                  alt={t('bestSellerAlt')}
                   width={600}
                   height={480}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-300"
                   priority
                 />
               </div>
-              <div className="absolute -bottom-3 -right-3 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg">
-                <span className="text-sm font-semibold text-teal-deep">Best seller</span>
+              <div className="absolute -bottom-3 -right-3 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg group-hover:bg-white transition-colors">
+                <span className="text-sm font-semibold text-teal-deep">{t('bestSeller')}</span>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

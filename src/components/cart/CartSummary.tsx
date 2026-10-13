@@ -8,6 +8,7 @@ import { formatPrice } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { Link } from '@/i18n/navigation';
 import type { Bundle, PromoValidation } from '@/types';
+import { COLLECTION_HREF } from '@/lib/constants';
 
 interface CartSummaryProps {
   locale: string;
@@ -42,7 +43,7 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
   }
 
   return (
-    <div className="bg-gray-50 rounded-[--radius-lg] p-6 space-y-4 sticky top-24">
+    <div className="bg-gray-50 rounded-[--radius-lg] p-6 space-y-4 sticky top-32">
       {/* Full price (before discounts) */}
       <div className="flex justify-between text-sm">
         <span className="text-text-mid">{t('subtotal')}</span>
@@ -89,7 +90,7 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
       {/* Continue shopping */}
       <div className="text-center">
         <Link
-          href="/shop"
+          href={COLLECTION_HREF}
           className="text-sm text-teal-deep hover:text-teal transition-colors font-medium"
         >
           {tCommon('buttons.continueShopping')}

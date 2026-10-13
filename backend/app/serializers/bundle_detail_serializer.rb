@@ -23,6 +23,10 @@ class BundleDetailSerializer
     bundle.in_stock?
   end
 
+  attribute :lowest_price_30_days do |bundle|
+    bundle.lowest_price_last_30_days
+  end
+
   attribute :stock_quantity do |bundle|
     bundle.computed_stock_quantity
   end

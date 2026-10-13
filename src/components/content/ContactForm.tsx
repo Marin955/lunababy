@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { sendContactMessage } from '@/services/api/contact';
 import Input from '@/components/ui/Input';
 import Button from '@/components/ui/Button';
 
@@ -16,6 +17,7 @@ type FormErrors = Partial<Record<keyof FormData, string>>;
 
 export default function ContactForm() {
   const t = useTranslations('contactPage');
+  const locale = useLocale();
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -24,6 +26,9 @@ export default function ContactForm() {
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendFailed, setSendFailed] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
 
   const validate = (): boolean => {
     const newErrors: FormErrors = {};
@@ -34,7 +39,7 @@ export default function ContactForm() {
     if (!formData.email.trim()) {
       newErrors.email = t('form.error');
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t('form.error');
+      newErrors.email = t('form.emailInvalid');
     }
     if (!formData.subject.trim()) {
       newErrors.subject = t('form.error');
@@ -58,12 +63,20 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      // Demo: just show success
+    if (!validate() || sending) return;
+
+    setSending(true);
+    setSendFailed(false);
+    try {
+      await sendContactMessage({ ...formData, language: locale, website: honeypot });
       setSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch {
+      setSendFailed(true);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -83,7 +96,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+    <form onSubmit={handleSubmit} className="relative space-y-5" noValidate>
       <h2 className="font-heading text-2xl font-semibold text-text-dark mb-2">
         {t('form.title')}
       </h2>
@@ -126,8 +139,28 @@ export default function ContactForm() {
         error={errors.message}
       />
 
-      <Button type="submit">
-        {t('form.submit')}
+      {/* Honeypot: hidden from people and screen readers, tempting to bots */}
+      <div className="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+        />
+      </div>
+
+      {sendFailed && (
+        <p role="alert" className="text-sm text-red-600">
+          {t('form.sendError')}
+        </p>
+      )}
+
+      <Button type="submit" disabled={sending}>
+        {sending ? t('form.sending') : t('form.submit')}
       </Button>
     </form>
   );
