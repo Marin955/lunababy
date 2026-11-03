@@ -1,5 +1,13 @@
-# Idempotent seed file — safe to run multiple times
+# Development seed data. NOT idempotent: it deletes all orders, shipments,
+# products and bundles before recreating the catalogue.
 # All monetary values are in cents (e.g. 8990 = €89.90)
+
+# Never wipe a live shop by accident (Render's build command used to run this on
+# every deploy). Set SEED_PRODUCTION=1 to seed a fresh production database on purpose.
+if Rails.env.production? && ENV["SEED_PRODUCTION"] != "1"
+  puts "Skipping db:seed in production: it would delete all orders and products. Set SEED_PRODUCTION=1 to force."
+  return
+end
 
 require "open-uri"
 require "nokogiri"
