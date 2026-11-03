@@ -52,6 +52,7 @@ module Admin
 
       audit_log!(action: "order.status_changed", target: order,
                  changes: { from: old_status, to: new_status })
+      OrderNotifications.status_changed(order)
 
       render json: { data: order.reload.as_json(include: :order_status_transitions) }
     rescue ActiveRecord::RecordNotFound
@@ -86,6 +87,7 @@ module Admin
 
       audit_log!(action: "order.shipment_created", target: order,
                  changes: { carrier: params[:carrier], tracking_number: params[:tracking_number] })
+      OrderNotifications.status_changed(order)
 
       render json: { data: order.reload.as_json(include: [ :shipment, :order_status_transitions ]) },
              status: :created

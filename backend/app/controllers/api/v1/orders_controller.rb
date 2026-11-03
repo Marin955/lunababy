@@ -32,6 +32,7 @@ module Api
 
         order = service.call
         order.reload
+        OrderNotifications.order_placed(order)
 
         render json: { data: serialize_order(order) }, status: :created
       rescue OrderCreationService::Error => e

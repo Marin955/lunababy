@@ -2,6 +2,9 @@
 # products and bundles before recreating the catalogue.
 # All monetary values are in cents (e.g. 8990 = €89.90)
 
+# Tests build their own data; seeding the test database breaks them.
+return if Rails.env.test?
+
 # Never wipe a live shop by accident (Render's build command used to run this on
 # every deploy). Set SEED_PRODUCTION=1 to seed a fresh production database on purpose.
 if Rails.env.production? && ENV["SEED_PRODUCTION"] != "1"
