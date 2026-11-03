@@ -19,6 +19,8 @@ class Order < ApplicationRecord
 
   enum :language, { hr: 0, en: 1 }
 
+  enum :payment_status, { unpaid: 0, paid: 1, expired: 2, refunded: 3 }, prefix: :payment
+
   validates :order_number, presence: true, uniqueness: true
   validates :customer_email, presence: true
   validates :customer_name, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_000943) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -138,6 +138,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000943) do
     t.integer "language", default: 0, null: false
     t.text "note"
     t.string "order_number", null: false
+    t.datetime "paid_at"
+    t.integer "payment_status", default: 0, null: false
     t.uuid "promo_code_id"
     t.string "shipping_city", null: false
     t.string "shipping_company"
@@ -149,6 +151,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000943) do
     t.string "shipping_postal_code", null: false
     t.string "shipping_street", null: false
     t.integer "status", default: 0, null: false
+    t.string "stripe_checkout_session_id"
+    t.string "stripe_payment_intent_id"
     t.integer "subtotal", null: false
     t.integer "total", null: false
     t.datetime "updated_at", null: false
@@ -156,6 +160,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000943) do
     t.index ["order_number"], name: "index_orders_on_order_number", unique: true
     t.index ["promo_code_id"], name: "index_orders_on_promo_code_id"
     t.index ["shipping_method_id"], name: "index_orders_on_shipping_method_id"
+    t.index ["stripe_checkout_session_id"], name: "index_orders_on_stripe_checkout_session_id", unique: true
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

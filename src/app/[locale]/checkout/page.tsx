@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart-store';
 import { fetchBundles } from '@/services/api/bundles';
 import { fetchShippingMethods } from '@/services/api/shipping';
 import { validatePromoCode } from '@/services/api/promo-codes';
+import { abandonOrder } from '@/services/api/orders';
 import { calculateSubtotal } from '@/services/cart-service';
 import CheckoutForm from '@/components/checkout/CheckoutForm';
 import ShippingSelector from '@/components/checkout/ShippingSelector';
@@ -14,7 +16,17 @@ import OrderSummary from '@/components/checkout/OrderSummary';
 import type { Bundle, ShippingMethod, PromoValidation } from '@/types';
 
 export default function CheckoutPage() {
+  return (
+    <Suspense fallback={null}>
+      <CheckoutContent />
+    </Suspense>
+  );
+}
+
+function CheckoutContent() {
   const t = useTranslations('checkout');
+  const searchParams = useSearchParams();
+  const cancelledOrderId = searchParams.get('cancelled_order');
   const locale = useLocale();
   const router = useRouter();
   const items = useCartStore((state) => state.items);
@@ -36,6 +48,12 @@ export default function CheckoutPage() {
       router.replace('/');
     }
   }, [isHydrated, items.length, router, orderPlaced]);
+
+  // Back from Stripe without paying: release the reserved stock right away
+  // (the cart is still intact because it is only cleared after payment).
+  useEffect(() => {
+    if (cancelledOrderId) abandonOrder(cancelledOrderId).catch(() => {});
+  }, [cancelledOrderId]);
 
   // Fetch bundles and shipping methods
   useEffect(() => {
@@ -100,6 +118,12 @@ export default function CheckoutPage() {
       <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
         {t('title')}
       </h1>
+
+      {cancelledOrderId && (
+        <div role="status" className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-[--radius-md] text-sm text-amber-900">
+          {t('paymentCancelled')}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left column: Form + Shipping */}

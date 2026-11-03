@@ -157,6 +157,32 @@ Returns order if user is owner or email matches.
 ### GET /api/v1/orders/:order_number/lookup?email=...
 Guest order lookup by order number + email.
 
+## Payments (Stripe Checkout)
+
+`POST /api/v1/orders` creates a `pending` / `unpaid` order (stock reserved) and returns
+`{ data: order, checkout_url }`; the frontend redirects to `checkout_url`. `checkout_url`
+is null when the total is 0 (order is confirmed immediately). 502 if Stripe is unavailable
+(the order is released).
+
+### POST /api/v1/orders/:order_number/confirm_payment `{ session_id }`
+Called by the confirmation page on return from Stripe (`success_url` carries
+`order` and `session_id`). Checks the session with Stripe if the webhook has not
+arrived yet; returns the order. 404 unless the session id belongs to the order.
+
+### POST /api/v1/orders/abandon `{ order_id }`
+Customer went back from Stripe (`cancel_url` carries `cancelled_order=<uuid>`):
+expires the session, cancels the order, restores stock and promo use. Always 204.
+
+### POST /api/v1/stripe/webhooks
+Stripe-signed (`STRIPE_WEBHOOK_SECRET`). Handles `checkout.session.completed`,
+`checkout.session.async_payment_succeeded` (→ `OrderPayment.complete!`: confirmed,
+paid, confirmation email) and `checkout.session.expired`,
+`checkout.session.async_payment_failed` (→ `OrderPayment.release!`). Both are idempotent.
+
+Env: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `FRONTEND_URL` (success/cancel URLs).
+Allowed payment methods: `bin/rails stripe:configure_payment_methods` (once per mode).
+Local webhooks: `stripe listen --api-key $STRIPE_SECRET_KEY --forward-to localhost:3001/api/v1/stripe/webhooks`.
+
 ## Profile Endpoints (authenticated)
 
 ### GET /api/v1/profile

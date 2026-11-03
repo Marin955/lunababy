@@ -14,7 +14,7 @@
       "addToCart": "Dodaj u košaricu",
       "continueShopping": "Nastavi kupnju",
       "proceedToCheckout": "Nastavi na plaćanje",
-      "placeOrder": "Naruči",
+      "placeOrder": "Naruči i plati",
       "viewAll": "Pogledaj sve",
       "learnMore": "Saznaj više",
       "subscribe": "Pretplati se",
@@ -150,8 +150,12 @@
       "invalidEmail": "Unesite valjanu email adresu",
       "invalidPhone": "Unesite valjani telefonski broj",
       "invalidPostalCode": "Unesite valjani poštanski broj (5 znamenki)",
-      "orderFailed": "Došlo je do greške pri stvaranju narudžbe. Pokušajte ponovo."
-    }
+      "orderFailed": "Došlo je do greške pri stvaranju narudžbe. Pokušajte ponovo.",
+      "paymentFailed": "Plaćanje trenutno nije moguće pokrenuti. Pokušajte ponovo za nekoliko minuta."
+    },
+    "paymentCancelled": "Plaćanje je otkazano i narudžba nije poslana. Možete pokušati ponovo.",
+    "redirecting": "Preusmjeravamo vas na sigurno plaćanje…",
+    "securePayment": "Plaćanje karticom, Apple Payom ili Google Payom preko sigurne Stripe stranice."
   },
   "confirmation": {
     "title": "Hvala na narudžbi!",
@@ -159,7 +163,12 @@
     "orderNumber": "Broj narudžbe",
     "orderTotal": "Ukupno",
     "email": "Email",
-    "continueShopping": "Nastavi kupnju"
+    "continueShopping": "Nastavi kupnju",
+    "pendingTitle": "Čekamo potvrdu plaćanja",
+    "pendingMessage": "Plaćanje se obrađuje. Ova stranica će se osvježiti čim ga banka potvrdi, a potvrdu ćemo vam poslati i na email.",
+    "notPaidTitle": "Plaćanje nije dovršeno",
+    "notPaidMessage": "Narudžba nije plaćena pa je nismo poslali. Proizvodi su i dalje u vašoj košarici.",
+    "backToCart": "Natrag u košaricu"
   },
   "newsletter": {
     "title": "Pridružite se LunaBaby obitelji",

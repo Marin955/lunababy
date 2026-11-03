@@ -1,7 +1,7 @@
 class OrderSerializer
   include Alba::Resource
 
-  attributes :id, :order_number, :status, :customer_email, :customer_name,
+  attributes :id, :order_number, :status, :payment_status, :paid_at, :customer_email, :customer_name,
              :subtotal, :discount_amount, :shipping_cost, :total,
              :language, :note, :created_at
 

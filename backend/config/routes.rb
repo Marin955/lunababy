@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       # Orders (mixed auth)
       resources :orders, only: [ :index, :show, :create ], param: :order_number
       get "orders/:order_number/lookup", to: "orders#lookup"
+      post "orders/:order_number/confirm_payment", to: "orders#confirm_payment"
+      post "orders/abandon", to: "orders#abandon"
+
+      # Stripe
+      post "stripe/webhooks", to: "stripe_webhooks#create"
 
       # Profile (authenticated)
       resource :profile, only: [ :show, :update ], controller: "profile"

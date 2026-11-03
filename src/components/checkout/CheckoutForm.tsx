@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart-store';
@@ -29,6 +29,27 @@ interface CheckoutFormProps {
   shippingMethodId: string | null;
   promoCode: string | null;
   onOrderPlaced?: () => void;
+}
+
+// Kept for the browser tab only, so a customer who goes back from the Stripe
+// payment page does not have to type everything again.
+const DRAFT_KEY = 'lb_checkout_draft';
+
+function loadDraft(): Partial<CheckoutFormValues> {
+  try {
+    return JSON.parse(sessionStorage.getItem(DRAFT_KEY) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+function saveDraft(values: CheckoutFormValues | null) {
+  try {
+    if (values) sessionStorage.setItem(DRAFT_KEY, JSON.stringify(values));
+    else sessionStorage.removeItem(DRAFT_KEY);
+  } catch {
+    // storage unavailable (private mode): nothing to restore later
+  }
 }
 
 const initialValues: CheckoutFormValues = {
@@ -61,6 +82,11 @@ export default function CheckoutForm({
   const [errors, setErrors] = useState<Partial<Record<keyof CheckoutFormValues, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const draft = loadDraft();
+    if (Object.keys(draft).length > 0) setValues((prev) => ({ ...prev, ...draft }));
+  }, []);
 
   function handleChange(field: keyof CheckoutFormValues, value: string) {
     setValues((prev) => ({ ...prev, [field]: value }));
@@ -134,16 +160,25 @@ export default function CheckoutForm({
     };
 
     try {
-      const order = await createOrder(orderParams, token);
+      const { order, checkoutUrl } = await createOrder(orderParams, token);
       onOrderPlaced?.();
+      if (checkoutUrl) {
+        saveDraft(values);
+        // The cart is cleared on the confirmation page once Stripe reports the payment.
+        window.location.assign(checkoutUrl);
+        return; // keep the button disabled while the browser leaves
+      }
+      saveDraft(null);
       clearCart();
       router.push(`/order-confirmation?order=${order.order_number}&email=${encodeURIComponent(values.email.trim())}`);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : t('errors.orderFailed');
+      const status = (err as { status?: number })?.status;
+      const message = status === 502
+        ? t('errors.paymentFailed')
+        : err instanceof Error ? err.message : t('errors.orderFailed');
       setSubmitError(message);
-    } finally {
-      setSubmitting(false);
     }
+    setSubmitting(false);
   }
 
   return (
@@ -242,8 +277,15 @@ export default function CheckoutForm({
         disabled={submitting}
         className="mt-6 w-full bg-teal-deep text-white font-semibold py-3 px-6 rounded-[--radius-md] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {submitting ? '...' : tCommon('buttons.placeOrder')}
+        {submitting ? t('redirecting') : tCommon('buttons.placeOrder')}
       </button>
+      <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-text-light">
+        <svg aria-hidden="true" className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+          <rect x="4" y="11" width="16" height="10" rx="2" />
+          <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+        </svg>
+        {t('securePayment')}
+      </p>
     </form>
   );
 }

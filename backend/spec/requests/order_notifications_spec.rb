@@ -18,26 +18,6 @@ RSpec.describe "Order emails", type: :request do
     }
   end
 
-  it "emails the customer an order confirmation when an order is placed" do
-    perform_enqueued_jobs do
-      post "/api/v1/orders", params: order_params
-    end
-
-    expect(response).to have_http_status(:created)
-    mail = ActionMailer::Base.deliveries.last
-    expect(mail.to).to eq([ "buyer@example.com" ])
-    expect(mail.subject).to start_with("Potvrda narudžbe LB-")
-    expect(mail.reply_to).to eq([ "info@lunababy.eu" ])
-    expect(mail.body.to_s).to include(bundle.name_hr)
-  end
-
-  it "still places the order when the email cannot be queued" do
-    allow(SendOrderConfirmationJob).to receive(:perform_later).and_raise(StandardError, "queue down")
-
-    expect { post "/api/v1/orders", params: order_params }.to change(Order, :count).by(1)
-    expect(response).to have_http_status(:created)
-  end
-
   it "emails a status update when an admin changes the order status" do
     order = create(:order, shipping_method: shipping, status: :pending, language: :en)
 

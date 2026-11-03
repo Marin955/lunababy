@@ -14,7 +14,7 @@
       "addToCart": "Add to Cart",
       "continueShopping": "Continue Shopping",
       "proceedToCheckout": "Proceed to Checkout",
-      "placeOrder": "Place Order",
+      "placeOrder": "Place order & pay",
       "viewAll": "View All",
       "learnMore": "Learn More",
       "subscribe": "Subscribe",
@@ -150,8 +150,12 @@
       "invalidEmail": "Please enter a valid email address",
       "invalidPhone": "Please enter a valid phone number",
       "invalidPostalCode": "Please enter a valid postal code (5 digits)",
-      "orderFailed": "There was an error creating your order. Please try again."
-    }
+      "orderFailed": "There was an error creating your order. Please try again.",
+      "paymentFailed": "Payment could not be started right now. Please try again in a few minutes."
+    },
+    "paymentCancelled": "Payment was cancelled and the order was not placed. You can try again.",
+    "redirecting": "Redirecting you to secure payment…",
+    "securePayment": "Pay by card, Apple Pay or Google Pay on a secure Stripe page."
   },
   "confirmation": {
     "title": "Thank you for your order!",
@@ -159,7 +163,12 @@
     "orderNumber": "Order Number",
     "orderTotal": "Total",
     "email": "Email",
-    "continueShopping": "Continue Shopping"
+    "continueShopping": "Continue Shopping",
+    "pendingTitle": "Waiting for payment confirmation",
+    "pendingMessage": "Your payment is being processed. This page will update as soon as your bank confirms it, and we will email you a confirmation.",
+    "notPaidTitle": "Payment not completed",
+    "notPaidMessage": "The order was not paid, so it has not been placed. Your items are still in your cart.",
+    "backToCart": "Back to cart"
   },
   "newsletter": {
     "title": "Join the LunaBaby Family",

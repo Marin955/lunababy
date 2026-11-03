@@ -11,6 +11,8 @@ development:
     <<: *default
     database: lunababy_development
     migrations_paths: db/queue_migrate
+    # Same database as primary: dumping it would overwrite queue_schema.rb with the app schema.
+    schema_dump: false
 
 test:
   primary:
@@ -20,6 +22,8 @@ test:
     <<: *default
     database: lunababy_test
     migrations_paths: db/queue_migrate
+    # Same database as primary: dumping it would overwrite queue_schema.rb with the app schema.
+    schema_dump: false
 
 production:
   primary:
@@ -31,8 +35,11 @@ production:
     url: <%= ENV["DATABASE_URL"] %>
     prepared_statements: false
     migrations_paths: db/queue_migrate
+    # Same database as primary: dumping it would overwrite queue_schema.rb with the app schema.
+    schema_dump: false
   cache:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
     prepared_statements: false
     migrations_paths: db/cache_migrate
+    schema_dump: false

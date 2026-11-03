@@ -77,6 +77,8 @@ export interface Order {
   id: string;
   order_number: string;
   status: OrderStatus;
+  payment_status: PaymentStatus;
+  paid_at: string | null;
   customer_email: string;
   customer_name: string;
   subtotal: number; // cents
@@ -92,6 +94,8 @@ export interface Order {
   promo_code: { code: string; discount_type: string; value: number } | null;
   shipment: Shipment | null;
 }
+
+export type PaymentStatus = 'unpaid' | 'paid' | 'expired' | 'refunded';
 
 export type OrderStatus =
   | 'pending'

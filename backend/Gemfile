@@ -46,9 +46,11 @@ gem "avo"
 
 # Rate limiting
 gem "rack-attack"
+gem "stripe", "~> 20.1"
 
 group :development do
   gem "letter_opener"
+  gem "dotenv" # loads backend/.env (Stripe test keys etc.)
 end
 
 group :development, :test do
