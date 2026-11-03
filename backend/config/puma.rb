@@ -31,6 +31,18 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT", 3000)
 
+# Render sets WEB_CONCURRENCY=1, which would start Puma in cluster mode with a
+# single worker: wasted memory, and the Solid Queue plugin then runs in a master
+# process that never loads Rails (NameError: SolidQueue). Run a single process
+# unless more workers are asked for, and preload the app when they are.
+web_workers = Integer(ENV.fetch("WEB_CONCURRENCY", 1))
+if web_workers > 1
+  workers web_workers
+  preload_app!
+else
+  workers 0
+end
+
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
