@@ -3,9 +3,9 @@ namespace :stripe do
   # configuration enables, and sandbox and live mode have separate
   # configurations. Run once per mode (with that mode's STRIPE_SECRET_KEY):
   #   bin/rails stripe:configure_payment_methods
-  desc "Enable only cards, Apple Pay, Google Pay and Link on the Stripe account"
+  desc "Enable only cards, Apple Pay, Google Pay, Link, Revolut Pay and PayPal"
   task configure_payment_methods: :environment do
-    keep = %w[card apple_pay google_pay link]
+    keep = %w[card apple_pay google_pay link revolut_pay paypal]
 
     config = Stripe::PaymentMethodConfiguration.list(limit: 100).data.find(&:is_default)
     abort "No default payment method configuration found" unless config
