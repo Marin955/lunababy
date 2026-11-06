@@ -60,7 +60,10 @@ module Admin
     def product_params
       params.require(:product).permit(
         :name_hr, :name_en, :description_hr, :description_en,
-        :stock_quantity, :low_stock_threshold, :active
+        :stock_quantity, :low_stock_threshold, :active,
+        :brand, :material_hr, :material_en, :dimensions,
+        :age_range_hr, :age_range_en, :care_instructions_hr, :care_instructions_en,
+        certifications: []
       )
     end
   end

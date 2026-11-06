@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_001335) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -166,11 +166,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.string "age_range_en"
+    t.string "age_range_hr"
+    t.string "brand"
+    t.text "care_instructions_en"
+    t.text "care_instructions_hr"
+    t.string "certifications", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.text "description_en"
     t.text "description_hr"
+    t.string "dimensions"
     t.string "image_path"
     t.integer "low_stock_threshold", default: 5, null: false
+    t.text "material_en"
+    t.text "material_hr"
     t.integer "msrp", default: 0, null: false
     t.string "name_en", null: false
     t.string "name_hr", null: false

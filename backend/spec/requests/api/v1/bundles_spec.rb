@@ -74,6 +74,54 @@ RSpec.describe "API V1 Bundles", type: :request do
       expect(json["items"][0]["name"]).to start_with("Product")
     end
 
+    context "with product catalog attributes" do
+      let(:product) { bundle1.bundle_items.first.product }
+
+      def item_for(product_id)
+        response.parsed_body["data"]["items"].find { |i| i["product_id"] == product_id }
+      end
+
+      before do
+        product.update!(
+          brand: "Acme",
+          material_hr: "Pamuk", material_en: "Cotton",
+          dimensions: "70 × 90 cm",
+          age_range_hr: "0–6 mjeseci", age_range_en: "0–6 months",
+          certifications: [ "CE", "EN 71-3" ],
+          care_instructions_hr: "Prati na 30 °C", care_instructions_en: "Wash at 30 °C"
+        )
+      end
+
+      it "returns localized specs in HR" do
+        get "/api/v1/bundles/sleep-bundle"
+
+        item = item_for(product.id)
+        expect(item).to include(
+          "brand" => "Acme", "material" => "Pamuk", "dimensions" => "70 × 90 cm",
+          "age_range" => "0–6 mjeseci", "certifications" => [ "CE", "EN 71-3" ],
+          "care_instructions" => "Prati na 30 °C"
+        )
+      end
+
+      it "returns localized specs in EN" do
+        get "/api/v1/bundles/sleep-bundle", params: { locale: "en" }
+
+        item = item_for(product.id)
+        expect(item).to include("material" => "Cotton", "age_range" => "0–6 months", "care_instructions" => "Wash at 30 °C")
+      end
+
+      it "returns null specs and empty certifications for products without data" do
+        get "/api/v1/bundles/sleep-bundle", params: { locale: "en" }
+
+        other = bundle1.bundle_items.map(&:product_id).find { |id| id != product.id }
+        item = item_for(other)
+        expect(item).to include(
+          "brand" => nil, "material" => nil, "dimensions" => nil,
+          "age_range" => nil, "certifications" => [], "care_instructions" => nil
+        )
+      end
+    end
+
     it "returns 404 for nonexistent bundle" do
       get "/api/v1/bundles/nonexistent"
 
