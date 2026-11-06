@@ -1,5 +1,8 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { Link } from '@/i18n/navigation';
+import { company } from '@/lib/company';
+import { WITHDRAWAL_HREF } from '@/lib/constants';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,10 +29,13 @@ export default async function ReturnsPage({ params }: Props) {
   const t = await getTranslations('returnsPage');
 
   const conditions = t.raw('conditions.items') as string[];
-  const steps = t.raw('process.steps') as Array<{
-    title: string;
-    description: string;
-  }>;
+  // Contact details in the copy come from src/lib/company.ts.
+  const fillContact = (text: string) =>
+    text.replace('{email}', company.email ?? '').replace('{phone}', company.phone ?? '');
+  const steps = (t.raw('process.steps') as Array<{ title: string; description: string }>).map((step) => ({
+    ...step,
+    description: fillContact(step.description),
+  }));
 
   return (
     <div>
@@ -52,12 +58,36 @@ export default async function ReturnsPage({ params }: Props) {
         </p>
       </section>
 
+      {/* Legal 14-day right of withdrawal (must match /terms#withdrawal) */}
+      <section id="withdrawal" className="bg-teal-pale/30 scroll-mt-24">
+        <div className="max-w-4xl mx-auto px-6 py-16">
+          <h2 className="font-heading text-2xl font-semibold text-text-dark mb-4">
+            {t('legal.title')}
+          </h2>
+          <div className="space-y-4 font-body text-text-mid leading-relaxed">
+            <p>{t('legal.description')}</p>
+            <p>
+              {t.rich('legal.link', {
+                link: (chunks) => (
+                  <Link href={WITHDRAWAL_HREF} className="font-medium text-teal-deep underline underline-offset-2 hover:text-teal">
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Conditions */}
       <section className="bg-cream/50">
         <div className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="font-heading text-2xl font-semibold text-text-dark mb-6">
             {t('conditions.title')}
           </h2>
+          <p className="font-body text-sm text-text-mid leading-relaxed mb-6 -mt-2">
+            {t('conditions.note')}
+          </p>
           <ul className="space-y-3">
             {conditions.map((item, index) => (
               <li key={index} className="flex items-start gap-3">

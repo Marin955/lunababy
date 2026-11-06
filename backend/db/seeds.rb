@@ -72,9 +72,9 @@ puts "Seeding shipping methods..."
   {
     slug: "standard",
     name_hr: "Standardna dostava", name_en: "Standard Delivery",
-    carrier: "Hrvatska Pošta",
-    description_hr: "Dostava Hrvatskom Poštom na kućnu adresu u roku od 3-5 radnih dana.",
-    description_en: "Delivery by Hrvatska Pošta to your home address within 3-5 business days.",
+    carrier: "Hrvatska pošta",
+    description_hr: "Dostava Hrvatskom poštom na kućnu adresu u roku od 3-5 radnih dana.",
+    description_en: "Delivery by Hrvatska pošta to your home address within 3-5 business days.",
     price: 350, estimated_days: "3-5", free_threshold: 5000, position: 0
   },
   {
@@ -88,7 +88,7 @@ puts "Seeding shipping methods..."
   {
     slug: "pickup",
     name_hr: "Preuzimanje na paketomatu", name_en: "Parcel Locker Pickup",
-    carrier: "BoxNow / GLS Parketomat",
+    carrier: "BoxNow / GLS Paketomat",
     description_hr: "Preuzimanje paketa na najbližem BoxNow ili GLS paketomatu u roku od 1-2 radna dana.",
     description_en: "Pick up your package at the nearest BoxNow or GLS parcel locker within 1-2 business days.",
     price: 250, estimated_days: "1-2", free_threshold: 5000, position: 2
@@ -118,7 +118,7 @@ products_data = [
   {
     sku: "11", slug: "silicone-bowl",
     name_hr: "Silikonska zdjelica s vakuumskim dnom", name_en: "Silicone Bowl with Suction Base",
-    description_hr: "Silikonska zdjelica s vakuumskim dnom koja se čvrsto drži za stol, sprječava prolijevanje hrane.", description_en: "Silicone bowl with suction base that firmly attaches to the table, preventing food spills.",
+    description_hr: "Silikonska zdjelica s vakuumskim dnom koja se čvrsto drži za stol i sprječava prolijevanje hrane.", description_en: "Silicone bowl with suction base that firmly attaches to the table, preventing food spills.",
     sex: :female, purchase_price: 750, purchase_price_with_vat: 938, msrp: 1500,
     supplier_url: "https://www.faire.com/product/p_h6kc2x3s4g",
     stock_quantity: 50, position: 0
@@ -149,8 +149,8 @@ products_data = [
   },
   {
     sku: "9", slug: "baby-girl-bib",
-    name_hr: "Partiklica za curicu", name_en: "Baby Girl Bib",
-    description_hr: "Slatka partiklica za curicu, mekana i upijajuća.", description_en: "Cute baby girl bib, soft and absorbent.",
+    name_hr: "Portiklica za curicu", name_en: "Baby Girl Bib",
+    description_hr: "Slatka portiklica za curicu, mekana i upijajuća.", description_en: "Cute baby girl bib, soft and absorbent.",
     sex: :female, purchase_price: 368, purchase_price_with_vat: 460, msrp: 736,
     supplier_url: "https://www.faire.com/product/p_3npnnkhxq5",
     stock_quantity: 50, position: 4
@@ -183,7 +183,7 @@ products_data = [
   {
     sku: "7", slug: "hooded-towel",
     name_hr: "Ručnik s kapuljačom", name_en: "Hooded Towel",
-    description_hr: "Mekani ručnik s kapuljačom za ugrijavanje bebe nakon kupanja.", description_en: "Soft hooded towel for keeping baby warm after bath.",
+    description_hr: "Mekani ručnik s kapuljačom koji bebu grije nakon kupanja.", description_en: "Soft hooded towel for keeping baby warm after bath.",
     sex: :unisex, purchase_price: 690, purchase_price_with_vat: 863, msrp: 1587,
     supplier_url: "https://www.faire.com/product/p_4pgawpwza7",
     stock_quantity: 50, position: 8
@@ -279,9 +279,9 @@ bundles_data = [
     price: 4490, position: 0,
     image_path: "/images/bundles/feeding-bundle.jpg",
     name_hr: "Paket za hranjenje", name_en: "Feeding Bundle",
-    short_description_hr: "Sve za bezbrino hranjenje bebe",
+    short_description_hr: "Sve za bezbrižno hranjenje bebe",
     short_description_en: "Everything for worry-free baby feeding",
-    description_hr: "Kompletni set za hranjenje bebe koji uključuje silikonsku zdjelicu, bočicu, trodjelnu posudu za hranu, vilicu i žlicu te partiklicu. Sve što trebate za hranjenje vaše bebe na jednom mjestu.",
+    description_hr: "Kompletni set za hranjenje bebe koji uključuje silikonsku zdjelicu, bočicu, trodjelnu posudu za hranu, vilicu i žlicu te portiklicu. Sve što trebate za hranjenje vaše bebe na jednom mjestu.",
     description_en: "A complete baby feeding set including a silicone bowl, bottle, three-compartment food container, fork and spoon, and a bib. Everything you need for feeding your baby in one place.",
     items: [
       { product_slug: "silicone-bowl", quantity: 1 },
