@@ -10,8 +10,8 @@ export default function Card({ children, className = '', hover = true }: CardPro
   return (
     <div
       className={`
-        bg-white rounded-[--radius-lg] shadow-sm overflow-hidden
-        ${hover ? 'hover:shadow-hover hover:-translate-y-1 transition-all duration-300' : ''}
+        bg-white rounded-lg shadow-sm overflow-hidden
+        ${hover ? 'hover:shadow-hover hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-all duration-300' : ''}
         ${className}
       `}
     >

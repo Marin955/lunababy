@@ -28,7 +28,7 @@ export default function Input(props: InputProps) {
 
   const fieldClasses = [
     'w-full px-4 py-3',
-    'rounded-[--radius-sm]',
+    'rounded-sm',
     'border border-gray-200 bg-white',
     'focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal',
     'transition-all',
@@ -59,13 +59,13 @@ export default function Input(props: InputProps) {
         <input
           id={inputId}
           type={type || 'text'}
-          className={fieldClasses}
+          className={`${fieldClasses} min-h-11`}
           {...(rest as React.InputHTMLAttributes<HTMLInputElement>)}
         />
       )}
 
       {error && (
-        <p className="text-red-500 text-xs mt-1">{error}</p>
+        <p className="text-red-700 text-sm mt-1">{error}</p>
       )}
     </div>
   );
