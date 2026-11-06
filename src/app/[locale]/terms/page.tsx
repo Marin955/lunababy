@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE, localeAlternates } from '@/lib/site-metadata';
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
 import { company } from '@/lib/company';
@@ -25,12 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t('title'),
     description: t('description'),
     robots: TERMS_NOINDEX ? { index: false, follow: true } : undefined,
+    alternates: localeAlternates(locale, '/terms'),
     openGraph: {
       title: t('title'),
       description: t('description'),
       siteName: 'LunaBaby',
       locale: locale === 'hr' ? 'hr_HR' : 'en_US',
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

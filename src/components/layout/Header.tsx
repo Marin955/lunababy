@@ -156,7 +156,7 @@ export default function Header() {
                 type="button"
                 className="lg:hidden flex flex-col items-center justify-center w-11 h-11 gap-1.5 cursor-pointer"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Menu"
+                aria-label={t('menu')}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
               >

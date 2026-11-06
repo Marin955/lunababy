@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE, localeAlternates } from '@/lib/site-metadata';
 import type React from 'react';
 import ContactForm from '@/components/content/ContactForm';
 import { company } from '@/lib/company';
@@ -13,12 +14,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t('title'),
     description: t('description'),
+    alternates: localeAlternates(locale, '/contact'),
     openGraph: {
       title: t('title'),
       description: t('description'),
       siteName: 'LunaBaby',
       locale: locale === 'hr' ? 'hr_HR' : 'en_US',
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

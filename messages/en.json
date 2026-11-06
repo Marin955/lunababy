@@ -10,7 +10,8 @@
       "returns": "Returns",
       "privacy": "Privacy",
       "trackOrder": "Track Order",
-      "terms": "Terms of Sale"
+      "terms": "Terms of Sale",
+      "menu": "Menu"
     },
     "buttons": {
       "addToCart": "Add to Cart",
@@ -234,7 +235,7 @@
     },
     "paymentCancelled": "Payment was cancelled and the order was not placed. You can try again.",
     "redirecting": "Redirecting you to secure payment…",
-    "securePayment": "Pay by card, Apple Pay or Google Pay on a secure Stripe page.",
+    "securePayment": "Pay by card, Apple Pay, Google Pay, Revolut Pay or PayPal on a secure Stripe page.",
     "submit": "Place order and pay",
     "opensInNewTab": "(opens in a new tab)",
     "steps": {

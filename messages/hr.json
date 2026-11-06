@@ -10,7 +10,8 @@
       "returns": "Povrati",
       "privacy": "Privatnost",
       "trackOrder": "Praćenje narudžbe",
-      "terms": "Uvjeti poslovanja"
+      "terms": "Uvjeti poslovanja",
+      "menu": "Izbornik"
     },
     "buttons": {
       "addToCart": "Dodaj u košaricu",
@@ -234,7 +235,7 @@
     },
     "paymentCancelled": "Plaćanje je otkazano i narudžba nije poslana. Možete pokušati ponovo.",
     "redirecting": "Preusmjeravamo vas na sigurno plaćanje…",
-    "securePayment": "Plaćanje karticom, Apple Payom ili Google Payom preko sigurne Stripe stranice.",
+    "securePayment": "Plaćanje karticom, Apple Payom, Google Payom, Revolut Payom ili PayPalom preko sigurne Stripe stranice.",
     "submit": "Naruči i plati",
     "opensInNewTab": "(otvara se u novoj kartici)",
     "steps": {

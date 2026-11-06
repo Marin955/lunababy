@@ -1,6 +1,7 @@
 import React from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { DEFAULT_OG_IMAGE, localeAlternates } from '@/lib/site-metadata';
 import { getBundles } from '@/services/bundle-service';
 import { fetchShippingMethods } from '@/services/api/shipping';
 import { getFreeShippingThreshold } from '@/services/cart-service';
@@ -20,12 +21,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
+    alternates: localeAlternates(locale, '/shop'),
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),
       siteName: 'LunaBaby',
       locale: locale === 'hr' ? 'hr_HR' : 'en_US',
       type: 'website',
+      images: [DEFAULT_OG_IMAGE],
     },
   };
 }

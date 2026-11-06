@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { getBundleImage } from '@/lib/bundle-images';
+import { getBundleThumbnail } from '@/lib/bundle-images';
 import type { Bundle } from '@/types';
 
 interface BundleThumbProps {
@@ -20,7 +20,7 @@ interface BundleThumbProps {
  * Falls back to the gradient + emoji tile when there is no image or it fails.
  */
 export default function BundleThumb({ bundle, size = 72, className = '' }: BundleThumbProps) {
-  const image = getBundleImage(bundle.slug);
+  const image = getBundleThumbnail(bundle.slug);
   const [failed, setFailed] = useState(false);
   const src = image && !failed ? image : null;
 

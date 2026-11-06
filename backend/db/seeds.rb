@@ -277,7 +277,7 @@ bundles_data = [
     slug: "feeding-bundle", category: "feeding", emoji: "🍼",
     color_from: "gold-light", color_to: "blush-light",
     price: 4490, position: 0,
-    image_path: "/images/bundles/feeding-bundle.jpg",
+    image_path: nil, # no box photo yet; the frontend shows a product-photo collage
     name_hr: "Paket za hranjenje", name_en: "Feeding Bundle",
     short_description_hr: "Sve za bezbrižno hranjenje bebe",
     short_description_en: "Everything for worry-free baby feeding",

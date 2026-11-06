@@ -42,7 +42,7 @@ export default function AddToCartButton({ bundleId, inStock, maxQuantity }: AddT
       size="lg"
       onClick={handleAdd}
       disabled={!inStock}
-      className={`w-full ${added ? 'bg-teal' : ''}`}
+      className={`w-full ${added ? 'bg-teal-ink-hover' : ''}`}
     >
       {!inStock ? (
         t('outOfStock')
