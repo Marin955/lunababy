@@ -94,7 +94,41 @@
     },
     "reviews": "reviews",
     "addedToCart": "Added!",
-    "lowestPrice30Days": "Lowest price in the last 30 days: {price}"
+    "lowestPrice30Days": "Lowest price in the last 30 days: {price}",
+    "stock": {
+      "inStock": "In stock",
+      "lowStock": "{count, plural, one {Only # left} other {Only # left}}",
+      "unavailable": "Currently unavailable"
+    },
+    "quantity": {
+      "label": "Quantity",
+      "decrease": "Decrease quantity",
+      "increase": "Increase quantity"
+    },
+    "delivery": {
+      "beforeCutoff": "Order by {cutoff} for delivery:",
+      "afterCutoff": "Order today for delivery:",
+      "range": "{from} – {to}",
+      "note": "Estimate for delivery within Croatia; depends on the shipping method."
+    },
+    "specs": {
+      "brand": "Brand",
+      "material": "Material",
+      "dimensions": "Dimensions",
+      "ageRange": "Age",
+      "certifications": "Markings & certifications",
+      "care": "Care",
+      "allCertified": "Every product in this bundle carries: {list}"
+    },
+    "gallery": {
+      "previous": "Previous image",
+      "next": "Next image",
+      "goTo": "Show image {index}",
+      "thumbnails": "Product images"
+    },
+    "related": {
+      "title": "See our other bundles"
+    }
   },
   "cart": {
     "title": "Your Cart",
@@ -725,7 +759,21 @@
       "descriptionEn": "Description (EN)",
       "names": "Names",
       "edit": "Edit",
-      "save": "Save"
+      "save": "Save",
+      "specs": "Specifications",
+      "specsHint": "Shown on the bundle page. Empty fields are hidden. Only enter verified data.",
+      "brand": "Brand",
+      "materialHr": "Material (HR)",
+      "materialEn": "Material (EN)",
+      "dimensions": "Dimensions",
+      "ageRangeHr": "Age (HR)",
+      "ageRangeEn": "Age (EN)",
+      "certifications": "Markings & certifications",
+      "certificationsHint": "Comma-separated, e.g. CE, EN 71-3",
+      "careHr": "Care (HR)",
+      "careEn": "Care (EN)",
+      "noSpecs": "No specifications entered yet.",
+      "saveError": "Saving failed. Please try again."
     },
     "nav": {
       "dashboard": "Dashboard",

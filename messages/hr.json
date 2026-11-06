@@ -94,7 +94,41 @@
     },
     "reviews": "recenzija",
     "addedToCart": "Dodano!",
-    "lowestPrice30Days": "Najniža cijena u posljednjih 30 dana: {price}"
+    "lowestPrice30Days": "Najniža cijena u posljednjih 30 dana: {price}",
+    "stock": {
+      "inStock": "Na zalihi",
+      "lowStock": "{count, plural, one {Još samo # komad} few {Još samo # komada} other {Još samo # komada}}",
+      "unavailable": "Trenutno nedostupno"
+    },
+    "quantity": {
+      "label": "Količina",
+      "decrease": "Smanji količinu",
+      "increase": "Povećaj količinu"
+    },
+    "delivery": {
+      "beforeCutoff": "Naručite do {cutoff} i očekujte isporuku:",
+      "afterCutoff": "Naručite danas i očekujte isporuku:",
+      "range": "{from} – {to}",
+      "note": "Procjena za dostavu unutar Hrvatske, ovisno o načinu dostave."
+    },
+    "specs": {
+      "brand": "Proizvođač",
+      "material": "Materijal",
+      "dimensions": "Dimenzije",
+      "ageRange": "Dob",
+      "certifications": "Oznake i certifikati",
+      "care": "Održavanje",
+      "allCertified": "Svi proizvodi u paketu nose oznaku: {list}"
+    },
+    "gallery": {
+      "previous": "Prethodna slika",
+      "next": "Sljedeća slika",
+      "goTo": "Prikaži sliku {index}",
+      "thumbnails": "Slike proizvoda"
+    },
+    "related": {
+      "title": "Pogledajte i ostale pakete"
+    }
   },
   "cart": {
     "title": "Vaša košarica",
@@ -725,7 +759,21 @@
       "descriptionEn": "Opis (EN)",
       "names": "Nazivi",
       "edit": "Uredi",
-      "save": "Spremi"
+      "save": "Spremi",
+      "specs": "Specifikacije",
+      "specsHint": "Prikazuju se na stranici paketa. Prazna polja se ne prikazuju. Unosite samo provjerene podatke.",
+      "brand": "Proizvođač / marka",
+      "materialHr": "Materijal (HR)",
+      "materialEn": "Materijal (EN)",
+      "dimensions": "Dimenzije",
+      "ageRangeHr": "Dob (HR)",
+      "ageRangeEn": "Dob (EN)",
+      "certifications": "Oznake i certifikati",
+      "certificationsHint": "Odvojite zarezom, npr. CE, EN 71-3",
+      "careHr": "Održavanje (HR)",
+      "careEn": "Održavanje (EN)",
+      "noSpecs": "Specifikacije još nisu unesene.",
+      "saveError": "Spremanje nije uspjelo. Pokušajte ponovno."
     },
     "nav": {
       "dashboard": "Kontrolna ploča",
