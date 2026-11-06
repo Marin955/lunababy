@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
 import { useAuthStore } from '@/stores/auth-store';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
+import { SHOP_HREF } from '@/lib/constants';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface MobileMenuProps {
 }
 
 const navLinks = [
+  { key: 'shop', href: SHOP_HREF },
   { key: 'home', href: '/' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
@@ -55,6 +57,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     <div
+      id="mobile-menu"
+      inert={!isOpen}
       className={`
         fixed inset-0 z-[60] transition-opacity duration-300
         ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}
@@ -121,11 +125,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <Link
                       href={href}
                       onClick={onClose}
+                      aria-current={isActive ? 'page' : undefined}
                       className={`
                         block py-3 px-3 text-lg font-medium rounded-[--radius-sm] transition-colors duration-200 border-b border-gray-50
                         ${isActive
-                          ? 'text-teal-deep bg-teal-pale/50'
-                          : 'text-text-dark hover:text-teal-deep hover:bg-teal-pale/30'
+                          ? 'text-[var(--color-teal-ink,#3F7C87)] bg-teal-pale/50'
+                          : 'text-text-dark hover:text-[var(--color-teal-ink,#3F7C87)] hover:bg-teal-pale/30'
                         }
                       `}
                     >
@@ -154,14 +159,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <Link
                   href="/profile"
                   onClick={onClose}
-                  className="block py-3 px-3 text-lg font-medium text-text-dark hover:text-teal-deep hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
+                  className="block py-3 px-3 text-lg font-medium text-text-dark hover:text-[var(--color-teal-ink,#3F7C87)] hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
                 >
                   {user?.name || tAuth('profile')}
                 </Link>
                 <button
                   type="button"
                   onClick={() => { signOutAction(); onClose(); }}
-                  className="w-full text-left py-3 px-3 text-lg font-medium text-text-light hover:text-red-500 hover:bg-red-50 rounded-[--radius-sm] transition-colors duration-200 cursor-pointer"
+                  className="w-full text-left py-3 px-3 text-lg font-medium text-text-mid hover:text-red-600 hover:bg-red-50 rounded-[--radius-sm] transition-colors duration-200 cursor-pointer"
                 >
                   {tAuth('signOut')}
                 </button>
@@ -170,7 +175,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link
                 href="/signin"
                 onClick={onClose}
-                className="block py-3 px-3 text-lg font-medium text-teal-deep hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
+                className="block py-3 px-3 text-lg font-medium text-[var(--color-teal-ink,#3F7C87)] hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
               >
                 {tAuth('signIn')}
               </Link>
@@ -180,7 +185,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <Link
               href="/cart"
               onClick={onClose}
-              className="flex items-center gap-3 py-3 px-3 text-lg font-medium text-text-dark hover:text-teal-deep hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
+              className="flex items-center gap-3 py-3 px-3 text-lg font-medium text-text-dark hover:text-[var(--color-teal-ink,#3F7C87)] hover:bg-teal-pale/30 rounded-[--radius-sm] transition-colors duration-200"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +203,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               </svg>
               <span>{tCart('title')}</span>
               {isHydrated && totalItems > 0 && (
-                <span className="ml-auto min-w-[24px] h-6 px-1.5 flex items-center justify-center bg-teal-deep text-white text-xs font-semibold rounded-full">
+                <span className="ml-auto min-w-[24px] h-6 px-1.5 flex items-center justify-center bg-[var(--color-teal-ink,#3F7C87)] text-white text-xs font-semibold rounded-full">
                   {totalItems}
                 </span>
               )}

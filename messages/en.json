@@ -1,6 +1,7 @@
 {
   "common": {
     "nav": {
+      "shop": "Bundles",
       "home": "Home",
       "about": "About Us",
       "contact": "Contact",
@@ -85,7 +86,21 @@
     "title": "All Bundles",
     "subtitle": "Discover our hand-picked bundles for your baby",
     "itemsIncluded": "Items Included",
-    "addedToCart": "Added to cart!"
+    "addedToCart": "Added to cart!",
+    "intro": "Thoughtfully put-together bundles for everyday life with your baby – everything you need, in one order.",
+    "metaTitle": "Baby bundles | LunaBaby",
+    "metaDescription": "Browse all LunaBaby baby bundles and pick the one you need. Secure payment and easy returns.",
+    "empty": "No bundles are available right now.",
+    "loadError": "We can't load the bundles right now. Please try again in a moment.",
+    "trust": {
+      "label": "Why shop with us",
+      "shippingTitle": "Free delivery from {amount}",
+      "shippingDesc": "On orders within Croatia",
+      "returnsTitle": "30-day returns",
+      "returnsDesc": "Extends your 14-day legal right of withdrawal",
+      "paymentTitle": "Secure payment",
+      "paymentDesc": "Card, Apple Pay, Google Pay and more, via Stripe"
+    }
   },
   "bundle": {
     "backToShop": "Back to Shop",
@@ -122,7 +137,25 @@
     "promoMinOrder": "Minimum order amount: €{amount}",
     "quantity": "Quantity",
     "remove": "Remove",
-    "freeShippingNote": "Free standard shipping on orders over €50!"
+    "iconLabel": "Cart, {count, plural, =0 {empty} one {# item} other {# items}}",
+    "decrease": "Decrease quantity: {name}",
+    "increase": "Increase quantity: {name}",
+    "removeItem": "Remove from cart: {name}",
+    "loadError": "We can't load prices right now. Refresh the page or try again in a moment.",
+    "freeShipping": {
+      "remaining": "Add {amount} more for free delivery",
+      "reached": "You've unlocked free delivery!",
+      "label": "Progress towards free delivery",
+      "threshold": "Free delivery on orders from {amount}"
+    }
+  },
+  "miniCart": {
+    "title": "Added to cart",
+    "announce": "{name} (×{quantity}) added to your cart",
+    "quantity": "Quantity: {quantity}",
+    "subtotal": "Subtotal ({count, plural, one {# item} other {# items}})",
+    "checkout": "Checkout",
+    "viewCart": "View cart"
   },
   "checkout": {
     "title": "Checkout",

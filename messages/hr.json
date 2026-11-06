@@ -1,6 +1,7 @@
 {
   "common": {
     "nav": {
+      "shop": "Paketi",
       "home": "Početna",
       "about": "O nama",
       "contact": "Kontakt",
@@ -85,7 +86,21 @@
     "title": "Svi paketi",
     "subtitle": "Otkrijte naše ručno birane pakete za vašu bebu",
     "itemsIncluded": "Uključeni proizvodi",
-    "addedToCart": "Dodano u košaricu!"
+    "addedToCart": "Dodano u košaricu!",
+    "intro": "Pažljivo složeni paketi za svakodnevicu s bebom – sve što vam treba, u jednoj narudžbi.",
+    "metaTitle": "Paketi za bebe | LunaBaby",
+    "metaDescription": "Pregledajte sve LunaBaby pakete za bebe i odaberite onaj koji vam treba. Sigurno plaćanje i jednostavan povrat.",
+    "empty": "Trenutno nema dostupnih paketa.",
+    "loadError": "Paketi se trenutno ne mogu učitati. Pokušajte ponovno za nekoliko trenutaka.",
+    "trust": {
+      "label": "Zašto kupovati kod nas",
+      "shippingTitle": "Besplatna dostava od {amount}",
+      "shippingDesc": "Za narudžbe unutar Hrvatske",
+      "returnsTitle": "30 dana za povrat",
+      "returnsDesc": "Produljujemo zakonsko pravo na raskid od 14 dana",
+      "paymentTitle": "Sigurno plaćanje",
+      "paymentDesc": "Kartica, Apple Pay, Google Pay i drugi načini, putem Stripea"
+    }
   },
   "bundle": {
     "backToShop": "Povratak u trgovinu",
@@ -122,7 +137,25 @@
     "promoMinOrder": "Minimalni iznos narudžbe: €{amount}",
     "quantity": "Količina",
     "remove": "Ukloni",
-    "freeShippingNote": "Besplatna standardna dostava za narudžbe iznad €50!"
+    "iconLabel": "Košarica, {count, plural, =0 {prazna} one {# artikl} few {# artikla} other {# artikala}}",
+    "decrease": "Smanji količinu: {name}",
+    "increase": "Povećaj količinu: {name}",
+    "removeItem": "Ukloni iz košarice: {name}",
+    "loadError": "Cijene se trenutno ne mogu učitati. Osvježite stranicu ili pokušajte ponovno za nekoliko trenutaka.",
+    "freeShipping": {
+      "remaining": "Još {amount} do besplatne dostave",
+      "reached": "Ostvarili ste besplatnu dostavu!",
+      "label": "Napredak do besplatne dostave",
+      "threshold": "Besplatna dostava za narudžbe od {amount}"
+    }
+  },
+  "miniCart": {
+    "title": "Dodano u košaricu",
+    "announce": "{name} ({quantity} kom.) dodano je u košaricu",
+    "quantity": "Količina: {quantity}",
+    "subtotal": "Međuzbroj ({count, plural, one {# artikl} few {# artikla} other {# artikala}})",
+    "checkout": "Na blagajnu",
+    "viewCart": "Pogledaj košaricu"
   },
   "checkout": {
     "title": "Blagajna",

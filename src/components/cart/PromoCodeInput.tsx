@@ -69,14 +69,14 @@ export default function PromoCodeInput({ locale, cartTotal, onValidated }: Promo
 
   return (
     <div className="space-y-3">
-      <label className="block text-sm font-medium text-text-dark">
+      <label htmlFor="promo-code" className="block text-sm font-medium text-text-dark">
         {t('promoCode')}
       </label>
 
       {activePromo || promoCode ? (
         <div className="flex items-center justify-between bg-teal-pale/50 border border-teal/20 rounded-[--radius-sm] px-4 py-3">
           <div>
-            <span className="font-semibold text-teal-deep text-sm">
+            <span className="font-semibold text-[var(--color-teal-ink,#3F7C87)] text-sm">
               {activePromo?.code || promoCode}
             </span>
             {activePromo?.label && (
@@ -88,7 +88,7 @@ export default function PromoCodeInput({ locale, cartTotal, onValidated }: Promo
           <button
             type="button"
             onClick={handleRemove}
-            className="text-sm text-text-mid hover:text-red-500 transition-colors font-medium cursor-pointer"
+            className="min-h-[44px] px-2 text-sm text-text-mid hover:text-red-600 transition-colors font-medium cursor-pointer"
           >
             {t('promoRemove')}
           </button>
@@ -96,7 +96,9 @@ export default function PromoCodeInput({ locale, cartTotal, onValidated }: Promo
       ) : (
         <div className="flex gap-2">
           <input
+            id="promo-code"
             type="text"
+            autoComplete="off"
             value={inputValue}
             onChange={(e) => {
               setInputValue(e.target.value);
@@ -106,13 +108,13 @@ export default function PromoCodeInput({ locale, cartTotal, onValidated }: Promo
             placeholder={t('promoPlaceholder')}
             disabled={loading}
             className={`
-              flex-1 px-4 py-2.5
+              flex-1 min-w-0 px-4 min-h-[44px]
               rounded-[--radius-sm]
               border bg-white
               focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal
               transition-all
               font-body text-text-dark text-sm
-              placeholder:text-text-light
+              placeholder:text-text-mid
               ${error ? 'border-red-400' : 'border-gray-200'}
               ${loading ? 'opacity-50' : ''}
             `}
@@ -121,15 +123,15 @@ export default function PromoCodeInput({ locale, cartTotal, onValidated }: Promo
             type="button"
             onClick={handleApply}
             disabled={loading}
-            className="px-5 py-2.5 bg-teal-deep text-white text-sm font-semibold rounded-[--radius-sm] hover:bg-teal transition-colors cursor-pointer shrink-0 disabled:opacity-50"
+            className="px-5 min-h-[44px] bg-[var(--color-teal-ink,#3F7C87)] text-white text-sm font-semibold rounded-[--radius-sm] hover:opacity-90 transition-opacity cursor-pointer shrink-0 disabled:opacity-50"
           >
             {loading ? '...' : t('promoApply')}
           </button>
         </div>
       )}
 
-      {error && <p className="text-red-500 text-xs">{error}</p>}
-      {success && <p className="text-teal-deep text-xs font-medium">{success}</p>}
+      {error && <p className="text-red-600 text-sm" role="alert">{error}</p>}
+      {success && <p className="text-[var(--color-teal-ink,#3F7C87)] text-sm font-medium" role="status">{success}</p>}
     </div>
   );
 }
