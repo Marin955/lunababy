@@ -38,7 +38,7 @@ export default function Newsletter() {
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
-      <div className="rounded-[--radius-lg] bg-gradient-to-br from-teal-light/30 to-lavender-light/40 p-8 sm:p-12 lg:p-16">
+      <div className="rounded-lg bg-gradient-to-br from-teal-light/30 to-lavender-light/40 p-8 sm:p-12 lg:p-16">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-text-dark mb-4">
             {t('title')}
@@ -53,7 +53,7 @@ export default function Newsletter() {
               <div className="w-14 h-14 bg-teal-pale rounded-full flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 text-teal-deep"
+                  className="h-7 w-7 text-teal-ink"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -66,7 +66,7 @@ export default function Newsletter() {
                   />
                 </svg>
               </div>
-              <p className="text-teal-deep font-medium">
+              <p className="text-teal-ink font-semibold">
                 {t('success')}
               </p>
             </div>
@@ -88,9 +88,11 @@ export default function Newsletter() {
                     }
                   }}
                   placeholder={t('placeholder')}
+                  aria-label={t('placeholder')}
+                  autoComplete="email"
                   disabled={status === 'loading'}
                   className={`
-                    flex-1 px-4 py-3 rounded-[--radius-sm] border bg-white
+                    flex-1 min-h-11 px-4 py-3 rounded-sm border bg-white
                     focus:outline-none focus:ring-2 focus:ring-teal/30 focus:border-teal
                     transition-all font-body text-text-dark placeholder:text-text-light
                     ${status === 'error' ? 'border-red-400' : 'border-gray-200'}
@@ -100,17 +102,17 @@ export default function Newsletter() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="px-6 py-3 bg-teal-deep text-white font-semibold rounded-[--radius-sm] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300 cursor-pointer whitespace-nowrap disabled:opacity-50"
+                  className="min-h-11 px-6 py-3 bg-teal-ink text-white font-semibold rounded-sm hover:bg-teal-ink-hover shadow-sm hover:shadow-md hover:-translate-y-0.5 motion-reduce:hover:translate-y-0 transition-all duration-200 cursor-pointer whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink focus-visible:ring-offset-2 disabled:opacity-50"
                 >
                   {status === 'loading' ? '...' : tCommon('buttons.subscribe')}
                 </button>
               </form>
 
               {errorMessage && (
-                <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
+                <p className="text-red-700 text-sm mt-3" role="alert">{errorMessage}</p>
               )}
 
-              <p className="text-xs text-text-light mt-4">
+              <p className="text-[13px] text-text-light mt-4">
                 {t('privacyNote')}
               </p>
             </>
