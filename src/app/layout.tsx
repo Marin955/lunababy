@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Playfair_Display, Quicksand } from 'next/font/google';
 import './globals.css';
+import { SITE_URL } from '@/lib/site-metadata';
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -12,15 +13,18 @@ const playfairDisplay = Playfair_Display({
 
 const quicksand = Quicksand({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  // 500 is the body weight; 600/700 for UI emphasis. 300 was unused.
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 });
 
+// Fallback only: every page renders under [locale]/layout.tsx, whose localized
+// generateMetadata overrides title, description and social cards.
 export const metadata: Metadata = {
-  title: 'LunaBaby — Nježna njega za vašeg malog mjesečevog zraka',
-  description:
-    'Pažljivo odabrani dječji proizvodi za moderne roditelje. Organski, sigurni i lijepo dizajnirani.',
+  metadataBase: new URL(SITE_URL),
+  title: 'LunaBaby — Nježni paketi za bebe',
+  description: 'Pažljivo složeni paketi dječjih proizvoda za nove roditelje i poklone.',
   icons: {
     icon: '/favicon.svg',
   },

@@ -42,7 +42,7 @@
       "title": "Nježna njega za vašu malu zvjezdicu",
       "subtitle": "Otkrijte naše ručno birane pakete vrhunskih proizvoda za bebe — savršeni za poklon ili prvi set za nove roditelje.",
       "cta": "Istražite pakete",
-      "trustBadge1": "Besplatna dostava iznad €50",
+      "trustBadge1": "Besplatna dostava iznad 50 €",
       "trustBadge2": "30 dana povrata",
       "trustBadge3": "Sigurno plaćanje",
       "bestSeller": "Najprodavanije",
@@ -430,13 +430,17 @@
     "goHome": "Povratak na početnu"
   },
   "metadata": {
+    "site": {
+      "title": "LunaBaby — Nježni paketi za bebe",
+      "description": "Pažljivo složeni paketi dječjih proizvoda za spavanje, kupanje i hranjenje. Savršen poklon za nove roditelje, s besplatnom dostavom iznad 50 €."
+    },
     "home": {
       "title": "LunaBaby - Nježni paketi za bebe | Poklon setovi",
-      "description": "Otkrijte LunaBaby ručno birane pakete sigurnih, organskih i testiranih proizvoda za bebe. Savršeni pokloni za nove roditelje."
+      "description": "Otkrijte LunaBaby pakete pažljivo odabranih proizvoda za bebe — za spavanje, kupanje i hranjenje. Savršen poklon za nove roditelje."
     },
     "shop": {
       "title": "Trgovina | LunaBaby",
-      "description": "Pregledajte našu kolekciju pažljivo biranih paketa za bebe. Organski materijali, sigurni proizvodi, besplatna dostava iznad €50."
+      "description": "Pregledajte LunaBaby pakete za bebe: pažljivo odabrani proizvodi za spavanje, kupanje i hranjenje. Besplatna dostava iznad 50 €."
     },
     "bundle": {
       "titleSuffix": " | LunaBaby"

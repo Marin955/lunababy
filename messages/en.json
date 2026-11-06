@@ -430,13 +430,17 @@
     "goHome": "Back to Home"
   },
   "metadata": {
+    "site": {
+      "title": "LunaBaby — Gentle Baby Bundles",
+      "description": "Thoughtfully put-together bundles of baby products for sleep, bath time and feeding. The perfect gift for new parents, with free shipping over €50."
+    },
     "home": {
       "title": "LunaBaby - Gentle Baby Bundles | Gift Sets",
-      "description": "Discover LunaBaby hand-picked bundles of safe, organic, and tested baby products. Perfect gifts for new parents."
+      "description": "Discover LunaBaby bundles of carefully chosen baby products for sleep, bath time and feeding. The perfect gift for new parents."
     },
     "shop": {
       "title": "Shop | LunaBaby",
-      "description": "Browse our collection of carefully curated baby bundles. Organic materials, safe products, free shipping over €50."
+      "description": "Browse LunaBaby baby bundles: carefully chosen products for sleep, bath time and feeding. Free shipping over €50."
     },
     "bundle": {
       "titleSuffix": " | LunaBaby"
