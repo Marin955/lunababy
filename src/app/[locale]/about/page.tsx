@@ -25,6 +25,9 @@ export default async function AboutPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations('about');
 
+  // Claims here and in home.whyUs stay deliberately general ("carefully chosen", "trusted suppliers") because
+  // per-product certifications and materials aren't recorded yet. Once WS-D's product data (brand, material,
+  // certifications) is filled in for every item, these can be strengthened, e.g. "All products CE-marked".
   const values = [
     {
       key: 'value1' as const,

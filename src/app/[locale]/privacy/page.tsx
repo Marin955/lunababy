@@ -1,5 +1,6 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { company } from '@/lib/company';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -59,6 +60,13 @@ export default async function PrivacyPage({ params }: Props) {
     },
   ];
 
+  // The controller is only named once the owner has filled in the legal entity (spec 005, O1).
+  const controllerLines = company.legalName
+    ? [company.legalName, company.oib ? `OIB: ${company.oib}` : null, company.address, company.email].filter(
+        (line): line is string => Boolean(line)
+      )
+    : [];
+
   return (
     <div>
       {/* Header */}
@@ -67,7 +75,7 @@ export default async function PrivacyPage({ params }: Props) {
           <h1 className="font-heading text-4xl font-bold text-text-dark mb-4">
             {t('title')}
           </h1>
-          <p className="font-body text-sm text-text-light">
+          <p className="font-body text-sm text-text-mid">
             {t('lastUpdated')}
           </p>
         </div>
@@ -78,6 +86,21 @@ export default async function PrivacyPage({ params }: Props) {
         <p className="font-body text-text-mid leading-relaxed">
           {t('intro')}
         </p>
+        {controllerLines.length > 0 && (
+          <div className="mt-8">
+            <h2 className="font-heading text-2xl font-semibold text-text-dark mb-3">
+              {t('controller.title')}
+            </h2>
+            <p className="font-body text-text-mid leading-relaxed mb-2">{t('controller.description')}</p>
+            <address className="not-italic font-body text-text-mid leading-relaxed">
+              {controllerLines.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
+            </address>
+          </div>
+        )}
       </section>
 
       {/* Sections with lists */}
@@ -155,13 +178,15 @@ export default async function PrivacyPage({ params }: Props) {
           <p className="font-body text-text-mid leading-relaxed mb-3">
             {t('contact.description')}
           </p>
-          <a
-            href={`mailto:${t('contact.email')}`}
-            className="inline-block font-body text-teal-deep font-semibold hover:underline mb-4"
-          >
-            {t('contact.email')}
-          </a>
-          <p className="font-body text-sm text-text-light leading-relaxed">
+          {company.email && (
+            <a
+              href={`mailto:${company.email}`}
+              className="inline-flex min-h-11 items-center font-body text-teal-deep font-semibold hover:underline mb-2"
+            >
+              {company.email}
+            </a>
+          )}
+          <p className="font-body text-sm text-text-mid leading-relaxed">
             {t('contact.note')}
           </p>
         </div>

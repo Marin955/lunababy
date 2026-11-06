@@ -8,7 +8,8 @@
       "shippingInfo": "Shipping",
       "returns": "Returns",
       "privacy": "Privacy",
-      "trackOrder": "Track Order"
+      "trackOrder": "Track Order",
+      "terms": "Terms of Sale"
     },
     "buttons": {
       "addToCart": "Add to Cart",
@@ -24,11 +25,17 @@
       "close": "Close"
     },
     "footer": {
-      "description": "Thoughtfully put-together bundles of safe, quality baby products — everything you need, in one place.",
+      "description": "Thoughtfully put-together bundles of quality baby products — everything you need, in one place.",
       "copyright": "© 2026 LunaBaby. All rights reserved.",
       "helpLinks": "Help",
       "companyLinks": "Company",
-      "socialFollow": "Follow Us"
+      "socialFollow": "Follow Us",
+      "legalLinks": "Legal",
+      "contactTitle": "Contact",
+      "withdrawal": "Right of withdrawal (14 days)",
+      "disputes": "Dispute resolution",
+      "paymentMethods": "Payment methods",
+      "oib": "OIB (tax no.): {value}"
     },
     "currency": "€",
     "language": {
@@ -65,12 +72,12 @@
       "title": "Why LunaBaby?",
       "freeShipping": "Free Shipping",
       "freeShippingDesc": "On all orders over €50 in Croatia",
-      "organic": "Organic Materials",
-      "organicDesc": "Only natural, safe materials for your baby",
+      "organic": "Carefully Chosen Products",
+      "organicDesc": "We pick every item in our bundles with a focus on quality and gentle materials",
       "easyReturns": "Easy Returns",
       "easyReturnsDesc": "30 days for exchange or refund",
-      "safeTested": "Safe & Tested",
-      "safeTestedDesc": "All products certified to EU standards"
+      "safeTested": "Trusted Suppliers",
+      "safeTestedDesc": "We source our products only from suppliers we trust"
     },
     "freeDeliveryBar": "Free delivery on orders over €50"
   },
@@ -181,16 +188,16 @@
   "about": {
     "title": "About Us",
     "heroTitle": "Gentleness in Every Detail",
-    "heroSubtitle": "We carefully choose every product in our bundles, with a focus on safety and natural materials.",
+    "heroSubtitle": "We carefully choose every product in our bundles, with a focus on safety and quality.",
     "ourValues": {
       "title": "Our Values",
       "value1": {
         "title": "Safety First",
-        "description": "All our products are certified to EU safety standards. We make no compromises when it comes to our children."
+        "description": "When it comes to babies, we make no compromises. We source the products in our bundles from trusted suppliers and choose them with safety in mind."
       },
       "value2": {
-        "title": "Organic & Natural Materials",
-        "description": "We prioritize organic cotton, natural materials, and products free from harmful chemicals. Your baby's delicate skin deserves only the best."
+        "title": "Gentle Materials",
+        "description": "We favour soft materials that are kind to a baby's sensitive skin, and products that are easy to look after."
       }
     }
   },
@@ -199,145 +206,134 @@
     "items": [
       {
         "question": "How do I place an order?",
-        "answer": "Ordering is simple! Select your desired bundle, add it to your cart, and follow the steps to complete your order. You'll need to enter your delivery details and choose a payment method. After confirming your order, you'll receive an email with the details and a tracking number."
+        "answer": "Ordering is simple: choose a bundle, add it to your cart and follow the steps at checkout. Enter your delivery details, pick a shipping method and pay. You'll get an email confirming your order, and we'll send a tracking number as soon as your parcel is on its way."
       },
       {
         "question": "What payment methods do you accept?",
-        "answer": "We accept Visa, Mastercard, Maestro and American Express cards, as well as Apple Pay and Google Pay. Payments are processed securely by Stripe, and your card details never pass through our servers."
+        "answer": "Payments are processed by Stripe. We accept Visa, Mastercard, Maestro and American Express cards, as well as Apple Pay, Google Pay, Revolut Pay and PayPal. Your card details never pass through our servers."
       },
       {
         "question": "How long does delivery take?",
-        "answer": "Standard delivery within Croatia takes 3-5 business days. Express delivery is available for 1-2 business days at an additional cost. Orders placed before 2:00 PM on business days are shipped the same day."
+        "answer": "Standard delivery within Croatia usually takes 3–5 business days; express and parcel locker delivery take 1–2 business days. Orders placed by 2:00 PM on a business day ship the same day. Exact times for each method are on our Shipping page."
       },
       {
         "question": "How much does shipping cost?",
-        "answer": "Standard shipping costs €3.99 for orders within Croatia. For orders over €50, standard shipping is completely free! Express shipping costs €7.99, and parcel locker pickup is €2.99. For orders over €50, parcel locker pickup is also free."
+        "answer": "The shipping cost depends on the method you choose and is always shown at checkout before you pay. For orders over €50, standard delivery and parcel locker pickup are free. All prices are listed on our Shipping page."
       },
       {
         "question": "Do you ship internationally?",
-        "answer": "We currently deliver throughout Croatia, including the islands. We are working on expanding delivery to neighbouring countries (Slovenia, Bosnia and Herzegovina, Serbia) and expect to offer international shipping soon. Subscribe to our newsletter to be the first to know when we launch international delivery."
+        "answer": "We currently deliver throughout Croatia, including the islands. Delivery to other countries isn't available yet — subscribe to our newsletter and we'll let you know when that changes."
       },
       {
         "question": "What is your return policy?",
-        "answer": "We offer 30 days for returns or exchanges from the date of receiving your order. Products must be unused, in their original packaging, and with tags attached. Refunds are processed within 7 business days of receiving the returned product. Return shipping costs are covered by the customer, unless the error was on our end."
+        "answer": "You have a legal right to withdraw from the purchase within 14 days of receiving your parcel, without giving a reason. On top of that, we offer a voluntary 30-day return or exchange for unused products in their original packaging. We refund you within 14 days of receiving your withdrawal notice. Return shipping is paid by you unless the mistake was ours. Full details are in our Terms of Sale."
       },
       {
         "question": "How do I return a product?",
-        "answer": "To initiate a return, contact us via email at info@lunababy.eu or call us at (+385) 95 7178 891. Our team will send you instructions and a return label. Package the product in its original packaging and hand it to the courier service. We'll track the status of your return and notify you once it has been processed."
+        "answer": "Email us at {email} or call {phone} and include your order number. You can use the withdrawal form in our Terms of Sale, but you don't have to. We'll send you the return address. Pack the product, ideally in its original packaging, and send it no later than 14 days after your withdrawal notice. We'll let you know once your return has been processed."
       },
       {
         "question": "Can I customize the bundle contents?",
-        "answer": "We currently offer pre-assembled bundles that have been carefully designed for different needs and age groups. Each bundle is put together based on paediatrician recommendations and the experience of hundreds of parents. If you have special requirements or requests, contact us and we'll do our best to find the right solution for you."
+        "answer": "We currently offer ready-made bundles for feeding, bath time and sleep. If you have special requests, get in touch and we'll do our best to find a solution for you."
       }
     ]
   },
   "shippingPage": {
     "title": "Shipping Information",
-    "intro": "At LunaBaby, we want your packages to arrive quickly, safely, and in perfect condition. Here you'll find all the information about shipping methods, delivery times, and costs.",
+    "intro": "We want your parcel to arrive quickly, safely and undamaged. Here are all our shipping methods, delivery times and prices.",
     "methods": {
       "title": "Shipping Methods",
-      "standard": {
-        "name": "Standard Shipping",
-        "time": "3-5 business days",
-        "price": "€3.99",
-        "freeAbove": "Free for orders over €50",
-        "description": "Reliable delivery via Croatian Post or GLS courier service to your home address."
-      },
-      "express": {
-        "name": "Express Shipping",
-        "time": "1-2 business days",
-        "price": "€7.99",
-        "description": "Fast delivery via GLS courier service for urgent orders. Orders placed before 2:00 PM are shipped the same day."
-      },
-      "pickup": {
-        "name": "Parcel Locker Pickup",
-        "time": "2-4 business days",
-        "price": "€2.99",
-        "freeAbove": "Free for orders over €50",
-        "description": "Pick up your package from the nearest BoxNow or DPD parcel locker at a time that suits you."
-      }
+      "days": "{range} business {upper, plural, one {day} other {days}}",
+      "freeAbove": "Free for orders over {amount}",
+      "carrier": "Carrier: {carrier}",
+      "checkoutNote": "The shipping cost for your order is always shown at checkout before you pay.",
+      "unavailable": "We can't load shipping methods right now. Prices and delivery times are always shown at checkout before you pay."
     },
     "freeShipping": {
       "title": "Free Shipping",
-      "description": "Enjoy free standard shipping on all orders over €50 within Croatia. Free shipping is applied automatically at checkout — no promo code needed."
+      "description": "For orders over {amount} within Croatia, shipping is free for: {methods}. The discount is applied automatically at checkout — no promo code needed."
     },
     "deliveryAreas": {
       "title": "Delivery Areas",
-      "description": "We deliver throughout the entire Republic of Croatia, including all islands. Delivery to islands may take 1-2 business days longer than the stated timeframes. For island addresses, we recommend standard shipping as express delivery is limited to mainland addresses.",
-      "international": "International shipping is not currently available. We are working on expanding our service to neighbouring countries. Subscribe to our newsletter for updates."
+      "description": "We deliver throughout the Republic of Croatia, including the islands. Delivery to the islands may take 1–2 business days longer than stated. For island addresses we recommend standard delivery, as express delivery is limited to the mainland.",
+      "international": "Delivery to other countries isn't available yet. Subscribe to our newsletter and we'll let you know when that changes."
     },
     "packaging": {
-      "title": "Packaging & Protection",
-      "description": "Every LunaBaby package is packed with special care. We use eco-friendly packaging materials — recycled cardboard, biodegradable protective material, and paper tape. Our packages are designed to be both functional and beautiful — perfect as a gift without the need for additional wrapping."
+      "title": "Packaging",
+      "description": "We pack every order with care so it arrives undamaged. Our boxes are designed so the bundle is ready to give as a gift, with no extra wrapping needed."
     },
     "tracking": {
       "title": "Shipment Tracking",
-      "description": "After your order is shipped, you'll receive an email with a tracking number. You can track the status of your order in real time via the link in the email."
+      "description": "Once your order ships, you'll receive an email with a tracking number. You can also check your order status on our Track Order page."
     }
   },
   "returnsPage": {
     "title": "Returns Policy",
     "overview": {
-      "title": "Returns Policy Overview",
-      "description": "At LunaBaby, we want you to be completely satisfied with your purchase. If for any reason you're not happy, we offer a simple and transparent return process within 30 days of receiving your order."
+      "title": "Overview",
+      "description": "We want you to be completely happy with your purchase. That's why, on top of your legal 14-day right of withdrawal, we offer a voluntary 30-day return or exchange. The voluntary period is in addition to your legal right and doesn't limit it in any way."
+    },
+    "legal": {
+      "title": "Your legal right of withdrawal (14 days)",
+      "description": "You can withdraw from the contract without giving a reason within 14 days of receiving your parcel. You may open and examine the product as far as needed to establish its nature, characteristics and functioning. We refund your money, including the standard delivery cost, no later than 14 days after receiving your withdrawal notice.",
+      "link": "Full details and the withdrawal form are in our <link>Terms of Sale</link>."
     },
     "conditions": {
-      "title": "Return Conditions",
+      "title": "Voluntary return conditions (up to 30 days)",
+      "note": "These conditions apply to returns after the legal 14-day period. During the first 14 days, the legal rules above apply.",
       "items": [
-        "The product must be returned within 30 days of receiving your order.",
+        "Tell us about the return within 30 days of receiving your order.",
         "The product must be unused and in its original packaging.",
         "All original tags and labels must be intact.",
-        "The product must not have been washed, worn, or used in any way.",
-        "A receipt or order confirmation must be included."
+        "The product must not have been washed, worn or used in any way.",
+        "Include your order number or receipt with the return."
       ]
     },
     "process": {
       "title": "Return Process",
       "steps": [
         {
-          "title": "Contact Us",
-          "description": "Send an email to info@lunababy.eu or call us at (+385) 95 7178 891. Include your order number and reason for return."
+          "title": "Get in touch",
+          "description": "Email us at {email} or call {phone} and include your order number. For a legal withdrawal you can use the form in our Terms of Sale, but you don't have to."
         },
         {
-          "title": "Receive Instructions",
-          "description": "Our team will send you a confirmation and return instructions within 24 hours, including the return address and label."
+          "title": "Receive instructions",
+          "description": "We'll reply with a confirmation and the address to send the product to."
         },
         {
-          "title": "Ship the Package",
-          "description": "Package the product in its original packaging and hand it to the courier service or drop it off at the nearest parcel locker."
+          "title": "Ship the package",
+          "description": "Pack the product, ideally in its original packaging, and send it no later than 14 days after contacting us."
         },
         {
-          "title": "Return Processing",
-          "description": "After receiving and inspecting the returned product, we'll process your return. You'll receive an email confirmation of the status."
+          "title": "Refund",
+          "description": "Once we've received and checked the product, we refund you and confirm by email."
         }
       ]
     },
     "refund": {
       "title": "Refunds",
-      "description": "Refunds are processed within 7 business days of receiving the returned product. Money is returned via the same payment method used for the order. For card payments, the refund may take an additional 3-5 business days depending on your bank.",
-      "shippingCosts": "Shipping costs are not refunded, unless the error was on our end (wrong product, damaged product, or product that doesn't match the description)."
+      "description": "We refund you without undue delay and no later than 14 days after receiving your withdrawal notice, using the same payment method you used for the purchase. We may hold the refund until we've received the product or proof that you've sent it. For card payments, your bank may need a few more business days before the amount shows in your account.",
+      "shippingCosts": "If you withdraw within the legal 14-day period, we also refund the cost of delivery to you, up to the price of our cheapest standard delivery. For voluntary returns after 14 days, delivery costs aren't refunded. Return shipping is paid by you unless the mistake was ours (wrong, damaged or faulty product) — in that case we cover all costs."
     },
     "exchange": {
-      "title": "Product Exchange",
-      "description": "If you'd like to exchange a product for a different bundle or size, contact us and we'll be happy to help. Exchanges are processed free of charge — we cover the shipping costs for the replacement product. Replacement products are shipped within 1-2 business days of receiving your return."
+      "title": "Exchanges",
+      "description": "If you'd like to swap your bundle for a different one, get in touch and we'll be happy to help. We cover the cost of sending the replacement, and ship it within 1–2 business days of receiving your return."
     },
     "exceptions": {
       "title": "Exceptions",
-      "description": "For hygiene reasons, we cannot accept returns of products that have been in direct contact with a child's skin and have been opened (e.g. creams, lotions, wet wipes). This exception does not affect your statutory consumer rights."
+      "description": "For health and hygiene reasons, the right of withdrawal does not apply to sealed products whose protective seal was opened after delivery, if this makes them unsuitable for return. This exception does not affect your rights if a product is faulty."
     }
   },
   "contactPage": {
     "title": "Contact Us",
-    "intro": "Have a question, suggestion, or need help with an order? Our team is here for you! Feel free to reach out through any of the channels below.",
+    "intro": "Have a question, a suggestion or need help with an order? Reach us by email, phone or the form below.",
     "email": {
       "label": "Email",
-      "value": "info@lunababy.eu",
-      "description": "For general enquiries"
+      "description": "General questions, orders and returns"
     },
     "phone": {
       "label": "Phone",
-      "value": "(+385) 95 7178 891",
-      "description": "Available on weekdays"
+      "description": "On business days"
     },
     "form": {
       "title": "Send Us a Message",
@@ -356,12 +352,16 @@
       "sendError": "Your message wasn’t sent. Please try again or email us at info@lunababy.eu.",
       "emailInvalid": "Please enter a valid email address."
     },
-    "responseTime": "We typically respond within 24 hours on business days."
+    "responseTime": "We typically respond within 24 hours on business days.",
+    "hours": {
+      "label": "Working hours"
+    },
+    "companyTitle": "Company details"
   },
   "privacyPage": {
     "title": "Privacy Policy",
     "intro": "At LunaBaby, we take the protection of your personal data seriously. This privacy policy explains what data we collect, how we use it, and what your rights are. Please read this policy carefully.",
-    "lastUpdated": "Last updated: February 2026.",
+    "lastUpdated": "Last updated: November 2026",
     "dataCollection": {
       "title": "Data Collection",
       "description": "We only collect data that is necessary for providing our services. This includes:",
@@ -376,9 +376,9 @@
       "title": "Cookies",
       "description": "Our website uses cookies to improve your experience. We use:",
       "items": [
-        "Essential cookies: required for the website to function, including the shopping cart and login. These cannot be disabled.",
-        "Analytics cookies: help us understand how you use our site so we can improve it. We use anonymised analytics.",
-        "Functional cookies: remember your preferences such as language and currency for a better user experience."
+        "Essential cookies: needed for the site to work, including the cart and sign-in. They cannot be switched off.",
+        "Analytics cookies: help us understand how you use the site so we can improve it. We only set them with your consent.",
+        "Functional cookies: remember your settings, such as language."
       ],
       "note": "We do not use advertising cookies or share data with advertising networks. You can manage cookies through your browser settings."
     },
@@ -398,7 +398,7 @@
       "description": "We do not sell or rent your personal data to third parties. We only share data with:",
       "items": [
         "Courier services: name, address, and phone number for delivery purposes.",
-        "Payment processors: payment data for secure transaction processing. We do not store your card details.",
+        "Stripe (payment processor): the data needed to process your payment securely. We don't store your card details.",
         "Hosting and IT services: trusted service providers who are contractually bound to protect your data."
       ]
     },
@@ -421,8 +421,11 @@
     "contact": {
       "title": "Data Protection Contact",
       "description": "For all questions regarding the protection of your personal data, please contact us at:",
-      "email": "info@lunababy.eu",
-      "note": "We will respond to your enquiry within 30 days, in accordance with legal requirements. If you believe your rights have not been respected, you have the right to file a complaint with the Croatian Personal Data Protection Agency (AZOP)."
+      "note": "We'll reply to your request within one month at the latest, as required by the GDPR. If you believe your rights have not been respected, you can lodge a complaint with the Croatian Personal Data Protection Agency (AZOP)."
+    },
+    "controller": {
+      "title": "Data controller",
+      "description": "The controller of your personal data is:"
     }
   },
   "errors": {
@@ -455,7 +458,7 @@
     },
     "about": {
       "title": "About Us | LunaBaby",
-      "description": "Meet LunaBaby — bundles of safe baby products made from natural materials."
+      "description": "Meet LunaBaby — thoughtfully put-together baby bundles for feeding, bath time and sleep."
     },
     "faq": {
       "title": "FAQ | LunaBaby",
@@ -463,11 +466,11 @@
     },
     "shipping": {
       "title": "Shipping | LunaBaby",
-      "description": "Information about shipping methods, delivery times, and costs. Free shipping on orders over €50."
+      "description": "Shipping methods, prices and delivery times for LunaBaby orders."
     },
     "returns": {
       "title": "Returns | LunaBaby",
-      "description": "LunaBaby returns policy. 30 days for returns or product exchanges."
+      "description": "14-day right of withdrawal plus a voluntary 30-day return or exchange policy at LunaBaby."
     },
     "contact": {
       "title": "Contact | LunaBaby",
@@ -500,6 +503,10 @@
     "admin": {
       "title": "Admin | LunaBaby",
       "description": "LunaBaby store administration."
+    },
+    "terms": {
+      "title": "Terms of Sale | LunaBaby",
+      "description": "Terms of sale at the LunaBaby online shop: ordering, prices, payment, delivery, right of withdrawal, complaints and dispute resolution."
     }
   },
   "auth": {
@@ -751,5 +758,117 @@
     "reject": "Essential only",
     "more": "Privacy details",
     "title": "Cookies"
+  },
+  "terms": {
+    "title": "Terms of Sale",
+    "lastUpdated": "Last updated: {date}",
+    "intro": "These terms apply to all purchases from the LunaBaby online shop (lunababy.eu). By placing an order you confirm that you have read and accept them. How we process your personal data is described in our <privacy>Privacy Policy</privacy>.",
+    "toc": "Contents",
+    "seller": {
+      "title": "Seller",
+      "intro": "The seller at the lunababy.eu online shop is:",
+      "labels": {
+        "legalName": "Name",
+        "oib": "OIB (tax no.)",
+        "address": "Registered address",
+        "register": "Registration",
+        "representative": "Responsible person",
+        "email": "Email",
+        "phone": "Phone",
+        "hours": "Working hours"
+      }
+    },
+    "ordering": {
+      "title": "Ordering and the contract",
+      "paragraphs": [
+        "Choose products in the shop and add them to your cart. At checkout you enter your contact and delivery details, choose a shipping method and see the total including shipping before you pay.",
+        "Before placing the order you can check and correct everything you entered. The contract is concluded when you place the order and your payment succeeds. We email you an order confirmation with all the details.",
+        "If a product turns out to be unavailable after you've ordered, we'll let you know straight away and refund the amount you paid."
+      ]
+    },
+    "prices": {
+      "title": "Prices",
+      "paragraphs": [
+        "All prices are in euros (EUR) and are final. Shipping is not included in product prices; it is shown at checkout before you pay.",
+        "When a price is reduced, we also show the lowest price of the product in the 30 days before the reduction.",
+        "Prices may change. Your order is charged at the price shown when you placed it."
+      ]
+    },
+    "payment": {
+      "title": "Payment",
+      "paragraphs": [
+        "You pay online when you order. Payments are processed by Stripe, a licensed payment service provider. You can pay by card (Visa, Mastercard, Maestro, American Express), Apple Pay, Google Pay, Revolut Pay or PayPal. Which methods are available may depend on your device and browser.",
+        "You enter your card details directly on Stripe's secure page. They never pass through our servers and we don't store them.",
+        "Your payment is taken when you pay. If we can't deliver your order, we refund the full amount to the same payment method."
+      ]
+    },
+    "delivery": {
+      "title": "Delivery",
+      "paragraphs": [
+        "We deliver to addresses in the Republic of Croatia. Shipping methods, prices and expected delivery times are listed on our <shipping>Shipping</shipping> page and at checkout.",
+        "The risk of loss or damage passes to you when you, or a person you name, receive the parcel.",
+        "Please check the packaging when you receive it. If it is damaged, tell the courier and contact us as soon as possible."
+      ]
+    },
+    "withdrawal": {
+      "title": "Right of withdrawal",
+      "paragraphs": [
+        "As a consumer, you have the right to withdraw from the contract within 14 days without giving any reason, under the Croatian Consumer Protection Act and Directive 2011/83/EU. The period starts on the day you, or a person you name (other than the carrier), receive the goods. If your order arrives in several parcels, it starts when you receive the last one.",
+        "To withdraw, send us a clear statement, for example by email to <mail>{email}</mail>. You can use the form below, but you don't have to. You meet the deadline if you send your statement before it expires.",
+        "After you withdraw, we refund everything you paid, including the cost of delivery to you (except any extra cost if you chose a delivery method more expensive than our cheapest standard delivery), without undue delay and no later than 14 days after we receive your statement. We use the same payment method you used, unless we expressly agree otherwise, and we don't charge any fee for the refund. We may hold the refund until we've received the goods or proof that you've sent them, whichever comes first.",
+        "Send the goods back without undue delay and no later than 14 days after you sent us your withdrawal statement. You pay the direct cost of returning the goods. You are only liable for any loss in value caused by handling beyond what was needed to establish their nature, characteristics and functioning.",
+        "The right of withdrawal does not apply to sealed goods that are not suitable for return for health protection or hygiene reasons if they were unsealed after delivery."
+      ],
+      "goodwill": {
+        "title": "Voluntary 30-day returns",
+        "text": "In addition to your legal right, we offer a voluntary 30-day period from delivery to return or exchange unused goods in their original packaging. It extends your legal right and doesn't replace it: during the first 14 days, the legal rules above always apply. Conditions and the process are described on our <returns>Returns</returns> page."
+      },
+      "form": {
+        "title": "Model withdrawal form",
+        "intro": "Fill in and send this form only if you want to withdraw from the contract. You can copy the text and paste it into an email.",
+        "copy": "Copy text",
+        "copied": "Copied",
+        "lines": [
+          "MODEL WITHDRAWAL FORM",
+          "To: {recipient}",
+          "I/We (*) hereby give notice that I/We (*) withdraw from my/our (*) contract of sale of the following goods:",
+          "Order number:",
+          "Ordered on (*) / received on (*):",
+          "Name of consumer(s):",
+          "Address of consumer(s):",
+          "Signature of consumer(s) (only if this form is sent on paper):",
+          "Date:",
+          "(*) Delete as appropriate."
+        ]
+      }
+    },
+    "warranty": {
+      "title": "Liability for defects and guarantees",
+      "paragraphs": [
+        "We are liable for material defects in the goods under the Croatian Civil Obligations Act, for defects that appear within two years of delivery. If you notice a defect, please tell us as soon as possible and no later than two months after you discover it.",
+        "If a product is faulty, you can ask for it to be repaired or replaced, for a price reduction, or to cancel the contract and get your money back, as provided by law. In that case we cover the cost of the return.",
+        "Where a manufacturer offers a guarantee, it applies in addition to our legal liability and doesn't limit it."
+      ]
+    },
+    "complaints": {
+      "title": "Written complaints",
+      "email": "You can send us a written complaint by email to <mail>{email}</mail>.",
+      "post": "You can also send a complaint by post to: {address}.",
+      "response": "We'll confirm receipt of your complaint without delay and send you a written reply within 15 days of receiving it, as required by the Croatian Consumer Protection Act."
+    },
+    "disputes": {
+      "title": "Out-of-court dispute resolution",
+      "paragraphs": [
+        "We try to resolve any dispute amicably. If we can't, you can turn to a body for out-of-court resolution of consumer disputes. The list of these bodies in Croatia is published by the ministry responsible for consumer protection.",
+        "You always have the right to report the matter to the State Inspectorate (Državni inspektorat) or to bring a claim before the competent court."
+      ],
+      "odr": "You can also submit a dispute through the EU online dispute resolution platform: <odr>{url}</odr>."
+    },
+    "law": {
+      "title": "Governing law",
+      "paragraphs": [
+        "These terms and contracts concluded in our shop are governed by Croatian law. This does not take away the protection given to you by the mandatory provisions of the law of the country where you normally live."
+      ]
+    }
   }
 }

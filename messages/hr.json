@@ -8,7 +8,8 @@
       "shippingInfo": "Dostava",
       "returns": "Povrati",
       "privacy": "Privatnost",
-      "trackOrder": "Praćenje narudžbe"
+      "trackOrder": "Praćenje narudžbe",
+      "terms": "Uvjeti poslovanja"
     },
     "buttons": {
       "addToCart": "Dodaj u košaricu",
@@ -24,11 +25,17 @@
       "close": "Zatvori"
     },
     "footer": {
-      "description": "Pažljivo složeni paketi sigurnih i kvalitetnih proizvoda za bebe — sve što vam treba, na jednom mjestu.",
+      "description": "Pažljivo složeni paketi kvalitetnih proizvoda za bebe — sve što vam treba, na jednom mjestu.",
       "copyright": "© 2026 LunaBaby. Sva prava pridržana.",
       "helpLinks": "Pomoć",
       "companyLinks": "Tvrtka",
-      "socialFollow": "Pratite nas"
+      "socialFollow": "Pratite nas",
+      "legalLinks": "Pravne informacije",
+      "contactTitle": "Kontakt",
+      "withdrawal": "Raskid ugovora (14 dana)",
+      "disputes": "Rješavanje sporova",
+      "paymentMethods": "Načini plaćanja",
+      "oib": "OIB: {value}"
     },
     "currency": "€",
     "language": {
@@ -65,12 +72,12 @@
       "title": "Zašto LunaBaby?",
       "freeShipping": "Besplatna dostava",
       "freeShippingDesc": "Na sve narudžbe iznad €50 u Hrvatskoj",
-      "organic": "Organski materijali",
-      "organicDesc": "Samo prirodni, sigurni materijali za vaše dijete",
+      "organic": "Pažljivo odabrani proizvodi",
+      "organicDesc": "Svaki proizvod u paketu biramo s naglaskom na kvalitetu i nježne materijale",
       "easyReturns": "Jednostavni povrati",
       "easyReturnsDesc": "30 dana za zamjenu ili povrat novca",
-      "safeTested": "Sigurno i testirano",
-      "safeTestedDesc": "Svi proizvodi certificirani prema EU standardima"
+      "safeTested": "Provjereni dobavljači",
+      "safeTestedDesc": "Proizvode nabavljamo isključivo od dobavljača kojima vjerujemo"
     },
     "freeDeliveryBar": "Besplatna dostava za narudžbe iznad 50 €"
   },
@@ -181,16 +188,16 @@
   "about": {
     "title": "O nama",
     "heroTitle": "Nježnost u svakom detalju",
-    "heroSubtitle": "Pažljivo biramo svaki proizvod u našim paketima, s naglaskom na sigurnost i prirodne materijale.",
+    "heroSubtitle": "Pažljivo biramo svaki proizvod u našim paketima, s naglaskom na sigurnost i kvalitetu.",
     "ourValues": {
       "title": "Naše vrijednosti",
       "value1": {
         "title": "Sigurnost na prvom mjestu",
-        "description": "Svi naši proizvodi su certificirani prema EU standardima sigurnosti. Ne pravimo kompromise kad su u pitanju naša djeca."
+        "description": "Kad su u pitanju bebe, ne radimo kompromise. Proizvode za naše pakete nabavljamo od provjerenih dobavljača i biramo ih s naglaskom na sigurnost."
       },
       "value2": {
-        "title": "Organski i prirodni materijali",
-        "description": "Dajemo prednost organskom pamuku, prirodnim materijalima i proizvodima bez štetnih kemikalija. Nježna koža vaše bebe zaslužuje samo najbolje."
+        "title": "Nježni materijali",
+        "description": "Prednost dajemo mekanim materijalima ugodnima za osjetljivu bebinu kožu i proizvodima koje je lako održavati."
       }
     }
   },
@@ -199,145 +206,134 @@
     "items": [
       {
         "question": "Kako mogu naručiti proizvode?",
-        "answer": "Naručivanje je jednostavno! Odaberite željeni paket, dodajte ga u košaricu i slijedite korake za završetak narudžbe. Potrebno je unijeti podatke za dostavu i odabrati način plaćanja. Nakon potvrde narudžbe, primit ćete email s detaljima i brojem za praćenje pošiljke."
+        "answer": "Naručivanje je jednostavno: odaberite paket, dodajte ga u košaricu i slijedite korake na blagajni. Upišite podatke za dostavu, odaberite način dostave i platite. Nakon narudžbe stiže vam email s potvrdom i pojedinostima, a broj za praćenje pošiljke šaljemo čim paket krene prema vama."
       },
       {
         "question": "Koji načini plaćanja su dostupni?",
-        "answer": "Prihvaćamo kartice Visa, Mastercard, Maestro i American Express te Apple Pay i Google Pay. Plaćanja sigurno obrađuje Stripe, a podaci o vašoj kartici nikada ne prolaze kroz naše servere."
+        "answer": "Plaćanje obrađuje Stripe. Prihvaćamo kartice Visa, Mastercard, Maestro i American Express te Apple Pay, Google Pay, Revolut Pay i PayPal. Podaci o vašoj kartici nikada ne prolaze kroz naše servere."
       },
       {
         "question": "Koliko traje dostava?",
-        "answer": "Standardna dostava unutar Hrvatske traje 3-5 radnih dana. Ekspresna dostava dostupna je za 1-2 radna dana uz nadoplatu. Za narudžbe zaprimljene do 14:00 sati radnim danom, paketi se šalju isti dan."
+        "answer": "Standardna dostava unutar Hrvatske obično traje 3–5 radnih dana, a ekspresna dostava i dostava u paketomat 1–2 radna dana. Narudžbe zaprimljene radnim danom do 14:00 šaljemo isti dan. Točni rokovi za svaki način dostave navedeni su na stranici Dostava."
       },
       {
         "question": "Koliki su troškovi dostave?",
-        "answer": "Standardna dostava košta €3,99 za narudžbe unutar Hrvatske. Za narudžbe iznad €50, standardna dostava je potpuno besplatna! Ekspresna dostava košta €7,99, a preuzimanje na paketomatu je €2,99. Za narudžbe iznad €50, preuzimanje na paketomatu je također besplatno."
+        "answer": "Cijena dostave ovisi o načinu koji odaberete i uvijek je prikazana na blagajni prije plaćanja. Za narudžbe iznad €50 standardna dostava i preuzimanje na paketomatu su besplatni. Pregled svih cijena nalazi se na stranici Dostava."
       },
       {
         "question": "Dostavljate li izvan Hrvatske?",
-        "answer": "Trenutno dostavljamo na područje cijele Hrvatske, uključujući otoke. Radimo na proširenju dostave na susjedne zemlje (Sloveniju, Bosnu i Hercegovinu, Srbiju) i očekujemo da ćemo uskoro moći dostavljati i izvan Hrvatske. Pretplatite se na naš newsletter kako biste prvi saznali kad uvedemo međunarodnu dostavu."
+        "answer": "Trenutno dostavljamo na cijelo područje Hrvatske, uključujući otoke. Dostava u druge zemlje zasad nije dostupna — pretplatite se na naš newsletter i javit ćemo vam kad se to promijeni."
       },
       {
         "question": "Kakva je politika povrata?",
-        "answer": "Nudimo 30 dana za povrat ili zamjenu proizvoda od dana primitka narudžbe. Proizvodi moraju biti nekorišteni, u originalnom pakiranju i s oznakom. Povrat novca obrađuje se u roku od 7 radnih dana od primitka vraćenog proizvoda. Troškove povratne dostave snosi kupac, osim u slučaju pogreške s naše strane."
+        "answer": "Imate zakonsko pravo jednostrano raskinuti ugovor u roku od 14 dana od primitka paketa, bez navođenja razloga. Uz to nudimo i dobrovoljni rok od 30 dana za povrat ili zamjenu nekorištenih proizvoda u originalnom pakiranju. Novac vraćamo najkasnije 14 dana od primitka vaše izjave o raskidu. Troškove povratne dostave snosite vi, osim ako je pogreška naša. Sve pojedinosti nalaze se u Uvjetima poslovanja."
       },
       {
         "question": "Kako mogu vratiti proizvod?",
-        "answer": "Za pokretanje povrata, kontaktirajte nas putem emaila na info@lunababy.eu ili nas nazovite na (+385) 95 7178 891. Naš tim će vam poslati upute i povratnu etiketu. Proizvod zapakirajte u originalnu ambalažu i predajte kurirskoj službi. Pratit ćemo status vašeg povrata i obavijestiti vas kad povrat bude obrađen."
+        "answer": "Pošaljite nam email na {email} ili nas nazovite na {phone} i navedite broj narudžbe. Možete koristiti obrazac za raskid iz Uvjeta poslovanja, ali nije obavezan. Javit ćemo vam adresu za povrat. Proizvod zapakirajte, po mogućnosti u originalnu ambalažu, i pošaljite ga najkasnije 14 dana nakon izjave o raskidu. Obavijestit ćemo vas kad povrat bude obrađen."
       },
       {
         "question": "Mogu li prilagoditi sadržaj paketa?",
-        "answer": "Trenutno nudimo unaprijed sastavljene pakete koji su pažljivo osmišljeni za različite potrebe i dobne skupine. Svaki paket je sastavljen na temelju preporuka pedijatara i iskustva stotina roditelja. Ako imate posebne zahtjeve ili želje, kontaktirajte nas i potrudit ćemo se pronaći najbolje rješenje za vas."
+        "answer": "Trenutno nudimo unaprijed složene pakete za hranjenje, kupanje i spavanje. Ako imate posebne želje, javite nam se i potrudit ćemo se pronaći rješenje za vas."
       }
     ]
   },
   "shippingPage": {
     "title": "Informacije o dostavi",
-    "intro": "U LunaBaby-ju želimo da vaši paketi stignu brzo, sigurno i u savršenom stanju. Ovdje ćete pronaći sve informacije o načinima dostave, rokovima i troškovima.",
+    "intro": "Želimo da vaš paket stigne brzo, sigurno i neoštećen. Ovdje su svi načini dostave, rokovi i cijene.",
     "methods": {
       "title": "Načini dostave",
-      "standard": {
-        "name": "Standardna dostava",
-        "time": "3-5 radnih dana",
-        "price": "€3,99",
-        "freeAbove": "Besplatno za narudžbe iznad €50",
-        "description": "Pouzdana dostava putem Hrvatske pošte ili GLS kurirske službe na vašu kućnu adresu."
-      },
-      "express": {
-        "name": "Ekspresna dostava",
-        "time": "1-2 radna dana",
-        "price": "€7,99",
-        "description": "Brza dostava putem GLS kurirske službe za hitne narudžbe. Narudžbe zaprimljene do 14:00 šalju se isti dan."
-      },
-      "pickup": {
-        "name": "Preuzimanje na paketomatu",
-        "time": "2-4 radna dana",
-        "price": "€2,99",
-        "freeAbove": "Besplatno za narudžbe iznad €50",
-        "description": "Preuzmite svoj paket na najbližem BoxNow ili DPD paketomatu u vrijeme koje vam odgovara."
-      }
+      "days": "{range} {upper, plural, one {radni dan} few {radna dana} other {radnih dana}}",
+      "freeAbove": "Besplatno za narudžbe iznad {amount}",
+      "carrier": "Dostavlja: {carrier}",
+      "checkoutNote": "Cijena dostave za vašu narudžbu uvijek je prikazana na blagajni prije plaćanja.",
+      "unavailable": "Načine dostave trenutno ne možemo učitati. Cijene i rokovi uvijek su prikazani na blagajni prije plaćanja."
     },
     "freeShipping": {
       "title": "Besplatna dostava",
-      "description": "Uživajte u besplatnoj standardnoj dostavi na sve narudžbe iznad €50 unutar Hrvatske. Besplatna dostava primjenjuje se automatski na blagajni — nije potreban promotivni kod."
+      "description": "Za narudžbe iznad {amount} unutar Hrvatske besplatna je dostava za: {methods}. Popust se primjenjuje automatski na blagajni — promotivni kod nije potreban."
     },
     "deliveryAreas": {
       "title": "Područja dostave",
-      "description": "Dostavljamo na cijelo područje Republike Hrvatske, uključujući sve otoke. Dostava na otoke može trajati 1-2 radna dana duže od navedenih rokova. Za otočne adrese preporučujemo standardnu dostavu jer je ekspresna dostava ograničena na kopnene adrese.",
-      "international": "Međunarodna dostava trenutno nije dostupna. Radimo na proširenju usluge na susjedne zemlje. Pretplatite se na naš newsletter za obavijesti o novostima."
+      "description": "Dostavljamo na cijelo područje Republike Hrvatske, uključujući otoke. Dostava na otoke može trajati 1–2 radna dana dulje od navedenih rokova. Za otočne adrese preporučujemo standardnu dostavu jer je ekspresna dostava ograničena na kopno.",
+      "international": "Dostava u druge zemlje trenutno nije dostupna. Pretplatite se na naš newsletter i javit ćemo vam kad se to promijeni."
     },
     "packaging": {
-      "title": "Pakiranje i zaštita",
-      "description": "Svaki LunaBaby paket zapakiran je s posebnom pažnjom. Koristimo ekološki prihvatljive materijale za pakiranje — reciklirani karton, biorazgradivi zaštitni materijal i papirnu traku. Naši paketi su osmišljeni tako da budu i funkcionalni i lijepi — savršeni kao poklon bez potrebe za dodatnim pakiranjem."
+      "title": "Pakiranje",
+      "description": "Svaki paket pažljivo pakiramo kako bi stigao neoštećen. Kutije su osmišljene tako da paket bude spreman za darivanje bez dodatnog zamatanja."
     },
     "tracking": {
       "title": "Praćenje pošiljke",
-      "description": "Nakon slanja narudžbe, primit ćete email s brojem za praćenje pošiljke. Status svoje narudžbe možete pratiti u stvarnom vremenu putem poveznice u emailu."
+      "description": "Kad pošaljemo vašu narudžbu, primit ćete email s brojem za praćenje pošiljke. Status narudžbe možete provjeriti i na stranici Praćenje narudžbe."
     }
   },
   "returnsPage": {
     "title": "Politika povrata",
     "overview": {
-      "title": "Pregled politike povrata",
-      "description": "U LunaBaby-ju želimo da budete potpuno zadovoljni svojom kupnjom. Ako iz bilo kojeg razloga niste zadovoljni, nudimo jednostavan i transparentan proces povrata unutar 30 dana od primitka narudžbe."
+      "title": "Pregled",
+      "description": "Želimo da budete potpuno zadovoljni kupnjom. Zato uz zakonsko pravo na jednostrani raskid ugovora u roku od 14 dana nudimo i dobrovoljni rok od 30 dana za povrat ili zamjenu. Dobrovoljni rok je dodatak zakonskom pravu i ni na koji ga način ne umanjuje."
+    },
+    "legal": {
+      "title": "Zakonsko pravo na raskid ugovora (14 dana)",
+      "description": "U roku od 14 dana od dana kad preuzmete paket možete raskinuti ugovor bez navođenja razloga. Proizvod smijete otvoriti i pregledati onoliko koliko je potrebno da utvrdite njegovu prirodu, obilježja i funkcioniranje. Novac, uključujući trošak standardne dostave do vas, vraćamo najkasnije 14 dana od primitka vaše izjave o raskidu.",
+      "link": "Sve pojedinosti i obrazac za raskid nalaze se u <link>Uvjetima poslovanja</link>."
     },
     "conditions": {
-      "title": "Uvjeti za povrat",
+      "title": "Uvjeti dobrovoljnog povrata (do 30 dana)",
+      "note": "Ovi uvjeti vrijede za povrat nakon isteka zakonskog roka od 14 dana. U prvih 14 dana vrijede zakonska pravila opisana gore.",
       "items": [
-        "Proizvod mora biti vraćen unutar 30 dana od primitka narudžbe.",
+        "Proizvod nam javite za povrat unutar 30 dana od primitka narudžbe.",
         "Proizvod mora biti nekorišten i u originalnom pakiranju.",
         "Sve originalne oznake i etikete moraju biti neoštećene.",
-        "Proizvod ne smije biti pran, nošen ili na bilo koji način korišten.",
-        "Potrebno je priložiti račun ili potvrdu narudžbe."
+        "Proizvod ne smije biti pran, nošen ni na bilo koji način korišten.",
+        "Uz povrat navedite broj narudžbe ili priložite račun."
       ]
     },
     "process": {
       "title": "Postupak povrata",
       "steps": [
         {
-          "title": "Kontaktirajte nas",
-          "description": "Pošaljite email na info@lunababy.eu ili nas nazovite na (+385) 95 7178 891. Navedite broj narudžbe i razlog povrata."
+          "title": "Javite nam se",
+          "description": "Pošaljite email na {email} ili nas nazovite na {phone} i navedite broj narudžbe. Za zakonski raskid možete koristiti obrazac iz Uvjeta poslovanja, ali nije obavezan."
         },
         {
           "title": "Primite upute",
-          "description": "Naš tim će vam u roku od 24 sata poslati potvrdu i upute za povrat, uključujući povratnu adresu i etiketu."
+          "description": "Odgovorit ćemo vam s potvrdom i adresom na koju šaljete proizvod."
         },
         {
           "title": "Pošaljite paket",
-          "description": "Zapakirajte proizvod u originalnu ambalažu i predajte ga kurirskoj službi ili ga dostavite na najbliži paketomati."
+          "description": "Zapakirajte proizvod, po mogućnosti u originalnu ambalažu, i pošaljite ga najkasnije 14 dana nakon što ste nam se javili."
         },
         {
-          "title": "Obrada povrata",
-          "description": "Nakon primitka i pregleda vraćenog proizvoda, obradit ćemo vaš povrat. Primit ćete email potvrdu o statusu."
+          "title": "Povrat novca",
+          "description": "Kad zaprimimo i pregledamo proizvod, vraćamo vam novac i šaljemo potvrdu emailom."
         }
       ]
     },
     "refund": {
       "title": "Povrat novca",
-      "description": "Povrat novca obrađuje se u roku od 7 radnih dana od primitka vraćenog proizvoda. Novac se vraća na isti način plaćanja korišten pri narudžbi. Za plaćanja karticom, povrat može potrajati dodatnih 3-5 radnih dana ovisno o banci.",
-      "shippingCosts": "Troškovi dostave se ne vraćaju, osim u slučaju pogreške s naše strane (pogrešan proizvod, oštećen proizvod ili proizvod koji ne odgovara opisu)."
+      "description": "Novac vraćamo bez odgađanja, a najkasnije u roku od 14 dana od dana kad primimo vašu izjavu o raskidu, istim načinom plaćanja koji ste koristili pri kupnji. Povrat možemo zadržati dok ne zaprimimo proizvod ili dokaz da ste ga poslali. Kod plaćanja karticom banci može trebati još nekoliko radnih dana da iznos bude vidljiv na vašem računu.",
+      "shippingCosts": "Kod raskida u zakonskom roku od 14 dana vraćamo i trošak dostave do vas, u iznosu najjeftinije standardne dostave. Kod dobrovoljnog povrata nakon 14 dana trošak dostave ne vraćamo. Troškove povratne dostave snosite vi, osim ako je pogreška naša (pogrešan, oštećen ili neispravan proizvod) — tada sve troškove snosimo mi."
     },
     "exchange": {
       "title": "Zamjena proizvoda",
-      "description": "Ako želite zamijeniti proizvod za drugi paket ili drugu veličinu, kontaktirajte nas i rado ćemo vam pomoći. Zamjene se obrađuju besplatno — mi pokrivamo troškove dostave zamjenskog proizvoda. Zamjenski proizvod šaljemo u roku od 1-2 radna dana od primitka vašeg povrata."
+      "description": "Ako paket želite zamijeniti za drugi, javite nam se i rado ćemo pomoći. Troškove slanja zamjenskog paketa snosimo mi, a šaljemo ga u roku od 1–2 radna dana od primitka vašeg povrata."
     },
     "exceptions": {
       "title": "Iznimke",
-      "description": "Iz higijenskih razloga, ne možemo prihvatiti povrate proizvoda koji su bili u direktnom kontaktu s dječjom kožom i koji su otvoreni (npr. kreme, losioni, vlažne maramice). Ova iznimka ne utječe na vaša zakonska prava potrošača."
+      "description": "Iz zdravstvenih i higijenskih razloga pravo na raskid ne vrijedi za zapečaćene proizvode čije je zaštitno pakiranje otvoreno nakon isporuke, ako zbog toga više nisu prikladni za povrat. Ova iznimka ne utječe na vaša prava ako je proizvod neispravan."
     }
   },
   "contactPage": {
     "title": "Kontaktirajte nas",
-    "intro": "Imate pitanje, prijedlog ili trebate pomoć s narudžbom? Naš tim je tu za vas! Slobodno nas kontaktirajte putem bilo kojeg od navedenih kanala.",
+    "intro": "Imate pitanje, prijedlog ili trebate pomoć s narudžbom? Javite nam se emailom, telefonom ili putem obrasca.",
     "email": {
       "label": "Email",
-      "value": "info@lunababy.eu",
-      "description": "Za opća pitanja i upite"
+      "description": "Za opća pitanja, narudžbe i povrate"
     },
     "phone": {
       "label": "Telefon",
-      "value": "(+385) 95 7178 891",
-      "description": "Dostupni radnim danom"
+      "description": "Radnim danom"
     },
     "form": {
       "title": "Pošaljite nam poruku",
@@ -356,12 +352,16 @@
       "sendError": "Poruka nije poslana. Pokušajte ponovno ili nam pišite na info@lunababy.eu.",
       "emailInvalid": "Unesite ispravnu email adresu."
     },
-    "responseTime": "Obično odgovaramo unutar 24 sata radnim danom."
+    "responseTime": "Obično odgovaramo unutar 24 sata radnim danom.",
+    "hours": {
+      "label": "Radno vrijeme"
+    },
+    "companyTitle": "Podaci o tvrtki"
   },
   "privacyPage": {
     "title": "Politika privatnosti",
     "intro": "U LunaBaby-ju ozbiljno shvaćamo zaštitu vaših osobnih podataka. Ova politika privatnosti objašnjava koje podatke prikupljamo, kako ih koristimo i koja su vaša prava. Molimo vas da pažljivo pročitate ovu politiku.",
-    "lastUpdated": "Posljednje ažuriranje: veljača 2026.",
+    "lastUpdated": "Posljednje ažuriranje: studeni 2026.",
     "dataCollection": {
       "title": "Prikupljanje podataka",
       "description": "Prikupljamo samo podatke koji su nam potrebni za pružanje naših usluga. To uključuje:",
@@ -376,9 +376,9 @@
       "title": "Kolačići (Cookies)",
       "description": "Naša web stranica koristi kolačiće za poboljšanje vašeg iskustva. Koristimo:",
       "items": [
-        "Neophodni kolačići: potrebni za rad web stranice, uključujući košaricu i prijavu. Ne mogu se isključiti.",
-        "Analitički kolačići: pomažu nam razumjeti kako koristite našu stranicu kako bismo je poboljšali. Koristimo anonimiziranu analitiku.",
-        "Funkcionalni kolačići: pamte vaše postavke kao što su jezik i valuta za bolje korisničko iskustvo."
+        "Nužni kolačići: potrebni za rad stranice, uključujući košaricu i prijavu. Ne mogu se isključiti.",
+        "Analitički kolačići: pomažu nam razumjeti kako koristite stranicu kako bismo je poboljšali. Postavljamo ih samo uz vaš pristanak.",
+        "Funkcionalni kolačići: pamte vaše postavke, primjerice jezik."
       ],
       "note": "Ne koristimo kolačiće za oglašavanje niti dijelimo podatke s oglašivačkim mrežama. Možete upravljati kolačićima putem postavki svog preglednika."
     },
@@ -398,7 +398,7 @@
       "description": "Ne prodajemo niti iznajmljujemo vaše osobne podatke trećim stranama. Podatke dijelimo samo s:",
       "items": [
         "Kurirske službe: ime, adresa i telefon za potrebe dostave.",
-        "Procesori plaćanja: podaci o plaćanju za sigurnu obradu transakcija. Ne pohranjujemo podatke o vašoj kartici.",
+        "Stripe (procesor plaćanja): podaci potrebni za sigurnu obradu plaćanja. Podatke o vašoj kartici ne pohranjujemo.",
         "Hosting i IT usluge: pouzdani pružatelji usluga koji su ugovorno obvezani na zaštitu vaših podataka."
       ]
     },
@@ -421,8 +421,11 @@
     "contact": {
       "title": "Kontakt za zaštitu podataka",
       "description": "Za sva pitanja vezana uz zaštitu vaših osobnih podataka, obratite nam se na:",
-      "email": "info@lunababy.eu",
-      "note": "Odgovorit ćemo na vaš upit u roku od 30 dana, u skladu sa zakonskim zahtjevima. Ako smatrate da vaša prava nisu poštovana, imate pravo podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP)."
+      "note": "Na vaš upit odgovorit ćemo najkasnije u roku od mjesec dana, u skladu s GDPR-om. Ako smatrate da vaša prava nisu poštovana, možete podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP)."
+    },
+    "controller": {
+      "title": "Voditelj obrade",
+      "description": "Voditelj obrade vaših osobnih podataka je:"
     }
   },
   "errors": {
@@ -455,7 +458,7 @@
     },
     "about": {
       "title": "O nama | LunaBaby",
-      "description": "Upoznajte LunaBaby — pakete sigurnih proizvoda za bebe od prirodnih materijala."
+      "description": "Upoznajte LunaBaby — pažljivo složene pakete proizvoda za bebe za hranjenje, kupanje i spavanje."
     },
     "faq": {
       "title": "Česta pitanja | LunaBaby",
@@ -463,11 +466,11 @@
     },
     "shipping": {
       "title": "Dostava | LunaBaby",
-      "description": "Informacije o načinima dostave, rokovima i troškovima. Besplatna dostava za narudžbe iznad €50."
+      "description": "Načini dostave, cijene i rokovi isporuke za narudžbe u LunaBaby trgovini."
     },
     "returns": {
       "title": "Povrati | LunaBaby",
-      "description": "Politika povrata LunaBaby trgovine. 30 dana za povrat ili zamjenu proizvoda."
+      "description": "Pravo na raskid ugovora u 14 dana i dobrovoljni povrat ili zamjena u 30 dana u LunaBaby trgovini."
     },
     "contact": {
       "title": "Kontakt | LunaBaby",
@@ -500,6 +503,10 @@
     "admin": {
       "title": "Admin | LunaBaby",
       "description": "Administracija LunaBaby trgovine."
+    },
+    "terms": {
+      "title": "Uvjeti poslovanja | LunaBaby",
+      "description": "Uvjeti kupnje u LunaBaby web trgovini: narudžba, cijene, plaćanje, dostava, pravo na raskid ugovora, reklamacije i rješavanje sporova."
     }
   },
   "auth": {
@@ -751,5 +758,117 @@
     "reject": "Samo nužni",
     "more": "Više o privatnosti",
     "title": "Kolačići"
+  },
+  "terms": {
+    "title": "Uvjeti poslovanja",
+    "lastUpdated": "Posljednje ažuriranje: {date}",
+    "intro": "Ovi uvjeti vrijede za sve kupnje u web trgovini LunaBaby (lunababy.eu). Slanjem narudžbe potvrđujete da ste ih pročitali i da ih prihvaćate. Kako obrađujemo vaše osobne podatke, opisano je u <privacy>Politici privatnosti</privacy>.",
+    "toc": "Sadržaj",
+    "seller": {
+      "title": "Prodavatelj",
+      "intro": "Prodavatelj u web trgovini lunababy.eu je:",
+      "labels": {
+        "legalName": "Naziv",
+        "oib": "OIB",
+        "address": "Sjedište",
+        "register": "Upis u registar",
+        "representative": "Odgovorna osoba",
+        "email": "Email",
+        "phone": "Telefon",
+        "hours": "Radno vrijeme"
+      }
+    },
+    "ordering": {
+      "title": "Narudžba i sklapanje ugovora",
+      "paragraphs": [
+        "Proizvode odaberete u trgovini i dodate u košaricu. Na blagajni upisujete podatke za kontakt i dostavu, birate način dostave i prije plaćanja vidite ukupan iznos s troškovima dostave.",
+        "Prije slanja narudžbe možete provjeriti i ispraviti sve upisane podatke. Ugovor je sklopljen kad pošaljete narudžbu i uspješno je platite. Potvrdu narudžbe sa svim pojedinostima šaljemo vam emailom.",
+        "Ako neki proizvod nakon narudžbe ipak nije dostupan, odmah ćemo vas obavijestiti i vratiti vam plaćeni iznos."
+      ]
+    },
+    "prices": {
+      "title": "Cijene",
+      "paragraphs": [
+        "Sve cijene iskazane su u eurima (EUR) i konačne su. Trošak dostave nije uključen u cijenu proizvoda; prikazan je na blagajni prije plaćanja.",
+        "Kod sniženja uz sniženu cijenu prikazujemo i najnižu cijenu proizvoda u posljednjih 30 dana prije sniženja.",
+        "Cijene se mogu mijenjati. Za vašu narudžbu vrijedi cijena prikazana u trenutku kad ste je poslali."
+      ]
+    },
+    "payment": {
+      "title": "Plaćanje",
+      "paragraphs": [
+        "Narudžbu plaćate online pri naručivanju. Plaćanje obrađuje Stripe, ovlašteni pružatelj platnih usluga. Možete platiti karticom (Visa, Mastercard, Maestro, American Express), Apple Payem, Google Payem, Revolut Payem ili PayPalom. Koji su načini dostupni, može ovisiti o vašem uređaju i pregledniku.",
+        "Podatke o kartici upisujete izravno na zaštićenoj Stripeovoj stranici. Oni nikada ne prolaze kroz naše servere i ne pohranjujemo ih.",
+        "Iznos se tereti u trenutku plaćanja. Ako narudžbu ne možemo isporučiti, vraćamo cijeli iznos istim načinom plaćanja."
+      ]
+    },
+    "delivery": {
+      "title": "Dostava",
+      "paragraphs": [
+        "Dostavljamo na adrese u Republici Hrvatskoj. Načini dostave, cijene i očekivani rokovi navedeni su na stranici <shipping>Dostava</shipping> i na blagajni.",
+        "Rizik od oštećenja ili gubitka robe prelazi na vas kad vi ili osoba koju ste odredili preuzmete pošiljku.",
+        "Pri preuzimanju pregledajte pakiranje. Ako je oštećeno, napomenite to dostavljaču i javite nam se što prije."
+      ]
+    },
+    "withdrawal": {
+      "title": "Pravo na jednostrani raskid ugovora",
+      "paragraphs": [
+        "Kao potrošač imate pravo jednostrano raskinuti ugovor u roku od 14 dana, bez navođenja razloga, u skladu sa Zakonom o zaštiti potrošača i Direktivom 2011/83/EU. Rok počinje teći danom kad vi ili osoba koju ste odredili (a koja nije prijevoznik) preuzmete robu. Ako narudžba stiže u više pošiljaka, rok teče od preuzimanja posljednje.",
+        "Za raskid nam pošaljite jasnu izjavu, primjerice emailom na <mail>{email}</mail>. Možete koristiti obrazac u nastavku, ali to nije obavezno. Rok je poštovan ako izjavu pošaljete prije njegova isteka.",
+        "Nakon raskida vraćamo vam sve što ste platili, uključujući trošak dostave do vas (osim dodatnog troška ako ste odabrali dostavu skuplju od najjeftinije standardne), bez odgađanja, a najkasnije 14 dana od dana kad primimo vašu izjavu. Novac vraćamo istim načinom plaćanja koji ste koristili, osim ako izričito ne dogovorimo drukčije, i za to ne naplaćujemo nikakvu naknadu. Povrat možemo zadržati dok ne zaprimimo robu ili dokaz da ste je poslali, ovisno o tome što bude prije.",
+        "Robu nam pošaljite bez odgađanja, a najkasnije 14 dana od dana kad ste nam poslali izjavu o raskidu. Izravne troškove povrata robe snosite vi. Odgovarate samo za umanjenu vrijednost robe nastalu rukovanjem koje nije bilo potrebno da biste utvrdili njezinu prirodu, obilježja i funkcioniranje.",
+        "Pravo na raskid ne vrijedi za zapečaćenu robu koja nije prikladna za povrat zbog zaštite zdravlja ili higijenskih razloga, ako je pečat otvoren nakon isporuke."
+      ],
+      "goodwill": {
+        "title": "Dobrovoljni povrat u 30 dana",
+        "text": "Uz zakonsko pravo nudimo i dobrovoljni rok od 30 dana od preuzimanja za povrat ili zamjenu nekorištene robe u originalnom pakiranju. Taj rok produljuje zakonsko pravo, a ne zamjenjuje ga: u prvih 14 dana uvijek vrijede zakonska pravila opisana gore. Uvjeti i postupak opisani su na stranici <returns>Povrati</returns>."
+      },
+      "form": {
+        "title": "Obrazac za jednostrani raskid ugovora",
+        "intro": "Ispunite i pošaljite ovaj obrazac samo ako želite jednostrano raskinuti ugovor. Tekst možete kopirati i zalijepiti u email.",
+        "copy": "Kopiraj tekst",
+        "copied": "Kopirano",
+        "lines": [
+          "OBRAZAC ZA JEDNOSTRANI RASKID UGOVORA",
+          "Primatelj: {recipient}",
+          "Ovim izjavljujem/izjavljujemo (*) da jednostrano raskidam/raskidamo (*) ugovor o kupnji sljedeće robe:",
+          "Broj narudžbe:",
+          "Datum narudžbe (*) / datum primitka (*):",
+          "Ime i prezime potrošača:",
+          "Adresa potrošača:",
+          "Potpis potrošača (samo ako se obrazac šalje na papiru):",
+          "Datum:",
+          "(*) Precrtajte ili izbrišite nepotrebno."
+        ]
+      }
+    },
+    "warranty": {
+      "title": "Odgovornost za nedostatke i jamstvo",
+      "paragraphs": [
+        "Za materijalne nedostatke robe odgovaramo u skladu sa Zakonom o obveznim odnosima, za nedostatke koji se pokažu u roku od dvije godine od preuzimanja. Ako primijetite nedostatak, javite nam se što prije, a najkasnije u roku od dva mjeseca od dana kad ste ga otkrili.",
+        "Ako je proizvod neispravan, možete tražiti uklanjanje nedostatka ili zamjenu, sniženje cijene ili raskid ugovora i povrat novca, u skladu sa zakonom. U tom slučaju troškove povrata snosimo mi.",
+        "Ako proizvođač daje jamstvo, ono vrijedi uz našu zakonsku odgovornost i ne umanjuje je."
+      ]
+    },
+    "complaints": {
+      "title": "Pisani prigovori",
+      "email": "Prigovor nam možete poslati pisanim putem, emailom na <mail>{email}</mail>.",
+      "post": "Prigovor možete poslati i poštom na adresu: {address}.",
+      "response": "Primitak prigovora potvrdit ćemo bez odgađanja, a pisani odgovor poslat ćemo vam najkasnije u roku od 15 dana od dana primitka, u skladu sa Zakonom o zaštiti potrošača."
+    },
+    "disputes": {
+      "title": "Izvansudsko rješavanje sporova",
+      "paragraphs": [
+        "Sporove nastojimo riješiti sporazumno. Ako u tome ne uspijemo, možete se obratiti tijelu za izvansudsko rješavanje potrošačkih sporova. Popis tih tijela u Republici Hrvatskoj objavljuje ministarstvo nadležno za zaštitu potrošača.",
+        "Uvijek imate pravo podnijeti prijavu Državnom inspektoratu ili tužbu nadležnom sudu."
+      ],
+      "odr": "Spor možete prijaviti i putem europske platforme za online rješavanje sporova: <odr>{url}</odr>."
+    },
+    "law": {
+      "title": "Mjerodavno pravo",
+      "paragraphs": [
+        "Na ove uvjete i ugovore sklopljene u našoj trgovini primjenjuje se pravo Republike Hrvatske. Time ne gubite zaštitu koju vam pružaju obvezne odredbe prava države u kojoj imate uobičajeno boravište."
+      ]
+    }
   }
 }

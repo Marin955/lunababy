@@ -1,6 +1,7 @@
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import FaqAccordion from '@/components/content/FaqAccordion';
+import { company } from '@/lib/company';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,7 +27,11 @@ export default async function FaqPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations('faq');
 
-  const items = t.raw('items') as Array<{ question: string; answer: string }>;
+  // Contact details in the answers come from src/lib/company.ts.
+  const items = (t.raw('items') as Array<{ question: string; answer: string }>).map((item) => ({
+    ...item,
+    answer: item.answer.replace('{email}', company.email ?? '').replace('{phone}', company.phone ?? ''),
+  }));
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-16">
