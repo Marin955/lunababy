@@ -5,26 +5,43 @@
   --color-cream: #FBF9F6;
   --color-warm-white: #FEFDFB;
   --color-teal: #8BBCC4;
-  --color-teal-deep: #6BA3AD;
+  /* teal-ink: text on light surfaces and primary button backgrounds (>= 4.5:1).
+     Soft teals (teal, teal-soft, teal-light, teal-pale) are decoration only:
+     borders, fills, badge backgrounds. They fail WCAG AA as text.
+     teal-deep used to be #6BA3AD (2.8:1 on white) and is used as text/button bg
+     across the site, so it now aliases teal-ink. New code should say teal-ink. */
+  --color-teal-ink: #356B75;
+  --color-teal-ink-hover: #2B5A62;
+  --color-teal-deep: #356B75;
+  --color-teal-soft: #6BA3AD;
   --color-teal-light: #D4EAEE;
   --color-teal-pale: #EDF6F8;
   --color-lavender: #C5B8D9;
   --color-lavender-light: #EDE8F4;
   --color-lavender-pale: #F6F3FA;
+  --color-lavender-ink: #6A5A8A;   /* text on lavender surfaces */
   --color-gold: #E8D5A3;
   --color-gold-warm: #F0DFB4;
   --color-gold-light: #FBF5E6;
   --color-blush: #F0D4CC;
   --color-blush-light: #FBF0ED;
+  --color-sale: #B4474F;           /* sale / discount badge bg (white text) and sale text */
+  --color-sale-light: #FDE8E8;     /* sale badge background */
   --color-sage: #B8CCBA;
   --color-sage-light: #E8F0E8;
   --color-text-dark: #3D3D4E;
-  --color-text-mid: #6B6B7B;
-  --color-text-light: #9898A8;
+  /* Text greys are tuned for >= 4.5:1 on every light surface; run
+     `node scripts/check-contrast.mjs` after changing any colour token. */
+  --color-text-mid: #5C5C6E;
+  --color-text-light: #6A6A7A;
 
-  /* Typography */
+  /* Typography (scale documented in agent_docs/frontend.md -> "Typography") */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Quicksand', sans-serif;
+  /* Nothing on the site goes below 13px: text-xs is raised from 12px to 13px
+     (legal microcopy, badges). UI text uses text-sm (14px) or larger. */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.125rem;
 
   /* Shadows */
   --shadow-sm: 0 2px 8px rgba(59, 59, 78, 0.04);
@@ -47,6 +64,7 @@ html {
 
 body {
   font-family: var(--font-body);
+  font-weight: 500; /* Quicksand 400 reads too thin on cream; see agent_docs/frontend.md "Typography" */
   color: var(--color-text-dark);
   background-color: var(--color-cream);
 }
@@ -54,6 +72,21 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
+
+/* Prices: aligned digits so totals and strikethroughs line up. */
+.tabular-nums,
+.price {
+  font-variant-numeric: tabular-nums;
+}
+
+/* `rounded-[--radius-md]` is Tailwind 3 syntax. In Tailwind 4 it compiles to
+   `border-radius: --radius-md`, which is invalid, so those elements rendered
+   square. Use `rounded-sm|md|lg|xl` (mapped to the --radius-* tokens above) in
+   new code; these rules keep the old class names working until they are migrated. */
+.rounded-\[--radius-sm\] { border-radius: var(--radius-sm); }
+.rounded-\[--radius-md\] { border-radius: var(--radius-md); }
+.rounded-\[--radius-lg\] { border-radius: var(--radius-lg); }
+.rounded-\[--radius-xl\] { border-radius: var(--radius-xl); }
 
 /* Smooth transitions */
 * {

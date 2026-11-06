@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import type { Bundle } from '@/types';
 import { formatPrice } from '@/lib/utils';
-import { getBundleImage } from '@/lib/bundle-images';
+import { getBundleCollage, getBundleImage } from '@/lib/bundle-images';
+import PhotoCollage from '@/components/ui/PhotoCollage';
 import Badge from '@/components/ui/Badge';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
 
@@ -14,6 +15,10 @@ interface BundleCardProps {
   locale: string;
 }
 
+// Matches BundleGrid: 1 column < md, 2 columns md, 3 columns lg inside max-w-7xl.
+const CARD_IMAGE_SIZES = '(min-width: 1280px) 400px, (min-width: 1024px) 31vw, (min-width: 768px) 46vw, 92vw';
+
+// Fallback when a bundle has neither a box photo nor product photos.
 function getGradientClasses(colorFrom: string, colorTo: string): string {
   const fromMap: Record<string, string> = {
     'teal-light': 'from-teal-light',
@@ -37,71 +42,77 @@ function getGradientClasses(colorFrom: string, colorTo: string): string {
 
 export default function BundleCard({ bundle, locale }: BundleCardProps) {
   const bundleImage = getBundleImage(bundle.slug);
+  const collage = bundleImage ? null : getBundleCollage(bundle.slug);
+  const zoom = 'group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform duration-300';
 
   return (
-    <div className="group bg-white rounded-[--radius-lg] shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 transition-all duration-300 flex flex-col">
-      {/* Top visual: product image or gradient+emoji */}
-      <Link href={`/shop/${bundle.slug}`} className="block relative">
+    <article className="group bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-all duration-300 flex flex-col">
+      {/* Top visual: box photo, else a collage of the real product photos, else gradient + emoji */}
+      <Link href={`/shop/${bundle.slug}`} className="block relative" tabIndex={-1} aria-hidden="true">
         <div
-          className={`relative h-48 ${bundleImage ? '' : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)}`} flex items-center justify-center overflow-hidden`}
+          className={`relative aspect-[4/3] overflow-hidden ${
+            bundleImage || collage
+              ? 'bg-cream'
+              : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center`
+          }`}
         >
           {bundleImage ? (
-            <Image
-              src={bundleImage}
+            <Image src={bundleImage} alt="" fill className={`object-cover ${zoom}`} sizes={CARD_IMAGE_SIZES} />
+          ) : collage ? (
+            <PhotoCollage
+              srcs={collage}
               alt={bundle.name}
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-300"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes={CARD_IMAGE_SIZES}
+              className="absolute inset-0"
+              imageClassName={zoom}
             />
           ) : (
-            <span className="text-7xl group-hover:scale-110 transition-transform duration-300">
+            <span className={`text-7xl ${zoom}`} aria-hidden="true">
               {bundle.emoji}
             </span>
           )}
 
-          {/* Badge overlay */}
           {bundle.badge && (
             <div className="absolute top-4 left-4">
               <Badge type={bundle.badge} />
             </div>
           )}
 
-          {/* Discount badge */}
           {bundle.discount_percent > 0 && (
-            <div className="absolute top-4 right-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+            <div className="absolute top-4 right-4 bg-sale text-white text-[13px] leading-tight font-bold px-2.5 py-1 rounded-full tabular-nums">
               -{bundle.discount_percent}%
             </div>
           )}
         </div>
       </Link>
 
-      {/* Card body */}
-      <div className="flex flex-col flex-1 p-5">
-        <Link href={`/shop/${bundle.slug}`}>
-          <h3 className="font-heading text-lg font-semibold text-text-dark mb-1 group-hover:text-teal-deep transition-colors duration-200">
+      <div className="flex flex-col flex-1 p-5 sm:p-6">
+        <h3 className="font-heading text-[22px] leading-snug font-semibold text-text-dark mb-1.5">
+          <Link
+            href={`/shop/${bundle.slug}`}
+            className="hover:text-teal-ink focus-visible:outline-none focus-visible:underline transition-colors duration-200"
+          >
             {bundle.name}
-          </h3>
-        </Link>
+          </Link>
+        </h3>
 
-        <p className="text-sm text-text-mid leading-relaxed mb-4 flex-1">
+        <p className="text-[15px] text-text-mid leading-relaxed mb-4 flex-1">
           {bundle.short_description}
         </p>
 
-        {/* Price */}
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex items-baseline gap-2 mb-4 tabular-nums">
+          <span className="text-[22px] font-semibold text-teal-ink">
+            {formatPrice(bundle.price, locale)}
+          </span>
           {bundle.original_price && (
             <span className="text-sm text-text-light line-through">
               {formatPrice(bundle.original_price, locale)}
             </span>
           )}
-          <span className="text-xl font-semibold text-teal-deep">
-            {formatPrice(bundle.price, locale)}
-          </span>
         </div>
 
-        {/* Add to Cart button */}
         <AddToCartButton bundleId={bundle.id} inStock={bundle.in_stock} />
       </div>
-    </div>
+    </article>
   );
 }

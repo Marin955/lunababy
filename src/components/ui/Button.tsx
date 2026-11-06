@@ -25,19 +25,21 @@ type ButtonAsLink = ButtonBaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
+// teal-ink keeps white button text and teal labels at >= 4.5:1 (see scripts/check-contrast.mjs).
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-teal-deep text-white hover:bg-teal shadow-md hover:shadow-hover',
+    'bg-teal-ink text-white shadow-sm hover:bg-teal-ink-hover hover:shadow-md active:bg-teal-ink-hover',
   secondary:
     'bg-lavender-light text-text-dark hover:bg-lavender',
   outline:
-    'border-2 border-teal text-teal-deep hover:bg-teal-pale',
+    'border-2 border-teal-ink text-teal-ink bg-transparent hover:bg-teal-pale',
 };
 
+// Every size keeps a 44px minimum touch target.
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  sm: 'min-h-11 px-4 py-2 text-sm',
+  md: 'min-h-11 px-6 py-2.5 text-base',
+  lg: 'min-h-12 px-7 py-3 text-base sm:text-lg',
 };
 
 export default function Button(props: ButtonProps) {
@@ -50,10 +52,13 @@ export default function Button(props: ButtonProps) {
   } = props;
 
   const baseClasses = [
-    'inline-flex items-center justify-center',
-    'rounded-[--radius-md] font-body font-semibold',
-    'transition-all duration-300',
-    'hover:-translate-y-0.5',
+    'inline-flex items-center justify-center gap-2 text-center leading-tight',
+    'rounded-md font-body font-semibold',
+    'transition-[background-color,box-shadow,transform,color] duration-200',
+    'hover:-translate-y-0.5 motion-reduce:hover:translate-y-0',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream',
+    'disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none',
+    'aria-disabled:pointer-events-none aria-disabled:opacity-50',
     'cursor-pointer',
     variantClasses[variant],
     sizeClasses[size],

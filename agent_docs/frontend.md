@@ -47,7 +47,7 @@
 
 ### Bundles (`src/components/bundles/`)
 - **BundleGrid.tsx** — Responsive grid wrapper
-- **BundleCard.tsx** — Product card: emoji, gradient, badge, price, discount badge, add-to-cart
+- **BundleCard.tsx** — Product card: box photo (or 2x2 product-photo collage via `getBundleCollage`, else gradient+emoji), badge, price, discount badge, add-to-cart
 - **BundleItemList.tsx** — "What's included" checklist
 - **AddToCartButton.tsx** — Add to cart with success animation
 
@@ -89,6 +89,7 @@
 - **Input.tsx** — Text/email/textarea with label and error display
 - **Badge.tsx** — New/Popular/Sale badges
 - **Card.tsx** — Generic card wrapper
+- **PhotoCollage.tsx** — 2x2 grid of photos (used for bundles without a box photo)
 
 ## Zustand Stores
 
@@ -178,11 +179,43 @@ All monetary fields are **integer cents**.
 
 ## Styling
 
-- Tailwind CSS 4 with custom theme in `src/app/globals.css`
-- Custom colors: cream, teal, teal-deep, teal-pale, lavender, gold, peach, blush
-- Custom fonts: Playfair Display (headings), Quicksand (body) — loaded via Google Fonts in layout
-- Border radius tokens: `--radius-sm` (12px), `--radius-md` (16px), `--radius-lg` (24px), `--radius-xl` (32px)
-- No tailwind.config.ts — uses CSS-based Tailwind 4 configuration
+- Tailwind CSS 4 with custom theme in `src/app/globals.css` (no tailwind.config.ts)
+- Fonts: Playfair Display (headings) and Quicksand (body), loaded with `next/font` in `src/app/layout.tsx` (Quicksand 400/500/600/700)
+- Radius: use `rounded-sm` (12px), `rounded-md` (16px), `rounded-lg` (24px), `rounded-xl` (32px); they map to the `--radius-*` tokens. The old `rounded-[--radius-md]` form is Tailwind 3 syntax that compiles to nothing in Tailwind 4; `globals.css` keeps those class names working, but don't add new ones.
+- Icons: `lucide-react` only, `strokeWidth={1.5}`, decorative icons get `aria-hidden`. No emoji in UI chrome (the bundle `emoji` data field is a last-resort image fallback only).
+
+### Colour tokens and contrast
+
+All text/background pairs must be >= 4.5:1 (>= 3:1 for text 24px+). Check with `node scripts/check-contrast.mjs` after changing any colour token.
+
+| Token | Use |
+|---|---|
+| `text-dark` #3D3D4E | headings, body |
+| `text-mid` #5C5C6E | secondary text, descriptions |
+| `text-light` #6A6A7A | tertiary text, strikethrough prices, placeholders |
+| `teal-ink` #356B75 | teal text, links, prices, primary button bg (white text) |
+| `teal-ink-hover` #2B5A62 | primary button hover |
+| `teal-deep` | alias of `teal-ink` (legacy name; prefer `teal-ink`) |
+| `teal`, `teal-soft`, `teal-light`, `teal-pale` | decoration only: borders, rings, fills, badge backgrounds. Never text, never behind white text (so no `hover:bg-teal` on a white-text button) |
+| `lavender-ink` / `sale` + `sale-light` | text on lavender surfaces / sale badges and sale prices |
+
+### Typography
+
+Body text is Quicksand **500** (set on `body`). Headings are Playfair Display 600.
+
+| Role | Classes | Size |
+|---|---|---|
+| h1 (page / hero) | `font-heading font-semibold text-[2rem] sm:text-5xl lg:text-6xl` (hero) or `text-3xl sm:text-4xl` (page) | 32-60px |
+| h2 (section) | `font-heading font-semibold text-3xl sm:text-4xl` | 30-36px |
+| h3 (card title) | `font-heading font-semibold text-[22px] leading-snug` | 22px |
+| h4 | `font-heading font-semibold text-xl` | 20px |
+| body | `text-base` (lead paragraphs `text-lg`/`text-xl`) | 16px |
+| small / UI | `text-sm` or `text-[15px]` (card descriptions) | 14-15px |
+| micro (legal, badges) | `text-xs` | 13px (`--text-xs` is raised to 13px) |
+
+- Minimums: 14px for UI text, 13px only for legal microcopy and badges.
+- Prices: `font-semibold text-teal-ink tabular-nums` (or the `.price` class); old/strikethrough price `text-sm text-text-light line-through`.
+- Buttons: use `components/ui/Button` (`font-semibold`, min height 44px, `teal-ink` primary, focus ring).
 
 ## Environment Variables (Frontend)
 

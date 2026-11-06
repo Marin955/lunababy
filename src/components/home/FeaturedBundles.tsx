@@ -13,12 +13,12 @@ export default async function FeaturedBundles({ locale, bundles }: FeaturedBundl
   const t = await getTranslations('home.featured');
 
   return (
-    <section id={BUNDLES_SECTION_ID} className="max-w-7xl mx-auto px-6 py-20 scroll-mt-28 lg:scroll-mt-32">
-      <div className="text-center mb-12">
-        <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-text-dark mb-3">
+    <section id={BUNDLES_SECTION_ID} className="max-w-7xl mx-auto px-6 pt-10 pb-16 sm:py-20 scroll-mt-28 lg:scroll-mt-32">
+      <div className="text-center mb-6 sm:mb-12">
+        <h2 className="font-heading text-3xl sm:text-4xl font-semibold text-text-dark mb-2 sm:mb-3">
           {t('title')}
         </h2>
-        <p className="text-text-mid text-lg">
+        <p className="text-text-mid text-base sm:text-lg max-w-2xl mx-auto">
           {t('subtitle')}
         </p>
       </div>
