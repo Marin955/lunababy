@@ -8,8 +8,11 @@ import { useAuthStore } from '@/stores/auth-store';
 import CartIcon from '@/components/cart/CartIcon';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import MobileMenu from '@/components/layout/MobileMenu';
+import MiniCart from '@/components/cart/MiniCart';
+import { SHOP_HREF } from '@/lib/constants';
 
 const navLinks = [
+  { key: 'shop', href: SHOP_HREF },
   { key: 'home', href: '/' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
@@ -58,14 +61,14 @@ export default function Header() {
         `}
       >
         {/* Free delivery announcement bar */}
-        <div className="h-8 flex items-center justify-center bg-teal-deep text-white text-xs sm:text-sm font-medium px-4 text-center">
+        <div className="h-8 flex items-center justify-center bg-[var(--color-teal-ink,#3F7C87)] text-white text-[13px] sm:text-sm font-medium px-4 text-center">
           {tHome('freeDeliveryBar')}
         </div>
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0">
+            <Link href="/" className="flex items-center gap-2 shrink-0 min-h-[44px]">
               <Image
                 src="/logo.svg"
                 unoptimized
@@ -80,17 +83,18 @@ export default function Header() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-7">
               {navLinks.map(({ key, href }) => {
                 const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
                 return (
                   <Link
                     key={key}
                     href={href}
+                    aria-current={isActive ? 'page' : undefined}
                     className={`
-                      text-sm font-medium transition-colors duration-200
-                      hover:text-teal-deep
-                      ${isActive ? 'text-teal-deep' : 'text-text-mid'}
+                      inline-flex items-center min-h-[44px] text-sm font-semibold transition-colors duration-200
+                      hover:text-[var(--color-teal-ink,#3F7C87)]
+                      ${isActive ? 'text-[var(--color-teal-ink,#3F7C87)] underline decoration-2 underline-offset-8' : 'text-text-mid'}
                     `}
                   >
                     {t(key)}
@@ -108,21 +112,21 @@ export default function Header() {
                     {user?.role === 'admin' && (
                       <Link
                         href="/admin"
-                        className="text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
+                        className="inline-flex items-center min-h-[44px] text-sm font-medium text-amber-700 hover:text-amber-800 transition-colors"
                       >
                         Admin
                       </Link>
                     )}
                     <Link
                       href="/profile"
-                      className="text-sm font-medium text-text-mid hover:text-teal-deep transition-colors"
+                      className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-mid hover:text-[var(--color-teal-ink,#3F7C87)] transition-colors"
                     >
                       {user?.name || tAuth('profile')}
                     </Link>
                     <button
                       type="button"
                       onClick={signOutAction}
-                      className="text-sm font-medium text-text-light hover:text-red-500 transition-colors cursor-pointer"
+                      className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-mid hover:text-red-600 transition-colors cursor-pointer"
                     >
                       {tAuth('signOut')}
                     </button>
@@ -130,7 +134,7 @@ export default function Header() {
                 ) : (
                   <Link
                     href="/signin"
-                    className="text-sm font-medium text-text-mid hover:text-teal-deep transition-colors"
+                    className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-mid hover:text-[var(--color-teal-ink,#3F7C87)] transition-colors"
                   >
                     {tAuth('signIn')}
                   </Link>
@@ -144,14 +148,17 @@ export default function Header() {
 
               {/* Cart Icon - visible on both mobile and desktop */}
               <CartIcon />
+              {/* Add-to-cart drawer; opens on cartStore.lastAdded */}
+              <MiniCart />
 
               {/* Mobile hamburger - visible below lg */}
               <button
                 type="button"
                 className="lg:hidden flex flex-col items-center justify-center w-11 h-11 gap-1.5 cursor-pointer"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label="Toggle menu"
+                aria-label="Menu"
                 aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
               >
                 <span
                   className={`

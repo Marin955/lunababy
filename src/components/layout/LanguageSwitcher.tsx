@@ -7,6 +7,9 @@ import type { Locale } from '@/i18n/routing';
 
 const locales: Locale[] = ['hr', 'en'];
 
+// Language names are shown in their own language, so they need no translation.
+const languageNames: Record<Locale, string> = { hr: 'Hrvatski', en: 'English' };
+
 export default function LanguageSwitcher() {
   const currentLocale = useLocale() as Locale;
   const router = useRouter();
@@ -18,7 +21,7 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="inline-flex items-center gap-1 rounded-full bg-gray-100 p-0.5">
+    <div className="inline-flex items-center gap-0.5 rounded-full bg-gray-100 p-0.5">
       {locales.map((loc) => {
         const isActive = loc === currentLocale;
         return (
@@ -27,13 +30,15 @@ export default function LanguageSwitcher() {
             type="button"
             onClick={() => handleSwitch(loc)}
             className={`
-              px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 cursor-pointer
+              inline-flex items-center justify-center min-w-[44px] min-h-[44px] px-3
+              text-[13px] font-semibold rounded-full transition-colors duration-200 cursor-pointer
               ${isActive
-                ? 'bg-teal-deep text-white shadow-sm'
-                : 'text-text-mid hover:text-teal-deep'
+                ? 'bg-[var(--color-teal-ink,#3F7C87)] text-white shadow-sm'
+                : 'text-text-mid hover:text-text-dark'
               }
             `}
-            aria-label={`Switch language to ${loc.toUpperCase()}`}
+            lang={loc}
+            aria-label={languageNames[loc]}
             aria-current={isActive ? 'true' : undefined}
           >
             {loc.toUpperCase()}
