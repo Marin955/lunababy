@@ -3,14 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
-import { fetchBundles } from '@/services/api/bundles';
 import { validatePromoCode } from '@/services/api/promo-codes';
 import { calculateSubtotal } from '@/services/cart-service';
-import CartItem from '@/components/cart/CartItem';
+import CartItem, { CartItemSkeleton } from '@/components/cart/CartItem';
+import FreeShippingProgress from '@/components/cart/FreeShippingProgress';
+import { useCartBundles, useFreeShippingThreshold, useIsClient } from '@/components/cart/useCartData';
 import PromoCodeInput from '@/components/cart/PromoCodeInput';
 import CartSummary from '@/components/cart/CartSummary';
 import Button from '@/components/ui/Button';
-import type { Bundle, PromoValidation } from '@/types';
+import type { PromoValidation } from '@/types';
 import { COLLECTION_HREF } from '@/lib/constants';
 
 export default function CartPage() {
@@ -18,26 +19,24 @@ export default function CartPage() {
   const tCommon = useTranslations('common');
   const locale = useLocale();
   const items = useCartStore((state) => state.items);
-  const isHydrated = useCartStore((state) => state.isHydrated);
+  const storeHydrated = useCartStore((state) => state.isHydrated);
+  // Wait for mount as well: the persisted cart is read synchronously on the client,
+  // and rendering it during hydration would not match the server HTML.
+  const isClient = useIsClient();
+  const isHydrated = storeHydrated && isClient;
 
   const promoCode = useCartStore((state) => state.promoCode);
   const removePromo = useCartStore((state) => state.removePromo);
 
-  const [bundles, setBundles] = useState<Bundle[]>([]);
-  const [loading, setLoading] = useState(true);
   const [promoValidation, setPromoValidation] = useState<PromoValidation | null>(null);
 
-  useEffect(() => {
-    if (!isHydrated) return;
-    if (items.length === 0) {
-      setLoading(false);
-      return;
-    }
-    fetchBundles(locale)
-      .then(setBundles)
-      .catch(() => setBundles([]))
-      .finally(() => setLoading(false));
-  }, [isHydrated, items.length, locale]);
+  // Cached bundle list (sessionStorage, 5 min) renders prices right after hydration;
+  // the API revalidates it in the background. See services/cart-service.ts.
+  const hasItems = isHydrated && items.length > 0;
+  const { bundles: loadedBundles, error: bundlesError } = useCartBundles(locale, hasItems);
+  const freeThreshold = useFreeShippingThreshold(locale, hasItems);
+  const bundles = loadedBundles ?? [];
+  const pricesReady = loadedBundles !== null;
 
   const subtotal = calculateSubtotal(items, bundles);
 
@@ -59,8 +58,8 @@ export default function CartPage() {
       });
   }, [promoCode, subtotal, locale, removePromo]);
 
-  // Show nothing while hydrating
-  if (!isHydrated || loading) {
+  // Until the persisted cart is read we don't know if it's empty.
+  if (!isHydrated) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-12">
         <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
@@ -118,12 +117,21 @@ export default function CartPage() {
         {t('title')}
       </h1>
 
-      {/* Free shipping note */}
-      <div className="bg-teal-pale/40 border border-teal/10 rounded-[--radius-md] px-4 py-3 mb-8">
-        <p className="text-sm text-teal-deep font-medium text-center">
-          {t('freeShippingNote')}
+      {/* Free shipping progress (threshold from the shipping methods API) */}
+      {pricesReady && (
+        <FreeShippingProgress
+          subtotal={subtotal}
+          threshold={freeThreshold}
+          locale={locale}
+          className="mb-8"
+        />
+      )}
+
+      {bundlesError && (
+        <p className="mb-8 rounded-[--radius-md] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">
+          {t('loadError')}
         </p>
-      </div>
+      )}
 
       {/* Two-column layout */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -131,15 +139,19 @@ export default function CartPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Cart items */}
           <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
-            {items.map((item) => (
-              <CartItem
-                key={item.bundleId}
-                bundleId={item.bundleId}
-                quantity={item.quantity}
-                locale={locale}
-                bundle={bundles.find((b) => b.id === item.bundleId)}
-              />
-            ))}
+            {items.map((item) =>
+              pricesReady ? (
+                <CartItem
+                  key={item.bundleId}
+                  bundleId={item.bundleId}
+                  quantity={item.quantity}
+                  locale={locale}
+                  bundle={bundles.find((b) => b.id === item.bundleId)}
+                />
+              ) : (
+                <CartItemSkeleton key={item.bundleId} quantity={item.quantity} />
+              )
+            )}
           </div>
 
           {/* Promo code */}
@@ -154,11 +166,15 @@ export default function CartPage() {
 
         {/* Right column: Summary */}
         <div className="lg:col-span-1">
-          <CartSummary
-            locale={locale}
-            bundles={bundles}
-            promoValidation={promoValidation}
-          />
+          {pricesReady ? (
+            <CartSummary
+              locale={locale}
+              bundles={bundles}
+              promoValidation={promoValidation}
+            />
+          ) : (
+            <div className="h-72 rounded-[--radius-lg] bg-gray-50 animate-pulse" aria-hidden="true" />
+          )}
         </div>
       </div>
     </div>

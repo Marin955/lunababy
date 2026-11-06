@@ -3,7 +3,7 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
-import { calculateSubtotal } from '@/services/cart-service';
+import { calculateBundleSavings, calculateSubtotal } from '@/services/cart-service';
 import { formatPrice } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { Link } from '@/i18n/navigation';
@@ -26,13 +26,7 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
   const promoDiscount = promoValidation?.valid ? (promoValidation.discount_amount ?? 0) : 0;
 
   // Calculate savings from bundle discounts (original_price vs price)
-  const bundleSavings = items.reduce((sum, item) => {
-    const bundle = bundles.find((b) => b.id === item.bundleId);
-    if (bundle?.original_price) {
-      return sum + (bundle.original_price - bundle.price) * item.quantity;
-    }
-    return sum;
-  }, 0);
+  const bundleSavings = calculateBundleSavings(items, bundles);
 
   // Full price before any discounts
   const fullPrice = subtotal + bundleSavings;
@@ -61,15 +55,15 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
       {/* Promo code discount */}
       {promoDiscount > 0 && (
         <div className="flex justify-between text-sm">
-          <span className="text-teal-deep">{t('discount')}</span>
-          <span className="font-medium text-teal-deep">-{formatPrice(promoDiscount, locale)}</span>
+          <span className="text-[var(--color-teal-ink,#3F7C87)]">{t('discount')}</span>
+          <span className="font-medium tabular-nums text-[var(--color-teal-ink,#3F7C87)]">-{formatPrice(promoDiscount, locale)}</span>
         </div>
       )}
 
       {/* Shipping */}
       <div className="flex justify-between text-sm">
         <span className="text-text-mid">{t('shipping')}</span>
-        <span className="text-text-light text-xs">{t('shippingAtCheckout')}</span>
+        <span className="text-text-mid text-[13px]">{t('shippingAtCheckout')}</span>
       </div>
 
       {/* Divider */}
@@ -91,7 +85,7 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
       <div className="text-center">
         <Link
           href={COLLECTION_HREF}
-          className="text-sm text-teal-deep hover:text-teal transition-colors font-medium"
+          className="inline-flex min-h-[44px] items-center text-sm font-semibold text-[var(--color-teal-ink,#3F7C87)] hover:underline underline-offset-2"
         >
           {tCommon('buttons.continueShopping')}
         </Link>
