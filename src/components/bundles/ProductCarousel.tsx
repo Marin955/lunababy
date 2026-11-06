@@ -2,7 +2,9 @@
 
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import type { BundleItem } from '@/types';
+import { buildSlides } from '@/components/bundles/product-page';
 
 interface ProductCarouselProps {
   bundleImage: string | null;
@@ -11,12 +13,6 @@ interface ProductCarouselProps {
   emoji: string;
   colorFrom: string;
   colorTo: string;
-}
-
-interface Slide {
-  type: 'bundle' | 'product';
-  src: string | null;
-  alt: string;
 }
 
 function getGradientClasses(colorFrom: string, colorTo: string): string {
@@ -40,6 +36,11 @@ function getGradientClasses(colorFrom: string, colorTo: string): string {
   return `${fromMap[colorFrom] || 'from-teal-pale'} ${toMap[colorTo] || 'to-lavender-pale'}`;
 }
 
+function scrollBehavior(): ScrollBehavior {
+  if (typeof window === 'undefined') return 'auto';
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+}
+
 export default function ProductCarousel({
   bundleImage,
   bundleName,
@@ -48,43 +49,27 @@ export default function ProductCarousel({
   colorFrom,
   colorTo,
 }: ProductCarouselProps) {
+  const t = useTranslations('bundle.gallery');
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const slides: Slide[] = [
-    { type: 'bundle', src: bundleImage, alt: bundleName },
-    ...items
-      .filter((item) => item.image_path)
-      .map((item) => ({
-        type: 'product' as const,
-        src: item.image_path,
-        alt: item.name,
-      })),
-  ];
-
+  const slides = buildSlides(bundleImage, bundleName, items);
   const totalSlides = slides.length;
   const hasMultiple = totalSlides > 1;
 
-  const scrollToIndex = useCallback(
-    (index: number) => {
-      const container = scrollRef.current;
-      if (!container) return;
-      const slideWidth = container.offsetWidth;
-      container.scrollTo({ left: slideWidth * index, behavior: 'smooth' });
-    },
-    []
-  );
+  const goTo = useCallback((index: number) => {
+    const container = scrollRef.current;
+    setCurrentIndex(index);
+    if (!container) return;
+    container.scrollTo({ left: container.offsetWidth * index, behavior: scrollBehavior() });
+  }, []);
 
   function handlePrev() {
-    const newIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
+    goTo(currentIndex === 0 ? totalSlides - 1 : currentIndex - 1);
   }
 
   function handleNext() {
-    const newIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-    scrollToIndex(newIndex);
+    goTo(currentIndex === totalSlides - 1 ? 0 : currentIndex + 1);
   }
 
   useEffect(() => {
@@ -93,101 +78,121 @@ export default function ProductCarousel({
 
     function onScroll() {
       if (!container) return;
-      const slideWidth = container.offsetWidth;
-      const index = Math.round(container.scrollLeft / slideWidth);
-      setCurrentIndex(index);
+      setCurrentIndex(Math.round(container.scrollLeft / container.offsetWidth));
     }
 
     container.addEventListener('scroll', onScroll, { passive: true });
     return () => container.removeEventListener('scroll', onScroll);
   }, []);
 
-  const gradientClasses = getGradientClasses(colorFrom, colorTo);
+  // No photos at all: decorative fallback (gradient + emoji).
+  if (totalSlides === 0) {
+    return (
+      <div
+        className={`aspect-square rounded-[--radius-xl] flex items-center justify-center bg-gradient-to-br ${getGradientClasses(colorFrom, colorTo)}`}
+      >
+        <span className="text-[120px] sm:text-[160px]" aria-hidden="true">{emoji}</span>
+      </div>
+    );
+  }
+
+  const arrowClasses =
+    'absolute top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/90 backdrop-blur-sm shadow-md items-center justify-center text-text-dark hover:bg-white transition-colors cursor-pointer hidden sm:flex focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-deep';
 
   return (
-    <div className="relative rounded-[--radius-xl] overflow-hidden">
-      {/* Scrollable container */}
-      <div
-        ref={scrollRef}
-        className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-      >
-        {slides.map((slide, i) => (
-          <div
-            key={i}
-            className="flex-shrink-0 w-full snap-center"
-          >
-            <div className={`relative min-h-[400px] lg:min-h-[500px] flex items-center justify-center ${
-              slide.src ? 'bg-gray-50' : `bg-gradient-to-br ${gradientClasses}`
-            }`}>
-              {slide.src ? (
+    <div>
+      <div className="relative rounded-[--radius-xl] overflow-hidden bg-white" aria-roledescription="carousel" aria-label={bundleName}>
+        {/* Scrollable container: native swipe with scroll snapping on touch devices */}
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {slides.map((slide, i) => (
+            <div
+              key={`${i}-${slide.src}`}
+              className="flex-shrink-0 w-full snap-center"
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} / ${totalSlides}`}
+            >
+              <div className="relative aspect-square">
                 <Image
                   src={slide.src}
                   alt={slide.alt}
                   fill
-                  className="object-cover"
+                  className={slide.type === 'bundle' ? 'object-cover' : 'object-contain p-6'}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   priority={i === 0}
                 />
-              ) : (
-                <span className="text-[120px] sm:text-[160px]">{emoji}</span>
-              )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Arrow buttons (desktop) */}
-      {hasMultiple && (
-        <>
-          <button
-            type="button"
-            onClick={handlePrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center text-text-dark hover:bg-white transition-colors cursor-pointer hidden sm:flex"
-            aria-label="Previous image"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={handleNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm shadow-md flex items-center justify-center text-text-dark hover:bg-white transition-colors cursor-pointer hidden sm:flex"
-            aria-label="Next image"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </>
-      )}
-
-      {/* Dot indicators */}
-      {hasMultiple && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => {
-                setCurrentIndex(i);
-                scrollToIndex(i);
-              }}
-              className={`w-2.5 h-2.5 rounded-full transition-all cursor-pointer ${
-                i === currentIndex ? 'bg-white scale-110 shadow-md' : 'bg-white/50'
-              }`}
-              aria-label={`Go to image ${i + 1}`}
-            />
           ))}
         </div>
-      )}
 
-      {/* Image label */}
+        {hasMultiple && (
+          <>
+            <button type="button" onClick={handlePrev} className={`${arrowClasses} left-3`} aria-label={t('previous')}>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button type="button" onClick={handleNext} className={`${arrowClasses} right-3`} aria-label={t('next')}>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Dots (mobile; thumbnails take over from sm up) */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex sm:hidden">
+              {slides.map((slide, i) => (
+                <button
+                  key={`${i}-${slide.src}`}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  className="w-6 h-6 flex items-center justify-center cursor-pointer"
+                  aria-label={t('goTo', { index: i + 1 })}
+                  aria-current={i === currentIndex ? 'true' : undefined}
+                >
+                  <span
+                    className={`block w-2.5 h-2.5 rounded-full shadow ${i === currentIndex ? 'bg-text-dark' : 'bg-white border border-gray-300'}`}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <div className="absolute bottom-3 right-3 bg-black/55 text-white text-[13px] font-semibold px-2.5 py-1 rounded-full" aria-hidden="true">
+              {currentIndex + 1} / {totalSlides}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Thumbnails (sm and up) */}
       {hasMultiple && (
-        <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-full">
-          {currentIndex + 1} / {totalSlides}
-        </div>
+        <ul className="hidden sm:flex flex-wrap gap-3 mt-4" aria-label={t('thumbnails')}>
+          {slides.map((slide, i) => (
+            <li key={`${i}-${slide.src}`}>
+              <button
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={slide.alt}
+                aria-current={i === currentIndex ? 'true' : undefined}
+                className={`relative block w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-[--radius-sm] overflow-hidden bg-white border-2 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-deep ${
+                  i === currentIndex ? 'border-text-dark' : 'border-transparent hover:border-gray-300'
+                }`}
+              >
+                <Image
+                  src={slide.src}
+                  alt=""
+                  fill
+                  sizes="72px"
+                  className={slide.type === 'bundle' ? 'object-cover' : 'object-contain p-1'}
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

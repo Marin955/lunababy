@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_07_002205) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_003621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -171,11 +171,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_07_002205) do
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "active", default: true, null: false
+    t.string "age_range_en"
+    t.string "age_range_hr"
+    t.string "brand"
+    t.text "care_instructions_en"
+    t.text "care_instructions_hr"
+    t.string "certifications", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.text "description_en"
     t.text "description_hr"
+    t.string "dimensions"
     t.string "image_path"
     t.integer "low_stock_threshold", default: 5, null: false
+    t.text "material_en"
+    t.text "material_hr"
     t.integer "msrp", default: 0, null: false
     t.string "name_en", null: false
     t.string "name_hr", null: false
@@ -205,6 +214,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_07_002205) do
     t.datetime "updated_at", null: false
     t.integer "value"
     t.index ["code"], name: "index_promo_codes_on_code", unique: true
+  end
+
+  create_table "reviews", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "approved_at"
+    t.string "author_display_name", null: false
+    t.text "body"
+    t.uuid "bundle_id", null: false
+    t.datetime "created_at", null: false
+    t.string "locale", default: "hr", null: false
+    t.uuid "order_id", null: false
+    t.integer "rating"
+    t.integer "status", default: 0, null: false
+    t.datetime "submitted_at"
+    t.string "title"
+    t.string "token", null: false
+    t.datetime "token_expires_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bundle_id", "status", "approved_at"], name: "index_reviews_on_bundle_id_and_status_and_approved_at"
+    t.index ["order_id", "bundle_id"], name: "index_reviews_on_order_id_and_bundle_id", unique: true
+    t.index ["token"], name: "index_reviews_on_token", unique: true
+    t.check_constraint "rating IS NULL OR rating >= 1 AND rating <= 5", name: "reviews_rating_range"
   end
 
   create_table "shipments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -392,6 +422,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_07_002205) do
   add_foreign_key "orders", "promo_codes"
   add_foreign_key "orders", "shipping_methods"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "bundles"
+  add_foreign_key "reviews", "orders"
   add_foreign_key "shipments", "orders"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

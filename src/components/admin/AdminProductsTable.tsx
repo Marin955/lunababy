@@ -20,6 +20,57 @@ interface EditFields {
   description_hr: string;
   description_en: string;
   low_stock_threshold: number;
+  // Catalog specs (owner input). Certifications are edited as a comma-separated string.
+  brand: string;
+  material_hr: string;
+  material_en: string;
+  dimensions: string;
+  age_range_hr: string;
+  age_range_en: string;
+  certifications: string;
+  care_instructions_hr: string;
+  care_instructions_en: string;
+}
+
+const EMPTY_FIELDS: EditFields = {
+  name_hr: '', name_en: '', description_hr: '', description_en: '', low_stock_threshold: 5,
+  brand: '', material_hr: '', material_en: '', dimensions: '', age_range_hr: '', age_range_en: '',
+  certifications: '', care_instructions_hr: '', care_instructions_en: '',
+};
+
+type SpecField = Exclude<keyof EditFields, 'name_hr' | 'name_en' | 'description_hr' | 'description_en' | 'low_stock_threshold'>;
+
+// Spec inputs in the edit form: [field, label key, multiline]
+const SPEC_INPUTS: [SpecField, string, boolean][] = [
+  ['brand', 'brand', false],
+  ['dimensions', 'dimensions', false],
+  ['material_hr', 'materialHr', true],
+  ['material_en', 'materialEn', true],
+  ['age_range_hr', 'ageRangeHr', false],
+  ['age_range_en', 'ageRangeEn', false],
+  ['certifications', 'certifications', false],
+  ['care_instructions_hr', 'careHr', true],
+  ['care_instructions_en', 'careEn', true],
+];
+
+function parseCertifications(value: string): string[] {
+  return Array.from(new Set(value.split(',').map((c) => c.trim()).filter(Boolean)));
+}
+
+/** Read-only spec rows for the expanded product, skipping empty values. */
+function specRows(product: AdminProduct, t: (key: string) => string): [string, string][] {
+  const rows: [string, string | null][] = [
+    [t('brand'), product.brand],
+    [t('dimensions'), product.dimensions],
+    [t('materialHr'), product.material_hr],
+    [t('materialEn'), product.material_en],
+    [t('ageRangeHr'), product.age_range_hr],
+    [t('ageRangeEn'), product.age_range_en],
+    [t('certifications'), product.certifications?.length ? product.certifications.join(', ') : null],
+    [t('careHr'), product.care_instructions_hr],
+    [t('careEn'), product.care_instructions_en],
+  ];
+  return rows.filter((row): row is [string, string] => Boolean(row[1]));
 }
 
 export default function AdminProductsTable({ products, onStockUpdated, onProductUpdated }: AdminProductsTableProps) {
@@ -28,8 +79,9 @@ export default function AdminProductsTable({ products, onStockUpdated, onProduct
   const [adjustingProduct, setAdjustingProduct] = useState<AdminProduct | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [editFields, setEditFields] = useState<EditFields>({ name_hr: '', name_en: '', description_hr: '', description_en: '', low_stock_threshold: 5 });
+  const [editFields, setEditFields] = useState<EditFields>(EMPTY_FIELDS);
   const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
 
   function startEdit(product: AdminProduct) {
     setEditingId(product.id);
@@ -39,16 +91,31 @@ export default function AdminProductsTable({ products, onStockUpdated, onProduct
       description_hr: product.description_hr || '',
       description_en: product.description_en || '',
       low_stock_threshold: product.low_stock_threshold,
+      brand: product.brand || '',
+      material_hr: product.material_hr || '',
+      material_en: product.material_en || '',
+      dimensions: product.dimensions || '',
+      age_range_hr: product.age_range_hr || '',
+      age_range_en: product.age_range_en || '',
+      certifications: (product.certifications || []).join(', '),
+      care_instructions_hr: product.care_instructions_hr || '',
+      care_instructions_en: product.care_instructions_en || '',
     });
+    setSaveError(false);
   }
 
   async function saveEdit(id: string) {
     if (!token || saving) return;
     setSaving(true);
+    setSaveError(false);
     try {
-      const updated = await updateAdminProduct(id, editFields, token);
+      // Blank strings are stored as NULL by the API, so the storefront hides them.
+      const payload = { ...editFields, certifications: parseCertifications(editFields.certifications) };
+      const updated = await updateAdminProduct(id, payload, token);
       onProductUpdated(updated);
       setEditingId(null);
+    } catch {
+      setSaveError(true);
     } finally {
       setSaving(false);
     }
@@ -234,6 +301,43 @@ export default function AdminProductsTable({ products, onStockUpdated, onProduct
                                       className="w-24 px-2 py-1.5 border border-gray-200 rounded text-sm"
                                     />
                                   </div>
+                                  <div className="pt-3 mt-3 border-t border-gray-200 space-y-2">
+                                    <h5 className="font-medium text-text-dark text-sm">{t('specs')}</h5>
+                                    <p className="text-xs text-text-mid">{t('specsHint')}</p>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                      {SPEC_INPUTS.map(([field, labelKey, multiline]) => {
+                                        const inputId = `product-${product.id}-${field}`;
+                                        return (
+                                          <div key={field}>
+                                            <label htmlFor={inputId} className="text-xs text-text-mid">{t(labelKey)}</label>
+                                            {multiline ? (
+                                              <textarea
+                                                id={inputId}
+                                                value={editFields[field]}
+                                                onChange={(e) => setEditFields((p) => ({ ...p, [field]: e.target.value }))}
+                                                rows={2}
+                                                className="w-full px-2 py-1.5 border border-gray-200 rounded text-sm"
+                                              />
+                                            ) : (
+                                              <input
+                                                id={inputId}
+                                                type="text"
+                                                value={editFields[field]}
+                                                onChange={(e) => setEditFields((p) => ({ ...p, [field]: e.target.value }))}
+                                                className="w-full px-2 py-1.5 border border-gray-200 rounded text-sm"
+                                              />
+                                            )}
+                                            {field === 'certifications' && (
+                                              <p className="text-xs text-text-mid mt-0.5">{t('certificationsHint')}</p>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                  {saveError && (
+                                    <p className="text-xs text-red-700" role="alert">{t('saveError')}</p>
+                                  )}
                                   <div className="flex gap-2 pt-1">
                                     <button type="button" onClick={() => saveEdit(product.id)} disabled={saving} className="text-xs text-teal-deep font-medium cursor-pointer disabled:opacity-50">
                                       {saving ? '...' : t('save')}
@@ -257,6 +361,21 @@ export default function AdminProductsTable({ products, onStockUpdated, onProduct
                                   <div><span className="text-text-light">EN:</span> <span className="text-text-dark">{product.name_en}</span></div>
                                   {product.description_hr && (
                                     <p className="text-text-mid text-xs mt-2">{product.description_hr}</p>
+                                  )}
+                                </div>
+                                <div className="pt-3 mt-3 border-t border-gray-200">
+                                  <h4 className="font-medium text-text-dark text-sm mb-2">{t('specs')}</h4>
+                                  {specRows(product, t).length > 0 ? (
+                                    <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+                                      {specRows(product, t).map(([label, value]) => (
+                                        <React.Fragment key={label}>
+                                          <dt className="text-text-mid">{label}</dt>
+                                          <dd className="text-text-dark whitespace-pre-line">{value}</dd>
+                                        </React.Fragment>
+                                      ))}
+                                    </dl>
+                                  ) : (
+                                    <p className="text-xs text-text-mid">{t('noSpecs')}</p>
                                   )}
                                 </div>
                               </>

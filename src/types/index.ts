@@ -36,6 +36,13 @@ export interface BundleItem {
   description: string;
   quantity: number;
   image_path: string | null;
+  // Catalog specs (owner-filled; null / [] when unknown, and then hidden)
+  brand: string | null;
+  material: string | null;
+  dimensions: string | null;
+  age_range: string | null;
+  certifications: string[];
+  care_instructions: string | null;
 }
 
 // Cart (client-side)
@@ -253,4 +260,14 @@ export interface AdminProduct {
   active: boolean;
   position: number;
   bundles: { id: string; name_hr: string; name_en: string; slug: string }[];
+  // Catalog specs shown on the product page (owner input O7)
+  brand: string | null;
+  material_hr: string | null;
+  material_en: string | null;
+  dimensions: string | null;
+  age_range_hr: string | null;
+  age_range_en: string | null;
+  certifications: string[];
+  care_instructions_hr: string | null;
+  care_instructions_en: string | null;
 }
