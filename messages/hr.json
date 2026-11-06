@@ -139,8 +139,9 @@
       "standard": "Standardna dostava",
       "express": "Ekspresna dostava",
       "pickup": "Preuzimanje na paketomatu",
-      "businessDays": "radnih dana",
-      "free": "Besplatno"
+      "free": "Besplatno",
+      "deliveryTime": "{range} {upper, plural, one {radni dan} few {radna dana} other {radnih dana}}",
+      "unavailable": "Načini dostave trenutno se ne mogu učitati. Osvježite stranicu ili nam se javite."
     },
     "orderSummary": "Pregled narudžbe",
     "savedAddresses": "Koristi spremljenu adresu",
@@ -151,11 +152,44 @@
       "invalidPhone": "Unesite valjani telefonski broj",
       "invalidPostalCode": "Unesite valjani poštanski broj (5 znamenki)",
       "orderFailed": "Došlo je do greške pri stvaranju narudžbe. Pokušajte ponovo.",
-      "paymentFailed": "Plaćanje trenutno nije moguće pokrenuti. Pokušajte ponovo za nekoliko minuta."
+      "paymentFailed": "Plaćanje trenutno nije moguće pokrenuti. Pokušajte ponovo za nekoliko minuta.",
+      "shippingMethod": "Odaberite način dostave",
+      "pickupPoint": "Odaberite paketomat ili upišite njegov naziv ili šifru",
+      "terms": "Za nastavak prihvatite Uvjete poslovanja",
+      "summary": "{count, plural, one {Ispravite # označeno polje.} few {Ispravite # označena polja.} other {Ispravite # označenih polja.}}"
     },
     "paymentCancelled": "Plaćanje je otkazano i narudžba nije poslana. Možete pokušati ponovo.",
     "redirecting": "Preusmjeravamo vas na sigurno plaćanje…",
-    "securePayment": "Plaćanje karticom, Apple Payom ili Google Payom preko sigurne Stripe stranice."
+    "securePayment": "Plaćanje karticom, Apple Payom ili Google Payom preko sigurne Stripe stranice.",
+    "submit": "Naruči i plati",
+    "opensInNewTab": "(otvara se u novoj kartici)",
+    "steps": {
+      "contact": "Kontakt podaci",
+      "address": "Adresa dostave",
+      "pickup": "Paketomat",
+      "billingAddress": "Adresa za račun",
+      "note": "Napomena"
+    },
+    "pickup": {
+      "provider": "Mreža paketomata",
+      "openMap": "Odaberi paketomat na karti",
+      "manualLabel": "Naziv ili šifra {provider} paketomata",
+      "manualPlaceholder": "npr. naziv lokacije ili šifra paketomata",
+      "manualHint": "Paketomat potražite na <link>karti {provider} paketomata</link> i ovdje upišite njegov naziv ili šifru.",
+      "confirm": "Potvrdi",
+      "selected": "Odabrani {provider} paketomat",
+      "code": "Šifra: {code}",
+      "change": "Promijeni",
+      "changeLabel": "Promijeni paketomat",
+      "billingHint": "Paket stiže u odabrani paketomat, a adresa nam treba za račun."
+    },
+    "terms": {
+      "label": "Pročitao/la sam i prihvaćam <terms>Uvjete poslovanja</terms> i <withdrawal>pravo na jednostrani raskid ugovora</withdrawal>."
+    },
+    "summary": {
+      "show": "Prikaži pregled narudžbe",
+      "hide": "Sakrij pregled narudžbe"
+    }
   },
   "confirmation": {
     "title": "Hvala na narudžbi!",
@@ -168,7 +202,12 @@
     "pendingMessage": "Plaćanje se obrađuje. Ova stranica će se osvježiti čim ga banka potvrdi, a potvrdu ćemo vam poslati i na email.",
     "notPaidTitle": "Plaćanje nije dovršeno",
     "notPaidMessage": "Narudžba nije plaćena pa je nismo poslali. Proizvodi su i dalje u vašoj košarici.",
-    "backToCart": "Natrag u košaricu"
+    "backToCart": "Natrag u košaricu",
+    "deliveryTitle": "Dostava",
+    "deliveryMethod": "Način dostave",
+    "pickupPoint": "Paketomat",
+    "deliveryAddress": "Adresa dostave",
+    "pickupCode": "Šifra: {code}"
   },
   "newsletter": {
     "title": "Pridružite se LunaBaby obitelji",

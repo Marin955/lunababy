@@ -68,8 +68,10 @@ export interface ShippingMethod {
   carrier: string;
   description: string;
   price: number; // cents
-  estimated_days: string;
+  estimated_days: string; // e.g. "3-5" or "2"
   free_threshold: number | null;
+  /** The customer must choose a parcel locker for this method. */
+  requires_pickup_point: boolean;
 }
 
 // Order
@@ -88,9 +90,11 @@ export interface Order {
   language: string;
   note: string | null;
   created_at: string;
+  terms_accepted_at: string | null;
   shipping_address: ShippingAddress;
+  pickup_point: OrderPickupPoint | null;
   items: OrderItem[];
-  shipping_method: { slug: string; name: string; price: number };
+  shipping_method: { slug: string; name: string; price: number; requires_pickup_point: boolean };
   promo_code: { code: string; discount_type: string; value: number } | null;
   shipment: Shipment | null;
 }
@@ -105,6 +109,16 @@ export type OrderStatus =
   | 'delivered'
   | 'cancelled'
   | 'refunded';
+
+export type OrderPickupPointProvider = 'boxnow' | 'gls';
+
+/** The parcel locker an order is delivered to. */
+export interface OrderPickupPoint {
+  provider: OrderPickupPointProvider;
+  id: string;
+  name: string;
+  address: string | null;
+}
 
 export interface ShippingAddress {
   first_name: string;

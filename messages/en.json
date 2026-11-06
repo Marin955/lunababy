@@ -139,8 +139,9 @@
       "standard": "Standard Shipping",
       "express": "Express Shipping",
       "pickup": "Parcel Locker Pickup",
-      "businessDays": "business days",
-      "free": "Free"
+      "free": "Free",
+      "deliveryTime": "{range} {upper, plural, one {business day} other {business days}}",
+      "unavailable": "Delivery methods could not be loaded. Please refresh the page or contact us."
     },
     "orderSummary": "Order Summary",
     "savedAddresses": "Use saved address",
@@ -151,11 +152,44 @@
       "invalidPhone": "Please enter a valid phone number",
       "invalidPostalCode": "Please enter a valid postal code (5 digits)",
       "orderFailed": "There was an error creating your order. Please try again.",
-      "paymentFailed": "Payment could not be started right now. Please try again in a few minutes."
+      "paymentFailed": "Payment could not be started right now. Please try again in a few minutes.",
+      "shippingMethod": "Please choose a delivery method",
+      "pickupPoint": "Please choose a parcel locker or enter its name or code",
+      "terms": "Please accept the Terms of Sale to continue",
+      "summary": "{count, plural, one {Please fix # highlighted field.} other {Please fix # highlighted fields.}}"
     },
     "paymentCancelled": "Payment was cancelled and the order was not placed. You can try again.",
     "redirecting": "Redirecting you to secure payment…",
-    "securePayment": "Pay by card, Apple Pay or Google Pay on a secure Stripe page."
+    "securePayment": "Pay by card, Apple Pay or Google Pay on a secure Stripe page.",
+    "submit": "Place order and pay",
+    "opensInNewTab": "(opens in a new tab)",
+    "steps": {
+      "contact": "Contact details",
+      "address": "Delivery address",
+      "pickup": "Parcel locker",
+      "billingAddress": "Billing address",
+      "note": "Note"
+    },
+    "pickup": {
+      "provider": "Locker network",
+      "openMap": "Choose a locker on the map",
+      "manualLabel": "{provider} locker name or code",
+      "manualPlaceholder": "e.g. location name or locker code",
+      "manualHint": "Find a locker on the <link>{provider} locker map</link> and enter its name or code here.",
+      "confirm": "Confirm",
+      "selected": "Selected {provider} locker",
+      "code": "Code: {code}",
+      "change": "Change",
+      "changeLabel": "Change parcel locker",
+      "billingHint": "Your parcel goes to the chosen locker; we need your address for the invoice."
+    },
+    "terms": {
+      "label": "I have read and accept the <terms>Terms of Sale</terms> and the <withdrawal>right of withdrawal</withdrawal>."
+    },
+    "summary": {
+      "show": "Show order summary",
+      "hide": "Hide order summary"
+    }
   },
   "confirmation": {
     "title": "Thank you for your order!",
@@ -168,7 +202,12 @@
     "pendingMessage": "Your payment is being processed. This page will update as soon as your bank confirms it, and we will email you a confirmation.",
     "notPaidTitle": "Payment not completed",
     "notPaidMessage": "The order was not paid, so it has not been placed. Your items are still in your cart.",
-    "backToCart": "Back to cart"
+    "backToCart": "Back to cart",
+    "deliveryTitle": "Delivery",
+    "deliveryMethod": "Delivery method",
+    "pickupPoint": "Parcel locker",
+    "deliveryAddress": "Delivery address",
+    "pickupCode": "Code: {code}"
   },
   "newsletter": {
     "title": "Join the LunaBaby Family",
