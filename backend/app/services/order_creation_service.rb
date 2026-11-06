@@ -9,12 +9,15 @@ class OrderCreationService
   end
 
   def call
+    raise Error, "Terms of sale must be accepted" unless terms_accepted?
+
     ActiveRecord::Base.transaction do
       bundles = lock_and_validate_bundles!
       subtotal = calculate_subtotal(bundles)
       promo = resolve_promo_code(subtotal)
       discount_amount = calculate_discount(promo, subtotal)
       shipping_method = ShippingMethod.find(params[:shipping_method_id])
+      validate_pickup_point!(shipping_method)
       shipping_cost = calculate_shipping_cost(shipping_method, subtotal, promo)
       total = subtotal - discount_amount + shipping_cost
 
@@ -38,6 +41,36 @@ class OrderCreationService
   end
 
   private
+
+  def terms_accepted?
+    ActiveModel::Type::Boolean.new.cast(params[:terms_accepted]) == true
+  end
+
+  def pickup_point_params
+    params[:pickup_point] || {}
+  end
+
+  def validate_pickup_point!(shipping_method)
+    return unless shipping_method.requires_pickup_point?
+
+    point = pickup_point_params
+    raise Error, "Pickup point is required" if point[:id].blank? || point[:name].blank?
+    raise Error, "Pickup point provider is invalid" unless Order::PICKUP_POINT_PROVIDERS.include?(point[:provider])
+  end
+
+  # Only stored for methods that deliver to a locker, so a stale selection from
+  # the form can never end up on a home-delivery order.
+  def pickup_point_attributes(shipping_method)
+    return {} unless shipping_method.requires_pickup_point?
+
+    point = pickup_point_params
+    {
+      pickup_point_provider: point[:provider],
+      pickup_point_id: point[:id].to_s.strip,
+      pickup_point_name: point[:name].to_s.strip,
+      pickup_point_address: point[:address].to_s.strip.presence
+    }
+  end
 
   def lock_and_validate_bundles!
     items = params[:items]
@@ -132,7 +165,9 @@ class OrderCreationService
       total: total,
       language: params[:language] || "hr",
       note: params[:note],
-      status: :pending
+      terms_accepted_at: Time.current,
+      status: :pending,
+      **pickup_point_attributes(shipping_method)
     )
   end
 

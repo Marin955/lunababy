@@ -3,7 +3,18 @@ class OrderSerializer
 
   attributes :id, :order_number, :status, :payment_status, :paid_at, :customer_email, :customer_name,
              :subtotal, :discount_amount, :shipping_cost, :total,
-             :language, :note, :created_at
+             :language, :note, :created_at, :terms_accepted_at
+
+  attribute :pickup_point do |order|
+    next nil unless order.pickup_point?
+
+    {
+      provider: order.pickup_point_provider,
+      id: order.pickup_point_id,
+      name: order.pickup_point_name,
+      address: order.pickup_point_address
+    }
+  end
 
   attribute :shipping_address do |order|
     {
@@ -29,7 +40,8 @@ class OrderSerializer
     {
       slug: sm.slug,
       name: locale == "en" ? sm.name_en : sm.name_hr,
-      price: sm.price
+      price: sm.price,
+      requires_pickup_point: sm.requires_pickup_point
     }
   end
 

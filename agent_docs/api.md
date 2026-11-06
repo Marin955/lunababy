@@ -99,7 +99,7 @@ Returns bundle with items.
 { "data": [{
   "id": "uuid", "slug": "standard", "name": "...", "carrier": "Hrvatska Pošta",
   "description": "...", "price": 350, "estimated_days": "3-5",
-  "free_threshold": 5000
+  "free_threshold": 5000, "requires_pickup_point": false
 }] }
 ```
 
@@ -135,6 +135,11 @@ Mixed auth (guest or authenticated). If authenticated, auto-associates to user.
   "language": "hr",
   "note": "...",                  // optional
   "save_address": true,           // optional, auth only
+  "terms_accepted": true,         // required: 422 unless true; stored as orders.terms_accepted_at
+  "pickup_point": {               // required when the method has requires_pickup_point (422 if missing)
+    "provider": "boxnow",         // "boxnow" | "gls"
+    "id": "locker code", "name": "...", "address": "..."   // address optional
+  },                              // ignored for home-delivery methods
   "shipping_address": {
     "first_name": "...", "last_name": "...",
     "street": "...", "city": "...", "postal_code": "...",
@@ -147,6 +152,9 @@ Mixed auth (guest or authenticated). If authenticated, auto-associates to user.
 // Response 201
 { "data": { ...OrderSerializer } }
 ```
+The shipping address stays required for pickup-point orders: it is the invoice address.
+`OrderSerializer` adds `terms_accepted_at` and `pickup_point` (`{ provider, id, name, address }` or null).
+Pickup point fields are also sent to Stripe as session/payment-intent metadata.
 
 ### GET /api/v1/orders?page=1&locale=hr
 Authenticated. Returns current user's orders (paginated, newest first).

@@ -98,6 +98,8 @@ puts "Seeding shipping methods..."
   sm.assign_attributes(attrs)
   sm.save!
 end
+# Parcel lockers: the customer picks a locker at checkout (set apart from the hash above to keep copy edits conflict-free).
+ShippingMethod.where(slug: "pickup").update_all(requires_pickup_point: true)
 
 puts "Seeding promo codes..."
 [

@@ -142,6 +142,7 @@ RSpec.describe "Discount flow", type: :request do
         customer_email: "buyer@example.com",
         customer_name: "Test User",
         shipping_method_id: shipping_method.id,
+        terms_accepted: true,
         shipping_address: {
           first_name: "Test",
           last_name: "User",

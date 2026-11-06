@@ -19,6 +19,8 @@
     <tr><td><strong>Total</strong></td><td><strong><%= number_to_currency(@order.total / 100.0, unit: "\u20AC") %></strong></td></tr>
   </table>
 
+  <%= render "order_mailer/delivery" %>
+
   <p>We'll notify you when your order ships.</p>
   <p>Luna Baby Team</p>
 <% else %>
@@ -41,6 +43,8 @@
     <tr><td>Dostava</td><td><%= number_to_currency(@order.shipping_cost / 100.0, unit: "\u20AC") %></td></tr>
     <tr><td><strong>Ukupno</strong></td><td><strong><%= number_to_currency(@order.total / 100.0, unit: "\u20AC") %></strong></td></tr>
   </table>
+
+  <%= render "order_mailer/delivery" %>
 
   <p>Obavijestit ćemo vas kada vaša narudžba bude poslana.</p>
   <p>Luna Baby tim</p>

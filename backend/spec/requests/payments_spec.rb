@@ -13,6 +13,7 @@ RSpec.describe "Stripe payments", type: :request do
       customer_name: "Ana Horvat",
       shipping_method_id: shipping.id,
       language: "hr",
+      terms_accepted: true,
       shipping_address: { first_name: "Ana", last_name: "Horvat", street: "Ilica 1", city: "Zagreb", postal_code: "10000" },
       items: [ { bundle_id: bundle.id, quantity: 1 } ]
     }
