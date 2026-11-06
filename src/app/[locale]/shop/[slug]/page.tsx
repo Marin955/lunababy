@@ -13,6 +13,9 @@ import ProductCarousel from '@/components/bundles/ProductCarousel';
 import StockStatus from '@/components/bundles/StockStatus';
 import DeliveryEstimate from '@/components/bundles/DeliveryEstimate';
 import RelatedBundles from '@/components/bundles/RelatedBundles';
+import ReviewsSection from '@/components/reviews/ReviewsSection';
+import { buildReviewJsonLd } from '@/components/reviews/review-json-ld';
+import { getBundleReviews } from '@/services/api/reviews';
 import {
   MAX_QUANTITY_PER_LINE,
   absoluteUrl,
@@ -78,11 +81,13 @@ export default async function BundleDetailPage({ params }: Props) {
   }
 
   const t = await getTranslations('bundle');
+  const reviews = await getBundleReviews(slug, locale);
   const bundleImage = getBundleImage(bundle.slug);
   const maxQuantity = Math.max(1, Math.min(MAX_QUANTITY_PER_LINE, bundle.stock_quantity));
   const jsonLd = buildProductJsonLd(bundle, {
     url: bundlePath(locale, slug),
     images: buildSlides(bundleImage, bundle.name, bundle.items).map((s) => s.src),
+    extra: buildReviewJsonLd(reviews),
   });
 
   return (
@@ -185,11 +190,8 @@ export default async function BundleDetailPage({ params }: Props) {
         </div>
       </div>
 
-      {/*
-        WS-F insertion point: render the reviews section here (between the product grid and
-        related bundles), and pass aggregateRating/review to buildProductJsonLd via `extra`
-        only when there is at least one approved review.
-      */}
+      {/* Verified-purchase reviews; renders nothing until there is an approved review. */}
+      <ReviewsSection slug={bundle.slug} locale={locale} reviews={reviews} />
 
       <RelatedBundles currentBundleId={bundle.id} locale={locale} />
     </div>

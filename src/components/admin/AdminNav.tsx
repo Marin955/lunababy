@@ -10,10 +10,12 @@ const navItems = [
   { key: 'products', href: '/admin/products' },
   { key: 'bundles', href: '/admin/bundles' },
   { key: 'promoCodes', href: '/admin/promo-codes' },
+  { key: 'reviews', href: '/admin/reviews' },
 ] as const;
 
 export default function AdminNav() {
   const t = useTranslations('admin.nav');
+  const tReviews = useTranslations('admin.reviews');
   const pathname = usePathname();
 
   return (
@@ -30,7 +32,7 @@ export default function AdminNav() {
                 : 'bg-gray-100 text-text-mid hover:bg-gray-200'
             }`}
           >
-            {t(key)}
+            {key === 'reviews' ? tReviews('nav') : t(key)}
           </Link>
         );
       })}

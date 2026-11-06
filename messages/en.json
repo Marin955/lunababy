@@ -781,6 +781,30 @@
       "products": "Products",
       "bundles": "Bundles",
       "promoCodes": "Promo Codes"
+    },
+    "reviews": {
+      "nav": "Reviews",
+      "title": "Reviews",
+      "intro": "Reviews customers sent through the link in their email. Only approved reviews appear on the site.",
+      "filterLabel": "Filter by status",
+      "filters": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "all": "All"
+      },
+      "status": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "rejected": "Rejected"
+      },
+      "stars": "Rated {rating} out of 5",
+      "approve": "Approve",
+      "reject": "Reject",
+      "empty": "No reviews with this status.",
+      "error": "Reviews couldn't be loaded or saved. Please try again.",
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "loading": "Loading...",
@@ -799,5 +823,50 @@
     "reject": "Essential only",
     "more": "Privacy details",
     "title": "Cookies"
+  },
+  "reviews": {
+    "title": "Customer reviews",
+    "count": "{count, plural, one {# review} other {# reviews}}",
+    "starsLabel": "Rated {rating} out of 5",
+    "verified": "Verified purchase",
+    "note": "Only customers who bought this bundle can review it: we email them a link after delivery. We check every review before it goes live.",
+    "showMore": "Show more reviews",
+    "loading": "Loading…",
+    "loadError": "Reviews can't be loaded right now. Please try again.",
+    "form": {
+      "pageTitle": "Review your bundle",
+      "eyebrow": "Your review",
+      "intro": "Thank you for shopping with us! Your experience helps other parents choose. We check each review before it is published.",
+      "ratingLabel": "How would you rate this bundle?",
+      "ratingOption": "{count, plural, one {# star} other {# stars}}: {name}",
+      "ratingNames": {
+        "1": "Poor",
+        "2": "Fair",
+        "3": "Good",
+        "4": "Very good",
+        "5": "Excellent"
+      },
+      "titleLabel": "Title (optional)",
+      "bodyLabel": "Your experience",
+      "bodyHint": "At least {min} characters. Written: {count}.",
+      "consent": "I agree that LunaBaby may publish this review under the name “{name}”.",
+      "submit": "Send review",
+      "submitting": "Sending…",
+      "successTitle": "Thank you!",
+      "successBody": "We've received your review. It will appear on the bundle page once we've checked it.",
+      "unavailableTitle": "This link isn't available",
+      "backToShop": "Browse bundles",
+      "errors": {
+        "rating": "Choose a rating from 1 to 5 stars.",
+        "titleTooLong": "The title can be at most {max} characters.",
+        "bodyTooShort": "Please write at least {min} characters.",
+        "bodyTooLong": "The review can be at most {max} characters.",
+        "consent": "We need your consent to publish the review.",
+        "generic": "Something went wrong. Please try again in a few minutes.",
+        "used": "This link has already been used: you've sent a review for this bundle. Thank you!",
+        "expired": "This link has expired. Review links are valid for 60 days.",
+        "notFound": "This link doesn't exist. Check that you copied the whole address from the email."
+      }
+    }
   }
 }

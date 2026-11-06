@@ -781,6 +781,30 @@
       "products": "Proizvodi",
       "bundles": "Paketi",
       "promoCodes": "Promo kodovi"
+    },
+    "reviews": {
+      "nav": "Recenzije",
+      "title": "Recenzije",
+      "intro": "Recenzije koje su kupci poslali putem poveznice iz e-pošte. Na stranici se prikazuju samo odobrene.",
+      "filterLabel": "Filtriraj po statusu",
+      "filters": {
+        "pending": "Na čekanju",
+        "approved": "Odobrene",
+        "rejected": "Odbijene",
+        "all": "Sve"
+      },
+      "status": {
+        "pending": "Na čekanju",
+        "approved": "Odobrena",
+        "rejected": "Odbijena"
+      },
+      "stars": "Ocjena {rating} od 5",
+      "approve": "Odobri",
+      "reject": "Odbij",
+      "empty": "Nema recenzija s ovim statusom.",
+      "error": "Recenzije se ne mogu učitati ili spremiti. Pokušajte ponovno.",
+      "previous": "Prethodna",
+      "next": "Sljedeća"
     }
   },
   "loading": "Učitavanje...",
@@ -799,5 +823,50 @@
     "reject": "Samo nužni",
     "more": "Više o privatnosti",
     "title": "Kolačići"
+  },
+  "reviews": {
+    "title": "Recenzije kupaca",
+    "count": "{count, plural, one {# recenzija} few {# recenzije} other {# recenzija}}",
+    "starsLabel": "Ocjena {rating} od 5",
+    "verified": "Provjerena kupnja",
+    "note": "Recenziju može napisati samo kupac ovog paketa: poveznicu mu šaljemo e-poštom nakon dostave. Svaku recenziju pregledamo prije objave.",
+    "showMore": "Prikaži još recenzija",
+    "loading": "Učitavanje…",
+    "loadError": "Recenzije se trenutačno ne mogu učitati. Pokušajte ponovno.",
+    "form": {
+      "pageTitle": "Ocijenite paket",
+      "eyebrow": "Vaša recenzija",
+      "intro": "Hvala što ste kupili kod nas! Vaše iskustvo pomaže drugim roditeljima pri odabiru. Recenziju pregledamo prije objave.",
+      "ratingLabel": "Kako biste ocijenili paket?",
+      "ratingOption": "{count, plural, one {# zvjezdica} few {# zvjezdice} other {# zvjezdica}}: {name}",
+      "ratingNames": {
+        "1": "Loše",
+        "2": "Slabo",
+        "3": "Dobro",
+        "4": "Vrlo dobro",
+        "5": "Odlično"
+      },
+      "titleLabel": "Naslov (nije obavezno)",
+      "bodyLabel": "Vaše iskustvo",
+      "bodyHint": "Najmanje {min} znakova. Napisano: {count}.",
+      "consent": "Slažem se da LunaBaby objavi ovu recenziju uz ime „{name}”.",
+      "submit": "Pošalji recenziju",
+      "submitting": "Šaljemo…",
+      "successTitle": "Hvala vam!",
+      "successBody": "Primili smo vašu recenziju. Objavit ćemo je na stranici paketa čim je pregledamo.",
+      "unavailableTitle": "Poveznica nije dostupna",
+      "backToShop": "Pogledajte pakete",
+      "errors": {
+        "rating": "Odaberite ocjenu od 1 do 5 zvjezdica.",
+        "titleTooLong": "Naslov može imati najviše {max} znakova.",
+        "bodyTooShort": "Napišite barem {min} znakova.",
+        "bodyTooLong": "Recenzija može imati najviše {max} znakova.",
+        "consent": "Za objavu recenzije potrebna je vaša suglasnost.",
+        "generic": "Nešto je pošlo po zlu. Pokušajte ponovno za nekoliko minuta.",
+        "used": "Ova je poveznica već iskorištena: recenziju za ovaj paket već ste poslali. Hvala!",
+        "expired": "Ova je poveznica istekla. Poveznice za recenziju vrijede 60 dana.",
+        "notFound": "Ova poveznica ne postoji. Provjerite jeste li kopirali cijelu adresu iz e-pošte."
+      }
+    }
   }
 }
