@@ -6,7 +6,9 @@ interface CartStore {
   items: CartItem[];
   promoCode: string | null;
   isHydrated: boolean;
-  addItem: (bundleId: string) => void;
+  /** Last add-to-cart event (not persisted). The mini-cart opens when `at` changes. */
+  lastAdded: { bundleId: string; quantity: number; at: number } | null;
+  addItem: (bundleId: string, quantity?: number) => void;
   removeItem: (bundleId: string) => void;
   updateQuantity: (bundleId: string, quantity: number) => void;
   applyPromo: (code: string) => void;
@@ -22,24 +24,29 @@ export const useCartStore = create<CartStore>()(
         items: [],
         promoCode: null,
         isHydrated: false,
+        lastAdded: null,
 
-        addItem: (bundleId: string) =>
+        addItem: (bundleId: string, quantity = 1) =>
           set(
             (state) => {
+              const qty = Math.max(1, Math.min(10, Math.floor(quantity)));
+              const lastAdded = { bundleId, quantity: qty, at: Date.now() };
               const existing = state.items.find(
                 (item) => item.bundleId === bundleId
               );
               if (existing) {
                 return {
+                  lastAdded,
                   items: state.items.map((item) =>
                     item.bundleId === bundleId
-                      ? { ...item, quantity: Math.min(item.quantity + 1, 10) }
+                      ? { ...item, quantity: Math.min(item.quantity + qty, 10) }
                       : item
                   ),
                 };
               }
               return {
-                items: [...state.items, { bundleId, quantity: 1 }],
+                lastAdded,
+                items: [...state.items, { bundleId, quantity: qty }],
               };
             },
             false,
