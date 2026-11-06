@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # Public endpoints
-      resources :bundles, only: [ :index, :show ], param: :slug
+      resources :bundles, only: [ :index, :show ], param: :slug do
+        resources :reviews, only: [ :index ]
+      end
       resources :shipping_methods, only: [ :index ]
       post "promo_codes/validate", to: "promo_codes#validate"
 
@@ -35,6 +37,10 @@ Rails.application.routes.draw do
       # Newsletter
       post "newsletter/subscribe", to: "newsletter#subscribe"
       post "contact_messages", to: "contact_messages#create"
+
+      # Verified-purchase reviews (token link from the review request email)
+      get "reviews/:token", to: "reviews#show", as: :review_form
+      post "reviews/:token", to: "reviews#create"
     end
   end
 
@@ -52,6 +58,12 @@ Rails.application.routes.draw do
       end
     end
     resources :promo_codes, only: [ :index, :create, :update ]
+    resources :reviews, only: [ :index ] do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
     get "dashboard", to: "dashboard#show"
   end
 end

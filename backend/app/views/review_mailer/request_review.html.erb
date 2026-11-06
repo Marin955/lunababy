@@ -1,0 +1,19 @@
+<% if @locale == "en" %>
+  <h1>How do you like your bundle?</h1>
+  <p>Hi <%= @order.shipping_first_name.presence || @order.customer_name %>,</p>
+  <p>Your order <strong><%= @order.order_number %></strong> arrived a few days ago. If you have a minute, tell other parents what you think. Every review on our site comes from a customer who actually bought the bundle.</p>
+  <% @links.each do |link| %>
+    <p><a href="<%= link[:url] %>">Review <%= link[:name] %></a></p>
+  <% end %>
+  <p>Each link works once and is valid until <%= @expires_on.strftime("%-d %B %Y") %>. We show your first name and the initial of your last name next to the review, and only after we check it.</p>
+  <p>Thank you!<br>Luna Baby Team</p>
+<% else %>
+  <h1>Kako vam se sviđa paket?</h1>
+  <p>Pozdrav <%= @order.shipping_first_name.presence || @order.customer_name %>,</p>
+  <p>Vaša narudžba <strong><%= @order.order_number %></strong> stigla je prije nekoliko dana. Ako imate minutu, recite drugim roditeljima što mislite. Sve recenzije na našoj stranici pišu kupci koji su paket stvarno kupili.</p>
+  <% @links.each do |link| %>
+    <p><a href="<%= link[:url] %>">Ocijenite: <%= link[:name] %></a></p>
+  <% end %>
+  <p>Svaka poveznica vrijedi jednom, do <%= @expires_on.strftime("%d.%m.%Y.") %> Uz recenziju prikazujemo vaše ime i početno slovo prezimena, i to tek nakon što je pregledamo.</p>
+  <p>Hvala vam!<br>Luna Baby tim</p>
+<% end %>

@@ -1,0 +1,27 @@
+<% if @locale == "en" -%>
+Hi <%= @order.shipping_first_name.presence || @order.customer_name %>,
+
+Your order <%= @order.order_number %> arrived a few days ago. If you have a minute, tell other parents what you think. Every review on our site comes from a customer who actually bought the bundle.
+
+<% @links.each do |link| -%>
+<%= link[:name] %>: <%= link[:url] %>
+<% end -%>
+
+Each link works once and is valid until <%= @expires_on.strftime("%-d %B %Y") %>. We show your first name and the initial of your last name next to the review, and only after we check it.
+
+Thank you!
+Luna Baby Team
+<% else -%>
+Pozdrav <%= @order.shipping_first_name.presence || @order.customer_name %>,
+
+Vaša narudžba <%= @order.order_number %> stigla je prije nekoliko dana. Ako imate minutu, recite drugim roditeljima što mislite. Sve recenzije na našoj stranici pišu kupci koji su paket stvarno kupili.
+
+<% @links.each do |link| -%>
+<%= link[:name] %>: <%= link[:url] %>
+<% end -%>
+
+Svaka poveznica vrijedi jednom, do <%= @expires_on.strftime("%d.%m.%Y.") %> Uz recenziju prikazujemo vaše ime i početno slovo prezimena, i to tek nakon što je pregledamo.
+
+Hvala vam!
+Luna Baby tim
+<% end -%>
