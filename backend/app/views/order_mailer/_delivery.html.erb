@@ -6,7 +6,7 @@
   <strong><%= en ? "Method:" : "Način dostave:" %></strong> <%= method_name %><br>
   <% if @order.pickup_point? %>
     <strong><%= en ? "Pickup point:" : "Paketomat:" %></strong>
-    <%= { "boxnow" => "BoxNow", "gls" => "GLS" }.fetch(@order.pickup_point_provider, @order.pickup_point_provider) %> –
+    <%= @order.pickup_point_provider_name %> –
     <%= @order.pickup_point_name %> (<%= @order.pickup_point_id %>)
     <% if @order.pickup_point_address.present? %><br><%= @order.pickup_point_address %><% end %>
   <% else %>

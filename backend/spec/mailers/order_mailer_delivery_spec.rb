@@ -9,7 +9,7 @@ RSpec.describe OrderMailer, "delivery details" do
                    pickup_point_address: "Ilica 242, 10000 Zagreb")
 
     body = described_class.confirmation(order).body.encoded
-    expect(body).to include("Paketomat:", "BoxNow", "BOX NOW Konzum Ilica", "BN-1234", "Ilica 242, 10000 Zagreb")
+    expect(body).to include("Paketomat:", "BOX NOW", "BOX NOW Konzum Ilica", "BN-1234", "Ilica 242, 10000 Zagreb")
   end
 
   it "shows the pickup point in English" do
@@ -32,5 +32,12 @@ RSpec.describe OrderMailer, "delivery details" do
     order = build(:order, shipping_method: locker)
     expect(order).not_to be_valid
     expect(order.errors[:pickup_point_id]).to be_present
+  end
+
+  it "lets older locker orders without a pickup point change status" do
+    order = create(:order, :with_items)
+    order.update_column(:shipping_method_id, locker.id)
+
+    expect(order.reload.update(status: :confirmed)).to be(true)
   end
 end
