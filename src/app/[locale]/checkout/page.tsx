@@ -11,8 +11,7 @@ import { validatePromoCode } from '@/services/api/promo-codes';
 import { abandonOrder } from '@/services/api/orders';
 import { calculateSubtotal } from '@/services/cart-service';
 import CheckoutForm from '@/components/checkout/CheckoutForm';
-import ShippingSelector from '@/components/checkout/ShippingSelector';
-import OrderSummary from '@/components/checkout/OrderSummary';
+import OrderSummary, { computeCheckoutTotals } from '@/components/checkout/OrderSummary';
 import type { Bundle, ShippingMethod, PromoValidation } from '@/types';
 
 export default function CheckoutPage() {
@@ -55,7 +54,7 @@ function CheckoutContent() {
     if (cancelledOrderId) abandonOrder(cancelledOrderId).catch(() => {});
   }, [cancelledOrderId]);
 
-  // Fetch bundles and shipping methods
+  // Fetch bundles and shipping methods once; the form and summary share them.
   useEffect(() => {
     if (!isHydrated || items.length === 0) return;
     Promise.all([
@@ -65,15 +64,17 @@ function CheckoutContent() {
       .then(([bundleData, shippingData]) => {
         setBundles(bundleData);
         setShippingMethods(shippingData);
-        if (shippingData.length > 0) {
-          setSelectedShippingMethodId(shippingData[0].id);
-        }
+        setSelectedShippingMethodId((current) =>
+          current && shippingData.some((m) => m.id === current) ? current : shippingData[0]?.id ?? null
+        );
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [isHydrated, items.length, locale]);
 
   const subtotal = calculateSubtotal(items, bundles);
+  const totals = computeCheckoutTotals(items, bundles, shippingMethods, selectedShippingMethodId, promoValidation);
+  const freeShippingPromo = Boolean(promoValidation?.valid && promoValidation.discount_type === 'free_shipping');
 
   // Re-validate stored promo code on mount
   useEffect(() => {
@@ -96,8 +97,8 @@ function CheckoutContent() {
   // Loading state while hydrating
   if (!isHydrated || loading) {
     return (
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:py-12">
+        <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-6 lg:mb-8">
           {t('title')}
         </h1>
         <div className="animate-pulse space-y-4">
@@ -114,8 +115,8 @@ function CheckoutContent() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:py-12">
+      <h1 className="font-heading text-3xl lg:text-4xl font-semibold text-text-dark mb-6 lg:mb-8">
         {t('title')}
       </h1>
 
@@ -125,40 +126,31 @@ function CheckoutContent() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left column: Form + Shipping */}
-        <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
-            <CheckoutForm
-              locale={locale}
-              items={items}
-              bundles={bundles}
-              shippingMethodId={selectedShippingMethodId}
-              promoCode={promoCode}
-              onOrderPlaced={() => setOrderPlaced(true)}
-            />
-          </div>
+      {/* Mobile: collapsible summary with the total, above the form */}
+      <div className="mb-6 lg:hidden">
+        <OrderSummary locale={locale} items={items} bundles={bundles} totals={totals} variant="collapsible" />
+      </div>
 
-          <div className="bg-white rounded-[--radius-lg] shadow-sm p-6">
-            <ShippingSelector
-              selectedMethodId={selectedShippingMethodId}
-              onSelect={setSelectedShippingMethodId}
-              locale={locale}
-              subtotal={subtotal}
-            />
-          </div>
-        </div>
-
-        {/* Right column: Order Summary */}
-        <div className="lg:col-span-1">
-          <OrderSummary
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        {/* Left column: the steps, ending with the submit button */}
+        <div className="lg:col-span-2">
+          <CheckoutForm
             locale={locale}
-            bundles={bundles}
+            items={items}
             shippingMethods={shippingMethods}
             selectedShippingMethodId={selectedShippingMethodId}
-            promoValidation={promoValidation}
+            onSelectShippingMethod={setSelectedShippingMethodId}
+            subtotal={subtotal}
+            freeShippingPromo={freeShippingPromo}
+            promoCode={promoCode}
+            onOrderPlaced={() => setOrderPlaced(true)}
           />
         </div>
+
+        {/* Right column (desktop): sticky order summary */}
+        <aside className="hidden lg:col-span-1 lg:block">
+          <OrderSummary locale={locale} items={items} bundles={bundles} totals={totals} />
+        </aside>
       </div>
     </div>
   );

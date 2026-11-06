@@ -11,6 +11,7 @@ RSpec.describe "API V1 Orders", type: :request do
       customer_name: "John Doe",
       shipping_method_id: shipping_method.id,
       language: "hr",
+      terms_accepted: true,
       shipping_address: {
         first_name: "John",
         last_name: "Doe",

@@ -1,7 +1,7 @@
 class ShippingMethodSerializer
   include Alba::Resource
 
-  attributes :id, :slug, :carrier, :price, :estimated_days, :free_threshold
+  attributes :id, :slug, :carrier, :price, :estimated_days, :free_threshold, :requires_pickup_point
 
   attribute :name do |sm|
     params[:locale] == "en" ? sm.name_en : sm.name_hr

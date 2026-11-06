@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_07_001348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -140,6 +140,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
     t.string "order_number", null: false
     t.datetime "paid_at"
     t.integer "payment_status", default: 0, null: false
+    t.string "pickup_point_address"
+    t.string "pickup_point_id"
+    t.string "pickup_point_name"
+    t.string "pickup_point_provider"
     t.uuid "promo_code_id"
     t.string "shipping_city", null: false
     t.string "shipping_company"
@@ -154,6 +158,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
     t.string "stripe_checkout_session_id"
     t.string "stripe_payment_intent_id"
     t.integer "subtotal", null: false
+    t.datetime "terms_accepted_at"
     t.integer "total", null: false
     t.datetime "updated_at", null: false
     t.uuid "user_id"
@@ -225,6 +230,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000944) do
     t.string "name_hr", null: false
     t.integer "position", default: 0, null: false
     t.integer "price", null: false
+    t.boolean "requires_pickup_point", default: false, null: false
     t.string "slug", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_shipping_methods_on_slug", unique: true

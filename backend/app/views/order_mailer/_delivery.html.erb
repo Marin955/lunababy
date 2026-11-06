@@ -1,0 +1,17 @@
+<%# Where the order goes: the chosen parcel locker, or the home address. %>
+<% en = @locale == "en" %>
+<% method_name = en ? @order.shipping_method.name_en : @order.shipping_method.name_hr %>
+<h2><%= en ? "Delivery" : "Dostava" %></h2>
+<p>
+  <strong><%= en ? "Method:" : "Način dostave:" %></strong> <%= method_name %><br>
+  <% if @order.pickup_point? %>
+    <strong><%= en ? "Pickup point:" : "Paketomat:" %></strong>
+    <%= @order.pickup_point_provider_name %> –
+    <%= @order.pickup_point_name %> (<%= @order.pickup_point_id %>)
+    <% if @order.pickup_point_address.present? %><br><%= @order.pickup_point_address %><% end %>
+  <% else %>
+    <strong><%= en ? "Address:" : "Adresa:" %></strong>
+    <%= @order.shipping_first_name %> <%= @order.shipping_last_name %>,
+    <%= @order.shipping_street %>, <%= @order.shipping_postal_code %> <%= @order.shipping_city %>
+  <% end %>
+</p>

@@ -1,5 +1,5 @@
 import { api } from './client';
-import type { Order, PaginatedResponse } from '@/types';
+import type { Order, OrderPickupPoint, PaginatedResponse } from '@/types';
 
 export interface CreateOrderParams {
   customer_email: string;
@@ -9,6 +9,10 @@ export interface CreateOrderParams {
   language: string;
   note?: string;
   save_address?: boolean;
+  /** Must be true: the customer ticked the terms-of-sale checkbox. */
+  terms_accepted: boolean;
+  /** Required when the shipping method has requires_pickup_point. */
+  pickup_point?: OrderPickupPoint;
   shipping_address: {
     first_name: string;
     last_name: string;

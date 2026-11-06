@@ -152,8 +152,9 @@ module Api
       def order_params
         permitted = params.permit(
           :customer_email, :customer_name, :shipping_method_id,
-          :promo_code, :language, :note, :save_address,
+          :promo_code, :language, :note, :save_address, :terms_accepted,
           shipping_address: [ :first_name, :last_name, :street, :city, :postal_code, :phone, :company ],
+          pickup_point: [ :provider, :id, :name, :address ],
           items: [ :bundle_id, :slug, :quantity ]
         )
 

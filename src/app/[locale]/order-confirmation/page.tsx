@@ -10,6 +10,7 @@ import { useCartStore } from '@/stores/cart-store';
 import { formatPrice } from '@/lib/utils';
 import type { Order } from '@/types';
 import { COLLECTION_HREF } from '@/lib/constants';
+import { providerLabel } from '@/components/checkout/pickup/providers';
 
 export default function OrderConfirmationPage() {
   return (
@@ -170,6 +171,7 @@ function OrderConfirmationContent() {
             <span className="text-text-mid">{t('email')}</span>
             <span className="text-text-dark">{order.customer_email}</span>
           </div>
+          <OrderDelivery order={order} />
         </div>
       )}
 
@@ -180,6 +182,39 @@ function OrderConfirmationContent() {
       >
         {t('continueShopping')}
       </Link>
+    </div>
+  );
+}
+
+/** Where the order goes: the parcel locker, or the delivery address. */
+function OrderDelivery({ order }: { order: Order }) {
+  const t = useTranslations('confirmation');
+  const point = order.pickup_point;
+  const address = order.shipping_address;
+
+  return (
+    <div className="border-t border-gray-200 pt-3 mt-3 space-y-2 text-sm">
+      <div className="flex justify-between gap-4">
+        <span className="shrink-0 text-text-mid">{t('deliveryMethod')}</span>
+        <span className="text-text-dark text-right">{order.shipping_method.name}</span>
+      </div>
+      <div className="flex justify-between gap-4">
+        <span className="shrink-0 text-text-mid">{point ? t('pickupPoint') : t('deliveryAddress')}</span>
+        {point ? (
+          <span className="text-text-dark text-right">
+            {providerLabel(point.provider)}: {point.name}
+            {point.address && <span className="block">{point.address}</span>}
+            {point.id !== point.name && <span className="block text-text-mid">{t('pickupCode', { code: point.id })}</span>}
+          </span>
+        ) : (
+          <span className="text-text-dark text-right">
+            {address.street}
+            <span className="block">
+              {address.postal_code} {address.city}
+            </span>
+          </span>
+        )}
+      </div>
     </div>
   );
 }

@@ -60,7 +60,15 @@ class StripeCheckout
   end
 
   def metadata
-    { order_id: order.id, order_number: order.order_number }
+    data = { order_id: order.id, order_number: order.order_number }
+    if order.pickup_point?
+      # Stripe metadata values are limited to 500 characters.
+      data[:pickup_point_provider] = order.pickup_point_provider
+      data[:pickup_point_id] = order.pickup_point_id.truncate(500)
+      data[:pickup_point_name] = order.pickup_point_name.truncate(500)
+      data[:pickup_point_address] = order.pickup_point_address.truncate(500) if order.pickup_point_address.present?
+    end
+    data
   end
 
   def line_items

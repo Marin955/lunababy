@@ -17,6 +17,8 @@
     <p><strong>Estimated delivery:</strong> <%= @shipment.estimated_delivery_at.strftime("%B %d, %Y") %></p>
   <% end %>
 
+  <% if @order.pickup_point? %><%= render "order_mailer/delivery" %><% end %>
+
   <p>Luna Baby Team</p>
 <% else %>
   <h1>Vaša narudžba je poslana!</h1>
@@ -36,6 +38,8 @@
   <% if @shipment&.estimated_delivery_at.present? %>
     <p><strong>Očekivana dostava:</strong> <%= @shipment.estimated_delivery_at.strftime("%d.%m.%Y.") %></p>
   <% end %>
+
+  <% if @order.pickup_point? %><%= render "order_mailer/delivery" %><% end %>
 
   <p>Luna Baby tim</p>
 <% end %>

@@ -33,6 +33,29 @@ class Order < ApplicationRecord
   validates :shipping_cost, presence: true
   validates :total, presence: true
 
+  PICKUP_POINT_PROVIDERS = %w[boxnow gls].freeze
+
+  # Parcel-locker orders need the locker. The shipping address stays required:
+  # it is the invoice address. Only checked on create, so locker orders placed
+  # before pickup points existed can still change status.
+  with_options on: :create, if: :requires_pickup_point? do
+    validates :pickup_point_provider, inclusion: { in: PICKUP_POINT_PROVIDERS }
+    validates :pickup_point_id, presence: true
+    validates :pickup_point_name, presence: true
+  end
+
+  def requires_pickup_point?
+    shipping_method&.requires_pickup_point? || false
+  end
+
+  def pickup_point?
+    pickup_point_id.present?
+  end
+
+  def pickup_point_provider_name
+    { "boxnow" => "BOX NOW", "gls" => "GLS" }.fetch(pickup_point_provider, pickup_point_provider)
+  end
+
   before_validation :generate_order_number, on: :create, unless: :order_number?
 
   private
