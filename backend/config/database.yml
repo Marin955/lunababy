@@ -25,15 +25,20 @@ test:
     # Same database as primary: dumping it would overwrite queue_schema.rb with the app schema.
     schema_dump: false
 
+# Supabase's transaction pooler hands each transaction a different server connection, so
+# session-level features break: prepared statements, and the advisory lock db:migrate takes
+# (it is acquired on one connection and released on another, which aborts the deploy).
 production:
   primary:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
     prepared_statements: false
+    advisory_locks: false
   queue:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
     prepared_statements: false
+    advisory_locks: false
     migrations_paths: db/queue_migrate
     # Same database as primary: dumping it would overwrite queue_schema.rb with the app schema.
     schema_dump: false
@@ -41,5 +46,6 @@ production:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
     prepared_statements: false
+    advisory_locks: false
     migrations_paths: db/cache_migrate
     schema_dump: false
