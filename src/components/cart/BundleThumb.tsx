@@ -14,9 +14,8 @@ interface BundleThumbProps {
 
 /**
  * Square bundle photo for cart lines and the mini-cart.
- * Uses the curated bundle image from `lib/bundle-images` (WS-C). The API's
- * `image_path` is not used: in the seed data it can point at files that don't
- * exist (e.g. /images/bundles/feeding-bundle.jpg), which would log 404/500s.
+ * Uses the box photo from `lib/bundle-images`, keyed by slug, rather than the
+ * API's `image_path`, so the frontend controls which files exist.
  * Falls back to the gradient + emoji tile when there is no image or it fails.
  */
 export default function BundleThumb({ bundle, size = 72, className = '' }: BundleThumbProps) {

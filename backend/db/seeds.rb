@@ -274,15 +274,31 @@ end
 puts "\nSeeding bundles..."
 bundles_data = [
   {
-    slug: "feeding-bundle", category: "feeding", emoji: "🍼",
+    slug: "first-bites", category: "feeding", emoji: "🥣",
     color_from: "gold-light", color_to: "blush-light",
-    price: 4490, position: 0,
-    image_path: nil, # no box photo yet; the frontend shows a product-photo collage
-    name_hr: "Paket za hranjenje", name_en: "Feeding Bundle",
-    short_description_hr: "Sve za bezbrižno hranjenje bebe",
-    short_description_en: "Everything for worry-free baby feeding",
-    description_hr: "Kompletni set za hranjenje bebe koji uključuje silikonsku zdjelicu, bočicu, trodjelnu posudu za hranu, vilicu i žlicu te portiklicu. Sve što trebate za hranjenje vaše bebe na jednom mjestu.",
-    description_en: "A complete baby feeding set including a silicone bowl, bottle, three-compartment food container, fork and spoon, and a bib. Everything you need for feeding your baby in one place.",
+    price: 2990, position: 0,
+    image_path: "/images/bundles/feeding-box.jpg",
+    name_hr: "Prvi zalogaji", name_en: "First Bites",
+    short_description_hr: "Osnove za prve obroke na žličicu",
+    short_description_en: "The essentials for first spoon-fed meals",
+    description_hr: "Mali set za početak dohrane: silikonska zdjelica s vakuumskim dnom koja ostaje na stolu, vilica i žlica za male ruke te portiklica. Sve što trebate za prve zalogaje, složeno u jednu kutiju.",
+    description_en: "A small set for starting solids: a silicone bowl with a suction base that stays put on the table, a fork and spoon for little hands, and a bib. Everything you need for the first bites, packed in one box.",
+    items: [
+      { product_slug: "silicone-bowl", quantity: 1 },
+      { product_slug: "fork-and-spoon", quantity: 1 },
+      { product_slug: "baby-girl-bib", quantity: 1 }
+    ]
+  },
+  {
+    slug: "first-bites-plus", category: "feeding", emoji: "🍼",
+    color_from: "gold-light", color_to: "blush-light",
+    price: 4490, position: 1,
+    image_path: "/images/bundles/feeding-box-large.jpg",
+    name_hr: "Prvi zalogaji Plus", name_en: "First Bites Plus",
+    short_description_hr: "Kompletan set za hranjenje, od bočice do zdjelice",
+    short_description_en: "The complete feeding set, from bottle to bowl",
+    description_hr: "Sve iz paketa Prvi zalogaji, uz bočicu s ručkama i trodjelnu posudu za hranu. Silikonska zdjelica s vakuumskim dnom, vilica i žlica, portiklica, bočica i posuda – kompletan set za hranjenje na jednom mjestu.",
+    description_en: "Everything in First Bites, plus a baby bottle with handles and a three-compartment food container. A silicone suction bowl, fork and spoon, bib, bottle and container – the complete feeding set in one box.",
     items: [
       { product_slug: "silicone-bowl", quantity: 1 },
       { product_slug: "baby-bottle", quantity: 1 },
@@ -292,17 +308,17 @@ bundles_data = [
     ]
   },
   {
-    slug: "bath-time-bundle", category: "bath", emoji: "🛁",
+    slug: "bubbles-and-cuddles", category: "bath", emoji: "🛁",
     color_from: "teal-pale", color_to: "teal-light",
-    price: 5990, position: 1,
-    image_path: "/images/bath-box.jpg",
-    name_hr: "Paket za kupanje", name_en: "Bath Time Bundle",
-    short_description_hr: "Sigurno i ugodno kupanje za bebe",
-    short_description_en: "Safe and comfortable bath time for babies",
-    description_hr: "Pretvorite kupanje u ugodno i sigurno iskustvo za vašu bebu. Uključuje patkicu, set za kupanje, češalj, ručnik s kapuljačom, termometar i držač za dudu.",
-    description_en: "Turn bath time into a comfortable and safe experience for your baby. Includes a rubber duck, bath set, comb, hooded towel, thermometer, and pacifier clip.",
+    price: 5990, position: 2,
+    image_path: "/images/bundles/bath-box.jpg",
+    name_hr: "Mjehurići i maženje", name_en: "Bubbles & Cuddles",
+    short_description_hr: "Sve za sigurno i ugodno kupanje",
+    short_description_en: "Everything for safe, cosy bath time",
+    description_hr: "Pretvorite kupanje u ugodno i sigurno iskustvo za vašu bebu. Uključuje dvije patkice, set za njegu, češalj, ručnik s kapuljačom, termometar za vodu i držač za dudu.",
+    description_en: "Turn bath time into a safe, cosy ritual for your baby. Includes two rubber ducks, a grooming set, a comb, a hooded towel, a water thermometer and a pacifier clip.",
     items: [
-      { product_slug: "rubber-duck", quantity: 1 },
+      { product_slug: "rubber-duck", quantity: 2 },
       { product_slug: "bath-accessories-set", quantity: 1 },
       { product_slug: "baby-comb", quantity: 1 },
       { product_slug: "hooded-towel", quantity: 1 },
@@ -311,15 +327,31 @@ bundles_data = [
     ]
   },
   {
-    slug: "sleep-bundle", category: "sleep", emoji: "🌙",
+    slug: "sweet-dreams", category: "sleep", emoji: "🌙",
     color_from: "teal-light", color_to: "lavender-light",
-    badge: :popular, price: 8990, position: 2,
-    image_path: "/images/sleeping-box.jpg",
-    name_hr: "Paket za spavanje", name_en: "Sleep Bundle",
+    price: 2490, position: 3,
+    image_path: "/images/bundles/sleep-box.jpg",
+    name_hr: "Slatki snovi", name_en: "Sweet Dreams",
+    short_description_hr: "Mala rutina za laku noć",
+    short_description_en: "A little bedtime routine",
+    description_hr: "Sve za mirnu rutinu prije spavanja: mekana tješilica, silikonsko noćno svjetlo i znak „Beba spava” za vrata sobe.",
+    description_en: "Everything for a calm bedtime routine: a soft comforter, a silicone night light and a “baby sleeping” sign for the nursery door.",
+    items: [
+      { product_slug: "baby-girl-comforter", quantity: 1 },
+      { product_slug: "silicone-night-light", quantity: 1 },
+      { product_slug: "baby-sleeping-sign", quantity: 1 }
+    ]
+  },
+  {
+    slug: "sweet-dreams-plus", category: "sleep", emoji: "🌙",
+    color_from: "teal-light", color_to: "lavender-light",
+    badge: :popular, price: 8990, position: 4,
+    image_path: "/images/bundles/sleep-box-large.jpg",
+    name_hr: "Slatki snovi Plus", name_en: "Sweet Dreams Plus",
     short_description_hr: "Mirne noći za bebe i roditelje",
     short_description_en: "Peaceful nights for babies and parents",
-    description_hr: "Sve što vaša beba treba za mirne noći i slatke snove. Ovaj paket uključuje tješilicu, silikonsko svjetlo, znak za vrata, uređaj za bijeli zvuk, baby monitor i držač za dudu.",
-    description_en: "Everything your baby needs for peaceful nights and sweet dreams. This bundle includes a comforter, silicone night light, door sign, white noise machine, baby monitor, and pacifier clip.",
+    description_hr: "Sve iz paketa Slatki snovi, uz uređaj za bijeli zvuk sa svjetlom, baby monitor i držač za dudu. Tješilica, noćno svjetlo, znak za vrata i sve što vam treba za mirne noći i bezbrižne roditelje.",
+    description_en: "Everything in Sweet Dreams, plus a white noise machine with light, a baby monitor and a pacifier clip. A comforter, night light, door sign and everything you need for peaceful nights and relaxed parents.",
     items: [
       { product_slug: "baby-girl-comforter", quantity: 1 },
       { product_slug: "silicone-night-light", quantity: 1 },

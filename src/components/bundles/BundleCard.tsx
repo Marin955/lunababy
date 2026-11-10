@@ -5,8 +5,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import type { Bundle } from '@/types';
 import { formatPrice } from '@/lib/utils';
-import { getBundleCollage, getBundleImage } from '@/lib/bundle-images';
-import PhotoCollage from '@/components/ui/PhotoCollage';
+import { getBundleImage } from '@/lib/bundle-images';
 import Badge from '@/components/ui/Badge';
 import AddToCartButton from '@/components/bundles/AddToCartButton';
 
@@ -18,7 +17,7 @@ interface BundleCardProps {
 // Matches BundleGrid: 1 column < md, 2 columns md, 3 columns lg inside max-w-7xl.
 const CARD_IMAGE_SIZES = '(min-width: 1280px) 400px, (min-width: 1024px) 31vw, (min-width: 768px) 46vw, 92vw';
 
-// Fallback when a bundle has neither a box photo nor product photos.
+// Fallback when a bundle has no box photo.
 function getGradientClasses(colorFrom: string, colorTo: string): string {
   const fromMap: Record<string, string> = {
     'teal-light': 'from-teal-light',
@@ -42,30 +41,21 @@ function getGradientClasses(colorFrom: string, colorTo: string): string {
 
 export default function BundleCard({ bundle, locale }: BundleCardProps) {
   const bundleImage = getBundleImage(bundle.slug);
-  const collage = bundleImage ? null : getBundleCollage(bundle.slug);
   const zoom = 'group-hover:scale-105 motion-reduce:group-hover:scale-100 transition-transform duration-300';
 
   return (
     <article className="group bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-all duration-300 flex flex-col">
-      {/* Top visual: box photo, else a collage of the real product photos, else gradient + emoji */}
+      {/* Top visual: box photo, else gradient + emoji */}
       <Link href={`/shop/${bundle.slug}`} className="block relative" tabIndex={-1} aria-hidden="true">
         <div
           className={`relative aspect-[4/3] overflow-hidden ${
-            bundleImage || collage
+            bundleImage
               ? 'bg-cream'
               : `bg-gradient-to-br ${getGradientClasses(bundle.color_from, bundle.color_to)} flex items-center justify-center`
           }`}
         >
           {bundleImage ? (
             <Image src={bundleImage} alt="" fill className={`object-cover ${zoom}`} sizes={CARD_IMAGE_SIZES} />
-          ) : collage ? (
-            <PhotoCollage
-              srcs={collage}
-              alt={bundle.name}
-              sizes={CARD_IMAGE_SIZES}
-              className="absolute inset-0"
-              imageClassName={zoom}
-            />
           ) : (
             <span className={`text-7xl ${zoom}`} aria-hidden="true">
               {bundle.emoji}
