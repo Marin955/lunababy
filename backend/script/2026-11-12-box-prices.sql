@@ -21,6 +21,13 @@ WITH new_prices(slug, price) AS (
 INSERT INTO bundle_price_changes (bundle_id, price, created_at)
 SELECT id, price, now() FROM changed;
 
+-- The earlier prices were test-period only (no real sales), so drop them from the
+-- history; otherwise the "lowest price in the last 30 days" notice shows them for a month.
+-- (Run as a follow-up on 2026-11-12, after the update above.)
+DELETE FROM bundle_price_changes c
+ WHERE EXISTS (SELECT 1 FROM bundle_price_changes n
+                WHERE n.bundle_id = c.bundle_id AND n.created_at > c.created_at);
+
 SELECT slug, price, discount_percent FROM bundles ORDER BY position;
 
 COMMIT;
