@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import Button from '@/components/ui/Button';
 import ReviewForm from '@/components/reviews/ReviewForm';
 import { fetchReviewForm } from '@/services/api/reviews';
-import { SHOP_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 
 export const dynamic = 'force-dynamic';
 
@@ -48,7 +48,7 @@ export default async function ReviewTokenPage({ params }: Props) {
                   ? t('errors.notFound')
                   : t('errors.generic')}
           </p>
-          <Button href={SHOP_HREF} variant="outline">
+          <Button href={shopPath(locale)} variant="outline">
             {t('backToShop')}
           </Button>
         </div>

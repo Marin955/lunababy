@@ -4,6 +4,7 @@ import React from 'react';
 import { useLocale } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import type { Locale } from '@/i18n/routing';
+import { translateShopPath } from '@/lib/shop-paths';
 
 const locales: Locale[] = ['hr', 'en'];
 
@@ -17,7 +18,7 @@ export default function LanguageSwitcher() {
 
   function handleSwitch(targetLocale: Locale) {
     if (targetLocale === currentLocale) return;
-    router.replace(pathname, { locale: targetLocale });
+    router.replace(translateShopPath(pathname, currentLocale, targetLocale), { locale: targetLocale });
   }
 
   return (

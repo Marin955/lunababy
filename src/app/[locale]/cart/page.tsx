@@ -12,7 +12,7 @@ import PromoCodeInput from '@/components/cart/PromoCodeInput';
 import CartSummary from '@/components/cart/CartSummary';
 import Button from '@/components/ui/Button';
 import type { PromoValidation } from '@/types';
-import { COLLECTION_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 
 export default function CartPage() {
   const t = useTranslations('cart');
@@ -103,7 +103,7 @@ export default function CartPage() {
           <p className="text-text-mid mb-8 max-w-md mx-auto">
             {t('emptyMessage')}
           </p>
-          <Button href={COLLECTION_HREF} variant="primary" size="lg">
+          <Button href={shopPath(locale)} variant="primary" size="lg">
             {tCommon('buttons.continueShopping')}
           </Button>
         </div>

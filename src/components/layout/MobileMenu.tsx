@@ -3,19 +3,19 @@
 import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
 import { useAuthStore } from '@/stores/auth-store';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
-import { SHOP_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const navLinks = [
-  { key: 'shop', href: SHOP_HREF },
+const getNavLinks = (locale: string) => [
+  { key: 'shop', href: shopPath(locale) },
   { key: 'home', href: '/' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
@@ -31,6 +31,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const tAuth = useTranslations('auth');
   const tCart = useTranslations('cart');
   const pathname = usePathname();
+  const locale = useLocale();
   const items = useCartStore((state) => state.items);
   const isHydrated = useCartStore((state) => state.isHydrated);
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -118,7 +119,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* Navigation links */}
           <nav className="flex-1 px-4 py-4">
             <ul className="space-y-1">
-              {navLinks.map(({ key, href }) => {
+              {getNavLinks(locale).map(({ key, href }) => {
                 const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
                 return (
                   <li key={key}>

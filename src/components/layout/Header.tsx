@@ -3,16 +3,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useAuthStore } from '@/stores/auth-store';
 import CartIcon from '@/components/cart/CartIcon';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import MobileMenu from '@/components/layout/MobileMenu';
 import MiniCart from '@/components/cart/MiniCart';
-import { SHOP_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 
-const navLinks = [
-  { key: 'shop', href: SHOP_HREF },
+const getNavLinks = (locale: string) => [
+  { key: 'shop', href: shopPath(locale) },
   { key: 'home', href: '/' },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
@@ -24,6 +24,7 @@ export default function Header() {
   const tAuth = useTranslations('auth');
   const tHome = useTranslations('home');
   const pathname = usePathname();
+  const locale = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -84,7 +85,7 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-7">
-              {navLinks.map(({ key, href }) => {
+              {getNavLinks(locale).map(({ key, href }) => {
                 const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
                 return (
                   <Link

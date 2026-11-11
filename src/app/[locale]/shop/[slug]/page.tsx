@@ -23,15 +23,12 @@ import {
   buildSlides,
   serializeJsonLd,
 } from '@/components/bundles/product-page';
-import { routing } from '@/i18n/routing';
-import { COLLECTION_HREF } from '@/lib/constants';
+import { localeAlternates, localePath } from '@/lib/site-metadata';
+import { bundlePath, shopPath } from '@/lib/shop-paths';
 
 export const dynamic = 'force-dynamic';
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
-
-// Trailing slash matches next.config `trailingSlash: true`.
-const bundlePath = (locale: string, slug: string) => `/${locale}/shop/${slug}/`;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
@@ -49,17 +46,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    alternates: {
-      canonical: absoluteUrl(bundlePath(locale, slug)),
-      languages: Object.fromEntries(routing.locales.map((l) => [l, absoluteUrl(bundlePath(l, slug))])),
-    },
+    alternates: localeAlternates(locale, (l) => bundlePath(l, slug)),
     openGraph: {
       title,
       description,
       siteName: 'LunaBaby',
       locale: locale === 'hr' ? 'hr_HR' : 'en_US',
       type: 'website',
-      url: absoluteUrl(bundlePath(locale, slug)),
+      url: absoluteUrl(localePath(locale, bundlePath(locale, slug))),
       ...(cover && { images: [{ url: absoluteUrl(cover.src), alt: cover.alt }] }),
     },
     twitter: {
@@ -85,7 +79,7 @@ export default async function BundleDetailPage({ params }: Props) {
   const bundleImage = getBundleImage(bundle.slug);
   const maxQuantity = Math.max(1, Math.min(MAX_QUANTITY_PER_LINE, bundle.stock_quantity));
   const jsonLd = buildProductJsonLd(bundle, {
-    url: bundlePath(locale, slug),
+    url: localePath(locale, bundlePath(locale, slug)),
     images: buildSlides(bundleImage, bundle.name, bundle.items).map((s) => s.src),
     extra: buildReviewJsonLd(reviews),
   });
@@ -96,7 +90,7 @@ export default async function BundleDetailPage({ params }: Props) {
 
       {/* Back to shop */}
       <div className="mb-6 sm:mb-8">
-        <Button href={COLLECTION_HREF} variant="outline" size="sm">
+        <Button href={shopPath(locale)} variant="outline" size="sm">
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>

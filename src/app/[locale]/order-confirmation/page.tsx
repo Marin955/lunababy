@@ -9,7 +9,7 @@ import { fetchOrder, confirmPayment } from '@/services/api/orders';
 import { useCartStore } from '@/stores/cart-store';
 import { formatPrice } from '@/lib/utils';
 import type { Order } from '@/types';
-import { COLLECTION_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 import { providerLabel } from '@/components/checkout/pickup/providers';
 
 export default function OrderConfirmationPage() {
@@ -177,7 +177,7 @@ function OrderConfirmationContent() {
 
       {/* Continue shopping button */}
       <Link
-        href={COLLECTION_HREF}
+        href={shopPath(locale)}
         className="inline-flex items-center justify-center px-8 py-4 bg-teal-deep text-white font-semibold rounded-[--radius-md] hover:bg-teal shadow-md hover:shadow-hover hover:-translate-y-0.5 transition-all duration-300"
       >
         {t('continueShopping')}

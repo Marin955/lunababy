@@ -2,6 +2,7 @@ import React from 'react';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import { DEFAULT_OG_IMAGE, localeAlternates } from '@/lib/site-metadata';
+import { shopPath } from '@/lib/shop-paths';
 import { getBundles } from '@/services/bundle-service';
 import { fetchShippingMethods } from '@/services/api/shipping';
 import { getFreeShippingThreshold } from '@/services/cart-service';
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t('metaTitle'),
     description: t('metaDescription'),
-    alternates: localeAlternates(locale, '/shop'),
+    alternates: localeAlternates(locale, shopPath),
     openGraph: {
       title: t('metaTitle'),
       description: t('metaDescription'),

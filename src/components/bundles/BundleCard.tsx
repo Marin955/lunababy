@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import { bundlePath } from '@/lib/shop-paths';
 import type { Bundle } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { getBundleImage } from '@/lib/bundle-images';
@@ -46,7 +47,7 @@ export default function BundleCard({ bundle, locale }: BundleCardProps) {
   return (
     <article className="group bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-hover hover:-translate-y-1 motion-reduce:hover:translate-y-0 transition-all duration-300 flex flex-col">
       {/* Top visual: box photo, else gradient + emoji */}
-      <Link href={`/shop/${bundle.slug}`} className="block relative" tabIndex={-1} aria-hidden="true">
+      <Link href={bundlePath(locale, bundle.slug)} className="block relative" tabIndex={-1} aria-hidden="true">
         <div
           className={`relative aspect-[4/3] overflow-hidden ${
             bundleImage
@@ -79,7 +80,7 @@ export default function BundleCard({ bundle, locale }: BundleCardProps) {
       <div className="flex flex-col flex-1 p-5 sm:p-6">
         <h3 className="font-heading text-[22px] leading-snug font-semibold text-text-dark mb-1.5">
           <Link
-            href={`/shop/${bundle.slug}`}
+            href={bundlePath(locale, bundle.slug)}
             className="hover:text-teal-ink focus-visible:outline-none focus-visible:underline transition-colors duration-200"
           >
             {bundle.name}

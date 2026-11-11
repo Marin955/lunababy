@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useCartStore } from '@/stores/cart-store';
 import { formatPrice } from '@/lib/utils';
 import { Link } from '@/i18n/navigation';
+import { bundlePath } from '@/lib/shop-paths';
 import type { Bundle } from '@/types';
 import BundleThumb from '@/components/cart/BundleThumb';
 
@@ -44,14 +45,14 @@ export default function CartItem({ bundleId, quantity, locale, bundle }: CartIte
     <div className="flex flex-col sm:flex-row sm:items-center gap-4 py-6 border-b border-gray-100 last:border-b-0">
       <div className="flex items-center gap-4 flex-1 min-w-0">
         {/* Bundle photo (gradient + emoji only when no image exists) */}
-        <Link href={`/shop/${bundle.slug}`} tabIndex={-1} aria-hidden="true" className="shrink-0">
+        <Link href={bundlePath(locale, bundle.slug)} tabIndex={-1} aria-hidden="true" className="shrink-0">
           <BundleThumb bundle={bundle} size={72} />
         </Link>
 
         {/* Bundle info */}
         <div className="flex-1 min-w-0">
           <h3 className="font-heading font-semibold text-text-dark text-base truncate">
-            <Link href={`/shop/${bundle.slug}`} className="hover:underline underline-offset-2">
+            <Link href={bundlePath(locale, bundle.slug)} className="hover:underline underline-offset-2">
               {bundle.name}
             </Link>
           </h3>

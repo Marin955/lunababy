@@ -8,7 +8,7 @@ import { formatPrice } from '@/lib/utils';
 import Button from '@/components/ui/Button';
 import { Link } from '@/i18n/navigation';
 import type { Bundle, PromoValidation } from '@/types';
-import { COLLECTION_HREF } from '@/lib/constants';
+import { shopPath } from '@/lib/shop-paths';
 
 interface CartSummaryProps {
   locale: string;
@@ -84,7 +84,7 @@ export default function CartSummary({ locale, bundles, promoValidation }: CartSu
       {/* Continue shopping */}
       <div className="text-center">
         <Link
-          href={COLLECTION_HREF}
+          href={shopPath(locale)}
           className="inline-flex min-h-[44px] items-center text-sm font-semibold text-[var(--color-teal-ink,#3F7C87)] hover:underline underline-offset-2"
         >
           {tCommon('buttons.continueShopping')}
