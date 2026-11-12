@@ -12,8 +12,8 @@ import MiniCart from '@/components/cart/MiniCart';
 import { shopPath } from '@/lib/shop-paths';
 
 const getNavLinks = (locale: string) => [
-  { key: 'shop', href: shopPath(locale) },
   { key: 'home', href: '/' },
+  { key: 'shop', href: shopPath(locale) },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'contact', href: '/contact' },

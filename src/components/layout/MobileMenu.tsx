@@ -15,8 +15,8 @@ interface MobileMenuProps {
 }
 
 const getNavLinks = (locale: string) => [
-  { key: 'shop', href: shopPath(locale) },
   { key: 'home', href: '/' },
+  { key: 'shop', href: shopPath(locale) },
   { key: 'trackOrder', href: '/order-lookup' },
   { key: 'about', href: '/about' },
   { key: 'faq', href: '/faq' },
