@@ -312,7 +312,7 @@ bundles_data = [
     color_from: "teal-pale", color_to: "teal-light",
     price: 5990, position: 2,
     image_path: "/images/bundles/bath-box.jpg",
-    name_hr: "Mjehurići i maženje", name_en: "Bubbles & Cuddles",
+    name_hr: "Prvo kupanje", name_en: "Bubbles & Cuddles",
     short_description_hr: "Sve za sigurno i ugodno kupanje",
     short_description_en: "Everything for safe, cosy bath time",
     description_hr: "Pretvorite kupanje u ugodno i sigurno iskustvo za vašu bebu. Uključuje dvije patkice, set za njegu, češalj, ručnik s kapuljačom, termometar za vodu i držač za dudu.",
